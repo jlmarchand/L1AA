@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Intégration</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Marchand Jean-Louis" />
+    <script src="integrale_files/header-attrs-2.10/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Intégration
+### Marchand Jean-Louis
+### 22/11/2021
+
+---
+
+
+
+
+
+
+# Calcul d'aire sous la courbe
+
+- mais enfin pourquoi ? 
+  + être en mesure de donner un sens à une aire non rectangulaire
+  + conserver le sens dans les cas connus : polygônes, disque
+  + calcul de sommation dans les milieux continus
+- exemples 
+  + les aires d'un triangle et un trapèze rectangles correspondent à des intégrales d'une fonction affine
+  + l'aire d'un disque est l'intégrale 
+- la clé : le théorème des gendarmes
+---
+<iframe title="sommes de Riemann" src="/home/marchand/Bureau/Cours/AgroCampus/AgroL1/Diapos/2021-2022/integration.html" width="2500" height="1200" allowfullscreen="TRUE"></iframe>
+
+---
+
+## Intégrale 
+
++ l'intégrale de `\(a\)` à `\(b\)` de la fonction **continue et  positive** `\(f\)` correspond à la mesure de l'aire **positive** délimitée par :
+`$$\left\{\begin{array}{lllll}a\leq x\leq b\\0\leq y\leq f(x)\end{array}\right.$$`
++ notation `$$\int_a^bf(x)dx$$`
++ l'intégrale de `\(a\)` à `\(b\)` de la fonction **continue et  négative** `\(f\)` correspond à la mesure de l'aire **négative** délimitée par :
+`$$\int_a^bf(x)dx=-\int_a^b-f(x)dx$$`
++ en pratique l'intégrale de `\(a\)` à `\(b\)` d'une fonction **continue** correspond à la somme des aires où `\(f\)` est positive à laquelle est soustraite la somme des aires où `\(f\)` est négative
+
+---
+
+## Théorème fondamental de l'intégration
+&lt;img src="integrale_files/figure-html/unnamed-chunk-2-1.png" width="400px" height="250px" style="display: block; margin: auto;" /&gt;
+* aire orange proche du rectangle
+
+`$$\int_{-1}^{2,1} f(x)dx-\int_{-1}^{2} f(x)dx = \int_{2}^{2,1} f(x)dx\approx 0,1 \times  f(2)$$`
+* si on note `\(\mathcal A(a,b) = \int_a^b f(x)dx\)` alors
+
+`$$\mathcal A(a,b+h)-\mathcal A(a,b)\approx h\times f(b) \Rightarrow\frac{\mathcal A(a,b+h)-\mathcal A(a,b)}h \approx f(b)$$`
+
+---
+
+## Théorème fondamental de l'intégration
+
+*		Une **primitive** `\(F\)` d'une fonction `\(f\)` sur un segment `\([a,b]\)` est une fonction dérivable sur `\([a,b]\)` dont la dérivée est `\(f\)` 
+
+`$$\forall x\in[a,b],\quad F'(x)=f(x)$$`
+*	**Théorème fondamental de l'intégration**
+  +	Soit `\(f\)` une fonction continue sur un **segment** `\([a,b]\)` alors l'intégrale de `\(f\)` sur `\([a,b]\)` est bien définie et  
+		`$$\int_{a}^{b}f(x)dx=\lim_{n\to+\infty}\frac{b-a}n\sum_{k=0}^{n-1}f\left(a+\tfrac {k(b-a)}n\right)= F(b)-F(a)$$` pour toute primitive `\(F\)` de `\(f\)` sur `\([a,b]\)`.
+
+---
+
+## Propriétés de l'intégrale
+- Soient `\(f,g\)` deux fonctions continues sur un segment `\([a,b]\)` et deux réels `\(\alpha,\beta\)`. L'intégrale possède les propriétés suivantes
+  + **linéarité** `\(\int_{a}^{b}\alpha f(x)+\beta g(x) dx  = \alpha \int_{a}^{b}f(x)dx+\beta \int_{a}^{b}g(x)dx\)`,
+	+ **positivité** si `\(\forall x\in [a,b],\quad f(x)\geq 0\)` alors `\(\int_{a}^{b}f(x)dx\geq 0\)`
+	+ **positivité - cas particulier 1** si `\(\forall x\in [a,b],\quad f(x)\geq g(x)\)` alors `\(\int_{a}^{b}f(x)dx\geq \int_{a}^{b}g(x)dx\)`
+	+ **positivité - cas particulier 2** si  `\(\int_{a}^{b}\left|f(x)\right|dx\geq \left|\int_{a}^{b}f(x)dx\right|\)`{}
+	+ **Relation de Chasles** `$$\forall c\in[a,b],\quad\int_{a}^{b}f(x)dx=\int_{a}^{c}f(x)dx+\int_{c}^{b}f(x)dx$$`
+	+ **Inégalité de Cauchy-Schwarz** `$$\int_{a}^{b}f(x)^{2}dx\int_{a}^{b}g(x)^{2}dx\geq \left(\int_{a}^{b}f(x)g(x)dx\right)^{2}$$`
+
+---
+
+##Que faire si on ne connaît pas de primitive ?
+- rappel dérivée d'un produit `\((fg)'=f'g+fg'\)`
+- par linéarité `\(\int_{a}^{b}(fg)'(x)dx=\int_{a}^{b}f'(x)g(x)dx+\int_{a}^{b}f(x)g'(x)dx\)`
+- **Intégration par parties** Soient `\(f\)` et `\(g\)` deux fonctions de classe `\(\mathcal C^{1}\)` sur `\([a,b]\)` alors :
+`$$\int_{a}^{b}f'(x)g(x)dx=[f(x)g(x)]_{a}^{b}-\int_{a}^{b}f(x)g'(x)dx.$$`
+- **Exemple**	
+
+`$$\int_{-2}^{3}xe^{x}dx=[xe^{x}]_{-2}^{3}-\int_{-2}^{3}e^{x}dx=3e^{3}+2e^{-2}-[e^{x}]_{-2}^{3}=2e^{3}+3e^{-2}.$$`
+
+---
+
+##Que faire si on ne connaît pas de primitive ?
+- application réciproque `\(\varphi^{-1} \colon  [\alpha,\beta]\to[a,b]\)` de `\(\varphi \colon [a,b] \to [\alpha,\beta]\)` telle que `\(\forall x\in [a,b], \quad \varphi(\varphi^{-1}(x))=x,\)` 
+- dans ce cas 
+`$$\int_{a}^{b}f(x)dx=F(b)-F(a)= F(\varphi (\varphi^{-1}(b))-F(\varphi(\varphi^{-1}(a))$$`
+`$$=\int_{\varphi^{-1}(b)}^{\varphi^{-1}(a)}\varphi'(t)f(\varphi(t))dt.$$`
+- **Changement de variables** Soit `\(f\)` une fonction continue sur `\([a,b]\)` et `\(\varphi\)` une fonction de classe `\(\mathcal C^{1}\)` sur `\([\alpha,\beta]\)` telle que `\(\varphi([\alpha,\beta])\subset [a,b]\)` alors
+`$$\int_{\varphi(\alpha)}^{\varphi(\beta)}f(x)dx=\int_{\alpha}^{\beta}\varphi'(t)f\circ\varphi(t)dt.$$` 
+
+---
+
+##Changement de variables : Exemple
+
+- l'intégrale `\(\int_{0}^{1} \sqrt{1-x^2}dx\)` est certes bien définie mais trouver une primitive ...
+- ici on choisit `\(x = \sin(t)\)` pour avoir `\(1-x^2=\cos^2(t)\)` pour chercher à simplifier la fonction à intégrer
+- ainsi 
+ par le théorème :
+`$$			 \int_{0}^{1} \sqrt{1-x^2}dx =\int_0^{\frac\pi2}\sin'(t) \sqrt{1-\sin^2(t)}dx=\int_0^{\frac\pi2}\cos^2(t)dt.$$`
+- pour trouver une primitive, il faut se rappeler que ce terme apparaît dans le développement de cosinus `\(2t\)` 
+`$$\cos(2t) = \cos^2(t)-\sin^2(t)=\cos^2(t)-(1-\cos^2(t))$$`
+finalement
+`$$\cos^2(t)=\frac{1+\cos(2t)}2$$`
+
+---
+
+## Changement de variable : exemple 
+
+- la recherche de primitive est plus simple, en effet
+`$$\frac{1+\cos(2t)}2= \left[\frac{t}2+\frac{\sin(2t)}4\right]_0^{\frac\pi2}=\frac\pi4.$$`
+- on prouve ainsi la formule connue depuis le collège de l'aire du quart de disque de rayon 1 : `\(\frac\pi4\)`
+- le raisonnement peut être repris pour prouver le cas général
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create();
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
