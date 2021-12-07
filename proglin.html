@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Programmation linéaire</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Marchand Jean-Louis" />
+    <meta name="date" content="2021-06-12" />
+    <script src="proglin_files/header-attrs-2.10/header-attrs.js"></script>
+    <script src="proglin_files/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+    <script src="proglin_files/plotly-binding-4.9.3/plotly.js"></script>
+    <script src="proglin_files/typedarray-0.1/typedarray.min.js"></script>
+    <script src="proglin_files/jquery-1.11.3/jquery.min.js"></script>
+    <link href="proglin_files/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+    <script src="proglin_files/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+    <link href="proglin_files/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+    <script src="proglin_files/plotly-main-1.57.1/plotly-latest.min.js"></script>
+    <script src="proglin_files/kePrint-0.0.1/kePrint.js"></script>
+    <link href="proglin_files/lightable-0.0.1/lightable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Programmation linéaire
+### Marchand Jean-Louis
+### 06/12/2021
+
+---
+
+
+
+
+
+
+# Optimisation 
+- but : maximiser un objectif ou minimiser un coût sur un ensemble fixé
+- deux grandes familles de résolution : exacte ou approchée
+- résolution exacte (ou presque ...)
+    + **programmation linéaire**
+    + estimateur des moindres carrés linéaires (fonction `lm` de `R` vue en stats)
+    + ACP, etc.
+- résolution approchée
+    + dichotomie vue au lycée pour la recherche des zéros d'une fonction
+    + plus généralement approximation des nombres réels irrationnels 
+    (ex : `\(\sqrt{2}\)`, `\(\pi\)`, `\(e^x\)`, `\(\sin\theta\)`, etc.)
+    + estimation statistique dans un cadre non-linéaire 
+- la programmation linéaire exercice classique pour les étudiants en informatique -&gt; algorithme raisonnable à mettre en place
+
+---
+
+# Formulation du problème
+**Boussard et Daudin, 1989** (Source principale de la construction de ce cours) :
+"Résoudre un programme linéaire, c'est résoudre le problème mathématique suivant :
+
+- étant donnés : 
+  - `\(A \in M_{m,n}(\mathbb R)\)`, 
+  - `\(b\in M_{m,1}(\mathbb R)\)`,
+  - `\(c\in M_{n,1}(\mathbb R)\)`
+- trouver un vecteur colonne `\(x\in M_{n,1}(\mathbb R)\)` tel que :
+  - `\(Ax\leq b\)` vérifié
+  - `\(x\geq 0\)` vérifié
+  - `\(cx\)` maximum"
+
+Note :  les inégalités sont à comprendre ligne à ligne
+---
+
+
+## Premier exemple
+
+- **exemple tiré du même ouvrage**   considérons un agriculteur qui cherche à optimiser sa rentabilité sachant qu'il produit du blé et de la betterave, sachant que :
+  - par hectare, le blé rapporte 3000 euros, la betterave 5000
+  - par hectare, le blé nécessite 20h de travail, la betterave 500
+  - l'agriculteur estime à 2000h son total de travail annuel, et possède une surface exploitable de 100 ha.
+--
+
+- les inconnues sont : `\(x_1\)` la surface à planter en blé, `\(x_2\)` celle en betterave, on cherche ainsi à maximiser 
+`$$F = 3000 x_1 + 5000 x_2$$` sous les contraintes
+`$$\left\{
+\begin{array}{l}
+  x_1+x_2 \leq 100\\
+  20 x_1 +500x_2 \leq 2000\\
+  x_1,x_2\geq 0
+\end{array}\right.$$`
+
+---
+
+- matriciellement, les contraintes deviennent
+`$$\underbrace{ 
+\begin{pmatrix}
+  1 &amp;1\\ 20 &amp;500
+\end{pmatrix}}_{=A}
+\underbrace{
+\begin{pmatrix}
+  x_1 \\ x_2
+\end{pmatrix}}_{=x}
+\leq
+\underbrace{
+\begin{pmatrix}
+  100\\ 2000
+\end{pmatrix}}_{=b}$$`
+et
+`$$\begin{pmatrix}
+  x_1 \\ x_2
+\end{pmatrix}\geq 0$$`
+- la fonction à maximiser devient
+`$$F= \underbrace{
+\begin{pmatrix}3000 &amp; 5000 \end{pmatrix}}_{=c}
+\begin{pmatrix}x_1\\x_2\end{pmatrix}$$`
+
+---
+
+## Enrichissement du modèle
+
+- **variable supplémentaire** intégration du nombre `\(x_3\)` d'heures effectuées par un employé au tarif horaire de 50 euros de l'heure
+  - `\(F\)` devient `\(F=3000x_1+5000x_2-50x_3\)`
+  - les contraintes s'écrivent alors
+
+`$$\left\{
+\begin{array}{ll}
+  x_1+x_2 \leq 100 &amp; \rightarrow\textrm{contrainte de surface inchangée}\\
+  20 x_1 +500x_2 - x_3 \leq 2000 \\
+  x_1,x_2, x_3\geq 0
+\end{array}\right.$$`
+--
+
+  - les matrices deviennent :
+  `\(A= \begin{pmatrix}1 &amp;1 &amp;0\\ 20  &amp;500 &amp;-1\end{pmatrix},\quad b=\begin{pmatrix}100\\2000\end{pmatrix},\quad c = \begin{pmatrix}3000 &amp;5000 &amp;-50\end{pmatrix}\)`
+
+---
+  
+## Enrichissement du modèle
+  
+- **contrainte supplémentaire** intégration du rythme saisonnier : 
+  - les 20h de travail annuelles sur un ha se décomposent en 2h le printemps, 10 l'été, et 8 l'automne alors que les 500h pour la betterave se décomposent en 300 heures le printemps et 200 l'automne
+  - `\(F\)` reste `\(F=3000x_1+5000x_2-50x_3\)`
+  - les 2000h annuelles se décomposent en 600h le printemps, l'été et l'automne et seulement 200 l'hiver
+--
+
+  - les contraintes s'écrivent alors
+
+`$$\left\{
+\begin{array}{ll}
+  x_1+x_2 \leq 100 \\
+  2 x_1 +300x_2 - \frac{x_3}4 \leq 600 \\
+  10 x_1  - \frac{x_3}4 \leq 600 \\
+  8 x_1 +200x_2 - \frac{x_3}4 \leq 600 \\
+  x_1,x_2, x_3\geq 0
+\end{array}\right.\Leftrightarrow
+\begin{array}{l}
+  A= \begin{pmatrix}1 &amp;1 &amp;0\\ 2  &amp;300 &amp;-0,25\\10&amp;0&amp;-0,25\\8 &amp;200&amp;-0,25\end{pmatrix},\\ b=\begin{pmatrix}100\\600\\600\\600\end{pmatrix},\quad c = \begin{pmatrix}3000 &amp;5000 &amp;-50\end{pmatrix}\end{array}$$`
+
+---
+
+## Discussion
+
+- ce type de modèle repose sur l'hypothèse de proportionnalité à tous les étages, cela n'est pas toujours raisonnable  
+    * on peut par exemple imaginer que l'usure du matériel agricole n'est pas une fonction linéaire du temps
+- il existe des algorithmes traitant les non-linéarités mais cela sort du scope de la **programmation linéaire** qui consiste en un algorithme qui fournit la réponse au problème posé (si existence et unicité admises)
+- la solution optimale `\(x\)` fournie par l'algorithme n'a aucune raison de ne présenter que des coordonnées entières, on en reparlera plus tard
+- pas de solution optimales bornée (infinie) ou une infinité de solutions optimales dans des cas mal spécifiés
+- si les matrices sont trop grandes, la recherche d'inverses dont on aura besoin passera par une approximation, de plus le temps de calcul risque d'être très important : 
+  * ce ne sera pas le cas dans les cas pratiques si j'ai tout bien compris mais ne soyez pas trop gourmangs et/ou patients !
+
+
+---
+
+# Algorithme du simplexe
+ 
+- un **simplexe** est une figure géométrique qui contient tous les barycentres convexes (moyennes pondérées) de ses sommets d'un nombre fini de points
+    - exemples : les polygônes usuels dans `\(\mathbb R^2\)`, les polyèdres usuels dans `\(\mathbb R^3\)` 
+- la zone des **stratégies admissibles** forme un simplexe 
+- si le problème est bien posé, alors un théorème assure que **la valeur maximale de `\(cx\)` est atteinte sur au moins un des sommets**
+- l'algorithme consiste à parcourir intelligemment les sommets    - on part de l'un d'entre eux
+   - on se dirige vers le voisin qui mène à la valeur la plus forte de `\(cx\)`
+   - on s'arrête dès qu'il n'y a plus de voisins ayant une valeur de `\(cx\)` supérieure
+- le problème possède des propriétés qui assure que le maximum local retenu est forcément global
+- l'algorithme n'est pas obligé de visiter tous les sommets
+
+---
+
+<iframe title="My embedded document" src="/home/marchand/Bureau/Cours/AgroCampus/M2Deglaire/essai3.html" width="1200" height="700" allowfullscreen="TRUE"></iframe>
+
+---
+
+## L'algorithme par l'exemple
+
+Retour à notre problème fil-rouge :
+ - maximiser 
+ 
+ `$$F= \underbrace{\begin{pmatrix}3000 &amp; 5000 \end{pmatrix}}_{=c}\begin{pmatrix}x_1\\x_2\end{pmatrix}$$`
+
+- sous les contraintes : 
+`$$\underbrace{\begin{pmatrix}1 &amp;1\\ 20 &amp;500\end{pmatrix}}_{=A}\underbrace{\begin{pmatrix}  x_1 \\ x_2\end{pmatrix}}_{=x}\leq\underbrace{\begin{pmatrix}  100\\ 2000\end{pmatrix}}_{=b},\qquad\textrm{et } \begin{pmatrix}x_1 \\x_2\end{pmatrix}\geq 0$$`
+---
+
+### Standardisation du problème
+- transformer les inéquations en équations en introduisant des variables supplémentaires
+- dans notre exemple, si `\(x_3\)` est la surface d'exploitation restante et `\(x_4\)` le temps de travail inutilisé :
+`$$\left\{\begin{array}{l}
+  x_1+x_2 \leq 100\\
+  20 x_1 +500x_2 \leq 2000\\
+  x_1,x_2\geq 0
+\end{array}\right.
+\Leftrightarrow
+\left\{
+\begin{array}{l}
+  x_1+x_2+x_3 = 100\\
+  20 x_1 +500x_2 + x_4 = 2000\\
+  x_1,x_2, x_3, x_4\geq 0
+\end{array}\right.$$`
+--
+
+- matriciellement, en mettant à jour les notations
+`$$\underbrace{\begin{pmatrix}
+  1 &amp;1 &amp;1 &amp;0\\ 20 &amp;500 &amp;0 &amp;1
+\end{pmatrix}}_{=A}
+\underbrace{
+\begin{pmatrix}
+  x_1 \\ x_2 \\ x_3 \\ x_4
+\end{pmatrix}}_{=x}
+=
+\underbrace{
+\begin{pmatrix}
+  100\\ 2000
+\end{pmatrix}}_{=b},\qquad\textrm{et } \begin{pmatrix}x_1\\x_2\\x_3\\x_4\end{pmatrix}\geq 0$$`
+
+---
+
+### Intérêt de la matrice standard
+
+- exemple simple pour permettre la visualisation, maximiser `\(F=2x+3y\)` sous la contrainte `\(x+y\leq 50\)`
+- avant standardisation
+
+&lt;img src="proglin_files/figure-html/unnamed-chunk-2-1.png" height="400" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+### Intérêt de la matrice standard
+
+- exemple simple pour permettre la visualisation, maximiser `\(F=2x+3y\)` sous la contrainte `\(x+y\leq 50\)`
+- après standardisation
+<div id="htmlwidget-9ca934525a0453eca0c3" style="width:700px;height:400px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9ca934525a0453eca0c3">{"x":{"visdat":{"f2b7900f99c":["function () ","plotlyVisDat"]},"cur_data":"f2b7900f99c","attrs":{"f2b7900f99c":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"z":[[50,45,40,35,30,25,20,15,10,5,0],[45,40.5,36,31.5,27,22.5,18,13.5,9,4.5,0],[40,36,32,28,24,20,16,12,8,4,0],[35,31.5,28,24.5,21,17.5,14,10.5,7,3.5,0],[30,27,24,21,18,15,12,9,6,3,0],[25,22.5,20,17.5,15,12.5,10,7.5,5,2.5,0],[20,18,16,14,12,10,8,6,4,2,0],[15,13.5,12,10.5,9,7.5,6,4.5,3,1.5,0],[10,9,8,7,6,5,4,3,2,1,0],[5,4.5,4,3.5,3,2.5,2,1.5,1,0.5,0],[0,0,0,0,0,0,0,0,0,0,0]],"type":"surface","x":[[0,5,10,15,20,25,30,35,40,45,50],[0,5,10,15,20,25,30,35,40,45,50],[0,5,10,15,20,25,30,35,40,45,50],[0,5,10,15,20,25,30,35,40,45,50],[0,5,10,15,20,25,30,35,40,45,50],[0,5,10,15,20,25,30,35,40,45,50],[0,5,10,15,20,25,30,35,40,45,50],[0,5,10,15,20,25,30,35,40,45,50],[0,5,10,15,20,25,30,35,40,45,50],[0,5,10,15,20,25,30,35,40,45,50],[0,5,10,15,20,25,30,35,40,45,50]],"y":[[0,0,0,0,0,0,0,0,0,0,0],[5,4.5,4,3.5,3,2.5,2,1.5,1,0.5,0],[10,9,8,7,6,5,4,3,2,1,0],[15,13.5,12,10.5,9,7.5,6,4.5,3,1.5,0],[20,18,16,14,12,10,8,6,4,2,0],[25,22.5,20,17.5,15,12.5,10,7.5,5,2.5,0],[30,27,24,21,18,15,12,9,6,3,0],[35,31.5,28,24.5,21,17.5,14,10.5,7,3.5,0],[40,36,32,28,24,20,16,12,8,4,0],[45,40.5,36,31.5,27,22.5,18,13.5,9,4.5,0],[50,45,40,35,30,25,20,15,10,5,0]],"inherit":true},"f2b7900f99c.1":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":[50,0,0],"y":[0,50,0],"z":[0,0,50],"type":"scatter3d","mode":"markers","marker":{"size":3,"color":"red","symbol":142},"showlegend":false,"inherit":true},"f2b7900f99c.2":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":[50,0,0],"y":[0,50,0],"z":[0,0,50],"text":["A","B","C"],"type":"scatter3d","mode":"text","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":[]},"yaxis":{"title":[]},"zaxis":{"title":[]}},"hovermode":"closest","showlegend":true,"legend":{"yanchor":"top","y":0.5}},"source":"A","config":{"showSendToCloud":false},"data":[{"colorbar":{"title":"","ticklen":2,"len":0.5,"lenmode":"fraction","y":1,"yanchor":"top"},"colorscale":[["0","rgba(68,1,84,1)"],["0.0416666666666667","rgba(70,19,97,1)"],["0.0833333333333333","rgba(72,32,111,1)"],["0.125","rgba(71,45,122,1)"],["0.166666666666667","rgba(68,58,128,1)"],["0.208333333333333","rgba(64,70,135,1)"],["0.25","rgba(60,82,138,1)"],["0.291666666666667","rgba(56,93,140,1)"],["0.333333333333333","rgba(49,104,142,1)"],["0.375","rgba(46,114,142,1)"],["0.416666666666667","rgba(42,123,142,1)"],["0.458333333333333","rgba(38,133,141,1)"],["0.5","rgba(37,144,140,1)"],["0.541666666666667","rgba(33,154,138,1)"],["0.583333333333333","rgba(39,164,133,1)"],["0.625","rgba(47,174,127,1)"],["0.666666666666667","rgba(53,183,121,1)"],["0.708333333333333","rgba(79,191,110,1)"],["0.75","rgba(98,199,98,1)"],["0.791666666666667","rgba(119,207,85,1)"],["0.833333333333333","rgba(147,214,70,1)"],["0.875","rgba(172,220,52,1)"],["0.916666666666667","rgba(199,225,42,1)"],["0.958333333333333","rgba(226,228,40,1)"],["1","rgba(253,231,37,1)"]],"showscale":true,"z":[[50,45,40,35,30,25,20,15,10,5,0],[45,40.5,36,31.5,27,22.5,18,13.5,9,4.5,0],[40,36,32,28,24,20,16,12,8,4,0],[35,31.5,28,24.5,21,17.5,14,10.5,7,3.5,0],[30,27,24,21,18,15,12,9,6,3,0],[25,22.5,20,17.5,15,12.5,10,7.5,5,2.5,0],[20,18,16,14,12,10,8,6,4,2,0],[15,13.5,12,10.5,9,7.5,6,4.5,3,1.5,0],[10,9,8,7,6,5,4,3,2,1,0],[5,4.5,4,3.5,3,2.5,2,1.5,1,0.5,0],[0,0,0,0,0,0,0,0,0,0,0]],"type":"surface","x":[[0,5,10,15,20,25,30,35,40,45,50],[0,5,10,15,20,25,30,35,40,45,50],[0,5,10,15,20,25,30,35,40,45,50],[0,5,10,15,20,25,30,35,40,45,50],[0,5,10,15,20,25,30,35,40,45,50],[0,5,10,15,20,25,30,35,40,45,50],[0,5,10,15,20,25,30,35,40,45,50],[0,5,10,15,20,25,30,35,40,45,50],[0,5,10,15,20,25,30,35,40,45,50],[0,5,10,15,20,25,30,35,40,45,50],[0,5,10,15,20,25,30,35,40,45,50]],"y":[[0,0,0,0,0,0,0,0,0,0,0],[5,4.5,4,3.5,3,2.5,2,1.5,1,0.5,0],[10,9,8,7,6,5,4,3,2,1,0],[15,13.5,12,10.5,9,7.5,6,4.5,3,1.5,0],[20,18,16,14,12,10,8,6,4,2,0],[25,22.5,20,17.5,15,12.5,10,7.5,5,2.5,0],[30,27,24,21,18,15,12,9,6,3,0],[35,31.5,28,24.5,21,17.5,14,10.5,7,3.5,0],[40,36,32,28,24,20,16,12,8,4,0],[45,40.5,36,31.5,27,22.5,18,13.5,9,4.5,0],[50,45,40,35,30,25,20,15,10,5,0]],"frame":null},{"x":[50,0,0],"y":[0,50,0],"z":[0,0,50],"type":"scatter3d","mode":"markers","marker":{"color":"red","size":3,"symbol":142,"line":{"color":"rgba(255,127,14,1)"}},"showlegend":false,"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"line":{"color":"rgba(255,127,14,1)"},"frame":null},{"x":[50,0,0],"y":[0,50,0],"z":[0,0,50],"text":["A","B","C"],"type":"scatter3d","mode":"text","marker":{"color":"rgba(44,160,44,1)","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"line":{"color":"rgba(44,160,44,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+- ce contexte facilite l'utilisation de l'algèbre linéaire pour parcourir les sommets
+
+---
+
+### Variables de base, coûts relatifs et pivot
+- Nouvel exemple (Source : https://fxjollois.github.io/)
+  * Une petite entreprise familiale qui désire fabriquer de la crème glacée et du beurre à partir du lait produit par leurs vaches.
+Les prix sont fixés à 5€ par litre de crème glacée et 4€ par Kg de beurre. Le profit (à maximiser) se calcule donc ainsi : `\(F=5x+4y\)`
+ * Nous avons les contraintes suivantes :
+La production hebdomadaire des vaches est de 22 litres ;
+Pour faire 1 Kg de beurre, il faut 2 litres de lait tandis que pour faire 1 litre de crème glacée, cela exige 3 litres de lait ;
+On entrepose les produits dans un réfrigérateur qui ne peut contenir plus que 6 litres de crème glacée ;
+Il faut 1 heure pour produire de 4 litres de crème glacée et 1 Kg de beurre. La famille dispose d’au plus 6 heures par semaine.
+--
+
+- Transcription  sous forme de programme linéaire
+
+`$$\left\{\begin{array}{lll}3x_1+2x_2\leq 22\\x_1\leq 6\\\frac{x_1}4 +x_2\leq 6\\x_1x_2\geq 0 \end{array}\right.
+\Rightarrow A = \begin{pmatrix}1&amp;2\\1&amp;0\\0,25 &amp;1\end{pmatrix},\quad b=\begin{pmatrix}22\\6\\6\end{pmatrix}, \quad c=\begin{pmatrix}5&amp;4\end{pmatrix}$$`
+
+---
+
+### Variables de base, coûts relatifs et pivot
+- matrice standard
+&lt;table class=" lightable-material" style='font-family: "Source Sans Pro", helvetica, sans-serif; margin-left: auto; margin-right: auto;'&gt;
+ &lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="empty-cells: hide;" colspan="1"&gt;&lt;/th&gt;
+&lt;th style="empty-cells: hide;" colspan="1"&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; color: #E7EDF3 !important;padding-right: 4px; padding-left: 4px; background-color: #E7EDF3 !important;" colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;5&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; color: #E7EDF3 !important;padding-right: 4px; padding-left: 4px; background-color: #E7EDF3 !important;" colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;4&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; color: #E7EDF3 !important;padding-right: 4px; padding-left: 4px; background-color: #E7EDF3 !important;" colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;0&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; color: #E7EDF3 !important;padding-right: 4px; padding-left: 4px; background-color: #E7EDF3 !important;" colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;0&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; color: #E7EDF3 !important;padding-right: 4px; padding-left: 4px; background-color: #E7EDF3 !important;" colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;0&lt;/div&gt;&lt;/th&gt;
+&lt;th style="empty-cells: hide;" colspan="1"&gt;&lt;/th&gt;
+&lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; 	 &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; 	 &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{1}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{2}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{3}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{4}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{5}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; 	 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt; \(x_{3}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:center;color: orange !important;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;color: orange !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;color: orange !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt; 22 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt; \(x_{4}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;color: orange !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;color: orange !important;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;color: orange !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt; 6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt; \(x_{5}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(\frac14\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;color: orange !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;color: orange !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;color: orange !important;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt; 6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;color: orange !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;color: orange !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;color: orange !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+### Variables de base, coûts relatifs et pivot
+- matrice augmentée avec le vecteur `\(b\)`
+&lt;table class=" lightable-material" style='font-family: "Source Sans Pro", helvetica, sans-serif; margin-left: auto; margin-right: auto;'&gt;
+ &lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="empty-cells: hide;" colspan="1"&gt;&lt;/th&gt;
+&lt;th style="empty-cells: hide;" colspan="1"&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; color: #E7EDF3 !important;padding-right: 4px; padding-left: 4px; background-color: #E7EDF3 !important;" colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;5&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; color: #E7EDF3 !important;padding-right: 4px; padding-left: 4px; background-color: #E7EDF3 !important;" colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;4&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; color: #E7EDF3 !important;padding-right: 4px; padding-left: 4px; background-color: #E7EDF3 !important;" colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;0&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; color: #E7EDF3 !important;padding-right: 4px; padding-left: 4px; background-color: #E7EDF3 !important;" colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;0&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; color: #E7EDF3 !important;padding-right: 4px; padding-left: 4px; background-color: #E7EDF3 !important;" colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;0&lt;/div&gt;&lt;/th&gt;
+&lt;th style="empty-cells: hide;" colspan="1"&gt;&lt;/th&gt;
+&lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; 	 &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; 	 &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{1}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{2}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{3}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{4}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{5}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; 	 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt; \(x_{3}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;color: orange !important;"&gt; 22 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt; \(x_{4}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;color: orange !important;"&gt; 6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt; \(x_{5}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(\frac14\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;color: orange !important;"&gt; 6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;color: orange !important;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+### Variables de base, coûts relatifs et pivot
+- variables de base : colonnes élémentaires
+&lt;table class=" lightable-material" style='font-family: "Source Sans Pro", helvetica, sans-serif; margin-left: auto; margin-right: auto;'&gt;
+ &lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="empty-cells: hide;" colspan="1"&gt;&lt;/th&gt;
+&lt;th style="empty-cells: hide;" colspan="1"&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; color: #E7EDF3 !important;padding-right: 4px; padding-left: 4px; background-color: #E7EDF3 !important;" colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;5&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; color: #E7EDF3 !important;padding-right: 4px; padding-left: 4px; background-color: #E7EDF3 !important;" colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;4&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; color: #E7EDF3 !important;padding-right: 4px; padding-left: 4px; background-color: #E7EDF3 !important;" colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;0&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; color: #E7EDF3 !important;padding-right: 4px; padding-left: 4px; background-color: #E7EDF3 !important;" colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;0&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; color: #E7EDF3 !important;padding-right: 4px; padding-left: 4px; background-color: #E7EDF3 !important;" colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;0&lt;/div&gt;&lt;/th&gt;
+&lt;th style="empty-cells: hide;" colspan="1"&gt;&lt;/th&gt;
+&lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; 	 &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; 	 &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{1}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{2}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{3}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{4}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{5}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; 	 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;font-weight: bold;color: orange !important;"&gt; \(x_{3}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:center;font-weight: bold;color: orange !important;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;font-weight: bold;color: orange !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;font-weight: bold;color: orange !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 22 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;font-weight: bold;color: orange !important;"&gt; \(x_{4}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;font-weight: bold;color: orange !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;font-weight: bold;color: orange !important;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;font-weight: bold;color: orange !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;font-weight: bold;color: orange !important;"&gt; \(x_{5}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(\frac14\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;font-weight: bold;color: orange !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;font-weight: bold;color: orange !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;font-weight: bold;color: orange !important;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;font-weight: bold;color: orange !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;font-weight: bold;color: orange !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;font-weight: bold;color: orange !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;font-weight: bold;color: orange !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+- solution "évidente" : `\(x_1=x_2=0\)`, `\(x_3=22\)`, `\(x_4=x_5=6\)`
+
+---
+
+### Variables de base, coûts relatifs et pivot
+- évolution de la fonction à maximiser `\(F=cx=5x_1+4x_2\)`
+&lt;table class=" lightable-material" style='font-family: "Source Sans Pro", helvetica, sans-serif; margin-left: auto; margin-right: auto;'&gt;
+ &lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="empty-cells: hide;" colspan="1"&gt;&lt;/th&gt;
+&lt;th style="empty-cells: hide;" colspan="1"&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; color: orange !important;" colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;5&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; color: orange !important;" colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;4&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; color: orange !important;" colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;0&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; color: orange !important;" colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;0&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; color: orange !important;" colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;0&lt;/div&gt;&lt;/th&gt;
+&lt;th style="empty-cells: hide;" colspan="1"&gt;&lt;/th&gt;
+&lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; 	 &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; 	 &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{1}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{2}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{3}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{4}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{5}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; 	 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;color: orange !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(x_{3}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 22 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;color: orange !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(x_{4}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;color: orange !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(x_{5}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(\frac14\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;color: orange !important;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;color: #E7EDF3 !important;background-color: #E7EDF3 !important;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+### Variables de base, coûts relatifs et pivot
+- calcul des coûts : pour `\(x_1\)`, `\(5 - 3\times 0- 1\times 0-\frac14\times 0\)`
+&lt;table class=" lightable-material" style='font-family: "Source Sans Pro", helvetica, sans-serif; margin-left: auto; margin-right: auto;'&gt;
+ &lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="empty-cells: hide;" colspan="1"&gt;&lt;/th&gt;
+&lt;th style="empty-cells: hide;" colspan="1"&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;5&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;4&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;0&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;0&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;0&lt;/div&gt;&lt;/th&gt;
+&lt;th style="empty-cells: hide;" colspan="1"&gt;&lt;/th&gt;
+&lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; 	 &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; 	 &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{1}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{2}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{3}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{4}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{5}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; 	 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(x_{3}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 22 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(x_{4}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(x_{5}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(\frac14\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;color: orange !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;color: orange !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;color: orange !important;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;color: orange !important;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;color: orange !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;color: orange !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;color: orange !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;color: orange !important;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+- la variable **entrante** ici est `\(x_1\)`
+---
+### Variables de base, coûts relatifs et pivot
+- choix d'une variable **sortante** : première variable à s'annuler lorsque `\(x_1\)` croît
+&lt;table class=" lightable-material" style='font-family: "Source Sans Pro", helvetica, sans-serif; margin-left: auto; margin-right: auto;'&gt;
+ &lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="empty-cells: hide;" colspan="1"&gt;&lt;/th&gt;
+&lt;th style="empty-cells: hide;" colspan="1"&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;5&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;4&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;0&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;0&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;0&lt;/div&gt;&lt;/th&gt;
+&lt;th style="empty-cells: hide;" colspan="1"&gt;&lt;/th&gt;
+&lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; 	 &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; 	 &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{1}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{2}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{3}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{4}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{5}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; 	 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(x_{3}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 22 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(x_{4}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(x_{5}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(\frac14\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+- si `\(x_1=\frac{22}3\)` alors `\(x_3=0\)`, si `\(x_1=6\)` alors `\(x_4=0\)`, enfin si `\(x_1=24\)` alors `\(x_5=0,\)` la variable sortante est donc `\(x_4\)`
+---
+### Variables de base, coûts relatifs et pivot
+- pivot pour que `\(x_1\)` remplace `\(x_4\)` en variable de base 
+&lt;table class=" lightable-material" style='font-family: "Source Sans Pro", helvetica, sans-serif; margin-left: auto; margin-right: auto;'&gt;
+ &lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="empty-cells: hide;" colspan="1"&gt;&lt;/th&gt;
+&lt;th style="empty-cells: hide;" colspan="1"&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;5&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;4&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;0&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;0&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;0&lt;/div&gt;&lt;/th&gt;
+&lt;th style="empty-cells: hide;" colspan="1"&gt;&lt;/th&gt;
+&lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; 	 &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; 	 &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{1}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{2}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{3}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{4}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{5}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; 	 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(x_{3}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -3 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(x_{1}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(x_{5}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(-\frac14\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(\frac92\) &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+- variable entrante `\(x_2\)`, sortante `\(x_3\)`
+---
+### Variables de base, coûts relatifs et pivot
+- pivot pour que `\(x_2\)` remplace `\(x_3\)` en variable de base 
+&lt;table class=" lightable-material" style='font-family: "Source Sans Pro", helvetica, sans-serif; margin-left: auto; margin-right: auto;'&gt;
+ &lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="empty-cells: hide;" colspan="1"&gt;&lt;/th&gt;
+&lt;th style="empty-cells: hide;" colspan="1"&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;5&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;4&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;0&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;0&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;0&lt;/div&gt;&lt;/th&gt;
+&lt;th style="empty-cells: hide;" colspan="1"&gt;&lt;/th&gt;
+&lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; 	 &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; 	 &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{1}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{2}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{3}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{4}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{5}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; 	 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(x_{2}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(\frac12\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(-\frac32\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(x_{1}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(x_{5}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(-\frac12\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(\frac54\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(\frac52\) &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -2 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+- variable entrante `\(x_4\)`, sortante `\(x_5\)`
+---
+### Variables de base, coûts relatifs et pivot
+- pivot pour que `\(x_4\)` remplace `\(x_5\)` en variable de base 
+&lt;table class=" lightable-material" style='font-family: "Source Sans Pro", helvetica, sans-serif; margin-left: auto; margin-right: auto;'&gt;
+ &lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="empty-cells: hide;" colspan="1"&gt;&lt;/th&gt;
+&lt;th style="empty-cells: hide;" colspan="1"&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;5&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;4&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;0&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;0&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"&gt;&lt;div style="border-bottom: 1px solid #eee; padding-bottom: 16px; padding-top: 16px; height: 56px;"&gt;0&lt;/div&gt;&lt;/th&gt;
+&lt;th style="empty-cells: hide;" colspan="1"&gt;&lt;/th&gt;
+&lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; 	 &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; 	 &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{1}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{2}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{3}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{4}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(x_{5}\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; 	 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(x_{2}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(-\frac1{10}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(\frac6{5}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(x_{1}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(\frac2{5}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(-\frac4{5}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(x_{4}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(-\frac25\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(\frac4{5}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(-\frac8{5}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; \(-\frac4{5}\) &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+- pas de nouvelle variable entrante : fin !
+---
+### Résolution avec R 
+
+
+```r
+A &lt;- matrix(c(3,1,.25, 2,0,1), byrow = F, nrow = 3)
+b &lt;- c(22,6,6)
+c &lt;- c(5,4) 
+library(boot)
+result = simplex( a = c, A1 = A, b1 = b, maxi = TRUE)
+result
+```
+
+```
+## 
+## Linear Programming Results
+## 
+## Call : simplex(a = c, A1 = A, b1 = b, maxi = TRUE)
+## 
+## Maximization Problem with Objective Function Coefficients
+## x1 x2 
+##  5  4 
+## 
+## 
+## Optimal solution has the following values
+## x1 x2 
+##  4  5 
+## The optimal value of the objective  function is 40.
+```
+
+---
+
+## Problèmes possibles et résolutions
+
+- le cadre le plus simple, abordé ici repose sur un nombre de contraintes plus faible que le nombre d'inconnues pour la matrice standard
+- la matrice `\(A\)` doit être de rang plein, cela peut provenir d'incompatibilités ou de contraintes redondantes
+- la recherche d'un premier sommet satisfaisant les contraintes, nécessaire pour amorcer l'algorithme peut poser problème
+- un système de contraintes trop complexe peut mener à un trop grand nombre de calculs même pour une machine 
+- etc.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create();
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
