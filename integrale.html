@@ -122,6 +122,53 @@ finalement
 `$$\frac{1+\cos(2t)}2= \left[\frac{t}2+\frac{\sin(2t)}4\right]_0^{\frac\pi2}=\frac\pi4.$$`
 - on prouve ainsi la formule connue depuis le collège de l'aire du quart de disque de rayon 1 : `\(\frac\pi4\)`
 - le raisonnement peut être repris pour prouver le cas général
+
+---
+
+# Intégrale généralisée
+
+- généralisation de la notion d'intégrale utile notamment en probabilité
+- exemple : la fonction `\(\frac1{\sqrt x}\)` est continue sur `\(]0,1]\)`
+  *  pour tout `\(a\in]0,1]\)` la fonction est continue sur `\([a,1]\)` donc intégrable :
+
+`$$\int_a^1\frac1{\sqrt x}dx=\left[2\sqrt{x}\right]_a^1=2\sqrt{1}-2\sqrt{a}$$`
+que se passe-t-il lorsque `\(a\)` tend vers 0 ?
+- finalement, on peut concevoir l'intégrale de 0 à 1 comme une masse unitaire étirée sur une hauteur infinie
+
+---
+
+## Définition
+
+- Si `\(f\)` est une fonction **continue** sur l'intervalle `\(]a,b]\)` alors l'intégrale généralisée de `\(f\)`  est le nombre réel, lorsqu'il existe, donné par
+`$$\int_a^bf(x)dx =\lim_{t\to a^+}\int_t^b f(x)dx.$$`
+- Si `\(f\)` est une fonction **continue** sur l'intervalle `\([a,b[\)` alors l'intégrale généralisée de `\(f\)`  est le nombre réel, lorsqu'il existe, donné par
+`$$\int_a^bf(x)dx =\lim_{t\to b^-}\int_a^t f(x)dx.$$`
+- Si `\(f\)` est une fonction **continue** sur l'intervalle `\(]a,b[\)` alors l'intégrale généralisée de `\(f\)` est définie par :
+`$$\int_a^bf(x)dx =\lim_{t\to a^+}\int_t^{c} f(x)dx+\lim_{t\to b^-}\int_c^t f(x)dx,$$` où `\(c\)` est un point intermédiaire de `\(]a,b[.\)`
+
+---
+
+## Exemples
+
+-  l'intégrale suivante est-elle bien définie? le cas échéant quel est sa valeur : `$$\int_0^1\ln(x)dx$$` 
+- idem pour les intégrale suivantes : `$$\int_1^{+\infty} \frac1{x^2}dx,\qquad \int_{-\infty}^{+\infty} xe^{-x^2}dx,  \qquad\int_0^{+\infty} \frac1{x^2}dx,\qquad \int_0^{+\infty} \frac{\sin\left(\frac1x\right)}{x^2}dx$$`
+
+---
+
+## Problèmes existentiels
+
+- comment savoir si une intégrale généralisée existe sans connaître de primitive ? 
+- on détermine les probabilités  d'une variable aléatoire de loi normale à l'aide d'intégrales du type :
+`$$\mathbb P(a\leq X\leq b)=\int_a^b \frac{e^{-\frac{x^2}2}}{\sqrt{2\pi}}dx$$`
+- la clé réside dans la comparaison 
+- **Théorème de Comparaison** : soient `\(f\)` et `\(g\)` deux fonctions **positives** avec `\(f\)` et `\(g\)` continues sur `\([a,b[\)` (respectivement `\(]a,b]\)`) et `\(c\in]a,b[\)` telles que  `\(g\)` est **intégrable** sur `\([c,b[\)` (resp. `\(\in]a,c]\)`) et
+  `$$\forall x\in[c,b[ \quad (\textrm{resp. } \in]a,c]),\quad  f(x)\leq g(x)$$`
+alors l'intégrale `\(\int_{a}^{b}f(x)dx\)` est **bien définie et réelle**.
+
+## Exemple
+
+- la fonction de **Gauss-Laplace** `\(f(x)=\frac{e^{-\frac{x^2}2}}{\sqrt{2\pi}}\)` est continue sur `\(\mathbb R\)` mais sa primitive sur `\(\mathbb R\)` n'est pas exprimable à l'aide des fonctions usuelles
+- comparer `\(f\)` à `\(g\)` sur `\([1,+\infty[\)`, conclure
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
