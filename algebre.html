@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Algèbre matricielle</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Marchand Jean-Louis" />
+    <meta name="date" content="2022-03-01" />
+    <script src="algebre_files/header-attrs-2.10/header-attrs.js"></script>
+    <script src="algebre_files/kePrint-0.0.1/kePrint.js"></script>
+    <link href="algebre_files/lightable-0.0.1/lightable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Algèbre matricielle
+### Marchand Jean-Louis
+### 03/01/2022
+
+---
+
+
+
+
+
+
+## Rappels sur les  systèmes
+- dans un enclos sont parqués des chameaux et des dromadaires, on compte 70 bosses et 200 pattes, déterminer la répartition exacte de chameaux et dromadaires
+- appelons `\(x\)` le nombre de chameaux et `\(y\)` celui de dromadaires
+`$$\left\{
+\begin{array}{l}
+  2x+y = 70\\
+  4x + 4y = 200
+\end{array}\right.$$`
+- deux méthodes de résolution vues au collège 
+  + **substitution** : la plus intuitive mais piégeuse dès que le nombre d'inconnues augmente
+  + **combinaison** : la plus généralisable comme le montrera ce cours
+
+---
+
+## Matrices
+
+- **objectifs** 
+  + factoriser le système en résumant dans un tableau l'ensemble des calculs effectués sur chacune des variables
+  + toutes les opérations effectuées par **combinaison** doivent pouvoir également être résumées à l'aide de matrices
+
+- ce qui semble être un jeu d'écritures  est en fait un outil puissant de calcul directement transposable sur un calculateur
+
+- outil compatible avec toutes les structures linéaires  : géométrie vectorielle, graphes, etc.
+
+---
+
+## Matrices
+- jeu d'écriture
+`$$\left\{
+\begin{array}{l}
+  2x+y = 70\\
+  4x + 4y = 200
+\end{array}\right.
+\Leftrightarrow
+\begin{pmatrix}
+  2 &amp; 1 \\
+  4 &amp; 4
+\end{pmatrix}
+\begin{pmatrix}
+  x \\
+  y
+\end{pmatrix}
+=
+\begin{pmatrix}
+  70 \\
+  200
+\end{pmatrix}$$`
+- la **matrice** ici apparaît comme un tableau contenant les coefficients devant les variables ligne à ligne
+`$$\begin{pmatrix}
+  2 &amp;1\\
+  4 &amp;4
+\end{pmatrix}$$`
+
+- le **produit** de cette matrice par la colonne des variables est de fait défini par :
+`$$\begin{pmatrix}
+  2 &amp; 1 \\
+  4 &amp; 4
+\end{pmatrix}
+\begin{pmatrix}
+  x \\
+  y
+\end{pmatrix}
+=
+\begin{pmatrix}
+  2x+ y \\
+  4x + 4y
+\end{pmatrix}$$`
+---
+
+## Matrices : définition
+
++ une matrice réelle `\(A\)` à `\(p\)` lignes et `\(q\)` colonnes est un tableau à entrées réelles
+`$$A = (a_{i,j})_{\substack{1 \leq i \leq p \\ 1\leq j\leq q}}=\begin{pmatrix} a_{1,1} &amp; a_{1,2} &amp; a_{1,3} &amp; \dots &amp; a_{1,q-1} &amp; a_{1,q} \\ a_{2,1} &amp; a_{2,2} &amp; a_{2,3} &amp; \dots  &amp; a_{2,q-1} &amp; a_{2,q} \\  \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\ a_{p-1,1} &amp; a_{p-1,2} &amp; a_{p-1,3} &amp; \dots &amp; a_{p-1,q-1} &amp; a_{p-1,q} \\ a_{p,1} &amp; a_{p,2} &amp; a_{p,3} &amp; \dots &amp; a_{p,q-1} &amp; a_{p,q} \end{pmatrix}$$`
+
++ on note `\(M_{p,q}(\mathbb R)\)` l'ensemble des matrices à `\(p\)` lignes et `\(q\)` colonnes. Lorsque la matrice est  **carrée** `\((p=q)\)`, on note plus simplement `\(M_{p}(\mathbb R)\)`
+---
+## Matrices : exemples
+`$$A = \begin{pmatrix}
+2 &amp; 1 &amp; -1 &amp;3 \\
+-1 &amp; 0 &amp; 2 &amp; 5
+\end{pmatrix}\in M_{2,4}(\mathbb R),\quad
+B = \begin{pmatrix}
+1 &amp;2 &amp;3\\
+-1 &amp;-2 &amp;5\\
+2 &amp;-3 &amp;1\\
+-1 &amp; 0 &amp;0
+\end{pmatrix}\in M_{4,3}(\mathbb R),$$`
+`$$C = \begin{pmatrix}1 &amp;3\\-3 &amp;2\end{pmatrix}\in M_{2}(\mathbb R), \quad  D = \begin{pmatrix}\pi &amp;e &amp; 2 \\\sqrt 2 &amp; \tfrac13 &amp;0 \\ 3 &amp; 1 &amp; 4\end{pmatrix}\in M_{3}(\mathbb R)$$`
+---
+
+
+## Produit de matrices
+
+- reprise du schéma précédent en travaillant colonne par colonne
+
+- pour effectuer le produit `\(AB\)` d'une matrice `\(A\)` par celui d'une matrice `\(B\)`, il faut que le nombre de colonnes de `\(A\)` soit égal à au nombre de lignes de `\(B\)`
+- le résultat possède autant de lignes que `\(A\)` et autant de colonnes de `\(B\)`
+
+- exemple :
+`$$A = \begin{pmatrix}
+2 &amp; 1 &amp; -1 &amp;3 \\
+-1 &amp; 0 &amp; 2 &amp; 5
+\end{pmatrix},\qquad
+B = \begin{pmatrix}
+1 &amp;2 &amp;3\\
+-1 &amp;-2 &amp;5\\
+2 &amp;-3 &amp;1\\
+-1 &amp; 0 &amp;0
+\end{pmatrix}$$`
+---
+
+## Produit de matrices
+
+&lt;img src="algebre_files/figure-html/unnamed-chunk-1-1.svg" width="400px" style="display: block; margin: auto;" /&gt;
+---
+
+## Produit de matrices
+
+&lt;img src="algebre_files/figure-html/unnamed-chunk-2-1.svg" width="400px" style="display: block; margin: auto;" /&gt;
+---
+
+## Produit de matrices
+
+&lt;img src="algebre_files/figure-html/unnamed-chunk-3-1.svg" width="400px" style="display: block; margin: auto;" /&gt;
+---
+
+## Produit de matrices
+
+&lt;img src="algebre_files/figure-html/unnamed-chunk-4-1.svg" width="400px" style="display: block; margin: auto;" /&gt;
+---
+
+## Produit de matrices
+
+&lt;img src="algebre_files/figure-html/unnamed-chunk-5-1.svg" width="400px" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Produit de matrices
+
+&lt;img src="algebre_files/figure-html/unnamed-chunk-6-1.svg" width="400px" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Produit de matrices
+
+&lt;img src="algebre_files/figure-html/unnamed-chunk-7-1.svg" width="400px" style="display: block; margin: auto;" /&gt;
+- en conclusion 
+`$$AB = \begin{pmatrix}-4&amp;5&amp;10\\-2 &amp;-8 &amp;-1\end{pmatrix}$$`
+
+---
+
+## Produit de matrices : quelques remarques
+
+- pour savoir si un produit est possible, il faut **toujours** vérifier le nombre de colonnes de la première et le nombre de lignes de la deuxième
+- l'existence du produit `\(AB\)` ne garantit pas en général la bonne définition de `\(BA\)`, c'est le cas dans l'exemple précédent : le nombre de colonnes de `\(B\)` (4) n'est pas le même que le nombre de lignes de `\(A\)`
+- même si les deux produits sont bien définis il n'y a aucune raison que les résultats soient égaux, pour que cela arrive, il faut que les matrice soient au minimum carrées mais ça ne suffit pas !
+
+---
+## Produit de matrices : exemples
+- calculer lorsque c'est possible les produits de matrice à partir des exemples précédents
+`$$A = \begin{pmatrix}
+2 &amp; 1 &amp; -1 &amp;3 \\
+-1 &amp; 0 &amp; 2 &amp; 5
+\end{pmatrix}\in M_{2,4}(\mathbb R),\quad
+B = \begin{pmatrix}
+1 &amp;2 &amp;3\\
+-1 &amp;-2 &amp;5\\
+2 &amp;-3 &amp;1\\
+-1 &amp; 0 &amp;0
+\end{pmatrix}\in M_{4,3}(\mathbb R),$$`
+`$$C = \begin{pmatrix}1 &amp;3\\-3 &amp;2\end{pmatrix}\in M_{2}(\mathbb R), \quad  D = \begin{pmatrix}\pi &amp;e &amp; 2 \\\sqrt 2 &amp; \tfrac13 &amp;0 \\ 3 &amp; 1 &amp; 4\end{pmatrix}\in M_{3}(\mathbb R)$$`
+---
+
+## Autres opérations algébriques
+
+- **l'addition** pour `\(A,B \in M_{p,q}(\mathbb R)\)`, la matrice `\(A+B \in M_{p,q}\)` obtenue en sommant les entrées : 
+`$$(A+B)_{i,j} = a_{i,j}+b_{i,j}$$`
+- exemple 
+`$$\begin{pmatrix}
+\frac 12 &amp; 1 \\ \frac 13 &amp;
+-7 \\ \pi &amp;2
+\end{pmatrix}
++
+\begin{pmatrix}
+\frac 23 &amp; 1 \\ \frac 23 &amp;
+1 \\ \pi &amp; 0
+\end{pmatrix}
+=
+\begin{pmatrix}
+\frac 12 + \frac 23 &amp; 1 + 1 \\ \frac13 + \frac 23 &amp;
+-7 + 1 \\ \pi + \pi &amp; 2 + 0
+\end{pmatrix}
+=
+\begin{pmatrix}
+\frac 76 &amp; 2 \\ 1 &amp;
+-6 \\ 2\pi &amp; 2
+\end{pmatrix}$$`
+
+---
+
+## Autres opérations algébriques
+
+- **la multiplication par un réel** pour `\(A\in M_{p,q}(\mathbb R)\)` et `\(\lambda \in\mathbb R\)`, la matrice `\(\lambda A\in M_{p,q}(\mathbb R)\)` obtenue en multipliant chaque entrée par `\(\lambda\)` : `$$(\lambda A)_{i,j}=\lambda a_{i,j},\quad\forall 1\leq i\leq p,\quad 1\leq j\leq q$$`
+- exemple 
+
+`$$\frac6\pi \begin{pmatrix}
+\frac 12 &amp; 1 &amp; \frac 13 \\
+-7 &amp;\pi &amp;2
+\end{pmatrix}
+=
+\begin{pmatrix}
+\frac 6\pi \frac 12 &amp; \frac 6\pi &amp;\frac 6\pi \frac 13 \\
+-7\frac 6\pi &amp; \pi\frac 6\pi &amp; 2 \frac 6\pi
+\end{pmatrix}
+=
+\begin{pmatrix}
+\frac 3\pi &amp; \frac 6\pi &amp;\frac 2\pi \\
+\frac{-42}\pi &amp; 6 &amp; \frac{12}\pi
+\end{pmatrix}$$`
+
+---
+
+## Autres opérations algébriques
+
+- **la transposition** : pour `\(A\in M_{p,q}(\mathbb R)\)`, la matrice `\(A'\in M_{q,p}(\mathbb R)\)` (ou  `\(^{t}A\)` ou `\(A^{T}\)`) obtenue en tranformant les lignes en colonnes (et inversement) :
+`$$(A')_{i,j}=a_{j,i},\quad \forall 1\leq i\leq q,\quad\forall 1\leq j\leq p$$`
+- exemple
+`$$\begin{pmatrix}
+1 &amp; -1 &amp; 2 &amp; -2 \\
+3 &amp; 0 &amp; 5 &amp; -2 \\
+1 &amp; 2 &amp; 3 &amp; 4
+\end{pmatrix}'
+=
+\begin{pmatrix}
+1 &amp; 3 &amp; 1 \\ 
+-1 &amp; 0 &amp; 2 \\
+2 &amp; 5 &amp; 3 \\
+-2 &amp; -2 &amp; 4
+\end{pmatrix}$$`
+
+---
+
+## Compatibilité des opérations
+
+- Pour `\(A,B\in M_{p,q}(\mathbb R), C,D\in M_{q,r}(\mathbb R)\)`, `\(\lambda,\mu \in\mathbb R\)`,
+  + `\(\lambda(A+B)=\lambda A+\lambda B\)`
+  + `\((\lambda+\mu)A=\lambda A+\mu A\)`
+  + `\((\lambda \mu) A=\lambda (\mu A)=\mu (\lambda A)\)` 
+  + `\(1 \times A=A\)`
+  + `\(\lambda (AB)=(\lambda A)B=A(\lambda B)\)`
+  + `\((A+B)(C+D)=AC+AD+BC+BD\)`
+  + `\(ABC=(AB)C=A(BC)\)`
+  + `\((\lambda A)'=\lambda A'\)`
+  + `\((A+B)'=A'+B'\)`
+  + `\((AB)'=B'A'\)`
+- en gros, tout se passe bien à part deux choses :
+  + le produit n'étant pas commutatif, il faut **absolument** tenir compte de l'ordre des matrices
+  + cela implique une subtilité sur **la transposition d'un produit** où l'ordre est inversé sur les transposées
+---
+
+## Retour à la résolution de système
+
+.pull-left[ 
+`$$\phantom{\Leftrightarrow}\left\{\begin{array}{llll} 2x+y &amp;=70 &amp; &amp; L_1\phantom{\leftarrow L_1 - L_2} \\ 4x + 4y &amp; =200&amp; &amp; L_2\end{array}\right.$$`
+
+`$$\Leftrightarrow\left\{\begin{array}{llll} 2x+y\phantom{a} &amp;=70\phantom{a} &amp; &amp; L_1\phantom{\leftarrow L_1 - L_2} \\ x + y &amp; =50&amp; &amp; L_2 \leftarrow \tfrac{L_2}4 \end{array}\right.$$`
+
+`$$\Leftrightarrow\left\{\begin{array}{llll} x &amp;=20\phantom{a} &amp; &amp; L_1\leftarrow L_1 - L_2\\ x + y\phantom{aa} &amp; =50&amp; &amp; L_2  \end{array}\right.$$`
+
+`$$\Leftrightarrow\left\{\begin{array}{llll} x &amp;=20\phantom{a} &amp; &amp; L_1\phantom{\leftarrow L_1 - L_2} \\  y\phantom{aaaaa} &amp; =30&amp; &amp; L_2 \leftarrow L_2-L_1 \end{array}\right.$$`
+]
+--
+.pull-right[
+`$$\phantom{\begin{pmatrix}1 &amp;0 \\ 0 &amp; \tfrac 14 \end{pmatrix}\begin{pmatrix}2 &amp;1 \\ 4 &amp; 4\end{pmatrix}=}\begin{pmatrix}2 &amp;1 \\ 4 &amp; 4\end{pmatrix}$$`
+`$$\begin{pmatrix}1 &amp;0 \\ 0 &amp; \tfrac 14 \end{pmatrix}\begin{pmatrix}2 &amp;1 \\ 4 &amp; 4\end{pmatrix}=\begin{pmatrix}2 &amp;1 \\ 1 &amp; 1\end{pmatrix}$$`
+`$$\begin{pmatrix}1 &amp;-1 \\ 0 &amp; 1 \end{pmatrix}\begin{pmatrix}2 &amp;1 \\ 1 &amp; 1\end{pmatrix}=\begin{pmatrix}1 &amp;0 \\ 1 &amp; 1\end{pmatrix}$$`
+`$$\begin{pmatrix}1 &amp;0 \\ -1 &amp; 1 \end{pmatrix}\begin{pmatrix}1 &amp;0 \\ 1 &amp; 1\end{pmatrix}=\begin{pmatrix}1 &amp;0 \\ 0 &amp; 1\end{pmatrix}$$`]
+
+--
+
+- Au final, la résolution se résume aux opérations suivantes :
+`$$\begin{pmatrix}1 &amp;0 \\ -1 &amp; 1 \end{pmatrix}\begin{pmatrix}1 &amp;-1 \\ 0 &amp; 1 \end{pmatrix}\begin{pmatrix}1 &amp;0 \\ 0 &amp; \tfrac 14 \end{pmatrix}\begin{pmatrix}2 &amp;1 \\ 4 &amp; 4\end{pmatrix}=\begin{pmatrix}1 &amp;0 \\ 0 &amp; 1\end{pmatrix}$$`
+
+---
+
+## 	Caractéristiques intéressantes de matrices carrées
+- Une matrice `\(A\in M_{p}(\mathbb R)\)` est
+  + **diagonale** si `\(a_{i,j}=0,\quad \forall i\neq j\)`
+  + **la matrice Identité**  et notée `\(I_{p}\)`  si elle est diagonale et     `\(a_{i,i}=1,\quad \forall 1\leq i\leq p\)`
+  + **symétrique** si `\(A=A'.\)` 
+  + **inversible** s'il existe une matrice notée `\(A^{-1}\)`  telle que `\(AA^{-1}=A^{-1}A=I_{p}\)` (on admettra que `\(AA^{-1}=I_p\Leftrightarrow A^{-1}A=I_p\)`)
+  + **orthogonale** si elle est inversible et `\(A^{-1}=A'\)`
+
+---
+
+## Exemples
+
+- **diagonale**
+`$$A = \begin{pmatrix}	1 &amp; 0 &amp; 0 \\0 &amp;\pi &amp;0 \\0 &amp; 0 &amp; -8\end{pmatrix}$$`
+- **la matrice Identité** 
+`$$I_{4} = \begin{pmatrix}	1 &amp; 0 &amp; 0 &amp; 0 \\0 &amp; 1 &amp; 0 &amp; 0 \\0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{pmatrix}$$`
+- **symétrique** 
+`$$A = \begin{pmatrix} 1 &amp; 2 &amp; 3 \\ 2 &amp; 5 &amp; 6 \\ 3 &amp; 6 &amp; 7 \end{pmatrix}$$`
+---
+
+## Exemples
+
+- **inversible** 
+`$$A = \begin{pmatrix}1 &amp;3 \\ 5 &amp; -4\end{pmatrix}\Rightarrow A^{-1}=\begin{pmatrix}\frac{4}{19} &amp; \frac{3}{19} \\ \frac{5}{19} &amp; \frac{-1}{19} \end{pmatrix}$$`
+- **orthogonale**
+`$$A=\begin{pmatrix}
+	\frac1{\sqrt{2}} &amp;\frac{-1}{\sqrt{2}}\\\frac1{\sqrt{2}} &amp;\frac1{\sqrt{2}}
+\end{pmatrix}\Rightarrow A'=\begin{pmatrix}
+	\frac1{\sqrt{2}} &amp;\frac{1}{\sqrt{2}}\\\frac{-1}{\sqrt{2}} &amp;\frac1{\sqrt{2}}
+\end{pmatrix}, \quad AA'=A'A=I_{2}$$`
+
+---
+
+## Inversibilité : remarques
+
+- une matrice diagonale est inversible si et seulement si tous les termes diagonaux sont non-nuls, par ex.
+`$$\begin{pmatrix}	2 &amp;0 &amp;0\\ 0 &amp;3 &amp;0 \\0 &amp;0 &amp;-1 \end{pmatrix}	\begin{pmatrix}	\tfrac 12 &amp;0 &amp;0 \\ 0 &amp; \tfrac 13 &amp;0 \\ 0 &amp;0 &amp;-1\end{pmatrix}=I_{3}$$`
+`$$\begin{pmatrix}	0 &amp;0 &amp;0 \\0 &amp;3 &amp;0 \\0 &amp;0 &amp;-1 \end{pmatrix}		\begin{pmatrix}	a &amp;b &amp;c \\ d &amp;e &amp;f \\ g &amp;h &amp;i \end{pmatrix}=
+\begin{pmatrix}	0 &amp;0 &amp;0 \\ 3d &amp; 3e &amp; 3f \\ -g &amp;-h &amp;-i\end{pmatrix}$$`
+		
+- compréhension du calcul matriciel comme **combinaison linéaire** des colonnes, par ex.
+`$$\begin{pmatrix}	a &amp;b &amp;c \\ d &amp;e &amp;f \\ g &amp;h &amp;i	\end{pmatrix}		\begin{pmatrix} x \\ y \\ z \end{pmatrix} = \begin{pmatrix} ax+by+cz \\ dx+ey+fz \\ gx+hy+iz \end{pmatrix} =x \begin{pmatrix} a \\ d \\ g \end{pmatrix} + y \begin{pmatrix} b \\ e \\ h \end{pmatrix} + z\begin{pmatrix} c \\ f \\ i \end{pmatrix}$$`
+
+---
+
+## Inversibilité
+
+- Une matrice `\(A\in M_{p}(\mathbb R)\)` n'est pas inversible  **ssi** il existe une de ses colonnes qui s'exprime comme une combinaison linéaire des autres colonnes de `\(A\)`.
+-	Autrement dit, si et  seulement si `$$\exists u\in M_{p,1}(\mathbb R),u\neq \vec 0_p, Au=\vec 0_p$$`
+-	Ainsi, en changeant de point de vue (verre à moitié plein plutôt qu'à moitié vide), une matrice `\(A\in M_{p}(\mathbb R)\)` est inversible  **ssi** si le  seul  **vecteur colonne** `\(u\)` solution de l'équation `$$Au=\vec 0_p$$` est `\(u=\vec 0_p.\)`
+
+---
+
+## Application en régression linéaire multiple
+
+- **Spoiler alert** nous abordons ici grossièrement un outil que l'on verra plus en détail en L2 en Démarche Statistique
+- Contexte :	un laboratoire d'analyse souhaite mettre en évidence l'influence de la composition du lait sur le rendement
+fromager. Pour ce faire, il a mesuré sur un échantillon de n = 85 laits, la densité, le taux butyreux, le taux de
+protéine, le taux de caséine, l'extrait sec et le rendement fromager de chacun de ces laits.
+- A terme, on aimerait pouvoir prédire le rendement fromager à partir de la composition du lait. 
+
+---
+
+## Suite de l'exemple
+- Pour le `\(i^{e}\)` lait, notons `\(Y_{i}\)` le rendement du `\(i^{e}\)` lait `\((1\leq i\leq 85)\)`, `\(x_{i,1}\)` la densité correspondante, `\(x_{i,2}\)` le taux butyreux, etc. La régresson linéaire est une méthode statistique qui cherche à savoir à quel point l'ensemble d'approximations suivantes est raisonnable ou non :
+`$$\left\{\begin{array}{l} Y_{1}\approx \beta_{0}+\beta_{1}x_{1,1}+\beta_{2}x_{1,2}+\beta_{3}x_{1,3}+\beta_{4}x_{1,4}+\beta_{5}x_{1,5}\\ Y_{2}\approx \beta_{0}+\beta_{1}x_{2,1}+\beta_{2}x_{2,2}+\beta_{3}x_{2,3}+\beta_{4}x_{2,4}+\beta_{5}x_{2,5}\\ Y_{3}\approx \beta_{0}+\beta_{1}x_{3,1}+\beta_{2}x_{3,2}+\beta_{3}x_{3,3}+\beta_{4}x_{3,4}+\beta_{5}x_{3,5}\\	\vdots\\ Y_{85}\approx \beta_{0}+\beta_{1}x_{85,1}+\beta_{2}x_{85,2}+\beta_{3}x_{85,3}+\beta_{4}x_{85,4}+\beta_{5}x_{85,5} \end{array}\right.$$`
+
+---
+
+## Définition des matrices correspondantes
+
+- Définition de matrices :
+`$$Y=\begin{pmatrix}Y_{1}\\Y_{2}\\Y_{3}\\\vdots\\Y_{85}\end{pmatrix}\in M_{85,1}(\mathbb R), \quad	\beta=\begin{pmatrix} \beta_{0} \\ \beta_{1} \\ \beta_{2} \\ \beta_{3} \\ \beta_{4} \\ \beta_{5} \end{pmatrix} \in M_{6,1}(\mathbb R)$$`
+`$$X = \begin{pmatrix}	1&amp;x_{1,1} &amp;x_{1,2}&amp;x_{1,3}&amp;x_{1,4}&amp;x_{1,5}\\ 1&amp;x_{2,1} &amp;x_{2,2}&amp;x_{2,3}&amp;x_{2,4}&amp;x_{2,5}\\ 1&amp;x_{3,1} &amp;x_{3,2}&amp;x_{3,3}&amp;x_{3,4}&amp;x_{3,5}\\ \vdots &amp;\vdots &amp;\vdots &amp;\vdots &amp;\vdots &amp;\vdots \\ 1 &amp;x_{85,1} &amp;x_{85,2} &amp;x_{85,3} &amp;x_{85,4} &amp;x_{85,5} \end{pmatrix}\in M_{85,6}(\mathbb R)$$`
+
+---
+
+## Résolution du système
+- Traduction des approximations et candidat pour `\(\beta\)`
+`$$Y\approx X\beta \quad\leadsto \quad X'Y \approx X'X \beta \quad\leadsto \quad (X'X)^{-1}X'Y \approx \beta$$`
+- Ainsi pour que ce raisonnement soit réalisable, il faut que `\(X'X\)` soit inversible
+- Estimation de la colonne inconnue `\(\beta\)` possible \textbf{ssi} `\(X'X\in M_{6}(\re)\)` inversible, valeurs fournies par `$$\hat\beta=(X'X)^{-1}X'Y=\left(\begin{smallmatrix}74.03\\-72.52\\0.09\\0.15\\-0.05\\0.06\end{smallmatrix}\right)$$`
+- Prévision du rendement pour un futur lait, pour les mesures effectuées sur un nouveau lait
+&lt;table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; DENSITE &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; BUTYREUX &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; PROTEINE &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; CASEINE &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; EXTRAITSEC &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 1.03 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 37.7 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 35.7 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 28.5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 127.1 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create();
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
