@@ -43,23 +43,23 @@
   --header-h3-font-size: 1.75rem;
 
   /* Colors */
-  --text-color: #0B3661;
+  --text-color: #272822;
   --header-color: #104e8b;
-  --background-color: #E7EDF3;
+  --background-color: #FFFFFF;
   --link-color: #104e8b;
   --text-bold-color: #104e8b;
   --code-highlight-color: rgba(255,255,0,0.5);
-  --inverse-text-color: #E7EDF3;
+  --inverse-text-color: #FFFFFF;
   --inverse-background-color: #104e8b;
-  --inverse-header-color: #E7EDF3;
+  --inverse-header-color: #FFFFFF;
   --inverse-link-color: #104e8b;
   --title-slide-background-color: #104e8b;
-  --title-slide-text-color: #E7EDF3;
+  --title-slide-text-color: #FFFFFF;
   --header-background-color: #104e8b;
-  --header-background-text-color: #E7EDF3;
+  --header-background-text-color: #FFFFFF;
   --base: #104e8b;
-  --white: #E7EDF3;
-  --black: #0B3661;
+  --white: #FFFFFF;
+  --black: #272822;
 }
 
 html {
