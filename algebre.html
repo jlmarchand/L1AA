@@ -544,9 +544,9 @@ toute matrice symétrique de `\(M_{p}(\mathbb R)\)` est diagonalisable à l'aide
 - ici toutes les variables sont comparables en l'état
 - comment travailler si des données contiennent des températures, des distances, des poids, etc ?
 - pour comparer les variables entre elles, il faut faire disparaître la grandeur, chaque variable est **remplacée** par 
-`$$\tilde x = \begin{pmatrix}\frac{x_1-\bar x}{s_x}\\\vdots\\\frac{x_1-\bar x}{s_x}\end{pmatrix},$$`
+`$$\tilde x = \begin{pmatrix}\frac{x_1-\bar x}{s_x}\\\vdots\\\frac{x_n-\bar x}{s_x}\end{pmatrix},$$`
 où `\(\bar x\)` est toujours la moyenne, et 
-`$$s_x=\sqrt{\frac1n\left(x_1^2+x_2^2+\dots+x_n^2\right)}$$`
+`$$s_x=\sqrt{\frac1n\left((x_1-\bar x)^2+(x_2-\bar x)^2+\dots+(x_n-\bar x)^2\right)}$$`
 
 ---
 
