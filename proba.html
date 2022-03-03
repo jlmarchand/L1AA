@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Théorie des Probabilités</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Marchand Jean-Louis" />
+    <meta name="date" content="2022-02-03" />
+    <script src="proba_files/header-attrs-2.10/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Théorie des Probabilités
+### Marchand Jean-Louis
+### 02/03/2022
+
+---
+
+
+
+
+
+
+# Introduction
+- on va tout reprendre de 0. 
+- premiere étape : le dénombrement, mais pas
+trop longtemps non-plus. 
+- but final : arriver jusqu'aux résultats classiques de la théorie des
+probabilités et leur lien à la loi normale (ou de Gauss) pour ouvrir sur le cours de statistiques de l'an prochain
+- historiquement : gagner de l'argent aux
+jeux de hasard
+- maintenant : partout ! (ou presque)
+ + économie
+ + sondage
+ + médecine
+ + météorologie
+ + biologie
+ + physique
+ + chimie
+ + sport
+ + etc.
+
+---
+
+# Probabilités sur univers fini
+- cadre le plus simple à partir duquel tous les enjeux sont cernés
+- cependant certaines choses ne sont pas généralisables
+- premier cas : situation d'équiprobabilité
+  + ex : dé équilibré
+  + contre-ex : dé déséquilibré
+- dans **ce cas**, savoir compter suffit ! 
+- dans beaucoup d'autres cas cela n'a pas de sens de se limiter au comptage : 
+
+---
+
+## Analyse combinatoire
+
+- principe élémentaire de la théorie
+  + **si on effectue successivement deux épreuves, où la première possède `\(m\)`
+possiblités et la seconde `\(n\)` possibilités quel que soit le
+résultat de la première , alors l'épreuve globale compte `\(m ✗ n\)`
+possibilités**
+  + autrement dit, au fur et à mesure des expériences, le nombre de possibilités est démultiplié
+- exemples :
+ + lancer d'une pièce (2 possibilités) puis un dé (6), les résultats sont représentés par des couples listant les deux résultats, il en existe `\(12 = 2 \times 6\)` différents `$$\tiny (P,1),(P,2),(P,3),(P,4),(P,5),(P,6),(F,1),(F,2),(F,3),(F,4),(F,5),(F,6)$$`
+ + tirages successifs sans remise de deux cartes dans un jeu de 32 cartes, il y a 32 possibilités pour la première et plus que 31 pour la deuxième, ce qui mène à un total de `\(32\times 31 = 992\)` résultats différents
+ + si on lance 10 fois un dé à 6 faces (en tenant compte de l'ordre) cela mènera à `\(6^{10}\)` séquences différentes
+ 
+---
+
+## Permutations
+
+- nous allons avoir une vision simplificatrice comparér à la définition mathématique
+- une permutation peut être raisonnablement assimilée à un **mélange**
+
+&gt; ### Définition
+on appelle **permutation** d'un ensemble composé de `\(n\)` éléments tout rangement ordonné de ses éléments
+
+- exemple : les triplets `\((b,c,a), (a,b,c) et (b,a,c)\)` sont trois permutations possibles de l'ensemble à 3 éléments `\(\{a,b,c\}\)`
+
+
+---
+
+## Permutations
+
+&gt; ### Propriété
+le nombre de permutations à `\(n\)` objets est noté `\(n!\)`, appelé **n factorielle** et vaut `$$n!=n\times(n-1)\times(n-2)\times\dots\times2\times1$$`
+
+- cela revient à effectuer le produit de tous les entiers entre 1 et `\(n\)`
+- exemple : prenons un jeu de 32 cartes,  le nombre de mélanges différents de ce jeu est `\(32! \approx 2.6\times 10^{35}\)`
+- par convention, le choix suivant `\(0!=1\)` est fait pour garantir une certaine cohérence
+
+---
+
+## Arrangements
+
+&gt; ### Définition
+on appelle **arrangement de `\(k\)` éléments pris parmi `\(n\)`**
+éléments d'un ensemble E, toute
+liste ordonnée de `\(k\)` éléments distincts de `\(E\)`
+
+- cela revient à ne considérer que les premiers éléments d'un mélange
+- exemple : prenons 3 cartes successivement sans remise dans un jeu de 32 cartes,  les séquences ainsi obtenues sont des arrangements de 3 éléments parmi 32
+- un arrangement de `\(n\)` éléments parmi `\(n\)` est tout simplement une permutation des `\(n\)` éléments 
+
+---
+
+## Arrangements
+
+&gt; ### Proposition
+le nombre total d'arrangements de `\(k\)` éléments parmi `\(n\)` est `$$n\times (n-1)\times (n-2)\times\dots\times (n-k+1) =  \frac{n!}{(n-k)!}$$`
+
+- exemple : prenons 3 cartes successivement sans remise dans un jeu de 32 cartes,  les séquences ainsi obtenues sont des arrangements de 3 éléments parmi 32, il en existe `\(32\times31\times30= 29760\)` différents
+
+---
+
+## Combinaison
+
+- pour les arrangements et les permutations l'ordre dans lequel sont tirées par exemple nos trois cartes définissent deux objets différents, par exemple `\((K\heartsuit, Q\diamondsuit, A\spadesuit) \neq (K\heartsuit, A\spadesuit, Q\diamondsuit)\)`
+- si une expérience peut être modélisée par des résultats où l'ordre n'importe pas, on pourra utiliser les combinaisons
+
+&gt; ### Définition
+on appelle **combinaison de `\(k\)` éléments parmi `\(n\)`** d'un
+ensemble `\(E\)` de cardinal `\(n\)`, toute partie de `\(E\)` de cardinal égal à `\(k\)`
+
+- exemple : une main de 5 cartes au poker fermé, par exemple `\(\{K\spadesuit, J\heartsuit,J\spadesuit, 7\clubsuit, 10\clubsuit\}\)`
+- on notera au passage que se limiter à des raisonnements du type : *ah bah là, c'est 4 éléments parmi 12* ne permet pas de savoir si on parle de combinaison ou d'arrangement
+
+---
+
+## Combinaison
+
+&gt; ### Proposition
+le nombre total de combinaisons différentes de `\(k\)` éléments parmi `\(n\)` est noté `\(\binom nk\)` et vaut `$$\binom nk = \frac{n!}{k!(n-k)!}=\frac{(n-2)\times\dots\times (n-k+1)}{k\times(k-1)\times\dots\times 2\times 1}$$`
+
+- exemple : le nombre de mains différentes  de 5 cartes au poker est `$$\binom{32}{5} = \frac{32 \times 31\times 30\times 29\times 28}{5\times 4\times 3\times 2\times1}=201376$$`
+- le calcul revient à dire que pour une combinaison de `\(k\)` éléments parmi `\(n\)` donnée, il existe `\(k!\)` permutations différentes réalisables, donc on divise le nombre d'arrangements par par celui de tous ceux qui sont constitués des mêmes éléments
+- par convention : `\(\binom nk =0\)` si `\(k&gt;n\)`
+---
+
+## Propriétés du nombre de combinaisons
+
+&gt; ### Propriété
+ - **symétrie** `$$\binom n{n-k} = \binom n{k}$$`
+ - **somme** `$$\binom n{k} + \binom n{k+1} = \binom{n+1}{k+1}$$`
+ - **total** `$$\sum_{k=0}^n\binom nk= 2^n$$`
+
+- le **triangle de Pascal** est un algorithme simple pour calculer les premières valeurs des `\(\binom nk\)` qui repose sur la formule de somme ci-dessus
+
+---
+
+## Binôme de Newton
+
+- le nombre `\(\binom nk\)` est aussi **coefficient binomial** à cause du résultat suivant
+&gt; ### Théorème - Binôme de Newton
+  soit `\(a\)` et `\(b\)` deux réels et `\(n\)` un entier naturel, alors
+  `$$(a+b)^n = \sum_{k=0}^n \binom nk a^k b^{n-k}$$`
+  
+- ceci constitue une généralisation de l'identité remarquable abordée au collège lorsque `\(n=2\)`, il faut surtout comprendre comment s'en servir
+  * `\((a+b)^2= \binom 20 a^0b^2 +\binom 21 a^1b^1+\binom 22 a^2b^0 =a^2 + 2ab + b^2\)`
+  * `\((a+b)^3 = a^3 + 3a^2b + 3ab^2 + b^3\)`
+  * `\((a+b)^4 = a^4 + 4a^3b + 6a^2b^2 + 4ab^3 + b^4\)`
+---
+## Et les probas dans tout ça ?!
+
+- pour l'instant, nous savons seulement compter
+- pour calculer la probabilité d'un événement à partir des comptages, il faut faire l'hypothèse  d'**équiprobabilité** des issues de l'expérience considérée, la probabilité correspond alors dans ce cas à la proportion de cas correspondants :
+`$$\mathbb P(A) =\frac{\textrm{Nombres d'issues dans }A}{\textrm{Nombre total d'issues de l'expérience}}$$`
+- en pratique, on commence par **modéliser** l'expérience 
+  + description des issues `\(\omega\in\Omega\)`
+  + comptage du nombre total d'issues de l'expérience, noté `\(\# \Omega\)`
+  + comptage du nombre total d'issues de l'expérience, noté `\(\# A\)`
+  + calcul de la probabilité `$$\mathbb P(A)=\frac{\# A}{\#\Omega}$$`
+---
+
+# Cadre général de la théorie des probabilités
+
+## Univers et probabilité
+
+
+
+# Variables aléatoires
+# Estimation
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create();
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
