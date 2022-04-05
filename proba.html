@@ -171,17 +171,198 @@ le nombre total de combinaisons différentes de `\(k\)` éléments parmi `\(n\)`
 - en pratique, on commence par **modéliser** l'expérience 
   + description des issues `\(\omega\in\Omega\)`
   + comptage du nombre total d'issues de l'expérience, noté `\(\# \Omega\)`
-  + comptage du nombre total d'issues de l'expérience, noté `\(\# A\)`
+  + comptage du nombre total d'issues dans `\(A\)`, noté `\(\# A\)`
   + calcul de la probabilité `$$\mathbb P(A)=\frac{\# A}{\#\Omega}$$`
+
+---
+
+# Exemples 
+1. quelle est la probabilité de n'avoir aucun 6 sur 3 lancers successifs d'un même dé ?
+2. quelle est la probabilité de n'avoir aucun 6 sur le lancer de trois dés ?
+3. quelle est la probabilité de n'avoir qu'un seul 6 sur 3 lancers de dé ?
+4. quelle est la probabilité d'avoir un carré (4 cartes de même valeur) au poker ?
+5. calculer la probabilité d'obtenir exactemement 5 fois un 6 sur 10 lancers 
+
 ---
 
 # Cadre général de la théorie des probabilités
 
-## Univers et probabilité
+- au début du 20e siècle, le formalisme général des probabilités (Kolmogorov) a été repensé suite au développement de la Théorie de la Mesure (Lebesgue)
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="Lebesgue.jpeg" alt="Henri Lebesgue et Andreï Kolmogorov" width="120px" height="180px" /&gt;&lt;img src="kolmo.jpg" alt="Henri Lebesgue et Andreï Kolmogorov" width="120px" height="180px" /&gt;
+&lt;p class="caption"&gt;Henri Lebesgue et Andreï Kolmogorov&lt;/p&gt;
+&lt;/div&gt;
+
+- sans rentrer dans les détails, la probabilité est vue comme une **fonction** qui à un ensemble attribue une mesure comprise entre 0 et 1, cette fonction étant compatible avec les opérations usuelles sur les **événements**
+
+---
+#### Rappels sur la manipulation d'ensembles
+&gt; 
+- un **sous-ensemble** (ou **partie**) `\(A\)` d'un ensemble `\(B\)` est un ensemble dont tous les éléments **appartiennent** à `\(B\)` 
+  + notation : `\(A\subset B\)` et `\(x\in A\)`
+- le **cardinal** compte le nombre d'éléments 
+  + notation : `\(\#A\)`
+- un ensemble est **fini** s'il comporte un nombre fini d'éléments, sinon il est **infini**
+  + exemples : `\(\{1,2\}\)` fini, `\([1,2]\)` infini
+- un ensemble est **dénombrable** si on peut numéroter ses éléments sinon il est **indénombrable**
+  + exemples : `\(\mathbb Q\)` dénombrable, `\(\mathbb R\)` indénombrable
+- la **réunion** de deux ensembles est l'ensemble des éléments appartenant à **au moins** un des deux ensembles 
+  + notation : `\(A\cup B\)`
+- l'**intersection** de deux ensembles est l'ensemble des éléments **communs** aux deux ensembles
+  + notation : `\(A\cap B\)`
+- le **complémentaire** d'un ensemble `\(A\)` dans un  ensemble `\(B\)` contenant `\(A\)` est le sous-ensemble de `\(B\)` formé des éléments qui n'appartiennent pas à `\(A\)`
+  + notation `\(\bar A\)` (attention aux ambiguités !)
+
+---
+
+## Univers 
+
+&gt; ### Définition
+l'**univers** noté `\(\Omega\)` représente l'ensemble contenant tous les états possibles du système qui permet de modéliser l'expérience considérée. Une **réalisation** ou **éventualité** correspond ainsi à un élément de cet ensemble et décrit donc l'état complet du système
+
+- exemple : pour le loto, on pourrait choisir l'univers se limitant au Gain ou à la Perte 
+`$$\Omega = \{G, P\}$$`
+cette représentation simpliste ne semble pas la plus adaptée, on préférera ici choisir 
+`\(\Omega\)` comme l'ensemble des tirages qui correspondent à des combinaisons de 7 numéros parmi 49 car dans ce cas toutes les éventualités sont équiprobables
+
+---
+
+## Evénement et probabilité
+- sans développer la théorie de la mesure, nous devons aussi définir la notion de **tribu**, l'ensemble des **événements** relatifs à l'expérience considérée
+- on la notera `\(\mathcal T\)`, naturellement `\(\Omega\in\mathcal T\)`
+- lorsque `\(\Omega\)` est **fini**, on prendra toujours `\(\mathcal T =\mathcal P(\Omega)\)`, l'ensemble de tous les sous-ensembles de `\(\Omega\)`
+- ce choix n'est pas possible lorsque par exemple `\(\Omega =\mathbb R\)` 
+&gt;### Définition
+une probabilité est une fonction de la forme
+`$$\begin{array}{lcr}\mathbb P\colon &amp;\mathcal T &amp;\rightarrow [0,1]\\&amp;A &amp;\mapsto \mathbb P(A) \end{array}$$`
+qui vérifie 
+  + `\(\mathbb P(\Omega) = 1\)` 
+  + `\(\mathbb P(A\cup B) = \mathbb P(A)+\mathbb P(B)\)` si `\(A\cap B=\emptyset\)` 
+  
+---
+
+## Probabilité
+&gt; ### Propriété
+  soit `\(\mathbb P\)` une probabilité sur `\((\Omega, \mathcal T)\)`, et `\(A,B\in\mathcal T\)`
+  - `\(\mathbb P(\emptyset) =0\)`
+  - `\(\mathbb P(\bar A) = 1-\mathbb P(A)\)`
+  - `\(\mathbb P(A\cup B) = \mathbb P(A) + \mathbb P(B) - \mathbb P(A\cap B)\)`
+  - si `\(A\subset B,\quad \mathbb P(A)\leq \mathbb P(B)\)`
+
+- exercice : prouvez-le !
+
+---
+## Probabilités conditionnelles
+
+- exemple : lecture des chiffres de la Covid
+&lt;a href="https://www.francetvinfo.fr/replay-radio/le-vrai-du-faux-numerique/covid-les-personnes-vaccinees-sont-elles-onze-fois-plus-hospitalisees-que-celles-non-vaccinees-dans-les-pays-de-la-loire-comme-l-affirme-un-tweet_4849655.html"&gt;franceinfo&lt;/a&gt;
+
+&gt; ### Définition
+soient `\(A\)` et `\(B\)` deux événements tels que `\(\mathbb P(B)\neq 0\)`, alors on définit la **probabilité conditionnelle de `\(A\)` sachant `\(B\)`** est la quantité notée `\(\mathbb P(A|B)\)` définie par 
+`$$\mathbb P(A|B)=\frac{\mathbb P(A\cap B)}{\mathbb P(B)}$$`
 
 
+&gt; ### Propriété
+la probabilité conditionnelle `\(\mathbb P(.|B)\)` est une probabilité en tant que fonction et donc satisfait toutes les propriétés inhérentes
+
+---
+## Partition
+
+&gt; ### Définition
+une famille d'événements non-vides `\((A_1,\dots,A_n)\)` forme une **partition** de `\(\Omega\)` si 
+  1. `\(\bigcup_{k=1}^n A_k = \Omega\)`
+  2. `\(A_i \cap A_j = \emptyset,\quad \forall i\neq j\)`
+
+- exemple : si `\(A\neq \emptyset, \Omega\)` alors `\((A,\bar A)\)` est une partition de `\(\Omega\)`
+- une partition est un **découpage** de l'ensemble, où tout élément de `\(\Omega\)` appartient à un seul des `\(A_k\)` (un puzzle quoi !)
+- en particulier 
+`$$\sum_{k=1}^n \mathbb P(A_k)=1$$`
+---
+## Formules centrales
+
+&gt; ### Probabilités totales
+soit `\((A_1,\dots,A_n)\)` une partition de `\(\Omega\)` alors pour tout événement `\(B\)`
+`$$\mathbb P(B) = \sum_{k=1}^n \mathbb P(B|A_k)\mathbb P(A_k)$$`
+
+&gt; ### Formule de Bayes
+sous les mêmes hypothèses
+`$$\mathbb P(A_{k_0}|B) = \frac{\mathbb P(B|A_{k_0})\mathbb P(A_{k_0})}{\sum_{k=1}^n \mathbb P(B|A_k)\mathbb P(A_k)}$$`
+
+---
+
+## Jeu de Monty Hall
+-  trois portes se présentent au joueur, derrière l'une d'entre elles se cache le gros lot, en l'occurence une voiture
+- le joueur choisit dans un premier temps l'une des trois portes
+- le présentateur ouvre une autre porte perdante, laissant le choix au joueur de changer son choix
+- quelle est la meilleure stratégie à suivre ? 
+---
+
+## Indépendance
+&gt; ### Définition
+deux événements `\(A\)` et `\(B\)` sont **indépendants** si 
+`$$\mathbb P(A|B)=\mathbb P(A)$$`
+
+&gt; ### Propriété
+soient `\(A\)` et `\(B\)` deux événements tels que `\(\mathbb P(A),\mathbb P(B)\neq 0\)`, alors les assertions suivantes son équivalentes
+  1. `\(\mathbb P(A|B)=\mathbb P(A)\)`
+  2. `\(\mathbb P(A|\bar B)=\mathbb P(A)\)`
+  3. `\(\mathbb P(A\cap B)=\mathbb P(A)\mathbb P(B)\)`
+  4. `\(\mathbb P(B|A)=\mathbb P(B)\)`
+
+---
 
 # Variables aléatoires
+
+- jusqu'ici, l'issue `\(\omega\)` a été supposée entièrement observée, pour pouvoir notamment comparer plusieurs informations liées à une même issue aussi complexe qu'elle soit, surtout lorsque l'on modèlise des phénomènes réels 
+
+&gt; ### Définition
+une **variable aléatoire réelle** est une fonction qui à toute issue `\(\omega \in\Omega\)` associe un réel, cette fonction étant
+*compatible* avec la probabilité, au sens que pour tout intervalle `\(I\)` de réels, la quantité `$$\mathbb P(X\in I)=\mathbb P(\{\omega\in\Omega \colon X(\omega)\in I\})$$`
+est toujours définie.
+
+- en d'autres termes, on peut voir une variable aléatoire réelle comme une *mesure* effectuée sur l'issue d'une expérience
+- quand le phénomène considéré est complexe, on cherche à multiplier les mesures, et étudier le lien entre elles
+---
+## Variables aléatoires
+
+- le cadre des probabilités permet de mettre en lien les différentes mesures sur une même issue
+
+&gt; ### Définition
+un  **couple de variables aléatoires réelles** est une fonction qui à toute issue `\(\omega \in\Omega\)` associe un couple de réels, cette fonction étant
+*compatible* avec la probabilité, au sens que pour tous intervalles `\(I\)` et `\(J\)` de réels, la quantité `$$\mathbb P(X\in I,\, Y\in J)=\mathbb P(\{\omega\in\Omega \colon X(\omega)\in I \,\&amp;\, Y(\omega)\in J\})$$`
+est toujours définie.
+
+- on comprend alors que l'on peut étendre le principe à n'importe quelle taille de famille (même infinie) de variables aléatoires
+- le but étant toujours de s'assurer une chose : considérer la possibilité que chacune des variables ne sorte pas d'une gamme de valeurs constitue  un événement
+
+---
+
+## Loi 
+&gt; ### Définition
+- la **loi d'une variable aléatoire réelle** est la donnée de la famille 
+`$$\left(\mathbb P(X\in I)\colon I \textrm{ intervalle réel }\right)$$`
+- la **loi d'un couple de variables aléatoires réelles** est la donnée de la famille 
+`$$\left(\mathbb P(X\in I,\,Y\in J)\colon I,J \textrm{ intervalles réels }\right)$$`
+
+- les lois fournissent la **distribution** des valeurs possibles
+- cette définition générale se simplifie dans deux familles de cas que nous allons étudier 
+  + les variables discrètes
+  + les variables continues
+- la différence se fait sur l'ensemble des valeurs possibles `$$X(\Omega)= \{X(\omega) \colon \omega\in \Omega\}$$`
+
+---
+
+## Variables aléatoires discrètes
+
+- cas où `\(X(\Omega)\)` est dénombrable, on peut lister alors ses éléments `$$X(\Omega)=\{x_k\colon k\in K\}$$` 
+où `\(K\subset \mathbb N\)`
+
+&gt; ### Propriété 
+- la **loi d'une variable aléatoire discrète** sur `\(X(\Omega)=\{x_k\colon k\in K\}\)` est entièrement décrite par la suite `\(\left( \mathbb P(X=x_k)\right)_{k\in K}\)`
+- soit `\(K\subset \mathbb N\)`, toute famille `\(\left(p_k\right)_{k\in K}\)` de réels compris entre 0 et 1, de somme totale égale à 1   permet de définir la loi d'une variable aléatoire discrète 
+
+- cette propriété permet la création simple de lois, notamment celles qui vont nous intéresser qui sont censées modéliser des situations type
+---
 # Estimation
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
