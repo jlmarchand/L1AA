@@ -183,7 +183,7 @@ html:fullscreen {
 <div class="frontmatter">
 <div class="title"><h1>Reprise en douceur</h1></div>
 <div class="author"><h2>JL Marchand</h2></div>
-<div class="date"><h3>2023-09-12</h3></div>
+<div class="date"><h3>2023-09-14</h3></div>
 </div>
 <div class="body">
 <div id="TOC">
@@ -221,7 +221,7 @@ html:fullscreen {
 <li><a href="#approximation-et-tangente"><span class="section-number">5.3</span> Approximation et tangente</a></li>
 <li><a href="#tangente-et-d-rivabilit"><span class="section-number">5.4</span> Tangente et dérivabilité</a></li>
 <li><a href="#parall-le-avec-la-vitesse"><span class="section-number">5.5</span> Parallèle avec la vitesse</a></li>
-<li><a href="#equation-de-tangente-et-approximation-affine"><span class="section-number">5.6</span> 'Equation de tangente et approximation affine</a></li>
+<li><a href="#equation-de-tangente-et-approximation-affine"><span class="section-number">5.6</span> Equation de tangente et approximation affine</a></li>
 <li><a href="#nombre-d-riv-et-fonction-d-riv-e"><span class="section-number">5.7</span> Nombre dérivé et fonction dérivée</a></li>
 <li><a href="#r-gles-de-calcul"><span class="section-number">5.8</span> Règles de calcul</a></li>
 </ul>
@@ -231,7 +231,7 @@ html:fullscreen {
 <li><a href="#remarques-g-n-rales"><span class="section-number">6.1</span> Remarques générales</a></li>
 <li><a href="#la-base-les-puissances"><span class="section-number">6.2</span> La base : les puissances</a></li>
 <li><a href="#level-2-puissances-enti-res-n-gatives-ou-nulle"><span class="section-number">6.3</span> Level 2 : Puissances entières négatives ou nulle</a></li>
-<li><a href="#level-3-puissances-rationnelles"><span class="section-number">6.4</span> Level 3 : Puissances rationnelles}</a></li>
+<li><a href="#level-3-puissances-rationnelles"><span class="section-number">6.4</span> Level 3 : Puissances rationnelles</a></li>
 <li><a href="#fonction-exponentielle"><span class="section-number">6.5</span> Fonction exponentielle</a></li>
 <li><a href="#illustration-de-convergences-des-suites"><span class="section-number">6.6</span> Illustration de convergences des suites</a></li>
 <li><a href="#propri-t-s-de-l-exponentielle"><span class="section-number">6.7</span> Propriétés de l’exponentielle</a></li>
@@ -583,7 +583,7 @@ $$V_{\textrm{moyenne}}= \frac{242}{2.67}=90.75 \,km.h^{-1}$$</li>
 $$ V_{\textrm{instantanée}}(t) = \lim_{h\to0 } \frac{\textrm{distance parcourue dans l’intervalle }[t,t+h]}h$$</li>
 </ul>
 <hr />
-<h2 id="equation-de-tangente-et-approximation-affine"><span class="section-number">5.6</span> 'Equation de tangente et approximation affine</h2>
+<h2 id="equation-de-tangente-et-approximation-affine"><span class="section-number">5.6</span> Equation de tangente et approximation affine</h2>
 <ul>
 <li>le <strong>nombre dérivé</strong> \(\frac{df}{dx}(a)\) (ou \(f'(a)\)) est le coefficient directeur de la tangente lorsqu’elle  n’est pas verticale</li>
 <li>le point de coordonnées \((a,f(a))\) appartient à la tangente, donc pour l’ordonnée à l’origine
@@ -597,7 +597,7 @@ De plus, la limite \(\displaystyle\lim_{x\to 0}f(x) - \left(f'(a)(x-a)+f(a)\righ
 $$f(x) \approx \frac{df}{dx}(a)(x-a)+f(a),$$</p>
 <ul>
 <li>on retrouve le <strong>principe d’approximation</strong> à l’origine de la tangente, ce type d’approximation <strong>extrêmement courante</strong>  en Physique et Chimie, par exemple : approximation des fonctions trigonométriques pour les petits angles utile notamment en optique, si \(\theta\) est un angle proche de 0
-$$\cos\theta\approx 1, \quad \sin\theta\approx \theta, \tan\theta\approx \theta$$</li>
+$$\cos\theta\approx 1, \quad \sin\theta\approx \theta,\quad \tan\theta\approx \theta$$</li>
 </ul>
 <hr />
 <h2 id="nombre-d-riv-et-fonction-d-riv-e"><span class="section-number">5.7</span> Nombre dérivé et fonction dérivée</h2>
@@ -609,7 +609,7 @@ $$\cos\theta\approx 1, \quad \sin\theta\approx \theta, \tan\theta\approx \theta$
 <ul>
 <li>toute fonction affine est sa propre tangente en chacun des ses points, la dérivée est donc constante égale au coefficient directeur</li>
 <li>soit \(x\) un nombre réel, alors le taux d’accroissement de la fonction carrée est
-$$\begin{array}{ll} \frac{(x+h)^2-x^2}{h}&amp;= \frac{x^2+2xh+h^2-x^2}{h}\\&amp;=2x+h\end{array}$$
+$$\begin{array}{ll} \displaystyle\frac{(x+h)^2-x^2}{h}&amp;= \displaystyle\frac{x^2+2xh+h^2-x^2}{h}\\&amp;=2x+h\end{array}$$
 qui tend vers \(2x\) quand \(h\) tend vers 0. Ainsi, le nombre dérivé en \(a\) vaut \(2a\) et la fonction dérivée associe \(2x\) à \(x\)</li>
 </ul>
 </li>
@@ -631,7 +631,7 @@ exemple : \(h(x)=3x^{2} \Rightarrow h'(x)= 6x\)</li>
 <li>produit de fonctions
 $$(fg)'(x_{0})=f'(x_{0})g(x_{0})+f(x_{0})g'(x_{0})$$
 exemple : \(h(x)=x^{2}e^{x} \Rightarrow h'(x)= e^{x}\times x^{2}+e^{x}\times (2x)\)</li>
-<li>composition de fonctions
+<li>composition de fonctions (Notation : \(f\circ g(x) = f(g(x))\))
 $$(f\circ g)'(x_{0})=g'(x_{0})\times f'(g(x_{0}))$$
 exemple : \(h(x)=e^{x^{2}}\Rightarrow h'(x)= 2x e^{x^{2}}\)</li>
 </ul>
@@ -658,14 +658,14 @@ exemple : \(h(x)=e^{x^{2}}\Rightarrow h'(x)= 2x e^{x^{2}}\)</li>
 <li>La puissance résume un produit  où tous les facteurs sont identiques.
 $$\forall n^{*} \in\mathbb N,\forall a\in\mathbb R,\qquad a^{n}= \underbrace{a\times a\times\dots\times a\times a}_{n\textrm{ fois}}$$</li>
 <li><strong>propriétés remarquables</strong> : \(a^{n}a^{m}=a^{n+m},\quad \left(a^{n}\right)^{m}=a^{nm}\)</li>
-<li>définitions des fonctions correspondantes sur \(\re,\quad f_{n}\colon x\mapsto x^{n}\)</li>
+<li>définitions des fonctions correspondantes sur \(\mathbb R,\quad f_{n}\colon x\mapsto x^{n}\)</li>
 <li>comportements globaux suivant la parité de \(n\)
 <ul>
-<li>si \(n=2k+1\), la fonction est \txtbc{impaire}, strictement croissante et $$\lim_{x\to+\infty}x^{2k+1}=+\infty,\quad \lim_{x\to-\infty}x^{2k+1}=-\infty$$</li>
-<li>si \(n=2k\), la fonction est \txtbc{paire}, strictement croissante sur \(\re^{+}\) et strictement décroissante sur \(\re^{-}\) et $$\lim_{x\to+\infty}x^{2k}=+\infty,\quad \lim_{x\to-\infty}x^{2k}=+\infty$$</li>
+<li>si \(n=2k+1\), la fonction est <strong>impaire</strong>, strictement croissante et $$\lim_{x\to+\infty}x^{2k+1}=+\infty,\quad \lim_{x\to-\infty}x^{2k+1}=-\infty$$</li>
+<li>si \(n=2k\), la fonction est <strong>paire</strong>, strictement croissante sur \(\mathbb R^{+}\) et strictement décroissante sur \(\mathbb R^{-}\) et $$\lim_{x\to+\infty}x^{2k}=+\infty,\quad \lim_{x\to-\infty}x^{2k}=+\infty$$</li>
 </ul>
 </li>
-<li>fonctions continues et dérivables sur \(\re\) de dérivées \(f_{n}'(x) = nx^{n-1}\)</li>
+<li>fonctions continues et dérivables sur \(\mathbb R\) de dérivées \(f_{n}'(x) = nx^{n-1}\)</li>
 </ul>
 <hr />
 <h3 id="r-pr-sentations-graphiques_1" class="unnumbered">Réprésentations graphiques</h3>
@@ -679,8 +679,11 @@ $$\forall n^{*} \in\mathbb N,\forall a\in\mathbb R,\qquad a^{n}= \underbrace{a\t
 $$\forall n,m\in\mathbb Z,\forall a\neq 0,\quad a^{n}a^{m}=a^{n+m},\quad \left(a^{n}\right)^{m}=a^{nm}$$</li>
 <li>définitions des fonctions correspondantes sur \(\mathbb R^{*}\), \(f_{n}\colon x\mapsto x^{-n}=\frac1{x^{n}}\)</li>
 <li>comportements globaux suivant la parité de \(n\)
-+ si \(n=2k+1\), la fonction est <strong>impaire</strong>, strictement décroissante sur \(\mathbb R^{-*}\) et \(\mathbb R^{+*}\) avec $$\begin{array}{lll}&amp;\lim_{x\to0^{+}}x^{-2k-1}=+\infty,\quad \lim_{x\to0^{-}}x^{-2k-1}=-\infty, \\ &amp;\lim_{x\to+\infty}x^{-2k-1}=\lim_{x\to+\infty}x^{-2k-1}=0\end{array}$$
-+ si \(n=2k\), la fonction est <strong>paire</strong>, strictement croissante sur \(\mathbb R^{-*}\) et strictement décroissante sur  \(\mathbb R^{+*}\) avec $$\begin{array}{lll}&amp;\lim_{x\to0^{+}}x^{-2k}=\lim_{x\to0^{-}}x^{-2k}=+\infty,\quad \lim_{x\to+\infty}x^{-2k}=\lim_{x\to+\infty}x^{-2k}=0\end{array}$$</li>
+<ul>
+<li>si \(n=2k+1\), la fonction est <strong>impaire</strong>, strictement décroissante sur \(\mathbb R^{-*}\) et \(\mathbb R^{+*}\) avec $$\begin{array}{lll}&amp;\displaystyle\lim_{x\to0^{+}}x^{-2k-1}=+\infty,\quad \displaystyle\lim_{x\to0^{-}}x^{-2k-1}=-\infty, \\ &amp;\displaystyle\lim_{x\to+\infty}x^{-2k-1}=\displaystyle\lim_{x\to+\infty}x^{-2k-1}=0\end{array}$$</li>
+<li>si \(n=2k\), la fonction est <strong>paire</strong>, strictement croissante sur \(\mathbb R^{-*}\) et strictement décroissante sur  \(\mathbb R^{+*}\) avec $$\begin{array}{lll}&amp;\displaystyle\lim_{x\to0^{+}}x^{-2k}=\displaystyle\lim_{x\to0^{-}}x^{-2k}=+\infty,\quad \displaystyle\lim_{x\to+\infty}x^{-2k}=\lim_{x\to+\infty}x^{-2k}=0\end{array}$$</li>
+</ul>
+</li>
 <li>fonctions continues et dérivables sur \(\mathbb R^{*}\) de dérivées $$f_{n}'(x) = -nx^{-n-1}$$</li>
 </ul>
 <hr />
@@ -689,11 +692,11 @@ $$\forall n,m\in\mathbb Z,\forall a\neq 0,\quad a^{n}a^{m}=a^{n+m},\quad \left(a
 <iframe src="BTM_powers2.html" width="1200" height="1200" scrolling="yes" seamless="seamless" frameBorder="0"> </iframe>
 </div>
 <hr />
-<h2 id="level-3-puissances-rationnelles"><span class="section-number">6.4</span> Level 3 : Puissances rationnelles}</h2>
+<h2 id="level-3-puissances-rationnelles"><span class="section-number">6.4</span> Level 3 : Puissances rationnelles</h2>
 <ul>
 <li>origine : applications réciproques \(\sqrt[n]{\quad}\) toujours définies de \(\mathbb R^{+*}\) dans \(\mathbb R^{+*}\) telles que
 $$\forall x &gt;0, \forall n\in\mathbb Z,\quad \left(\sqrt[n]{x}\right)^{n}=\sqrt[n]{\left(x\right)^{n}}=x$$</li>
-<li>généralisation de la puissance aux rationnels : $$\forall x &gt;0, \forall m\in\mathbb Z, \forall n\in\n^{*},\quad x^{\frac mn}=\left(\sqrt[n]{x}\right)^{m}=\sqrt[n]{x^{m}}$$</li>
+<li>généralisation de la puissance aux rationnels : $$\forall x &gt;0, \forall m\in\mathbb Z, \forall n\in\mathbb N^{*},\quad x^{\frac mn}=\left(\sqrt[n]{x}\right)^{m}=\sqrt[n]{x^{m}}$$</li>
 <li>fonctions correspondantes continues et dérivables sur \(\mathbb R^{+*}\) de dérivées $$x\mapsto \tfrac mn x^{\frac mn -1}$$</li>
 </ul>
 <hr />
