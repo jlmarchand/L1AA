@@ -183,7 +183,7 @@ html:fullscreen {
 <div class="frontmatter">
 <div class="title"><h1>Equations différentielles</h1></div>
 <div class="author"><h2>JL Marchand</h2></div>
-<div class="date"><h3>2023-11-20</h3></div>
+<div class="date"><h3>2023-11-23</h3></div>
 </div>
 <div class="body">
 <div id="TOC">
@@ -207,12 +207,13 @@ html:fullscreen {
 </li>
 <li><a href="#equations-diff-rentielles-lin-aires-d-ordre-1"><span class="section-number">3.</span> Equations différentielles linéaires d’ordre 1</a>
 <ul>
-<li><a href="#equation-homog-ne_1"><span class="section-number">3.1</span> Equation homogène</a></li>
-<li><a href="#pourquoi-l-quation-homog-ne-et-la-solution-particuli-re"><span class="section-number">3.2</span> Pourquoi l’équation homogène et la solution particulière ?</a></li>
-<li><a href="#a-la-recherche-d-une-solution-particuli-re"><span class="section-number">3.3</span> A la recherche d’une solution particulière</a></li>
-<li><a href="#en-pratique"><span class="section-number">3.4</span> En pratique</a></li>
-<li><a href="#cas-particulier-o-a-et-b-sont-constantes"><span class="section-number">3.5</span> Cas particulier où a et b sont constantes</a></li>
-<li><a href="#et-si-le-cadre-n-est-pas-v-rifi-ou-qu-aucune-primitive-usuelle-n-appara-t-que-faire"><span class="section-number">3.6</span> Et si le cadre n’est pas vérifié, ou qu’aucune primitive usuelle n’apparaît, que faire ?</a></li>
+<li><a href="#cadre-math-matique"><span class="section-number">3.1</span> Cadre mathématique</a></li>
+<li><a href="#equation-homog-ne_1"><span class="section-number">3.2</span> Equation homogène</a></li>
+<li><a href="#pourquoi-l-quation-homog-ne-et-la-solution-particuli-re"><span class="section-number">3.3</span> Pourquoi l’équation homogène et la solution particulière ?</a></li>
+<li><a href="#a-la-recherche-d-une-solution-particuli-re"><span class="section-number">3.4</span> A la recherche d’une solution particulière</a></li>
+<li><a href="#en-pratique"><span class="section-number">3.5</span> En pratique</a></li>
+<li><a href="#cas-particulier-o-a-et-b-sont-constantes"><span class="section-number">3.6</span> Cas particulier où a et b sont constantes</a></li>
+<li><a href="#et-si-le-cadre-n-est-pas-v-rifi-ou-qu-aucune-primitive-usuelle-n-appara-t-que-faire"><span class="section-number">3.7</span> Et si le cadre n’est pas vérifié, ou qu’aucune primitive usuelle n’apparaît, que faire ?</a></li>
 </ul>
 </li>
 <li><a href="#equations-diff-rentielles-lin-aires-d-ordre-2-coefficients-constants"><span class="section-number">4.</span> Equations différentielles linéaires d’ordre 2 à coefficients constants</a>
@@ -374,7 +375,10 @@ $$f'(x)=\frac{f(b)-f(a)}{b-a}$$</li>
 </li>
 </ul>
 <hr />
+<!--# class="middle center" style = "background-color:#f8ac00;"-->
 <h1 id="equations-diff-rentielles-lin-aires-d-ordre-1"><span class="section-number">3.</span> Equations différentielles linéaires d’ordre 1</h1>
+<hr />
+<h2 id="cadre-math-matique"><span class="section-number">3.1</span> Cadre mathématique</h2>
 <ul>
 <li>résolution sur un intervalle \(I\) d’équation de la forme suivante :
 $$\left\{\begin{array}{ll} y' = a(x) y + b(x)\\y(x_0)=y_0\end{array}\right.$$
@@ -390,7 +394,7 @@ où \(a\) et \(b\) sont des <strong>fonctions continues sur l’intervalle \(I\)
 </li>
 </ul>
 <hr />
-<h2 id="equation-homog-ne_1"><span class="section-number">3.1</span> Equation homogène</h2>
+<h2 id="equation-homog-ne_1"><span class="section-number">3.2</span> Equation homogène</h2>
 <ul>
 <li>dans un premier temps on oublie \(b\) et la condition \(y(x_0)=y_0\) : l’équation homogène se résume à
 $$\forall x\in I,\quad y'(x)=a(x)y(x)$$</li>
@@ -399,7 +403,7 @@ $$\forall x\in I,\quad y'(x)=a(x)y(x)$$</li>
 <li>ce sont les <strong>seules solutions</strong> !</li>
 </ul>
 <hr />
-<h2 id="pourquoi-l-quation-homog-ne-et-la-solution-particuli-re"><span class="section-number">3.2</span> Pourquoi l’équation homogène et la solution particulière ?</h2>
+<h2 id="pourquoi-l-quation-homog-ne-et-la-solution-particuli-re"><span class="section-number">3.3</span> Pourquoi l’équation homogène et la solution particulière ?</h2>
 <ul>
 <li>remarque : si \(f\) et \(g\) sont deux solutions de $$\forall x\in I,\quad  y'(x) = a(x) y(x) + b(x)$$ alors \(h=f-g\) est solution de l’équation homogène
 $$\forall x\in I, h'(x)=f'(x)-g'(x)=a(x)f(x)-a(x)g(x)=a(x)h(x)$$</li>
@@ -407,7 +411,7 @@ $$\forall x\in I, h'(x)=f'(x)-g'(x)=a(x)f(x)-a(x)g(x)=a(x)h(x)$$</li>
 <li><strong>conclusion</strong> en décrivant toutes les solutions de l’équation homogène, on retrouve toutes les solutions de l’équation de départ en ajoutant une solution particulière \(\varphi\) à chacune d’elles !</li>
 </ul>
 <hr />
-<h2 id="a-la-recherche-d-une-solution-particuli-re"><span class="section-number">3.3</span> A la recherche d’une solution particulière</h2>
+<h2 id="a-la-recherche-d-une-solution-particuli-re"><span class="section-number">3.4</span> A la recherche d’une solution particulière</h2>
 <ul>
 <li>pas de méthode miracle qui fonctionnerait tout le temps, cependant <strong>la méthode de variation de la constante</strong> permet de traiter un grand nombre de cas à un point technique près</li>
 <li>si on en voit une <strong>évidente</strong> simplifions-nous la vie, ça fera toujours moins de calculs</li>
@@ -419,7 +423,7 @@ $$\mu'(x)=b(x)e^{-A(x)}$$</li>
 <li><strong>conclusion</strong> si on sait déterminer une <strong>primitive</strong> de \(be^{-A}\) alors on dispose d’une solution particulière \(\varphi\)</li>
 </ul>
 <hr />
-<h2 id="en-pratique"><span class="section-number">3.4</span> En pratique</h2>
+<h2 id="en-pratique"><span class="section-number">3.5</span> En pratique</h2>
 <ul>
 <li>écriture de l’équation sous la forme \(y' = a(x)y+b(x)\)</li>
 <li>détermination du plus grand intervalle de travail \(I\) contenant \(x_0\), tel que \(a\) et \(b\) sont simultanément continues sur \(I\)</li>
@@ -441,7 +445,7 @@ $$y(x_0)= \varphi(x_0) + \lambda e^{A(x_0)}=y_0\qquad \Rightarrow\qquad  \lambda
 <li>par curiosité, on peut chercher à étendre la solution à un intervalle plus grand si l’équation de départ n’est pas de la forme \(y'=ay+b\)</li>
 </ul>
 <hr />
-<h2 id="cas-particulier-o-a-et-b-sont-constantes"><span class="section-number">3.5</span> Cas particulier où a et b sont constantes</h2>
+<h2 id="cas-particulier-o-a-et-b-sont-constantes"><span class="section-number">3.6</span> Cas particulier où a et b sont constantes</h2>
 <p>Dans les premiers cas vus en électricité, vu que \(a\) et \(b\) sont constantes,
 $$y' = a y +b$$
 la résolution se simplifie :</p>
@@ -454,7 +458,7 @@ $$\varphi'(x)=0= a\varphi(x) +b=ac+b \quad \Rightarrow\quad c = -\frac ba$$</li>
 $$y(x) = \lambda e^{ax} -\frac ba$$</li>
 </ul>
 <hr />
-<h2 id="et-si-le-cadre-n-est-pas-v-rifi-ou-qu-aucune-primitive-usuelle-n-appara-t-que-faire"><span class="section-number">3.6</span> Et si le cadre n’est pas vérifié, ou qu’aucune primitive usuelle n’apparaît, que faire ?</h2>
+<h2 id="et-si-le-cadre-n-est-pas-v-rifi-ou-qu-aucune-primitive-usuelle-n-appara-t-que-faire"><span class="section-number">3.7</span> Et si le cadre n’est pas vérifié, ou qu’aucune primitive usuelle n’apparaît, que faire ?</h2>
 <ul>
 <li>une approximation évidemment !</li>
 <li>il existe plein de schémas d’approximation, le plus naïf consiste à utiliser les tangentes
