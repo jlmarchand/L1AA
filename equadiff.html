@@ -183,7 +183,7 @@ html:fullscreen {
 <div class="frontmatter">
 <div class="title"><h1>Equations différentielles</h1></div>
 <div class="author"><h2>JL Marchand</h2></div>
-<div class="date"><h3>2023-11-23</h3></div>
+<div class="date"><h3>2023-12-19</h3></div>
 </div>
 <div class="body">
 <div id="TOC">
@@ -207,7 +207,7 @@ html:fullscreen {
 </li>
 <li><a href="#equations-diff-rentielles-lin-aires-d-ordre-1"><span class="section-number">3.</span> Equations différentielles linéaires d’ordre 1</a>
 <ul>
-<li><a href="#cadre-math-matique"><span class="section-number">3.1</span> Cadre mathématique</a></li>
+<li><a href="#cadre-math-matique_1"><span class="section-number">3.1</span> Cadre mathématique</a></li>
 <li><a href="#equation-homog-ne_1"><span class="section-number">3.2</span> Equation homogène</a></li>
 <li><a href="#pourquoi-l-quation-homog-ne-et-la-solution-particuli-re"><span class="section-number">3.3</span> Pourquoi l’équation homogène et la solution particulière ?</a></li>
 <li><a href="#a-la-recherche-d-une-solution-particuli-re"><span class="section-number">3.4</span> A la recherche d’une solution particulière</a></li>
@@ -218,8 +218,9 @@ html:fullscreen {
 </li>
 <li><a href="#equations-diff-rentielles-lin-aires-d-ordre-2-coefficients-constants"><span class="section-number">4.</span> Equations différentielles linéaires d’ordre 2 à coefficients constants</a>
 <ul>
-<li><a href="#equation-homog-ne_2"><span class="section-number">4.1</span> Equation homogène</a></li>
-<li><a href="#exemple-oscillation-libre-amortie"><span class="section-number">4.2</span> Exemple : oscillation libre amortie</a></li>
+<li><a href="#cadre-math-matique_2"><span class="section-number">4.1</span> Cadre mathématique</a></li>
+<li><a href="#equation-homog-ne_2"><span class="section-number">4.2</span> Equation homogène</a></li>
+<li><a href="#exemple-oscillation-libre-amortie"><span class="section-number">4.3</span> Exemple : oscillation libre amortie</a></li>
 </ul>
 </li>
 </ul>
@@ -378,7 +379,7 @@ $$f'(x)=\frac{f(b)-f(a)}{b-a}$$</li>
 <!--# class="middle center" style = "background-color:#f8ac00;"-->
 <h1 id="equations-diff-rentielles-lin-aires-d-ordre-1"><span class="section-number">3.</span> Equations différentielles linéaires d’ordre 1</h1>
 <hr />
-<h2 id="cadre-math-matique"><span class="section-number">3.1</span> Cadre mathématique</h2>
+<h2 id="cadre-math-matique_1"><span class="section-number">3.1</span> Cadre mathématique</h2>
 <ul>
 <li>résolution sur un intervalle \(I\) d’équation de la forme suivante :
 $$\left\{\begin{array}{ll} y' = a(x) y + b(x)\\y(x_0)=y_0\end{array}\right.$$
@@ -474,7 +475,10 @@ $$y_k = y_{k-1}+ a(x_{k-1})\times \Delta x$$</li>
 <iframe src="euler.html" width="1000" height="800" scrolling="yes" seamless="seamless" frameBorder="0"> </iframe>
 </div>
 <hr />
+<!--# class="middle center" style = "background-color:#f8ac00;"-->
 <h1 id="equations-diff-rentielles-lin-aires-d-ordre-2-coefficients-constants"><span class="section-number">4.</span> Equations différentielles linéaires d’ordre 2 à coefficients constants</h1>
+<hr />
+<h2 id="cadre-math-matique_2"><span class="section-number">4.1</span> Cadre mathématique</h2>
 <ul>
 <li>résolution sur un intervalle \(I\) d’équation de la forme suivante :
 $$\left\{\begin{array}{ll} ay''+ b y' + cy = f \\y(x_0)=y_0\\y'(x_0)=z_0\end{array}\right.$$
@@ -490,7 +494,7 @@ où \(a\), \(b\) et \(c\) sont des <strong>constantes réelles</strong> et \(f\)
 </li>
 </ul>
 <hr />
-<h2 id="equation-homog-ne_2"><span class="section-number">4.1</span> Equation homogène</h2>
+<h2 id="equation-homog-ne_2"><span class="section-number">4.2</span> Equation homogène</h2>
 <p>Encore une fois, on identifie un premier problème, plus simple à résoudre
 $$ay''+ b y' + cy = 0.$$</p>
 <ul>
@@ -506,7 +510,7 @@ $$\forall x\in\mathbb R,\quad h(x)=e^{-\frac b{2a}x}\left(\lambda\cos\left(\frac
 </li>
 </ul>
 <hr />
-<h3 id="r-criture-du-dernier-cas"><span class="section-number">4.1.1</span> Réécriture du dernier cas</h3>
+<h3 id="r-criture-du-dernier-cas"><span class="section-number">4.2.1</span> Réécriture du dernier cas</h3>
 <ul>
 <li>en fixant \(r_0=-\frac b{2a}\), \(\omega = \frac{\sqrt{-\Delta}}{2a}\), \(\gamma = \sqrt{\lambda^2+\mu^2}\) et \(\varphi = \arctan\left(\frac{\mu}{\lambda}\right)\), on peut réécrire la forme générale des solutions
 $$\forall x\in\mathbb R,\quad h(x)= x_0 e^{r_0x}\cos(\omega x+\varphi)$$</li>
@@ -514,7 +518,7 @@ $$\forall x\in\mathbb R,\quad h(x)= x_0 e^{r_0x}\cos(\omega x+\varphi)$$</li>
 <li>la théorie permet de comprendre que l’apparition des fonctions trigonométriques est due à leur périodicité et leur régularité (elles sont dérivables à l’infini)</li>
 </ul>
 <hr />
-<h2 id="exemple-oscillation-libre-amortie"><span class="section-number">4.2</span> Exemple : oscillation libre amortie</h2>
+<h2 id="exemple-oscillation-libre-amortie"><span class="section-number">4.3</span> Exemple : oscillation libre amortie</h2>
 <ul>
 <li>
 <p>Imaginons un bloc de masse \(m\) pendu à un ressort, la force de rappel est proportionnel à la position

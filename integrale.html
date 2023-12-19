@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Intégration</title>
+<style type="text/css">
+body {
+  font-family: sans-serif;
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+body, .footnotes, code { font-size: .9em; }
+li li { font-size: .95em; }
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+pre, img { max-width: 100%; }
+pre, pre:hover {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+pre code {
+  display: block;
+  overflow-x: auto;
+}
+code { font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace; }
+:not(pre) > code, code[class] { background-color: #F8F8F8; }
+code.language-undefined, pre > code:not([class]) {
+  background-color: inherit;
+  border: 1px solid #eee;
+}
+table {
+  margin: auto;
+  border-top: 1px solid #666;
+}
+table thead th { border-bottom: 1px solid #ddd; }
+th, td { padding: 5px; }
+thead, tfoot, tr:nth-child(even) { background: #eee; }
+blockquote {
+  color: #666;
+  margin: 0;
+  padding-left: 1em;
+  border-left: 0.5em solid #eee;
+}
+hr, .footnotes::before { border: 1px dashed #ddd; }
+.frontmatter { text-align: center; }
+#TOC .numbered li { list-style: none; }
+#TOC .numbered { padding-left: 0; }
+#TOC .numbered ul { padding-left: 1em; }
+table, .body h2 { border-bottom: 1px solid #666; }
+.body .appendix, .appendix ~ h2 { border-bottom-style: dashed; }
+.footnote-ref a::before { content: "["; }
+.footnote-ref a::after { content: "]"; }
+.footnotes::before {
+  content: "";
+  display: block;
+  max-width: 20em;
+}
+
+@media print {
+  body {
+    font-size: 12pt;
+    max-width: 100%;
+  }
+  tr, img { page-break-inside: avoid; }
+}
+@media only screen and (min-width: 992px) {
+  pre { white-space: pre; }
+}
+</style>
+<style type="text/css">
+:root { --slide-width: 100%; }
+html { scroll-snap-type: y mandatory; }
+th, td { padding: .2em .5em; }
+.slide {
+  padding: 1em;
+  position: relative;
+}
+.slide > h2, .slide > h3 { margin-top: unset; }
+body {
+  max-width: fit-content;
+  padding: 0;
+}
+a { color: #eb4a47; }
+:not(pre) > code { background-color: #fdfded; }
+#TOC { columns: 2; }
+#TOC::before {
+  font-size: 1.3em;
+  font-weight: bold;
+  display: block;
+  border-bottom: 1px solid #666;
+}
+.frontmatter, .middle {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.page-number, .timer {
+  position: absolute;
+  bottom: 0;
+  opacity: .5;
+  font: .7em monospace;
+}
+.page-number { right: 0; }
+.timer { left: 0; }
+.inverse {
+  background-color: #eee;
+  filter: invert(1);
+}
+.fade {
+  background: repeating-linear-gradient(135deg, white, white 30px, #ddd 32px, #ddd 32px);
+  opacity: 0.6;
+}
+.center { text-align: center; }
+.slide-container h2 .section-number {
+  display: inline-block;
+  background-color: #666;
+  color: white;
+  padding: 0 .1em;
+  margin-right: .3em;
+}
+.overview {
+  font-size: .8em;
+  max-width: none;
+}
+.overview .slide {
+  min-height: unset;
+  scroll-snap-align: unset;
+}
+.overview .slide-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.overview .slide-container .slide {
+  width: var(--slide-width);
+  border: 1px dotted #ccc;
+  margin-bottom: 0.5em;
+}
+.mirrored { transform: scale(-1, 1); }
+.spacer { height: 50vh; }
+.overview .timer, .overview .spacer { display: none; }
+.overview .footnotes { position: unset; }
+html:fullscreen::-webkit-scrollbar { display: none; }
+html:fullscreen {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+@media (min-width: 992px) {
+ :root { --slide-width: 49%; }
+  body { font-size: 2em; }
+  .slide {
+    min-height: 100vh;
+    scroll-snap-align: start;
+  }
+  li li { font-size: .9em; }
+  .footnotes {
+    position: absolute;
+    bottom: 1em;
+    font-size: .8em;
+  }
+}
+@media (min-width: 1400px) {
+ :root { --slide-width: 33%; }
+}
+@media (min-width: 1800px) {
+ :root { --slide-width: 24.67%; }
+}
+@media print, (max-width: 991.98px) {
+  .timer, .spacer { display: none; }
+}
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/@xiee/utils/css/key-buttons.min.css,npm/@xiee/utils/css/heading-anchor.min.css">
+</head>
+<body>
+<div class="include-before">
+</div>
+<div class="frontmatter">
+<div class="title"><h1>Intégration</h1></div>
+<div class="author"><h2>Marchand Jean-Louis</h2></div>
+<div class="date"><h3>2023-12-19</h3></div>
+</div>
+<div class="body">
+<div id="TOC">
+<ul class="numbered">
+<li><a href="#calcul-d-aire-sous-la-courbe"><span class="section-number">1.</span> Calcul d’aire sous la courbe</a>
+<ul>
+<li><a href="#motivations"><span class="section-number">1.1</span> Motivations</a></li>
+<li><a href="#int-grale"><span class="section-number">1.2</span> Intégrale</a></li>
+<li><a href="#th-or-me-fondamental-de-l-int-gration_1"><span class="section-number">1.3</span> Théorème fondamental de l’intégration</a></li>
+<li><a href="#th-or-me-fondamental-de-l-int-gration_2"><span class="section-number">1.4</span> Théorème fondamental de l’intégration</a></li>
+<li><a href="#propri-t-s-de-l-int-grale"><span class="section-number">1.5</span> Propriétés de l’intégrale</a></li>
+<li><a href="#que-faire-si-on-ne-conna-t-pas-de-primitive_1"><span class="section-number">1.6</span> Que faire si on ne connaît pas de primitive ?</a></li>
+<li><a href="#que-faire-si-on-ne-conna-t-pas-de-primitive_2"><span class="section-number">1.7</span> Que faire si on ne connaît pas de primitive ?</a></li>
+<li><a href="#changement-de-variables-exemple"><span class="section-number">1.8</span> Changement de variables : Exemple</a></li>
+<li><a href="#changement-de-variable-exemple"><span class="section-number">1.9</span> Changement de variable : exemple</a></li>
+</ul>
+</li>
+<li><a href="#int-grale-g-n-ralis-e"><span class="section-number">2.</span> Intégrale généralisée</a>
+<ul>
+<li><a href="#de-l-importance-de-distinguer-les-situations"><span class="section-number">2.1</span> De l’importance de distinguer les situations</a></li>
+<li><a href="#d-finition"><span class="section-number">2.2</span> Définition</a></li>
+<li><a href="#exemples"><span class="section-number">2.3</span> Exemples</a></li>
+<li><a href="#probl-mes-existentiels"><span class="section-number">2.4</span> Problèmes existentiels</a></li>
+<li><a href="#exemple"><span class="section-number">2.5</span> Exemple</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{Making HTML Slides with the markdown Package}
+%\VignetteEncoding{UTF-8}
+-->
+<style type="text/css">
+/* your CSS rules */
+body {
+  background-image: url("blackboard.jpg");
+  background-color: #FFFFFF;
+  background-repeat: no-repeat;
+  background-position: middle center;
+  background-size:  1800px;
+  color: #272822;
+}
+blockquote {
+  border-left: solid 5px #f8ac0080;
+  padding-left: 1em;
+  color: #272822;
+  font-style: italic;
+}
+h1 {
+  color: white;
+}
+h2, h3 {
+  color: #f8ac00;
+}
+.slide-container h2 .section-number {
+  display: inline-block;
+  background-color: #f8ac00;
+  color: white;
+  padding: 0 .1em;
+  margin-right: .3em;
+}
+strong {
+  background-color: #f8ac00;
+  color: white;
+
+}
+</style>
+<hr />
+<!--# class="middle center" style = "background-color:#f8ac00;"-->
+<h1 id="calcul-d-aire-sous-la-courbe"><span class="section-number">1.</span> Calcul d’aire sous la courbe</h1>
+<hr />
+<h2 id="motivations"><span class="section-number">1.1</span> Motivations</h2>
+<ul>
+<li>mais enfin pourquoi ?
+<ul>
+<li>être en mesure de donner un sens à une aire non rectangulaire</li>
+<li>conserver le sens dans les cas connus : polygônes, disque</li>
+<li>calcul de sommation dans les milieux continus</li>
+</ul>
+</li>
+<li>exemples
+<ul>
+<li>les aires d’un triangle et un trapèze rectangles correspondent à des intégrales d’une fonction affine</li>
+<li>l’aire d’un demi-disque est l’intégrale de la fonction \(\sqrt{R^2-x^2}\) sur \([-R;R]\)</li>
+</ul>
+</li>
+<li>la clé : le théorème des gendarmes</li>
+</ul>
+<hr />
+<iframe title="sommes de Riemann" src="integration.html" width="2500" height="1200" allowfullscreen="TRUE"></iframe>
+<hr />
+<h2 id="int-grale"><span class="section-number">1.2</span> Intégrale</h2>
+<ul>
+<li>l’intégrale de \(a\) à \(b\) de la fonction <strong>continue et  positive</strong> \(f\) correspond à la mesure de l’aire <strong>positive</strong> délimitée par :
+$$\left\{\begin{array}{lllll}a\leq x\leq b\\0\leq y\leq f(x)\end{array}\right.$$</li>
+<li>notation $$\int_a^bf(x)dx$$</li>
+<li>l’intégrale de \(a\) à \(b\) de la fonction <strong>continue et  négative</strong> \(f\) correspond à la mesure de l’aire <strong>négative</strong> délimitée par :
+$$\int_a^bf(x)dx=-\int_a^b-f(x)dx$$</li>
+<li>en pratique l’intégrale de \(a\) à \(b\) d’une fonction <strong>continue</strong> correspond à la somme des aires où \(f\) est positive à laquelle est soustraite la somme des aires où \(f\) est négative</li>
+</ul>
+<hr />
+<h2 id="th-or-me-fondamental-de-l-int-gration_1"><span class="section-number">1.3</span> Théorème fondamental de l’intégration</h2>
+<img src="data:image/png;base64,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" width="400px" height="250px" style="display: block; margin: auto;" />
+* aire orange proche du rectangle
+<p>$$\int_{-1}^{2,1} f(x)dx-\int_{-1}^{2} f(x)dx = \int_{2}^{2,1} f(x)dx\approx 0,1 \times  f(2)$$</p>
+<ul>
+<li>si on note \(\mathcal A(a,b) = \int_a^b f(x)dx\) alors</li>
+</ul>
+<p>$$\mathcal A(a,b+h)-\mathcal A(a,b)\approx h\times f(b) \Rightarrow\frac{\mathcal A(a,b+h)-\mathcal A(a,b)}h \approx f(b)$$</p>
+<hr />
+<h2 id="th-or-me-fondamental-de-l-int-gration_2"><span class="section-number">1.4</span> Théorème fondamental de l’intégration</h2>
+<ul>
+<li>Une <strong>primitive</strong> \(F\) d’une fonction \(f\) sur un segment \([a,b]\) est une fonction dérivable sur \([a,b]\) dont la dérivée est \(f\)</li>
+</ul>
+<p>$$\forall x\in[a,b],\quad F'(x)=f(x)$$</p>
+<ul>
+<li><strong>Théorème fondamental de l’intégration</strong>
+<ul>
+<li>Soit \(f\) une fonction continue sur un <strong>segment</strong> \([a,b]\) alors l’intégrale de \(f\) sur \([a,b]\) est bien définie et<br />
+$$\int_{a}^{b}f(x)dx=\lim_{n\to+\infty}\frac{b-a}n\sum_{k=0}^{n-1}f\left(a+\tfrac {k(b-a)}n\right)= F(b)-F(a)$$ pour toute primitive \(F\) de \(f\) sur \([a,b]\).</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="propri-t-s-de-l-int-grale"><span class="section-number">1.5</span> Propriétés de l’intégrale</h2>
+<ul>
+<li>Soient \(f,g\) deux fonctions continues sur un segment \([a,b]\) et deux réels \(\alpha,\beta\). L’intégrale possède les propriétés suivantes
+<ul>
+<li><strong>linéarité</strong> \(\int_{a}^{b}\alpha f(x)+\beta g(x) dx  = \alpha \int_{a}^{b}f(x)dx+\beta \int_{a}^{b}g(x)dx\),
+<ul>
+<li><strong>positivité</strong> si \(\forall x\in [a,b],\quad f(x)\geq 0\) alors \(\int_{a}^{b}f(x)dx\geq 0\)</li>
+<li><strong>positivité - cas particulier 1</strong> si \(\forall x\in [a,b],\quad f(x)\geq g(x)\) alors \(\int_{a}^{b}f(x)dx\geq \int_{a}^{b}g(x)dx\)</li>
+<li><strong>positivité - cas particulier 2</strong> si  \(\int_{a}^{b}\left|f(x)\right|dx\geq \left|\int_{a}^{b}f(x)dx\right|\)</li>
+<li><strong>Relation de Chasles</strong> $$\forall c\in[a,b],\quad\int_{a}^{b}f(x)dx=\int_{a}^{c}f(x)dx+\int_{c}^{b}f(x)dx$$</li>
+<li><strong>Inégalité de Cauchy-Schwarz</strong> $$\int_{a}^{b}f(x)^{2}dx\int_{a}^{b}g(x)^{2}dx\geq \left(\int_{a}^{b}f(x)g(x)dx\right)^{2}$$</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="que-faire-si-on-ne-conna-t-pas-de-primitive_1"><span class="section-number">1.6</span> Que faire si on ne connaît pas de primitive ?</h2>
+<ul>
+<li>rappel dérivée d’un produit \((fg)'=f'g+fg'\)</li>
+<li>par linéarité \(\int_{a}^{b}(fg)'(x)dx=\int_{a}^{b}f'(x)g(x)dx+\int_{a}^{b}f(x)g'(x)dx\)</li>
+<li><strong>Intégration par parties</strong> Soient \(f\) et \(g\) deux fonctions de classe \(\mathcal C^{1}\) sur \([a,b]\) alors :
+$$\int_{a}^{b}f'(x)g(x)dx=[f(x)g(x)]_{a}^{b}-\int_{a}^{b}f(x)g'(x)dx.$$</li>
+<li><strong>Exemple</strong></li>
+</ul>
+<p>$$\int_{-2}^{3}xe^{x}dx=[xe^{x}]_{-2}^{3}-\int_{-2}^{3}e^{x}dx=3e^{3}+2e^{-2}-[e^{x}]_{-2}^{3}=2e^{3}+3e^{-2}.$$</p>
+<hr />
+<h2 id="que-faire-si-on-ne-conna-t-pas-de-primitive_2"><span class="section-number">1.7</span> Que faire si on ne connaît pas de primitive ?</h2>
+<ul>
+<li>application réciproque \(\varphi^{-1} \colon  [\alpha,\beta]\to[a,b]\) de \(\varphi \colon [a,b] \to [\alpha,\beta]\) telle que \(\forall x\in [a,b], \quad \varphi(\varphi^{-1}(x))=x,\)</li>
+<li>dans ce cas
+$$\int_{a}^{b}f(x)dx=F(b)-F(a)= F(\varphi (\varphi^{-1}(b))-F(\varphi(\varphi^{-1}(a))$$
+$$=\int_{\varphi^{-1}(b)}^{\varphi^{-1}(a)}\varphi'(t)f(\varphi(t))dt.$$</li>
+<li><strong>Changement de variables</strong> Soit \(f\) une fonction continue sur \([a,b]\) et \(\varphi\) une fonction de classe \(\mathcal C^{1}\) sur \([\alpha,\beta]\) telle que \(\varphi([\alpha,\beta])\subset [a,b]\) alors
+$$\int_{\varphi(\alpha)}^{\varphi(\beta)}f(x)dx=\int_{\alpha}^{\beta}\varphi'(t)f\circ\varphi(t)dt.$$</li>
+</ul>
+<hr />
+<h2 id="changement-de-variables-exemple"><span class="section-number">1.8</span> Changement de variables : Exemple</h2>
+<ul>
+<li>l’intégrale \(\int_{0}^{1} \sqrt{1-x^2}dx\) est certes bien définie mais trouver une primitive …</li>
+<li>ici on choisit \(x = \sin(t)\) pour avoir \(1-x^2=\cos^2(t)\) pour chercher à simplifier la fonction à intégrer</li>
+<li>ainsi
+par le théorème :
+$$			 \int_{0}^{1} \sqrt{1-x^2}dx =\int_0^{\frac\pi2}\sin'(t) \sqrt{1-\sin^2(t)}dx=\int_0^{\frac\pi2}\cos^2(t)dt.$$</li>
+<li>pour trouver une primitive, il faut se rappeler que ce terme apparaît dans le développement de cosinus \(2t\)
+$$\cos(2t) = \cos^2(t)-\sin^2(t)=\cos^2(t)-(1-\cos^2(t))$$
+finalement
+$$\cos^2(t)=\frac{1+\cos(2t)}2$$</li>
+</ul>
+<hr />
+<h2 id="changement-de-variable-exemple"><span class="section-number">1.9</span> Changement de variable : exemple</h2>
+<ul>
+<li>la recherche de primitive est plus simple, en effet
+$$\frac{1+\cos(2t)}2= \left[\frac{t}2+\frac{\sin(2t)}4\right]_0^{\frac\pi2}=\frac\pi4.$$</li>
+<li>on prouve ainsi la formule connue depuis le collège de l’aire du quart de disque de rayon 1 : \(\frac\pi4\)</li>
+<li>le raisonnement peut être repris pour prouver le cas général</li>
+</ul>
+<hr />
+<!--# class="middle center" style = "background-color:#f8ac00;"-->
+<h1 id="int-grale-g-n-ralis-e"><span class="section-number">2.</span> Intégrale généralisée</h1>
+<hr />
+<h2 id="de-l-importance-de-distinguer-les-situations"><span class="section-number">2.1</span> De l’importance de distinguer les situations</h2>
+<ul>
+<li>généralisation de la notion d’intégrale utile notamment en probabilité</li>
+<li>exemple : la fonction \(\frac1{\sqrt x}\) est continue sur \(]0,1]\)
+<ul>
+<li>pour tout \(a\in]0,1]\) la fonction est continue sur \([a,1]\) donc intégrable :</li>
+</ul>
+</li>
+</ul>
+<p>$$\int_a^1\frac1{\sqrt x}dx=\left[2\sqrt{x}\right]_a^1=2\sqrt{1}-2\sqrt{a}$$
+que se passe-t-il lorsque \(a\) tend vers 0 ?</p>
+<ul>
+<li>finalement, on peut concevoir l’intégrale de 0 à 1 comme une masse unitaire étirée sur une hauteur infinie</li>
+</ul>
+<hr />
+<h2 id="d-finition"><span class="section-number">2.2</span> Définition</h2>
+<ul>
+<li>Si \(f\) est une fonction <strong>continue</strong> sur l’intervalle \(]a,b]\) alors l’intégrale généralisée de \(f\)  est le nombre réel, lorsqu’il existe, donné par
+$$\int_a^bf(x)dx =\lim_{t\to a^+}\int_t^b f(x)dx.$$</li>
+<li>Si \(f\) est une fonction <strong>continue</strong> sur l’intervalle \([a,b[\) alors l’intégrale généralisée de \(f\)  est le nombre réel, lorsqu’il existe, donné par
+$$\int_a^bf(x)dx =\lim_{t\to b^-}\int_a^t f(x)dx.$$</li>
+<li>Si \(f\) est une fonction <strong>continue</strong> sur l’intervalle \(]a,b[\) alors l’intégrale généralisée de \(f\) est définie par :
+$$\int_a^bf(x)dx =\lim_{t\to a^+}\int_t^{c} f(x)dx+\lim_{t\to b^-}\int_c^t f(x)dx,$$ où \(c\) est un point intermédiaire de \(]a,b[.\)</li>
+</ul>
+<hr />
+<h2 id="exemples"><span class="section-number">2.3</span> Exemples</h2>
+<ul>
+<li>l’intégrale suivante est-elle bien définie? le cas échéant quel est sa valeur : $$\int_0^1\ln(x)dx$$</li>
+<li>idem pour les intégrale suivantes : $$\int_1^{+\infty} \frac1{x^2}dx,\qquad \int_{-\infty}^{+\infty} xe^{-x^2}dx,  \qquad\int_0^{+\infty} \frac1{x^2}dx,\qquad \int_0^{+\infty} \frac{\sin\left(\frac1x\right)}{x^2}dx$$</li>
+</ul>
+<hr />
+<h2 id="probl-mes-existentiels"><span class="section-number">2.4</span> Problèmes existentiels</h2>
+<ul>
+<li>comment savoir si une intégrale généralisée existe sans connaître de primitive ?</li>
+<li>on détermine les probabilités  d’une variable aléatoire de loi normale à l’aide d’intégrales du type :
+$$\mathbb P(a\leq X\leq b)=\int_a^b \frac{e^{-\frac{x^2}2}}{\sqrt{2\pi}}dx$$</li>
+<li>la clé réside dans la comparaison</li>
+<li><strong>Théorème de Comparaison</strong> : soient \(f\) et \(g\) deux fonctions <strong>positives</strong> avec \(f\) et \(g\) continues sur \([a,b[\) (respectivement \(]a,b]\)) et \(c\in]a,b[\) telles que  \(g\) est <strong>intégrable</strong> sur \([c,b[\) (resp. \(\in]a,c]\)) et
+$$\forall x\in[c,b[ \quad (\textrm{resp. } \in]a,c]),\quad  f(x)\leq g(x)$$
+alors l’intégrale \(\int_{a}^{b}f(x)dx\) est <strong>bien définie et réelle</strong>.</li>
+</ul>
+<hr />
+<h2 id="exemple"><span class="section-number">2.5</span> Exemple</h2>
+<ul>
+<li>la fonction de <strong>Gauss-Laplace</strong> \(f(x)=\frac{e^{-\frac{x^2}2}}{\sqrt{2\pi}}\) est continue sur \(\mathbb R\) mais sa primitive sur \(\mathbb R\) n’est pas exprimable à l’aide des fonctions usuelles</li>
+<li>comparer \(f\) à \(g\) sur \([1,+\infty[\), conclure</li>
+</ul>
+</div>
+<div class="include-after">
+</div>
+<script>
+(function(d) {
+  let p = d.body;  // container of slides; assume <body> for now
+  const s1 = ':scope > hr:not([class])', s2 = ':scope > h2';
+  // find a container that has at least n "slides"
+  function findContainer(s, n = 1) {
+    if (p.querySelectorAll(s).length >= n) return true;
+    // if body doesn't contain headings or <hr>s, look into children
+    for (let i = 0; i < p.children.length; i++) {
+      if (p.children[i].querySelectorAll(s).length >= n) {
+        p = p.children[i]; break;
+      }
+    }
+    return false;
+  }
+  function newEl(tag, cls) {
+    const el = d.createElement(tag);
+    if (cls) el.className = cls;
+    return el;
+  }
+  if (!findContainer(s1, 3)) {
+    // if not enough <hr>s found in children; look for <h2> instead
+    if (p.tagName === 'BODY') {
+      // not enough h2 found, this page is not appropriate for slides
+      if (!findContainer(s2) && p.tagName === 'BODY') return;
+      p.querySelectorAll(s2).forEach(h2 => h2.before(newEl('hr')));
+    }
+  }
+  p.classList.add('slide-container');
+  // add 'slide' class to the frontmatter div and toc
+  ['.frontmatter', '#TOC'].forEach(s => {
+    d.body.querySelector(s)?.classList.add('slide');
+  });
+
+  function newSlide(s) {
+    return (s?.innerText === '') ? s : newEl('div', 'slide');
+  }
+  function isSep(el) {
+    return el.tagName === 'HR' && el.attributes.length === 0;
+  }
+  let el = p.firstElementChild; if (isSep(el)) el.remove();
+  el = p.firstElementChild; if (!el) return;
+  let s = newSlide(); el.before(s);
+  while (true) {
+    let el = s.nextSibling;
+    if (!el) break;
+    // remove slide separators (<hr>) and create new slide
+    if (isSep(el)) {
+      s = newSlide(s);
+      el.before(s); el.remove();
+    } else if (el.classList?.contains('slide')) {
+      s = newSlide(s);
+      el.after(s);
+    } else {
+      s.append(el);
+    }
+  }
+  function setAttr(el, attr) {
+    const m = newEl('div');
+    m.innerHTML = `<div ${attr}></div>`;
+    const attrs = m.firstElementChild.attributes;
+    for (let i = 0; i < attrs.length; i++) {
+      let a = attrs[i];
+      el.setAttribute(a.name, a.value);
+    }
+    m.remove();
+  }
+  const slides = d.querySelectorAll('div.slide'), N = slides.length,
+        tm = d.querySelector('span.timer'), fn = d.querySelector('.footnotes');
+  slides.forEach((s, i) => {
+    // append footnotes
+    if (fn) s.querySelectorAll('.footnote-ref > a[href^="#fn"]').forEach(a => {
+      const li = fn.querySelector('li' + a.getAttribute('href'));
+      if (!li) return;
+      let f = s.querySelector('div.footnotes');
+      if (!f) {
+        f = newEl('div', 'footnotes'); s.append(f);
+      }
+      f.append(li);
+      li.firstElementChild?.insertAdjacentHTML('afterbegin', `[${a.innerHTML}] `);
+      li.outerHTML = li.innerHTML;
+    });
+    // add a timer
+    s.append(tm ? tm.cloneNode() : newEl('span', 'timer'));
+    // add page numbers
+    const n = newEl('span', 'page-number');
+    n.innerText = i + 1 + '/' + N;
+    n.onclick = e => location.hash = i + 1;
+    s.append(n);
+    // apply slide attributes in <!--# -->
+    for (let k in s.childNodes) {
+      const node = s.childNodes[k];
+      if (node.nodeType !== Node.COMMENT_NODE) continue;
+      let t = node.textContent;
+      if (!/^#/.test(t)) continue;
+      t = t.replace(/^#/, '');
+      const r = /[\s\n]class="([^"]+)"/, m = t.match(r);
+      if (m) {
+        t = t.replace(r, '').trim();
+        s.className += ' ' + m[1];
+      }
+      if (t) setAttr(s, t);
+      break;
+    }
+    s.classList.contains('extend') && s.append(newEl('div', 'spacer fade'));
+    location.hash === ('#' + (i + 1)) && s.scrollIntoView();
+    s.addEventListener('click', e => {
+      if (!e.altKey) return;
+      d.body.classList.toggle('overview');
+      setTimeout(() => e.target.scrollIntoView(), 100);
+    });
+  });
+  [...d.querySelectorAll('a.footnote-backref'), fn, tm].forEach(el => el?.remove());
+  const tms = d.querySelectorAll('span.timer'), t1 = 1000 * tms[0].dataset.total;
+  let t0;
+  function startTimers() {
+    t0 = new Date();
+    setInterval(setTimers, 1000);
+  }
+  function setTimers() {
+    let t = (new Date() - t0);
+    if (t1) t = t1 - t;
+    const t2 = new Date(Math.abs(t)).toISOString().substr(11, 8).replace(/^00:/, '');
+    tms.forEach(el => {
+      el.innerText = t2;
+      if (t < 0) el.style.display = el.style.display === 'none' ? '' : 'none';
+    });
+  }
+  // press f for fullscreen mode
+  d.addEventListener('keyup', (e) => {
+    if (e.target !== d.body) return;
+    e.key === 'f' && d.documentElement.requestFullscreen();
+    e.key === 'o' && d.body.classList.toggle('overview');
+    e.key === 'm' && d.body.classList.toggle('mirrored');
+    sessionStorage.setItem('body-class', d.body.className);
+  });
+  // start timer on fullscreen
+  d.onfullscreenchange = (e) => d.fullscreenElement && !t0 && startTimers();
+  tms.forEach(el => el.addEventListener('click', e => startTimers()));
+  // restore previsouly saved body class
+  const bc = sessionStorage.getItem('body-class');
+  if (bc) d.body.className += ' ' + bc;
+})(document);
+</script>
+<script src="https://cdn.jsdelivr.net/combine/npm/katex/dist/katex.min.js,npm/katex/dist/contrib/auto-render.min.js,npm/@xiee/utils/js/render-katex.js" defer></script>
+<script src="https://cdn.jsdelivr.net/combine/npm/@xiee/utils/js/key-buttons.min.js,npm/@xiee/utils/js/external-link.min.js,npm/@xiee/utils/js/heading-anchor.min.js" defer></script>
+</body>
+</html>
