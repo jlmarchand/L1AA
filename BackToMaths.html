@@ -55,7 +55,7 @@ table, .body h2 { border-bottom: 1px solid #666; }
 .body .appendix, .appendix ~ h2 { border-bottom-style: dashed; }
 .footnote-ref a::before { content: "["; }
 .footnote-ref a::after { content: "]"; }
-.footnotes::before {
+section.footnotes::before {
   content: "";
   display: block;
   max-width: 20em;
@@ -178,12 +178,10 @@ html:fullscreen {
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/@xiee/utils/css/key-buttons.min.css,npm/@xiee/utils/css/heading-anchor.min.css">
 </head>
 <body>
-<div class="include-before">
-</div>
 <div class="frontmatter">
 <div class="title"><h1>Reprise en douceur</h1></div>
 <div class="author"><h2>JL Marchand</h2></div>
-<div class="date"><h3>2023-09-14</h3></div>
+<div class="date"><h3>2024-09-03</h3></div>
 </div>
 <div class="body">
 <div id="TOC">
@@ -192,13 +190,16 @@ html:fullscreen {
 <ul>
 <li><a href="#math-matiques-et-agroalimentaire"><span class="section-number">1.1</span> Mathématiques et Agroalimentaire</a></li>
 <li><a href="#les-grandes-lignes-du-programme"><span class="section-number">1.2</span> Les grandes lignes du programme</a></li>
+<li><a href="#principales-comp-tences-d-velopp-es"><span class="section-number">1.3</span> Principales compétences développées</a></li>
+<li><a href="#evaluation"><span class="section-number">1.4</span> Evaluation</a></li>
 </ul>
 </li>
-<li><a href="#d-crassage-en-douceur"><span class="section-number">2.</span> Décrassage en douceur</a>
+<li><a href="#retour-aux-origines"><span class="section-number">2.</span> Retour aux origines</a>
 <ul>
-<li><a href="#la-proportionnalit-est-la-cl"><span class="section-number">2.1</span> La proportionnalité est la clé</a></li>
-<li><a href="#proportions-et-fractions"><span class="section-number">2.2</span> Proportions et fractions</a></li>
-<li><a href="#inverse-r-el"><span class="section-number">2.3</span> Inverse réel</a></li>
+<li><a href="#message-important-les-r-gles-de-calcul-ne-changent-pas"><span class="section-number">2.1</span> Message important : les règles de calcul ne changent pas !</a></li>
+<li><a href="#le-principe-central-du-secondaire-la-proportion"><span class="section-number">2.2</span> Le principe central du secondaire : la proportion</a></li>
+<li><a href="#proportions-et-fractions"><span class="section-number">2.3</span> Proportions et fractions</a></li>
+<li><a href="#inverse-r-el"><span class="section-number">2.4</span> Inverse réel</a></li>
 </ul>
 </li>
 <li><a href="#savoir-se-r-p-rer"><span class="section-number">3.</span> Savoir se répérer</a>
@@ -220,10 +221,9 @@ html:fullscreen {
 <li><a href="#continuit"><span class="section-number">5.2</span> Continuité</a></li>
 <li><a href="#approximation-et-tangente"><span class="section-number">5.3</span> Approximation et tangente</a></li>
 <li><a href="#tangente-et-d-rivabilit"><span class="section-number">5.4</span> Tangente et dérivabilité</a></li>
-<li><a href="#parall-le-avec-la-vitesse"><span class="section-number">5.5</span> Parallèle avec la vitesse</a></li>
-<li><a href="#equation-de-tangente-et-approximation-affine"><span class="section-number">5.6</span> Equation de tangente et approximation affine</a></li>
-<li><a href="#nombre-d-riv-et-fonction-d-riv-e"><span class="section-number">5.7</span> Nombre dérivé et fonction dérivée</a></li>
-<li><a href="#r-gles-de-calcul"><span class="section-number">5.8</span> Règles de calcul</a></li>
+<li><a href="#equation-de-tangente-et-approximation-affine"><span class="section-number">5.5</span> Equation de tangente et approximation affine</a></li>
+<li><a href="#nombre-d-riv-et-fonction-d-riv-e"><span class="section-number">5.6</span> Nombre dérivé et fonction dérivée</a></li>
+<li><a href="#r-gles-de-calcul"><span class="section-number">5.7</span> Règles de calcul</a></li>
 </ul>
 </li>
 <li><a href="#fonctions-usuelles"><span class="section-number">6.</span> Fonctions usuelles</a>
@@ -238,6 +238,7 @@ html:fullscreen {
 <li><a href="#logarithme-n-perien-inspiration"><span class="section-number">6.8</span> Logarithme néperien : inspiration</a></li>
 <li><a href="#logarithme-n-perien-d-finition"><span class="section-number">6.9</span> Logarithme néperien : définition</a></li>
 <li><a href="#propri-t-s-du-logarithme"><span class="section-number">6.10</span> Propriétés du logarithme</a></li>
+<li><a href="#croissances-compar-es"><span class="section-number">6.11</span> Croissances comparées</a></li>
 </ul>
 </li>
 </ul>
@@ -251,51 +252,55 @@ html:fullscreen {
 /* your CSS rules */
 body {
   background-image: url("blackboard.jpg");
-  background-color: #FFFFFF;
+  background-color: #FFF;
   background-repeat: no-repeat;
   background-position: middle center;
   background-size:  1800px;
-  color: #272822;
+  color: #21618c;
+  /*#154360*/
 }
 blockquote {
-  border-left: solid 5px #f8ac0080;
+  border-left: solid 5px #B74803;
+  background-color: #fae5d3;
   padding-left: 1em;
-  color: #272822;
   font-style: italic;
 }
 h1 {
-  color: white;
+  color: #FFF;
 }
-h2, h3 {
-  color: #f8ac00;
+h2 {
+  color: #CC6D3D;
+}
+h3 {
+    color: #21618c;
 }
 .slide-container h2 .section-number {
   display: inline-block;
-  background-color: #f8ac00;
-  color: white;
+  color: #FFF;
+  background-color:  #CC6D3D;
   padding: 0 .1em;
   margin-right: .3em;
 }
 strong {
-  background-color: #f8ac00;
+  background-color: #21618c;
   color: white;
 
 }
 </style>
 <hr />
-<!--# class="middle center" style = "background-color:#f8ac00;"-->
+<!--# class="middle center" style = "background-color:#21618c;"-->
 <h1 id="mais-pourquoi-encore-des-maths"><span class="section-number">1.</span> Mais pourquoi encore des maths ?</h1>
 <hr />
 <h2 id="math-matiques-et-agroalimentaire"><span class="section-number">1.1</span> Mathématiques et Agroalimentaire</h2>
 <ul>
 <li>outils pour :
 <ul>
-<li>représenter</li>
-<li>modéliser</li>
-<li>analyser</li>
-<li>optimiser</li>
-<li>estimer</li>
-<li>prédire</li>
+<li>représenter; pour appréhender des évolutions par exemple</li>
+<li>modéliser; réussir à quantifier des liens entre des informations</li>
+<li>analyser; exploiter la nature et le comportement  des modèles</li>
+<li>optimiser; identifier des valeurs qui mènent à de <strong>meilleurs</strong> résultats</li>
+<li>estimer; faire le lien entre hypothèse mathématique et observations</li>
+<li>prédire; se projeter grâce à la nature des liens identifiés</li>
 </ul>
 </li>
 </ul>
@@ -304,73 +309,121 @@ strong {
 <ul>
 <li>analyse
 <ul>
-<li>fonctions usuelles</li>
-<li>étude de fonctions</li>
-<li>équations différentielles</li>
-<li>intégrales</li>
+<li>fonctions usuelles -&gt; des repères pour comprendre et comparer des évolutions</li>
+<li>étude de fonctions -&gt; comprendre finement les comportements</li>
+<li>trigonométrie -&gt; angles et repérages</li>
+<li>intégrales -&gt; calculs d’aire et autres</li>
+<li>équations différentielles -&gt; retrouver une trajectoire à l’aide de la vitesse</li>
 </ul>
 </li>
 <li>probabilités
 <ul>
-<li>probabilité d’événements</li>
-<li>variables aléatoires réelles</li>
+<li>probabilité d’événements -&gt; représentation mathématique, généralisation de la proportion</li>
+<li>variables aléatoires réelles -&gt; représentation de mesures sur un phénomène aléatoire</li>
 </ul>
 </li>
 <li>algèbre matricielle
 <ul>
-<li>matrices et calculs</li>
-<li>notion d’inverse</li>
-<li>diagonalisation</li>
+<li>matrices et calculs -&gt; système d’équations sous forme de tableaux</li>
+<li>notion d’inverse -&gt; recherche et détection des systèmes possédant une unique solution</li>
+<li>diagonalisation -&gt; vue simplifiée des tableaux</li>
+</ul>
+</li>
+<li>statistiques descriptives
+<ul>
+<li>descripteurs univariés -&gt; représenter et quantifier les fluctuations d’une information observée plusieurs fois</li>
+<li>descripteurs bivariés -&gt; mise en avant d’un lien entre deux informations</li>
+<li>descripteurs multivariés -&gt; mise en avant d’un lien entre  de multiples informations</li>
 </ul>
 </li>
 </ul>
 <hr />
-<!--# class="middle center" style = "background-color:#f8ac00;"-->
-<h1 id="d-crassage-en-douceur"><span class="section-number">2.</span> Décrassage en douceur</h1>
-<hr />
-<h2 id="la-proportionnalit-est-la-cl"><span class="section-number">2.1</span> La proportionnalité est la clé</h2>
+<h2 id="principales-comp-tences-d-velopp-es"><span class="section-number">1.3</span> Principales compétences développées</h2>
 <ul>
-<li>obsession du collège et du lycée même si ce n’est pas évident de le concevoir
-<ul>
-<li><strong>fractions</strong> : sens, additions, soustractions, multiplications, division, pourcentages, etc.</li>
-<li><strong>théorème de Thalès</strong> : rapport proportionnel de longueurs de triangles rectangles</li>
-<li><strong>trigonométrie</strong> : conséquence des théorèmes de Pythagore et Thalès</li>
-<li><strong>fonctions affines et linéaires</strong> : pente caractérisée par le coefficient directeur, rapport de proportionnalité</li>
-<li><strong>tangente à une courbe</strong> : droite approchant le mieux possible la courbe d’une fonction autour d’un point donné</li>
-<li><strong>dérivabilité</strong> : fonction affine approchant le mieux possible la fonction autour d’une absicsse donnée, conséquence sur l’étude des variations</li>
-<li><strong>exponentielle</strong> : notion de gain proportionnel</li>
-<li><strong>linéarité des opérations</strong> : la dérivation, l’intégration, etc.</li>
-<li><strong>probabilités</strong> : prolongement de la notion de proportionnalité dans la mesure du possible</li>
-</ul>
-</li>
-<li>cadre simple inspirant les premières approches
-<ul>
-<li><strong>statistiques</strong> : modèle linéaire, ACP, etc.</li>
-<li><strong>optimisation</strong> : modèlisation linéaire</li>
-<li><strong>linéarisation des problèmes</strong> : pour se ramener aux cadres précédents du mieux possible</li>
-</ul>
-</li>
+<li>appréhender les enjeux d’une théorie mathématique : <strong>mettre du sens</strong> dans la structure d’un ensemble de résultats,</li>
+<li>organiser ses connaissances pour répondre à un problème : <strong>identifier</strong> quels éléments vus en cours apportent des éléments de réponse,</li>
+<li>communiquer clairement son raisonnement : <strong>relier</strong> la réprésentation formelle du problème à sa résolution avec une argumentation aboutie,</li>
+<li>savoir être sûr de son argumentation : sans passer par la validation de l’enseignant ou d’une correction.</li>
 </ul>
 <hr />
-<h2 id="proportions-et-fractions"><span class="section-number">2.2</span> Proportions et fractions</h2>
+<h2 id="evaluation"><span class="section-number">1.4</span> Evaluation</h2>
+<ul>
+<li>deux semestres : 1 contrôle continu par mois et un examen final</li>
+<li>les clés du succès
+<ul>
+<li>apprendre le cours : connaître l’énoncé et le <strong>sens</strong> des définitions et des résultats</li>
+<li>retenir les structures de chapitre à long terme : cerner les nuances entre résultats et la nécessité de nouvelles définitions</li>
+<li>être capable de remplacer une formule par une phrase, comme par exemple : “diviser par un nombre revient à multiplier par son inverse” correspondant à  la formule  $$\frac{a}{b}=a\times\frac{1}{b}$$</li>
+<li>retravailler les exercices en insistant sur ce qui a motivé tel ou tel argument et non uniquement un schéma de raisonnement</li>
+<li>travailler en groupe sans oublier de refaire un point en individuel</li>
+<li>relire ses notes chaque semaine pour suivre dès le début</li>
+<li>lister les points de blocage, en discuter en groupe, venir voir le professeur en fin de cours, au bureau 24.0.34, sur le forum Moodle</li>
+<li>ne pas attendre un mois avant de travailler …</li>
+<li>soigner ses copies, il y aura plus d’exigences qu’au lycée !</li>
+<li>ne pas douter à l’excès : “je n’y arrive pas, j’ai pourtant retravaillé tous les exercices …”</li>
+</ul>
+</li>
+</ul>
+<hr />
+<!--# class="middle center" style = "background-color:#21618c;"-->
+<h1 id="retour-aux-origines"><span class="section-number">2.</span> Retour aux origines</h1>
+<hr />
+<h2 id="message-important-les-r-gles-de-calcul-ne-changent-pas"><span class="section-number">2.1</span> Message important : les règles de calcul ne changent pas !</h2>
+<ul>
+<li>encore une fois, en cas de doute : revenir au sens de l’opération ! pour retrouver une règle de calcul, vérifier la cohérence à l’aide du sens des outils</li>
+<li>la logique de construction des nouvelles notions reposera cette année  sur une volonté de généralisation des principes vus au collège et au lycée
+tant que cela est possible, comme par exemple la <strong>fonction exponentielle</strong></li>
+<li>nous reprenons de la base car elle est <strong>indispensable</strong>, la prise de recul sur les principes du secondaire facilite clairement les choses, donc il ne faut pas attendre pour travailler que vous ayez suivi la spé en terminale ou pas !</li>
+<li>ainsi, on cherchera à construire la suite sur un bloc de connaissances maîtrisé au mieux !!!</li>
+</ul>
+<hr />
+<h2 id="le-principe-central-du-secondaire-la-proportion"><span class="section-number">2.2</span> Le principe central du secondaire : la proportion</h2>
+<ul>
+<li>abordée tout d’abord suite au travail sur la division, ce principe est la <strong>brique commune</strong> à la majeure partie du programme</li>
+<li>en géométrie :</li>
+</ul>
+<ul>
+<li>le Théorème de Thalès repose sur une conservation de rapports de longueurs entre deux triangles possédant les mêmes angles</li>
+<li>le nombre \(\pi\), est le rapport constant entre le périmètre de n’importe quel cercle et son diamètre</li>
+<li>la trigonométrie, abordée au collège à travers les rapports constants déduits du Théorème de Thalès</li>
+</ul>
+<ul>
+<li>en analyse :
+<ul>
+<li>droites et fonctions affines, le <strong>coefficient directeur</strong> est un gain proportionnel entre ordonnées et abscisses</li>
+<li>approximation locale des fonctions par des fonctions affines, le <strong>nombre dérivé</strong> est le coefficient directeur de la droite tangente</li>
+<li>variations déduites du lien avec le signe de ces coefficients</li>
+</ul>
+</li>
+<li>les nouveautés (ou pas) de l’année également reposent sur le principe de proportion
+<ul>
+<li>en analyse : les équations différentielles permettent de modéliser des évolutions de quantités reliées à leur valeur, par exemple “la croissance exponentielle”</li>
+<li>en probabilités : la probabilité d’un événement est la généralisation du principe de proportion</li>
+<li>en algèbre : extension du lien linéaire à des situations plus riches</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="proportions-et-fractions"><span class="section-number">2.3</span> Proportions et fractions</h2>
 <ul>
 <li>par expérience, beaucoup de confusions car oubli du <strong>sens</strong></li>
 <li>rappels sur le principe <strong>essentiel</strong></li>
 </ul>
-<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnPz4KPCEtLSBUaGlzIGZpbGUgd2FzIGdlbmVyYXRlZCBieSBkdmlzdmdtIDIuMTMuMSAtLT4KPHN2ZyB2ZXJzaW9uPScxLjEnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZycgeG1sbnM6eGxpbms9J2h0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsnIHdpZHRoPSc1MTEuNDM4MDNwdCcgaGVpZ2h0PScxMDEuNDgyMTM2cHQnIHZpZXdCb3g9Jy03Mi4wMDAwNjUgLTcyLjAwMDA2NSA1MTEuNDM4MDMgMTAxLjQ4MjEzNic+CjxkZWZzPgo8Zm9udCBpZD0nY21yMTcnIGhvcml6LWFkdi14PScwJz4KPGZvbnQtZmFjZSBmb250LWZhbWlseT0nY21yMTcnIHVuaXRzLXBlci1lbT0nMTAwMCcgYXNjZW50PSc3NDknIGRlc2NlbnQ9JzI1MCcvPgo8Z2x5cGggdW5pY29kZT0nKycgaG9yaXotYWR2LXg9JzcxOScgdmVydC1hZHYteT0nNzE5JyBnbHlwaC1uYW1lPSdwbHVzJyBkPSdNMzc3IDIzMkg2NDJDNjU2IDIzMiA2NzMgMjMyIDY3MyAyNDlDNjczIDI2NyA2NTcgMjY3IDY0MiAyNjdIMzc3VjUzMkMzNzcgNTQ2IDM3NyA1NjMgMzYwIDU2M0MzNDIgNTYzIDM0MiA1NDcgMzQyIDUzMlYyNjdINzdDNjMgMjY3IDQ2IDI2NyA0NiAyNTBDNDYgMjMyIDYyIDIzMiA3NyAyMzJIMzQyVi0zM0MzNDItNDcgMzQyLTY0IDM1OS02NEMzNzctNjQgMzc3LTQ4IDM3Ny0zM1YyMzJaJy8+CjxnbHlwaCB1bmljb2RlPScxJyBob3Jpei1hZHYteD0nNDU4JyB2ZXJ0LWFkdi15PSc0NTgnIGdseXBoLW5hbWU9J29uZScgZD0nTTI2NiA2MzlDMjY2IDY2MCAyNjUgNjYxIDI1MSA2NjFDMjEyIDYxNCAxNTMgNTk5IDk3IDU5N0M5NCA1OTcgODkgNTk3IDg4IDU5NVM4NyA1OTEgODcgNTcwQzExOCA1NzAgMTcwIDU3NiAyMTAgNjAwVjczQzIxMCAzOCAyMDggMjYgMTIyIDI2SDkyVjBDMTQwIDEgMTkwIDIgMjM4IDJTMzM2IDEgMzg0IDBWMjZIMzU0QzI2OCAyNiAyNjYgMzcgMjY2IDczVjYzOVonLz4KPGdseXBoIHVuaWNvZGU9JzInIGhvcml6LWFkdi14PSc0NTgnIHZlcnQtYWR2LXk9JzQ1OCcgZ2x5cGgtbmFtZT0ndHdvJyBkPSdNNDE3IDE1NUgzOTlDMzg5IDg0IDM4MSA3MiAzNzcgNjZDMzcyIDU4IDMwMCA1OCAyODYgNThIOTRDMTMwIDk3IDIwMCAxNjggMjg1IDI1MEMzNDYgMzA4IDQxNyAzNzYgNDE3IDQ3NUM0MTcgNTkzIDMyMyA2NjEgMjE4IDY2MUMxMDggNjYxIDQxIDU2NCA0MSA0NzRDNDEgNDM1IDcwIDQzMCA4MiA0MzBDOTIgNDMwIDEyMiA0MzYgMTIyIDQ3MUMxMjIgNTAyIDk2IDUxMSA4MiA1MTFDNzYgNTExIDcwIDUxMCA2NiA1MDhDODUgNTkzIDE0MyA2MzUgMjA0IDYzNUMyOTEgNjM1IDM0OCA1NjYgMzQ4IDQ3NUMzNDggMzg4IDI5NyAzMTMgMjQwIDI0OEw0MSAyM1YwSDM5M0w0MTcgMTU1WicvPgo8Z2x5cGggdW5pY29kZT0nMycgaG9yaXotYWR2LXg9JzQ1OCcgdmVydC1hZHYteT0nNDU4JyBnbHlwaC1uYW1lPSd0aHJlZScgZD0nTTIyMSAzNDBDMzEwIDM0MCAzNDkgMjYzIDM0OSAxNzRDMzQ5IDU0IDI4NSA4IDIyNyA4QzE3NCA4IDg4IDM0IDYxIDExMUM2NiAxMDkgNzEgMTA5IDc2IDEwOUMxMDAgMTA5IDExOCAxMjUgMTE4IDE1MUMxMTggMTgwIDk2IDE5MyA3NiAxOTNDNTkgMTkzIDMzIDE4NSAzMyAxNDhDMzMgNTYgMTIzLTE2IDIyOS0xNkMzNDAtMTYgNDI1IDcxIDQyNSAxNzNDNDI1IDI3MCAzNDUgMzQwIDI1MCAzNTFDMzI2IDM2NyAzOTkgNDM1IDM5OSA1MjZDMzk5IDYwNCAzMjAgNjYxIDIzMCA2NjFDMTM5IDY2MSA1OSA2MDUgNTkgNTI1QzU5IDQ5MCA4NSA0ODQgOTggNDg0QzExOSA0ODQgMTM3IDQ5NyAxMzcgNTIzUzExOSA1NjIgOTggNTYyQzk0IDU2MiA4OSA1NjIgODUgNTYwQzExNCA2MjYgMTkzIDYzOCAyMjggNjM4UzMyOSA2MjEgMzI5IDUyNUMzMjkgNDk3IDMyNSA0NDcgMjkxIDQwM0MyNjEgMzY0IDIyNyAzNjIgMTk0IDM1OUMxODkgMzU5IDE2NiAzNTcgMTYyIDM1N0MxNTUgMzU2IDE1MSAzNTUgMTUxIDM0OFMxNTIgMzQwIDE3MiAzNDBIMjIxWicvPgo8Z2x5cGggdW5pY29kZT0nNScgaG9yaXotYWR2LXg9JzQ1OCcgdmVydC1hZHYteT0nNDU4JyBnbHlwaC1uYW1lPSdmaXZlJyBkPSdNMTE0IDU4NUMxMjQgNTgxIDE2NSA1NjggMjA3IDU2OEMzMDAgNTY4IDM1MSA2MTggMzgwIDY0N0MzODAgNjU1IDM4MCA2NjAgMzc0IDY2MEMzNzMgNjYwIDM3MSA2NjAgMzYzIDY1NkMzMjggNjQxIDI4NyA2MjkgMjM3IDYyOUMyMDcgNjI5IDE2MiA2MzMgMTEzIDY1NUMxMDIgNjYwIDEwMCA2NjAgOTkgNjYwQzk0IDY2MCA5MyA2NTkgOTMgNjM5VjM0OUM5MyAzMzEgOTMgMzI2IDEwMyAzMjZDMTA4IDMyNiAxMTAgMzI4IDExNSAzMzVDMTQ3IDM4MCAxOTEgMzk5IDI0MSAzOTlDMjc2IDM5OSAzNTEgMzc3IDM1MSAyMDZDMzUxIDE3NCAzNTEgMTE2IDMyMSA3MEMyOTYgMjkgMjU3IDggMjE0IDhDMTQ4IDggODEgNTQgNjMgMTMxQzY3IDEzMCA3NSAxMjggNzkgMTI4QzkyIDEyOCAxMTcgMTM1IDExNyAxNjZDMTE3IDE5MyA5OCAyMDQgNzkgMjA0QzU2IDIwNCA0MSAxOTAgNDEgMTYyQzQxIDc1IDExMC0xNiAyMTYtMTZDMzE5LTE2IDQxNyA3MyA0MTcgMjAyQzQxNyAzMjIgMzM5IDQxNSAyNDIgNDE1QzE5MSA0MTUgMTQ4IDM5NiAxMTQgMzYwVjU4NVonLz4KPGdseXBoIHVuaWNvZGU9JzYnIGhvcml6LWFkdi14PSc0NTgnIHZlcnQtYWR2LXk9JzQ1OCcgZ2x5cGgtbmFtZT0nc2l4JyBkPSdNMTA2IDM0NUMxMDYgNTg0IDIxOCA2MzggMjgzIDYzOEMzMDQgNjM4IDM1NSA2MzQgMzc1IDU5NUMzNTkgNTk1IDMyOSA1OTUgMzI5IDU2MEMzMjkgNTMzIDM1MSA1MjQgMzY1IDUyNEMzNzQgNTI0IDQwMSA1MjggNDAxIDU2MkM0MDEgNjI1IDM1MSA2NjEgMjgyIDY2MUMxNjMgNjYxIDM4IDUzNyAzOCAzMTZDMzggNDQgMTUxLTE2IDIzMS0xNkMzMjgtMTYgNDIwIDcxIDQyMCAyMDVDNDIwIDMzMCAzMzkgNDIxIDIzNyA0MjFDMTc2IDQyMSAxMzEgMzgxIDEwNiAzMTFWMzQ1Wk0yMzEgOEMxMDggOCAxMDggMTkyIDEwOCAyMjlDMTA4IDMwMSAxNDIgNDA1IDIzNSA0MDVDMjUyIDQwNSAzMDEgNDA1IDMzNCAzMzZDMzUyIDI5NyAzNTIgMjU2IDM1MiAyMDZDMzUyIDE1MiAzNTIgMTEyIDMzMSA3MkMzMDkgMzEgMjc3IDggMjMxIDhaJy8+CjxnbHlwaCB1bmljb2RlPSc9JyBob3Jpei1hZHYteD0nNzE5JyB2ZXJ0LWFkdi15PSc3MTknIGdseXBoLW5hbWU9J2VxdWFsJyBkPSdNNjQzIDMyMUM2NTggMzIxIDY3MyAzMjEgNjczIDMzOEM2NzMgMzU2IDY1NiAzNTYgNjM5IDM1Nkg4MEM2MyAzNTYgNDYgMzU2IDQ2IDMzOEM0NiAzMjEgNjEgMzIxIDc2IDMyMUg2NDNaTTYzOSAxNDNDNjU2IDE0MyA2NzMgMTQzIDY3MyAxNjFDNjczIDE3OCA2NTggMTc4IDY0MyAxNzhINzZDNjEgMTc4IDQ2IDE3OCA0NiAxNjFDNDYgMTQzIDYzIDE0MyA4MCAxNDNINjM5WicvPgo8L2ZvbnQ+CjwvZGVmcz4KPHN0eWxlIHR5cGU9J3RleHQvY3NzJz4KPCFbQ0RBVEFbdGV4dC5mMCB7Zm9udC1mYW1pbHk6Y21yMTc7Zm9udC1zaXplOjIwLjY2MjUyMXB4fQp0ZXh0LmYxIHtmb250LWZhbWlseTpjbXIxNztmb250LXNpemU6MjQuNzg3MDUzcHh9Cl1dPgo8L3N0eWxlPgo8ZyBpZD0ncGFnZTEnPgo8cGF0aCBkPSdNLTE0LjcxMDktNDMuMDU0Njg2Qy0xNC43MTA5LTU4LjcxMDktMjcuMzk4NC03MS40MDIzLTQzLjA1NDY4Ni03MS40MDIzQy01OC43MTA5LTcxLjQwMjMtNzEuNDAyMy01OC43MTA5LTcxLjQwMjMtNDMuMDU0Njg2Qy03MS40MDIzLTI3LjM5ODQtNTguNzEwOS0xNC43MTA5LTQzLjA1NDY4Ni0xNC43MTA5Qy0yNy4zOTg0LTE0LjcxMDktMTQuNzEwOS0yNy4zOTg0LTE0LjcxMDktNDMuMDU0Njg2Wicgc3Ryb2tlPScjZmY4YzAwJyBmaWxsPSdub25lJyBzdHJva2Utd2lkdGg9JzEuMTk1NTMnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcvPgo8cGF0aCBkPSdNLTcxLjQwMjMtNDMuMDU0Njg2Qy03MS40MDIzLTI3LjM5ODQtNTguNzEwOS0xNC43MTA5LTQzLjA1NDY4Ni0xNC43MTA5Qy0yNy4zOTg0LTE0LjcxMDktMTQuNzEwOS0yNy4zOTg0LTE0LjcxMDktNDMuMDU0Njg2WicgZmlsbD0nI2ZmYmYwMCcvPgo8cGF0aCBkPSdNLTcxLjQwMjMtNDMuMDU0Njg2Qy03MS40MDIzLTI3LjM5ODQtNTguNzEwOS0xNC43MTA5LTQzLjA1NDY4Ni0xNC43MTA5Qy0yNy4zOTg0LTE0LjcxMDktMTQuNzEwOS0yNy4zOTg0LTE0LjcxMDktNDMuMDU0Njg2Wicgc3Ryb2tlPScjZmY4YzAwJyBmaWxsPSdub25lJyBzdHJva2Utd2lkdGg9JzEuMTk1NTMnIHN0cm9rZS1taXRlcmxpbWl0PScxMCcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJy8+Cjx0ZXh0IGNsYXNzPSdmMCcgeD0nLTQxLjg2MDI5NycgeT0nLTUyLjgxNTI2NCcgdHJhbnNmb3JtPSdtYXRyaXgoMSAwIDAgMSAtNS45MzM3IDYzLjkyODIpJz4xPC90ZXh0Pgo8cmVjdCB4PSctNDEuODYwMjk3JyB5PSctNDkuNzQ4MzA0JyBoZWlnaHQ9Jy45OTE0NDUnIHdpZHRoPSc5LjQ3NjE5OCcgdHJhbnNmb3JtPSdtYXRyaXgoMSAwIDAgMSAtNS45MzM3IDYzLjkyODIpJy8+Cjx0ZXh0IGNsYXNzPSdmMCcgeD0nLTQxLjg2MDI5NycgeT0nLTM0LjQ0NjEyOScgdHJhbnNmb3JtPSdtYXRyaXgoMSAwIDAgMSAtNS45MzM3IDYzLjkyODIpJz4yPC90ZXh0Pgo8dGV4dCBjbGFzcz0nZjEnIHg9Jy00My4wNTU4MTEnIHk9Jy00My4wNTU4MTEnIHRyYW5zZm9ybT0nbWF0cml4KDEgMCAwIDEgNDcuNzcyMTkgNjIuODg5NiknPis8L3RleHQ+CjxwYXRoIGQ9J003MC4zMzIyLTQzLjA1NDY4Nkw1Ni4xNTYzLTE4LjUwNzgnIHN0cm9rZT0nI2ZmOGMwMCcgZmlsbD0nbm9uZScgc3Ryb2tlLXdpZHRoPScxLjE5NTUzJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcvPgo8cGF0aCBkPSdNOTguNjc5Mi00My4wNTQ2ODZDOTguNjc5Mi01OC43MTA5IDg1Ljk4ODItNzEuNDAyMyA3MC4zMzIyLTcxLjQwMjNDNTQuNjc1OC03MS40MDIzIDQxLjk4NDQtNTguNzEwOSA0MS45ODQ0LTQzLjA1NDY4NkM0MS45ODQ0LTI3LjM5ODQgNTQuNjc1OC0xNC43MTA5IDcwLjMzMjItMTQuNzEwOUM4NS45ODgyLTE0LjcxMDkgOTguNjc5Mi0yNy4zOTg0IDk4LjY3OTItNDMuMDU0Njg2Wicgc3Ryb2tlPScjZmY4YzAwJyBmaWxsPSdub25lJyBzdHJva2Utd2lkdGg9JzEuMTk1NTMnIHN0cm9rZS1taXRlcmxpbWl0PScxMCcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJy8+CjxwYXRoIGQ9J003MC4zMzIyLTQzLjA1NDY4Nkg5OC42NzkyQzk4LjY3OTItNTguNzEwOSA4NS45ODgyLTcxLjQwMjMgNzAuMzMyMi03MS40MDIzQzY1LjM1NTItNzEuNDAyMyA2MC40NjUyLTcwLjA5MzcgNTYuMTU2My02Ny42MDU1WicgZmlsbD0nI2ZmYmYwMCcvPgo8cGF0aCBkPSdNNzAuMzMyMi00My4wNTQ2ODZIOTguNjc5MkM5OC42NzkyLTU4LjcxMDkgODUuOTg4Mi03MS40MDIzIDcwLjMzMjItNzEuNDAyM0M2NS4zNTUyLTcxLjQwMjMgNjAuNDY1Mi03MC4wOTM3IDU2LjE1NjMtNjcuNjA1NVonIHN0cm9rZT0nI2ZmOGMwMCcgZmlsbD0nbm9uZScgc3Ryb2tlLXdpZHRoPScxLjE5NTUzJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcvPgo8dGV4dCBjbGFzcz0nZjAnIHg9Jy00MS44NjAyOTcnIHk9Jy01Mi44MTUyNjQnIHRyYW5zZm9ybT0nbWF0cml4KDEgMCAwIDEgMTA3LjQ1MzYgNjMuOTI4MiknPjE8L3RleHQ+CjxyZWN0IHg9Jy00MS44NjAyOTcnIHk9Jy00OS43NDgzMDQnIGhlaWdodD0nLjk5MTQ0NScgd2lkdGg9JzkuNDc2MTk4JyB0cmFuc2Zvcm09J21hdHJpeCgxIDAgMCAxIDEwNy40NTM2IDYzLjkyODIpJy8+Cjx0ZXh0IGNsYXNzPSdmMCcgeD0nLTQxLjg2MDI5NycgeT0nLTM0LjQ0NjEyOScgdHJhbnNmb3JtPSdtYXRyaXgoMSAwIDAgMSAxMDcuNDUzNiA2My45MjgyKSc+MzwvdGV4dD4KPHRleHQgY2xhc3M9J2YxJyB4PSctNDMuMDU1ODExJyB5PSctNDMuMDU1ODExJyB0cmFuc2Zvcm09J21hdHJpeCgxIDAgMCAxIDE2MS4xNTk4IDYxLjEwMDUpJz49PC90ZXh0Pgo8cGF0aCBkPSdNMjEyLjA2NjItNDMuMDU0Njg2QzIxMi4wNjYyLTU4LjcxMDkgMTk5LjM3NTItNzEuNDAyMyAxODMuNzE5Mi03MS40MDIzQzE2OC4wNjIyLTcxLjQwMjMgMTU1LjM3MTItNTguNzEwOSAxNTUuMzcxMi00My4wNTQ2ODZDMTU1LjM3MTItMjcuMzk4NCAxNjguMDYyMi0xNC43MTA5IDE4My43MTkyLTE0LjcxMDlDMTk5LjM3NTItMTQuNzEwOSAyMTIuMDY2Mi0yNy4zOTg0IDIxMi4wNjYyLTQzLjA1NDY4NlonIGZpbGw9JyNmZmJmMDAnLz4KPHBhdGggZD0nTTIxMi4wNjYyLTQzLjA1NDY4NkMyMTIuMDY2Mi01OC43MTA5IDE5OS4zNzUyLTcxLjQwMjMgMTgzLjcxOTItNzEuNDAyM0MxNjguMDYyMi03MS40MDIzIDE1NS4zNzEyLTU4LjcxMDkgMTU1LjM3MTItNDMuMDU0Njg2QzE1NS4zNzEyLTI3LjM5ODQgMTY4LjA2MjItMTQuNzEwOSAxODMuNzE5Mi0xNC43MTA5QzE5OS4zNzUyLTE0LjcxMDkgMjEyLjA2NjItMjcuMzk4NCAyMTIuMDY2Mi00My4wNTQ2ODZaJyBzdHJva2U9JyNmZjhjMDAnIGZpbGw9J25vbmUnIHN0cm9rZS13aWR0aD0nMS4xOTU1Mycgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyBzdHJva2UtbGluZWNhcD0ncm91bmQnLz4KPHBhdGggZD0nTTE4My43MTkyLTQzLjA1NDY4NkgyMTIuMDY2MicgZmlsbD0nI2ZmYmYwMCcvPgo8cGF0aCBkPSdNMTgzLjcxOTItNDMuMDU0Njg2SDIxMi4wNjYyJyBzdHJva2U9JyNmZjhjMDAnIGZpbGw9J25vbmUnIHN0cm9rZS13aWR0aD0nMS4xOTU1Mycgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyBzdHJva2UtbGluZWNhcD0ncm91bmQnLz4KPHBhdGggZD0nTTE4My43MTkyLTQzLjA1NDY4NkwxOTcuODkwMi02Ny42MDU1JyBmaWxsPScjZmZiZjAwJy8+CjxwYXRoIGQ9J00xODMuNzE5Mi00My4wNTQ2ODZMMTk3Ljg5MDItNjcuNjA1NScgc3Ryb2tlPScjZmY4YzAwJyBmaWxsPSdub25lJyBzdHJva2Utd2lkdGg9JzEuMTk1NTMnIHN0cm9rZS1taXRlcmxpbWl0PScxMCcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJy8+CjxwYXRoIGQ9J00xODMuNzE5Mi00My4wNTQ2ODZMMTY5LjU0NzItNjcuNjA1NScgZmlsbD0nI2ZmYmYwMCcvPgo8cGF0aCBkPSdNMTgzLjcxOTItNDMuMDU0Njg2TDE2OS41NDcyLTY3LjYwNTUnIHN0cm9rZT0nI2ZmOGMwMCcgZmlsbD0nbm9uZScgc3Ryb2tlLXdpZHRoPScxLjE5NTUzJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcvPgo8cGF0aCBkPSdNMTgzLjcxOTItNDMuMDU0Njg2SDE1NS4zNzEyJyBmaWxsPScjZmZiZjAwJy8+CjxwYXRoIGQ9J00xODMuNzE5Mi00My4wNTQ2ODZIMTU1LjM3MTInIHN0cm9rZT0nI2ZmOGMwMCcgZmlsbD0nbm9uZScgc3Ryb2tlLXdpZHRoPScxLjE5NTUzJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcvPgo8cGF0aCBkPSdNMTgzLjcxOTItNDMuMDU0Njg2TDE2OS41NDcyLTE4LjUwNzgnIGZpbGw9JyNmZmJmMDAnLz4KPHBhdGggZD0nTTE4My43MTkyLTQzLjA1NDY4NkwxNjkuNTQ3Mi0xOC41MDc4JyBzdHJva2U9JyNmZjhjMDAnIGZpbGw9J25vbmUnIHN0cm9rZS13aWR0aD0nMS4xOTU1Mycgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyBzdHJva2UtbGluZWNhcD0ncm91bmQnLz4KPHBhdGggZD0nTTE4My43MTkyLTQzLjA1NDY4NkwxOTcuODkwMi0xOC41MDc4JyBmaWxsPScjZmZiZjAwJy8+CjxwYXRoIGQ9J00xODMuNzE5Mi00My4wNTQ2ODZMMTk3Ljg5MDItMTguNTA3OCcgc3Ryb2tlPScjZmY4YzAwJyBmaWxsPSdub25lJyBzdHJva2Utd2lkdGg9JzEuMTk1NTMnIHN0cm9rZS1taXRlcmxpbWl0PScxMCcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJy8+CjxwYXRoIGQ9J00xODMuNzE5Mi00My4wNTQ2ODZIMjEyLjA2NjInIGZpbGw9JyNmZmJmMDAnLz4KPHBhdGggZD0nTTE4My43MTkyLTQzLjA1NDY4NkgyMTIuMDY2Micgc3Ryb2tlPScjZmY4YzAwJyBmaWxsPSdub25lJyBzdHJva2Utd2lkdGg9JzEuMTk1NTMnIHN0cm9rZS1taXRlcmxpbWl0PScxMCcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJy8+CjxwYXRoIGQ9J00xNTUuMzcxMi00My4wNTQ2ODZDMTU1LjM3MTItMjcuMzk4NCAxNjguMDYyMi0xNC43MTA5IDE4My43MTkyLTE0LjcxMDlDMTk5LjM3NTItMTQuNzEwOSAyMTIuMDY2Mi0yNy4zOTg0IDIxMi4wNjYyLTQzLjA1NDY4NlonIGZpbGw9JyNmZmJmMDAnLz4KPHBhdGggZD0nTTE1NS4zNzEyLTQzLjA1NDY4NkMxNTUuMzcxMi0yNy4zOTg0IDE2OC4wNjIyLTE0LjcxMDkgMTgzLjcxOTItMTQuNzEwOUMxOTkuMzc1Mi0xNC43MTA5IDIxMi4wNjYyLTI3LjM5ODQgMjEyLjA2NjItNDMuMDU0Njg2Wicgc3Ryb2tlPScjZmY4YzAwJyBmaWxsPSdub25lJyBzdHJva2Utd2lkdGg9JzEuMTk1NTMnIHN0cm9rZS1taXRlcmxpbWl0PScxMCcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJy8+Cjx0ZXh0IGNsYXNzPSdmMCcgeD0nLTQxLjg2MDI5NycgeT0nLTUyLjgxNTI2NCcgdHJhbnNmb3JtPSdtYXRyaXgoMSAwIDAgMSAyMjAuODQwOCA2My45MjgyKSc+MzwvdGV4dD4KPHJlY3QgeD0nLTQxLjg2MDI5NycgeT0nLTQ5Ljc0ODMwNCcgaGVpZ2h0PScuOTkxNDQ1JyB3aWR0aD0nOS40NzYxOTgnIHRyYW5zZm9ybT0nbWF0cml4KDEgMCAwIDEgMjIwLjg0MDggNjMuOTI4MiknLz4KPHRleHQgY2xhc3M9J2YwJyB4PSctNDEuODYwMjk3JyB5PSctMzQuNDQ2MTI5JyB0cmFuc2Zvcm09J21hdHJpeCgxIDAgMCAxIDIyMC44NDA4IDYzLjkyODIpJz42PC90ZXh0Pgo8dGV4dCBjbGFzcz0nZjEnIHg9Jy00My4wNTU4MTEnIHk9Jy00My4wNTU4MTEnIHRyYW5zZm9ybT0nbWF0cml4KDEgMCAwIDEgMjc0LjU0NjggNjIuODg5NiknPis8L3RleHQ+CjxwYXRoIGQ9J00zMjUuNDUzMi00My4wNTQ2ODZDMzI1LjQ1MzItNTguNzEwOSAzMTIuNzYyMi03MS40MDIzIDI5Ny4xMDUyLTcxLjQwMjNDMjgxLjQ0OTItNzEuNDAyMyAyNjguNzU4Mi01OC43MTA5IDI2OC43NTgyLTQzLjA1NDY4NkMyNjguNzU4Mi0yNy4zOTg0IDI4MS40NDkyLTE0LjcxMDkgMjk3LjEwNTItMTQuNzEwOUMzMTIuNzYyMi0xNC43MTA5IDMyNS40NTMyLTI3LjM5ODQgMzI1LjQ1MzItNDMuMDU0Njg2Wicgc3Ryb2tlPScjMDAwJyBmaWxsPSdub25lJyBzdHJva2Utd2lkdGg9Jy4zOTg1JyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcvPgo8cGF0aCBkPSdNMjk3LjEwNTItNDMuMDU0Njg2SDMyNS40NTMyJyBmaWxsPScjZmZiZjAwJy8+CjxwYXRoIGQ9J00yOTcuMTA1Mi00My4wNTQ2ODZIMzI1LjQ1MzInIHN0cm9rZT0nI2ZmOGMwMCcgZmlsbD0nbm9uZScgc3Ryb2tlLXdpZHRoPScxLjE5NTUzJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcvPgo8cGF0aCBkPSdNMjk3LjEwNTItNDMuMDU0Njg2TDMxMS4yODEyLTY3LjYwNTUnIGZpbGw9JyNmZmJmMDAnLz4KPHBhdGggZD0nTTI5Ny4xMDUyLTQzLjA1NDY4NkwzMTEuMjgxMi02Ny42MDU1JyBzdHJva2U9JyNmZjhjMDAnIGZpbGw9J25vbmUnIHN0cm9rZS13aWR0aD0nMS4xOTU1Mycgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyBzdHJva2UtbGluZWNhcD0ncm91bmQnLz4KPHBhdGggZD0nTTI5Ny4xMDUyLTQzLjA1NDY4NkwyODIuOTMzMi02Ny42MDU1JyBmaWxsPScjZmZiZjAwJy8+CjxwYXRoIGQ9J00yOTcuMTA1Mi00My4wNTQ2ODZMMjgyLjkzMzItNjcuNjA1NScgc3Ryb2tlPScjZmY4YzAwJyBmaWxsPSdub25lJyBzdHJva2Utd2lkdGg9JzEuMTk1NTMnIHN0cm9rZS1taXRlcmxpbWl0PScxMCcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJy8+CjxwYXRoIGQ9J00yOTcuMTA1Mi00My4wNTQ2ODZIMjY4Ljc1ODInIGZpbGw9JyNmZmJmMDAnLz4KPHBhdGggZD0nTTI5Ny4xMDUyLTQzLjA1NDY4NkgyNjguNzU4Micgc3Ryb2tlPScjZmY4YzAwJyBmaWxsPSdub25lJyBzdHJva2Utd2lkdGg9JzEuMTk1NTMnIHN0cm9rZS1taXRlcmxpbWl0PScxMCcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJy8+CjxwYXRoIGQ9J00yOTcuMTA1Mi00My4wNTQ2ODZMMjgyLjkzMzItMTguNTA3OCcgZmlsbD0nI2ZmYmYwMCcvPgo8cGF0aCBkPSdNMjk3LjEwNTItNDMuMDU0Njg2TDI4Mi45MzMyLTE4LjUwNzgnIHN0cm9rZT0nI2ZmOGMwMCcgZmlsbD0nbm9uZScgc3Ryb2tlLXdpZHRoPScxLjE5NTUzJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcvPgo8cGF0aCBkPSdNMjk3LjEwNTItNDMuMDU0Njg2TDMxMS4yODEyLTE4LjUwNzgnIGZpbGw9JyNmZmJmMDAnLz4KPHBhdGggZD0nTTI5Ny4xMDUyLTQzLjA1NDY4NkwzMTEuMjgxMi0xOC41MDc4JyBzdHJva2U9JyNmZjhjMDAnIGZpbGw9J25vbmUnIHN0cm9rZS13aWR0aD0nMS4xOTU1Mycgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyBzdHJva2UtbGluZWNhcD0ncm91bmQnLz4KPHBhdGggZD0nTTI5Ny4xMDUyLTQzLjA1NDY4NkgzMjUuNDUzMicgZmlsbD0nI2ZmYmYwMCcvPgo8cGF0aCBkPSdNMjk3LjEwNTItNDMuMDU0Njg2SDMyNS40NTMyJyBzdHJva2U9JyNmZjhjMDAnIGZpbGw9J25vbmUnIHN0cm9rZS13aWR0aD0nMS4xOTU1Mycgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyBzdHJva2UtbGluZWNhcD0ncm91bmQnLz4KPHBhdGggZD0nTTI5Ny4xMDUyLTQzLjA1NDY4NkgzMjUuNDUzMkMzMjUuNDUzMi01OC43MTA5IDMxMi43NjIyLTcxLjQwMjMgMjk3LjEwNTItNzEuNDAyM0MyOTIuMTMzMi03MS40MDIzIDI4Ny4yNDIyLTcwLjA5MzcgMjgyLjkzMzItNjcuNjA1NVonIGZpbGw9JyNmZmJmMDAnLz4KPHBhdGggZD0nTTI5Ny4xMDUyLTQzLjA1NDY4NkgzMjUuNDUzMkMzMjUuNDUzMi01OC43MTA5IDMxMi43NjIyLTcxLjQwMjMgMjk3LjEwNTItNzEuNDAyM0MyOTIuMTMzMi03MS40MDIzIDI4Ny4yNDIyLTcwLjA5MzcgMjgyLjkzMzItNjcuNjA1NVonIHN0cm9rZT0nI2ZmOGMwMCcgZmlsbD0nbm9uZScgc3Ryb2tlLXdpZHRoPScxLjE5NTUzJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcvPgo8dGV4dCBjbGFzcz0nZjAnIHg9Jy00MS44NjAyOTcnIHk9Jy01Mi44MTUyNjQnIHRyYW5zZm9ybT0nbWF0cml4KDEgMCAwIDEgMzM0LjIyNzggNjMuOTI4MiknPjI8L3RleHQ+CjxyZWN0IHg9Jy00MS44NjAyOTcnIHk9Jy00OS43NDgzMDQnIGhlaWdodD0nLjk5MTQ0NScgd2lkdGg9JzkuNDc2MTk4JyB0cmFuc2Zvcm09J21hdHJpeCgxIDAgMCAxIDMzNC4yMjc4IDYzLjkyODIpJy8+Cjx0ZXh0IGNsYXNzPSdmMCcgeD0nLTQxLjg2MDI5NycgeT0nLTM0LjQ0NjEyOScgdHJhbnNmb3JtPSdtYXRyaXgoMSAwIDAgMSAzMzQuMjI3OCA2My45MjgyKSc+NjwvdGV4dD4KPHRleHQgY2xhc3M9J2YxJyB4PSctNDMuMDU1ODExJyB5PSctNDMuMDU1ODExJyB0cmFuc2Zvcm09J21hdHJpeCgxIDAgMCAxIDM4Ny45MzM4IDYxLjEwMDUpJz49PC90ZXh0Pgo8cGF0aCBkPSdNNDM4Ljg0MDItNDMuMDU0Njg2QzQzOC44NDAyLTU4LjcxMDkgNDI2LjE0ODItNzEuNDAyMyA0MTAuNDkyMi03MS40MDIzUzM4Mi4xNDgyLTU4LjcxMDkgMzgyLjE0ODItNDMuMDU0Njg2QzM4Mi4xNDgyLTI3LjM5ODQgMzk0LjgzNjItMTQuNzEwOSA0MTAuNDkyMi0xNC43MTA5UzQzOC44NDAyLTI3LjM5ODQgNDM4Ljg0MDItNDMuMDU0Njg2Wicgc3Ryb2tlPScjMDAwJyBmaWxsPSdub25lJyBzdHJva2Utd2lkdGg9Jy4zOTg1JyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcvPgo8cGF0aCBkPSdNNDEwLjQ5MjItNDMuMDU0Njg2SDM4Mi4xNDQyQzM4Mi4xNDQyLTI3LjM5ODQgMzk0LjgzNjItMTQuNzEwOSA0MTAuNDkyMi0xNC43MTA5UzQzOC44NDAyLTI3LjM5ODQgNDM4Ljg0MDItNDMuMDU0Njg2QzQzOC44NDAyLTU4LjcxMDkgNDI2LjE0ODItNzEuNDAyMyA0MTAuNDkyMi03MS40MDIzQzQwNS41MTkyLTcxLjQwMjMgNDAwLjYyOTItNzAuMDkzNyAzOTYuMzIwMi02Ny42MDU1WicgZmlsbD0nI2ZmYmYwMCcvPgo8cGF0aCBkPSdNNDEwLjQ5MjItNDMuMDU0Njg2SDM4Mi4xNDQyQzM4Mi4xNDQyLTI3LjM5ODQgMzk0LjgzNjItMTQuNzEwOSA0MTAuNDkyMi0xNC43MTA5UzQzOC44NDAyLTI3LjM5ODQgNDM4Ljg0MDItNDMuMDU0Njg2QzQzOC44NDAyLTU4LjcxMDkgNDI2LjE0ODItNzEuNDAyMyA0MTAuNDkyMi03MS40MDIzQzQwNS41MTkyLTcxLjQwMjMgNDAwLjYyOTItNzAuMDkzNyAzOTYuMzIwMi02Ny42MDU1Wicgc3Ryb2tlPScjZmY4YzAwJyBmaWxsPSdub25lJyBzdHJva2Utd2lkdGg9JzEuMTk1NTMnIHN0cm9rZS1taXRlcmxpbWl0PScxMCcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJy8+Cjx0ZXh0IGNsYXNzPSdmMCcgeD0nLTQxLjg2MDI5NycgeT0nLTUyLjgxNTI2NCcgdHJhbnNmb3JtPSdtYXRyaXgoMSAwIDAgMSA0NDcuNjE1OCA2My45MjgyKSc+NTwvdGV4dD4KPHJlY3QgeD0nLTQxLjg2MDI5NycgeT0nLTQ5Ljc0ODMwNCcgaGVpZ2h0PScuOTkxNDQ1JyB3aWR0aD0nOS40NzYxOTgnIHRyYW5zZm9ybT0nbWF0cml4KDEgMCAwIDEgNDQ3LjYxNTggNjMuOTI4MiknLz4KPHRleHQgY2xhc3M9J2YwJyB4PSctNDEuODYwMjk3JyB5PSctMzQuNDQ2MTI5JyB0cmFuc2Zvcm09J21hdHJpeCgxIDAgMCAxIDQ0Ny42MTU4IDYzLjkyODIpJz42PC90ZXh0Pgo8cGF0aCBkPSdNNDEwLjQ5MjItNDMuMDU0Njg2SDQzOC44NDAyJyBmaWxsPScjZmZiZjAwJy8+CjxwYXRoIGQ9J000MTAuNDkyMi00My4wNTQ2ODZINDM4Ljg0MDInIHN0cm9rZT0nI2ZmOGMwMCcgZmlsbD0nbm9uZScgc3Ryb2tlLXdpZHRoPScxLjE5NTUzJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcvPgo8cGF0aCBkPSdNNDEwLjQ5MjItNDMuMDU0Njg2TDQyNC42NjgyLTY3LjYwNTUnIGZpbGw9JyNmZmJmMDAnLz4KPHBhdGggZD0nTTQxMC40OTIyLTQzLjA1NDY4Nkw0MjQuNjY4Mi02Ny42MDU1JyBzdHJva2U9JyNmZjhjMDAnIGZpbGw9J25vbmUnIHN0cm9rZS13aWR0aD0nMS4xOTU1Mycgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyBzdHJva2UtbGluZWNhcD0ncm91bmQnLz4KPHBhdGggZD0nTTQxMC40OTIyLTQzLjA1NDY4NkwzOTYuMzIwMi02Ny42MDU1JyBmaWxsPScjZmZiZjAwJy8+CjxwYXRoIGQ9J000MTAuNDkyMi00My4wNTQ2ODZMMzk2LjMyMDItNjcuNjA1NScgc3Ryb2tlPScjZmY4YzAwJyBmaWxsPSdub25lJyBzdHJva2Utd2lkdGg9JzEuMTk1NTMnIHN0cm9rZS1taXRlcmxpbWl0PScxMCcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJy8+CjxwYXRoIGQ9J000MTAuNDkyMi00My4wNTQ2ODZIMzgyLjE0ODInIGZpbGw9JyNmZmJmMDAnLz4KPHBhdGggZD0nTTQxMC40OTIyLTQzLjA1NDY4NkgzODIuMTQ4Micgc3Ryb2tlPScjZmY4YzAwJyBmaWxsPSdub25lJyBzdHJva2Utd2lkdGg9JzEuMTk1NTMnIHN0cm9rZS1taXRlcmxpbWl0PScxMCcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJy8+CjxwYXRoIGQ9J000MTAuNDkyMi00My4wNTQ2ODZMMzk2LjMyMDItMTguNTA3OCcgZmlsbD0nI2ZmYmYwMCcvPgo8cGF0aCBkPSdNNDEwLjQ5MjItNDMuMDU0Njg2TDM5Ni4zMjAyLTE4LjUwNzgnIHN0cm9rZT0nI2ZmOGMwMCcgZmlsbD0nbm9uZScgc3Ryb2tlLXdpZHRoPScxLjE5NTUzJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcvPgo8cGF0aCBkPSdNNDEwLjQ5MjItNDMuMDU0Njg2TDQyNC42NjgyLTE4LjUwNzgnIGZpbGw9JyNmZmJmMDAnLz4KPHBhdGggZD0nTTQxMC40OTIyLTQzLjA1NDY4Nkw0MjQuNjY4Mi0xOC41MDc4JyBzdHJva2U9JyNmZjhjMDAnIGZpbGw9J25vbmUnIHN0cm9rZS13aWR0aD0nMS4xOTU1Mycgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyBzdHJva2UtbGluZWNhcD0ncm91bmQnLz4KPHBhdGggZD0nTTQxMC40OTIyLTQzLjA1NDY4Nkg0MzguODQwMicgZmlsbD0nI2ZmYmYwMCcvPgo8cGF0aCBkPSdNNDEwLjQ5MjItNDMuMDU0Njg2SDQzOC44NDAyJyBzdHJva2U9JyNmZjhjMDAnIGZpbGw9J25vbmUnIHN0cm9rZS13aWR0aD0nMS4xOTU1Mycgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyBzdHJva2UtbGluZWNhcD0ncm91bmQnLz4KPC9nPgo8L3N2Zz4=" width="600px" style="display: block; margin: auto;" />
+<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnPz4KPCEtLSBUaGlzIGZpbGUgd2FzIGdlbmVyYXRlZCBieSBkdmlzdmdtIDIuMTMuMSAtLT4KPHN2ZyB2ZXJzaW9uPScxLjEnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZycgeG1sbnM6eGxpbms9J2h0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsnIHdpZHRoPSc1MTEuNDM4MDNwdCcgaGVpZ2h0PScxMTAuNTEyNjQ2cHQnIHZpZXdCb3g9Jy03Mi4wMDAwNjUgLTcyLjAwMDA2NSA1MTEuNDM4MDMgMTEwLjUxMjY0Nic+CjxkZWZzPgo8Zm9udCBpZD0nY21yMTcnIGhvcml6LWFkdi14PScwJz4KPGZvbnQtZmFjZSBmb250LWZhbWlseT0nY21yMTcnIHVuaXRzLXBlci1lbT0nMTAwMCcgYXNjZW50PSc3NDknIGRlc2NlbnQ9JzI1MCcvPgo8Z2x5cGggdW5pY29kZT0nKycgaG9yaXotYWR2LXg9JzcxOScgdmVydC1hZHYteT0nNzE5JyBnbHlwaC1uYW1lPSdwbHVzJyBkPSdNMzc3IDIzMkg2NDJDNjU2IDIzMiA2NzMgMjMyIDY3MyAyNDlDNjczIDI2NyA2NTcgMjY3IDY0MiAyNjdIMzc3VjUzMkMzNzcgNTQ2IDM3NyA1NjMgMzYwIDU2M0MzNDIgNTYzIDM0MiA1NDcgMzQyIDUzMlYyNjdINzdDNjMgMjY3IDQ2IDI2NyA0NiAyNTBDNDYgMjMyIDYyIDIzMiA3NyAyMzJIMzQyVi0zM0MzNDItNDcgMzQyLTY0IDM1OS02NEMzNzctNjQgMzc3LTQ4IDM3Ny0zM1YyMzJaJy8+CjxnbHlwaCB1bmljb2RlPScxJyBob3Jpei1hZHYteD0nNDU4JyB2ZXJ0LWFkdi15PSc0NTgnIGdseXBoLW5hbWU9J29uZScgZD0nTTI2NiA2MzlDMjY2IDY2MCAyNjUgNjYxIDI1MSA2NjFDMjEyIDYxNCAxNTMgNTk5IDk3IDU5N0M5NCA1OTcgODkgNTk3IDg4IDU5NVM4NyA1OTEgODcgNTcwQzExOCA1NzAgMTcwIDU3NiAyMTAgNjAwVjczQzIxMCAzOCAyMDggMjYgMTIyIDI2SDkyVjBDMTQwIDEgMTkwIDIgMjM4IDJTMzM2IDEgMzg0IDBWMjZIMzU0QzI2OCAyNiAyNjYgMzcgMjY2IDczVjYzOVonLz4KPGdseXBoIHVuaWNvZGU9JzInIGhvcml6LWFkdi14PSc0NTgnIHZlcnQtYWR2LXk9JzQ1OCcgZ2x5cGgtbmFtZT0ndHdvJyBkPSdNNDE3IDE1NUgzOTlDMzg5IDg0IDM4MSA3MiAzNzcgNjZDMzcyIDU4IDMwMCA1OCAyODYgNThIOTRDMTMwIDk3IDIwMCAxNjggMjg1IDI1MEMzNDYgMzA4IDQxNyAzNzYgNDE3IDQ3NUM0MTcgNTkzIDMyMyA2NjEgMjE4IDY2MUMxMDggNjYxIDQxIDU2NCA0MSA0NzRDNDEgNDM1IDcwIDQzMCA4MiA0MzBDOTIgNDMwIDEyMiA0MzYgMTIyIDQ3MUMxMjIgNTAyIDk2IDUxMSA4MiA1MTFDNzYgNTExIDcwIDUxMCA2NiA1MDhDODUgNTkzIDE0MyA2MzUgMjA0IDYzNUMyOTEgNjM1IDM0OCA1NjYgMzQ4IDQ3NUMzNDggMzg4IDI5NyAzMTMgMjQwIDI0OEw0MSAyM1YwSDM5M0w0MTcgMTU1WicvPgo8Z2x5cGggdW5pY29kZT0nMycgaG9yaXotYWR2LXg9JzQ1OCcgdmVydC1hZHYteT0nNDU4JyBnbHlwaC1uYW1lPSd0aHJlZScgZD0nTTIyMSAzNDBDMzEwIDM0MCAzNDkgMjYzIDM0OSAxNzRDMzQ5IDU0IDI4NSA4IDIyNyA4QzE3NCA4IDg4IDM0IDYxIDExMUM2NiAxMDkgNzEgMTA5IDc2IDEwOUMxMDAgMTA5IDExOCAxMjUgMTE4IDE1MUMxMTggMTgwIDk2IDE5MyA3NiAxOTNDNTkgMTkzIDMzIDE4NSAzMyAxNDhDMzMgNTYgMTIzLTE2IDIyOS0xNkMzNDAtMTYgNDI1IDcxIDQyNSAxNzNDNDI1IDI3MCAzNDUgMzQwIDI1MCAzNTFDMzI2IDM2NyAzOTkgNDM1IDM5OSA1MjZDMzk5IDYwNCAzMjAgNjYxIDIzMCA2NjFDMTM5IDY2MSA1OSA2MDUgNTkgNTI1QzU5IDQ5MCA4NSA0ODQgOTggNDg0QzExOSA0ODQgMTM3IDQ5NyAxMzcgNTIzUzExOSA1NjIgOTggNTYyQzk0IDU2MiA4OSA1NjIgODUgNTYwQzExNCA2MjYgMTkzIDYzOCAyMjggNjM4UzMyOSA2MjEgMzI5IDUyNUMzMjkgNDk3IDMyNSA0NDcgMjkxIDQwM0MyNjEgMzY0IDIyNyAzNjIgMTk0IDM1OUMxODkgMzU5IDE2NiAzNTcgMTYyIDM1N0MxNTUgMzU2IDE1MSAzNTUgMTUxIDM0OFMxNTIgMzQwIDE3MiAzNDBIMjIxWicvPgo8Z2x5cGggdW5pY29kZT0nNScgaG9yaXotYWR2LXg9JzQ1OCcgdmVydC1hZHYteT0nNDU4JyBnbHlwaC1uYW1lPSdmaXZlJyBkPSdNMTE0IDU4NUMxMjQgNTgxIDE2NSA1NjggMjA3IDU2OEMzMDAgNTY4IDM1MSA2MTggMzgwIDY0N0MzODAgNjU1IDM4MCA2NjAgMzc0IDY2MEMzNzMgNjYwIDM3MSA2NjAgMzYzIDY1NkMzMjggNjQxIDI4NyA2MjkgMjM3IDYyOUMyMDcgNjI5IDE2MiA2MzMgMTEzIDY1NUMxMDIgNjYwIDEwMCA2NjAgOTkgNjYwQzk0IDY2MCA5MyA2NTkgOTMgNjM5VjM0OUM5MyAzMzEgOTMgMzI2IDEwMyAzMjZDMTA4IDMyNiAxMTAgMzI4IDExNSAzMzVDMTQ3IDM4MCAxOTEgMzk5IDI0MSAzOTlDMjc2IDM5OSAzNTEgMzc3IDM1MSAyMDZDMzUxIDE3NCAzNTEgMTE2IDMyMSA3MEMyOTYgMjkgMjU3IDggMjE0IDhDMTQ4IDggODEgNTQgNjMgMTMxQzY3IDEzMCA3NSAxMjggNzkgMTI4QzkyIDEyOCAxMTcgMTM1IDExNyAxNjZDMTE3IDE5MyA5OCAyMDQgNzkgMjA0QzU2IDIwNCA0MSAxOTAgNDEgMTYyQzQxIDc1IDExMC0xNiAyMTYtMTZDMzE5LTE2IDQxNyA3MyA0MTcgMjAyQzQxNyAzMjIgMzM5IDQxNSAyNDIgNDE1QzE5MSA0MTUgMTQ4IDM5NiAxMTQgMzYwVjU4NVonLz4KPGdseXBoIHVuaWNvZGU9JzYnIGhvcml6LWFkdi14PSc0NTgnIHZlcnQtYWR2LXk9JzQ1OCcgZ2x5cGgtbmFtZT0nc2l4JyBkPSdNMTA2IDM0NUMxMDYgNTg0IDIxOCA2MzggMjgzIDYzOEMzMDQgNjM4IDM1NSA2MzQgMzc1IDU5NUMzNTkgNTk1IDMyOSA1OTUgMzI5IDU2MEMzMjkgNTMzIDM1MSA1MjQgMzY1IDUyNEMzNzQgNTI0IDQwMSA1MjggNDAxIDU2MkM0MDEgNjI1IDM1MSA2NjEgMjgyIDY2MUMxNjMgNjYxIDM4IDUzNyAzOCAzMTZDMzggNDQgMTUxLTE2IDIzMS0xNkMzMjgtMTYgNDIwIDcxIDQyMCAyMDVDNDIwIDMzMCAzMzkgNDIxIDIzNyA0MjFDMTc2IDQyMSAxMzEgMzgxIDEwNiAzMTFWMzQ1Wk0yMzEgOEMxMDggOCAxMDggMTkyIDEwOCAyMjlDMTA4IDMwMSAxNDIgNDA1IDIzNSA0MDVDMjUyIDQwNSAzMDEgNDA1IDMzNCAzMzZDMzUyIDI5NyAzNTIgMjU2IDM1MiAyMDZDMzUyIDE1MiAzNTIgMTEyIDMzMSA3MkMzMDkgMzEgMjc3IDggMjMxIDhaJy8+CjxnbHlwaCB1bmljb2RlPSc9JyBob3Jpei1hZHYteD0nNzE5JyB2ZXJ0LWFkdi15PSc3MTknIGdseXBoLW5hbWU9J2VxdWFsJyBkPSdNNjQzIDMyMUM2NTggMzIxIDY3MyAzMjEgNjczIDMzOEM2NzMgMzU2IDY1NiAzNTYgNjM5IDM1Nkg4MEM2MyAzNTYgNDYgMzU2IDQ2IDMzOEM0NiAzMjEgNjEgMzIxIDc2IDMyMUg2NDNaTTYzOSAxNDNDNjU2IDE0MyA2NzMgMTQzIDY3MyAxNjFDNjczIDE3OCA2NTggMTc4IDY0MyAxNzhINzZDNjEgMTc4IDQ2IDE3OCA0NiAxNjFDNDYgMTQzIDYzIDE0MyA4MCAxNDNINjM5WicvPgo8L2ZvbnQ+CjwvZGVmcz4KPHN0eWxlIHR5cGU9J3RleHQvY3NzJz4KPCFbQ0RBVEFbdGV4dC5mMCB7Zm9udC1mYW1pbHk6Y21yMTc7Zm9udC1zaXplOjI0Ljc4NzA1M3B4fQpdXT4KPC9zdHlsZT4KPGcgaWQ9J3BhZ2UxJz4KPHBhdGggZD0nTS0xNC43MTA5LTQzLjA1NDY4NkMtMTQuNzEwOS01OC43MTA5LTI3LjM5ODQtNzEuNDAyMy00My4wNTQ2ODYtNzEuNDAyM0MtNTguNzEwOS03MS40MDIzLTcxLjQwMjMtNTguNzEwOS03MS40MDIzLTQzLjA1NDY4NkMtNzEuNDAyMy0yNy4zOTg0LTU4LjcxMDktMTQuNzEwOS00My4wNTQ2ODYtMTQuNzEwOUMtMjcuMzk4NC0xNC43MTA5LTE0LjcxMDktMjcuMzk4NC0xNC43MTA5LTQzLjA1NDY4NlonIHN0cm9rZT0nI2U1OTg2NicgZmlsbD0nbm9uZScgc3Ryb2tlLXdpZHRoPScxLjE5NTUzJyBzdHJva2UtbGluZWNhcD0ncm91bmQnLz4KPHBhdGggZD0nTS03MS40MDIzLTQzLjA1NDY4NkMtNzEuNDAyMy0yNy4zOTg0LTU4LjcxMDktMTQuNzEwOS00My4wNTQ2ODYtMTQuNzEwOUMtMjcuMzk4NC0xNC43MTA5LTE0LjcxMDktMjcuMzk4NC0xNC43MTA5LTQzLjA1NDY4NlonIGZpbGw9JyNkMzU0MDAnLz4KPHBhdGggZD0nTS03MS40MDIzLTQzLjA1NDY4NkMtNzEuNDAyMy0yNy4zOTg0LTU4LjcxMDktMTQuNzEwOS00My4wNTQ2ODYtMTQuNzEwOUMtMjcuMzk4NC0xNC43MTA5LTE0LjcxMDktMjcuMzk4NC0xNC43MTA5LTQzLjA1NDY4NlonIHN0cm9rZT0nI2U1OTg2NicgZmlsbD0nbm9uZScgc3Ryb2tlLXdpZHRoPScxLjE5NTUzJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcvPgo8dGV4dCBjbGFzcz0nZjAnIHg9Jy00MS44NjAyOTcnIHk9Jy01OS44MjQ0NDEnIHRyYW5zZm9ybT0nbWF0cml4KDEgMCAwIDEgLTYuODc5NSA2NC41NjU3KSc+PHRzcGFuIGZpbGw9JyMyMTYxOGMnPjE8L3RzcGFuPjwvdGV4dD4KPHJlY3QgeD0nLTQxLjg2MDI5NycgeT0nLTQ5Ljc0ODMwNCcgaGVpZ2h0PScuOTkxNDQ1JyB3aWR0aD0nMTEuMzY3Nzg2JyB0cmFuc2Zvcm09J21hdHJpeCgxIDAgMCAxIC02Ljg3OTUgNjQuNTY1NyknIGZpbGw9JyMyMTYxOGMnLz4KPHRleHQgY2xhc3M9J2YwJyB4PSctNDEuODYwMjk3JyB5PSctMjYuMDUzMTE5JyB0cmFuc2Zvcm09J21hdHJpeCgxIDAgMCAxIC02Ljg3OTUgNjQuNTY1NyknPjx0c3BhbiBmaWxsPScjMjE2MThjJz4yPC90c3Bhbj48L3RleHQ+Cjx0ZXh0IGNsYXNzPSdmMCcgeD0nLTQzLjA1NTgxMScgeT0nLTQzLjA1NTgxMScgdHJhbnNmb3JtPSdtYXRyaXgoMSAwIDAgMSA0Ny43NzIxOSA2Mi44ODk2KSc+PHRzcGFuIGZpbGw9JyMyMTYxOGMnPis8L3RzcGFuPjwvdGV4dD4KPHBhdGggZD0nTTcwLjMzMjItNDMuMDU0Njg2TDU2LjE1NjMtMTguNTA3OCcgc3Ryb2tlPScjZTU5ODY2JyBmaWxsPSdub25lJyBzdHJva2Utd2lkdGg9JzEuMTk1NTMnIHN0cm9rZS1taXRlcmxpbWl0PScxMCcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJy8+CjxwYXRoIGQ9J005OC42NzkyLTQzLjA1NDY4NkM5OC42NzkyLTU4LjcxMDkgODUuOTg4Mi03MS40MDIzIDcwLjMzMjItNzEuNDAyM0M1NC42NzU4LTcxLjQwMjMgNDEuOTg0NC01OC43MTA5IDQxLjk4NDQtNDMuMDU0Njg2QzQxLjk4NDQtMjcuMzk4NCA1NC42NzU4LTE0LjcxMDkgNzAuMzMyMi0xNC43MTA5Qzg1Ljk4ODItMTQuNzEwOSA5OC42NzkyLTI3LjM5ODQgOTguNjc5Mi00My4wNTQ2ODZaJyBzdHJva2U9JyNlNTk4NjYnIGZpbGw9J25vbmUnIHN0cm9rZS13aWR0aD0nMS4xOTU1Mycgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyBzdHJva2UtbGluZWNhcD0ncm91bmQnLz4KPHBhdGggZD0nTTcwLjMzMjItNDMuMDU0Njg2SDk4LjY3OTJDOTguNjc5Mi01OC43MTA5IDg1Ljk4ODItNzEuNDAyMyA3MC4zMzIyLTcxLjQwMjNDNjUuMzU1Mi03MS40MDIzIDYwLjQ2NTItNzAuMDkzNyA1Ni4xNTYzLTY3LjYwNTVaJyBmaWxsPScjZDM1NDAwJy8+CjxwYXRoIGQ9J003MC4zMzIyLTQzLjA1NDY4Nkg5OC42NzkyQzk4LjY3OTItNTguNzEwOSA4NS45ODgyLTcxLjQwMjMgNzAuMzMyMi03MS40MDIzQzY1LjM1NTItNzEuNDAyMyA2MC40NjUyLTcwLjA5MzcgNTYuMTU2My02Ny42MDU1Wicgc3Ryb2tlPScjZTU5ODY2JyBmaWxsPSdub25lJyBzdHJva2Utd2lkdGg9JzEuMTk1NTMnIHN0cm9rZS1taXRlcmxpbWl0PScxMCcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJy8+Cjx0ZXh0IGNsYXNzPSdmMCcgeD0nLTQxLjg2MDI5NycgeT0nLTU5LjgyNDQ0MScgdHJhbnNmb3JtPSdtYXRyaXgoMSAwIDAgMSAxMDYuNTA3NyA2NC41NjU3KSc+PHRzcGFuIGZpbGw9JyMyMTYxOGMnPjE8L3RzcGFuPjwvdGV4dD4KPHJlY3QgeD0nLTQxLjg2MDI5NycgeT0nLTQ5Ljc0ODMwNCcgaGVpZ2h0PScuOTkxNDQ1JyB3aWR0aD0nMTEuMzY3Nzg2JyB0cmFuc2Zvcm09J21hdHJpeCgxIDAgMCAxIDEwNi41MDc3IDY0LjU2NTcpJyBmaWxsPScjMjE2MThjJy8+Cjx0ZXh0IGNsYXNzPSdmMCcgeD0nLTQxLjg2MDI5NycgeT0nLTI2LjA1MzExOScgdHJhbnNmb3JtPSdtYXRyaXgoMSAwIDAgMSAxMDYuNTA3NyA2NC41NjU3KSc+PHRzcGFuIGZpbGw9JyMyMTYxOGMnPjM8L3RzcGFuPjwvdGV4dD4KPHRleHQgY2xhc3M9J2YwJyB4PSctNDMuMDU1ODExJyB5PSctNDMuMDU1ODExJyB0cmFuc2Zvcm09J21hdHJpeCgxIDAgMCAxIDE2MS4xNTk4IDYxLjEwMDUpJz48dHNwYW4gZmlsbD0nIzIxNjE4Yyc+PTwvdHNwYW4+PC90ZXh0Pgo8cGF0aCBkPSdNMjEyLjA2NjItNDMuMDU0Njg2QzIxMi4wNjYyLTU4LjcxMDkgMTk5LjM3NTItNzEuNDAyMyAxODMuNzE5Mi03MS40MDIzQzE2OC4wNjIyLTcxLjQwMjMgMTU1LjM3MTItNTguNzEwOSAxNTUuMzcxMi00My4wNTQ2ODZDMTU1LjM3MTItMjcuMzk4NCAxNjguMDYyMi0xNC43MTA5IDE4My43MTkyLTE0LjcxMDlDMTk5LjM3NTItMTQuNzEwOSAyMTIuMDY2Mi0yNy4zOTg0IDIxMi4wNjYyLTQzLjA1NDY4NlonIGZpbGw9JyNmZmYnLz4KPHBhdGggZD0nTTIxMi4wNjYyLTQzLjA1NDY4NkMyMTIuMDY2Mi01OC43MTA5IDE5OS4zNzUyLTcxLjQwMjMgMTgzLjcxOTItNzEuNDAyM0MxNjguMDYyMi03MS40MDIzIDE1NS4zNzEyLTU4LjcxMDkgMTU1LjM3MTItNDMuMDU0Njg2QzE1NS4zNzEyLTI3LjM5ODQgMTY4LjA2MjItMTQuNzEwOSAxODMuNzE5Mi0xNC43MTA5QzE5OS4zNzUyLTE0LjcxMDkgMjEyLjA2NjItMjcuMzk4NCAyMTIuMDY2Mi00My4wNTQ2ODZaJyBzdHJva2U9JyNlNTk4NjYnIGZpbGw9J25vbmUnIHN0cm9rZS13aWR0aD0nMS4xOTU1Mycgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyBzdHJva2UtbGluZWNhcD0ncm91bmQnLz4KPHBhdGggZD0nTTE1NS4zNzEyLTQzLjA1NDY4NkMxNTUuMzcxMi0yNy4zOTg0IDE2OC4wNjIyLTE0LjcxMDkgMTgzLjcxOTItMTQuNzEwOUMxOTkuMzc1Mi0xNC43MTA5IDIxMi4wNjYyLTI3LjM5ODQgMjEyLjA2NjItNDMuMDU0Njg2WicgZmlsbD0nI2QzNTQwMCcvPgo8cGF0aCBkPSdNMTU1LjM3MTItNDMuMDU0Njg2QzE1NS4zNzEyLTI3LjM5ODQgMTY4LjA2MjItMTQuNzEwOSAxODMuNzE5Mi0xNC43MTA5QzE5OS4zNzUyLTE0LjcxMDkgMjEyLjA2NjItMjcuMzk4NCAyMTIuMDY2Mi00My4wNTQ2ODZaJyBzdHJva2U9JyNlNTk4NjYnIGZpbGw9J25vbmUnIHN0cm9rZS13aWR0aD0nMS4xOTU1Mycgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyBzdHJva2UtbGluZWNhcD0ncm91bmQnLz4KPHBhdGggZD0nTTE4My43MTkyLTQzLjA1NDY4NkgyMTIuMDY2MicgZmlsbD0nI2QzNTQwMCcvPgo8cGF0aCBkPSdNMTgzLjcxOTItNDMuMDU0Njg2SDIxMi4wNjYyJyBzdHJva2U9JyNlNTk4NjYnIGZpbGw9J25vbmUnIHN0cm9rZS13aWR0aD0nMS4xOTU1Mycgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyBzdHJva2UtbGluZWNhcD0ncm91bmQnLz4KPHBhdGggZD0nTTE4My43MTkyLTQzLjA1NDY4NkwxOTcuODkwMi02Ny42MDU1JyBmaWxsPScjZDM1NDAwJy8+CjxwYXRoIGQ9J00xODMuNzE5Mi00My4wNTQ2ODZMMTk3Ljg5MDItNjcuNjA1NScgc3Ryb2tlPScjZTU5ODY2JyBmaWxsPSdub25lJyBzdHJva2Utd2lkdGg9JzEuMTk1NTMnIHN0cm9rZS1taXRlcmxpbWl0PScxMCcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJy8+CjxwYXRoIGQ9J00xODMuNzE5Mi00My4wNTQ2ODZMMTY5LjU0NzItNjcuNjA1NScgZmlsbD0nI2QzNTQwMCcvPgo8cGF0aCBkPSdNMTgzLjcxOTItNDMuMDU0Njg2TDE2OS41NDcyLTY3LjYwNTUnIHN0cm9rZT0nI2U1OTg2NicgZmlsbD0nbm9uZScgc3Ryb2tlLXdpZHRoPScxLjE5NTUzJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcvPgo8cGF0aCBkPSdNMTgzLjcxOTItNDMuMDU0Njg2SDE1NS4zNzEyJyBmaWxsPScjZDM1NDAwJy8+CjxwYXRoIGQ9J00xODMuNzE5Mi00My4wNTQ2ODZIMTU1LjM3MTInIHN0cm9rZT0nI2U1OTg2NicgZmlsbD0nbm9uZScgc3Ryb2tlLXdpZHRoPScxLjE5NTUzJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcvPgo8cGF0aCBkPSdNMTgzLjcxOTItNDMuMDU0Njg2TDE2OS41NDcyLTE4LjUwNzgnIGZpbGw9JyNkMzU0MDAnLz4KPHBhdGggZD0nTTE4My43MTkyLTQzLjA1NDY4NkwxNjkuNTQ3Mi0xOC41MDc4JyBzdHJva2U9JyNlNTk4NjYnIGZpbGw9J25vbmUnIHN0cm9rZS13aWR0aD0nMS4xOTU1Mycgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyBzdHJva2UtbGluZWNhcD0ncm91bmQnLz4KPHBhdGggZD0nTTE4My43MTkyLTQzLjA1NDY4NkwxOTcuODkwMi0xOC41MDc4JyBmaWxsPScjZDM1NDAwJy8+CjxwYXRoIGQ9J00xODMuNzE5Mi00My4wNTQ2ODZMMTk3Ljg5MDItMTguNTA3OCcgc3Ryb2tlPScjZTU5ODY2JyBmaWxsPSdub25lJyBzdHJva2Utd2lkdGg9JzEuMTk1NTMnIHN0cm9rZS1taXRlcmxpbWl0PScxMCcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJy8+CjxwYXRoIGQ9J00xODMuNzE5Mi00My4wNTQ2ODZIMjEyLjA2NjInIGZpbGw9JyNkMzU0MDAnLz4KPHBhdGggZD0nTTE4My43MTkyLTQzLjA1NDY4NkgyMTIuMDY2Micgc3Ryb2tlPScjZTU5ODY2JyBmaWxsPSdub25lJyBzdHJva2Utd2lkdGg9JzEuMTk1NTMnIHN0cm9rZS1taXRlcmxpbWl0PScxMCcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJy8+Cjx0ZXh0IGNsYXNzPSdmMCcgeD0nLTQxLjg2MDI5NycgeT0nLTU5LjgyNDQ0MScgdHJhbnNmb3JtPSdtYXRyaXgoMSAwIDAgMSAyMTkuODk0OCA2NC41NjU3KSc+PHRzcGFuIGZpbGw9JyMyMTYxOGMnPjM8L3RzcGFuPjwvdGV4dD4KPHJlY3QgeD0nLTQxLjg2MDI5NycgeT0nLTQ5Ljc0ODMwNCcgaGVpZ2h0PScuOTkxNDQ1JyB3aWR0aD0nMTEuMzY3Nzg2JyB0cmFuc2Zvcm09J21hdHJpeCgxIDAgMCAxIDIxOS44OTQ4IDY0LjU2NTcpJyBmaWxsPScjMjE2MThjJy8+Cjx0ZXh0IGNsYXNzPSdmMCcgeD0nLTQxLjg2MDI5NycgeT0nLTI2LjA1MzExOScgdHJhbnNmb3JtPSdtYXRyaXgoMSAwIDAgMSAyMTkuODk0OCA2NC41NjU3KSc+PHRzcGFuIGZpbGw9JyMyMTYxOGMnPjY8L3RzcGFuPjwvdGV4dD4KPHRleHQgY2xhc3M9J2YwJyB4PSctNDMuMDU1ODExJyB5PSctNDMuMDU1ODExJyB0cmFuc2Zvcm09J21hdHJpeCgxIDAgMCAxIDI3NC41NDY4IDYyLjg4OTYpJz48dHNwYW4gZmlsbD0nIzIxNjE4Yyc+KzwvdHNwYW4+PC90ZXh0Pgo8cGF0aCBkPSdNMzI1LjQ1MzItNDMuMDU0Njg2QzMyNS40NTMyLTU4LjcxMDkgMzEyLjc2MjItNzEuNDAyMyAyOTcuMTA1Mi03MS40MDIzQzI4MS40NDkyLTcxLjQwMjMgMjY4Ljc1ODItNTguNzEwOSAyNjguNzU4Mi00My4wNTQ2ODZDMjY4Ljc1ODItMjcuMzk4NCAyODEuNDQ5Mi0xNC43MTA5IDI5Ny4xMDUyLTE0LjcxMDlDMzEyLjc2MjItMTQuNzEwOSAzMjUuNDUzMi0yNy4zOTg0IDMyNS40NTMyLTQzLjA1NDY4NlonIHN0cm9rZT0nIzAwMCcgZmlsbD0nbm9uZScgc3Ryb2tlLXdpZHRoPScuMzk4NScgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyBzdHJva2UtbGluZWNhcD0ncm91bmQnLz4KPHBhdGggZD0nTTI5Ny4xMDUyLTQzLjA1NDY4NkgzMjUuNDUzMkMzMjUuNDUzMi01OC43MTA5IDMxMi43NjIyLTcxLjQwMjMgMjk3LjEwNTItNzEuNDAyM0MyOTIuMTMzMi03MS40MDIzIDI4Ny4yNDIyLTcwLjA5MzcgMjgyLjkzMzItNjcuNjA1NVonIGZpbGw9JyNkMzU0MDAnLz4KPHBhdGggZD0nTTI5Ny4xMDUyLTQzLjA1NDY4NkgzMjUuNDUzMkMzMjUuNDUzMi01OC43MTA5IDMxMi43NjIyLTcxLjQwMjMgMjk3LjEwNTItNzEuNDAyM0MyOTIuMTMzMi03MS40MDIzIDI4Ny4yNDIyLTcwLjA5MzcgMjgyLjkzMzItNjcuNjA1NVonIHN0cm9rZT0nI2U1OTg2NicgZmlsbD0nbm9uZScgc3Ryb2tlLXdpZHRoPScxLjE5NTUzJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcvPgo8cGF0aCBkPSdNMjk3LjEwNTItNDMuMDU0Njg2SDMyNS40NTMyJyBmaWxsPScjZDM1NDAwJy8+CjxwYXRoIGQ9J00yOTcuMTA1Mi00My4wNTQ2ODZIMzI1LjQ1MzInIHN0cm9rZT0nI2U1OTg2NicgZmlsbD0nbm9uZScgc3Ryb2tlLXdpZHRoPScxLjE5NTUzJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcvPgo8cGF0aCBkPSdNMjk3LjEwNTItNDMuMDU0Njg2TDMxMS4yODEyLTY3LjYwNTUnIGZpbGw9JyNkMzU0MDAnLz4KPHBhdGggZD0nTTI5Ny4xMDUyLTQzLjA1NDY4NkwzMTEuMjgxMi02Ny42MDU1JyBzdHJva2U9JyNlNTk4NjYnIGZpbGw9J25vbmUnIHN0cm9rZS13aWR0aD0nMS4xOTU1Mycgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyBzdHJva2UtbGluZWNhcD0ncm91bmQnLz4KPHBhdGggZD0nTTI5Ny4xMDUyLTQzLjA1NDY4NkwyODIuOTMzMi02Ny42MDU1JyBmaWxsPScjZDM1NDAwJy8+CjxwYXRoIGQ9J00yOTcuMTA1Mi00My4wNTQ2ODZMMjgyLjkzMzItNjcuNjA1NScgc3Ryb2tlPScjZTU5ODY2JyBmaWxsPSdub25lJyBzdHJva2Utd2lkdGg9JzEuMTk1NTMnIHN0cm9rZS1taXRlcmxpbWl0PScxMCcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJy8+CjxwYXRoIGQ9J00yOTcuMTA1Mi00My4wNTQ2ODZIMjY4Ljc1ODInIGZpbGw9JyNkMzU0MDAnLz4KPHBhdGggZD0nTTI5Ny4xMDUyLTQzLjA1NDY4NkgyNjguNzU4Micgc3Ryb2tlPScjZTU5ODY2JyBmaWxsPSdub25lJyBzdHJva2Utd2lkdGg9JzEuMTk1NTMnIHN0cm9rZS1taXRlcmxpbWl0PScxMCcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJy8+CjxwYXRoIGQ9J00yOTcuMTA1Mi00My4wNTQ2ODZMMjgyLjkzMzItMTguNTA3OCcgZmlsbD0nI2QzNTQwMCcvPgo8cGF0aCBkPSdNMjk3LjEwNTItNDMuMDU0Njg2TDI4Mi45MzMyLTE4LjUwNzgnIHN0cm9rZT0nI2U1OTg2NicgZmlsbD0nbm9uZScgc3Ryb2tlLXdpZHRoPScxLjE5NTUzJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcvPgo8cGF0aCBkPSdNMjk3LjEwNTItNDMuMDU0Njg2TDMxMS4yODEyLTE4LjUwNzgnIGZpbGw9JyNkMzU0MDAnLz4KPHBhdGggZD0nTTI5Ny4xMDUyLTQzLjA1NDY4NkwzMTEuMjgxMi0xOC41MDc4JyBzdHJva2U9JyNlNTk4NjYnIGZpbGw9J25vbmUnIHN0cm9rZS13aWR0aD0nMS4xOTU1Mycgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyBzdHJva2UtbGluZWNhcD0ncm91bmQnLz4KPHBhdGggZD0nTTI5Ny4xMDUyLTQzLjA1NDY4NkgzMjUuNDUzMicgZmlsbD0nI2QzNTQwMCcvPgo8cGF0aCBkPSdNMjk3LjEwNTItNDMuMDU0Njg2SDMyNS40NTMyJyBzdHJva2U9JyNlNTk4NjYnIGZpbGw9J25vbmUnIHN0cm9rZS13aWR0aD0nMS4xOTU1Mycgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyBzdHJva2UtbGluZWNhcD0ncm91bmQnLz4KPHRleHQgY2xhc3M9J2YwJyB4PSctNDEuODYwMjk3JyB5PSctNTkuODI0NDQxJyB0cmFuc2Zvcm09J21hdHJpeCgxIDAgMCAxIDMzMy4yODI4IDY0LjU2NTcpJz48dHNwYW4gZmlsbD0nIzIxNjE4Yyc+MjwvdHNwYW4+PC90ZXh0Pgo8cmVjdCB4PSctNDEuODYwMjk3JyB5PSctNDkuNzQ4MzA0JyBoZWlnaHQ9Jy45OTE0NDUnIHdpZHRoPScxMS4zNjc3ODYnIHRyYW5zZm9ybT0nbWF0cml4KDEgMCAwIDEgMzMzLjI4MjggNjQuNTY1NyknIGZpbGw9JyMyMTYxOGMnLz4KPHRleHQgY2xhc3M9J2YwJyB4PSctNDEuODYwMjk3JyB5PSctMjYuMDUzMTE5JyB0cmFuc2Zvcm09J21hdHJpeCgxIDAgMCAxIDMzMy4yODI4IDY0LjU2NTcpJz48dHNwYW4gZmlsbD0nIzIxNjE4Yyc+NjwvdHNwYW4+PC90ZXh0Pgo8dGV4dCBjbGFzcz0nZjAnIHg9Jy00My4wNTU4MTEnIHk9Jy00My4wNTU4MTEnIHRyYW5zZm9ybT0nbWF0cml4KDEgMCAwIDEgMzg3LjkzMzggNjEuMTAwNSknPj08L3RleHQ+CjxwYXRoIGQ9J000MzguODQwMi00My4wNTQ2ODZDNDM4Ljg0MDItNTguNzEwOSA0MjYuMTQ4Mi03MS40MDIzIDQxMC40OTIyLTcxLjQwMjNTMzgyLjE0ODItNTguNzEwOSAzODIuMTQ4Mi00My4wNTQ2ODZDMzgyLjE0ODItMjcuMzk4NCAzOTQuODM2Mi0xNC43MTA5IDQxMC40OTIyLTE0LjcxMDlTNDM4Ljg0MDItMjcuMzk4NCA0MzguODQwMi00My4wNTQ2ODZaJyBzdHJva2U9JyMwMDAnIGZpbGw9J25vbmUnIHN0cm9rZS13aWR0aD0nLjM5ODUnIHN0cm9rZS1taXRlcmxpbWl0PScxMCcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJy8+CjxwYXRoIGQ9J000MTAuNDkyMi00My4wNTQ2ODZIMzgyLjE0NDJDMzgyLjE0NDItMjcuMzk4NCAzOTQuODM2Mi0xNC43MTA5IDQxMC40OTIyLTE0LjcxMDlTNDM4Ljg0MDItMjcuMzk4NCA0MzguODQwMi00My4wNTQ2ODZDNDM4Ljg0MDItNTguNzEwOSA0MjYuMTQ4Mi03MS40MDIzIDQxMC40OTIyLTcxLjQwMjNDNDA1LjUxOTItNzEuNDAyMyA0MDAuNjI5Mi03MC4wOTM3IDM5Ni4zMjAyLTY3LjYwNTVaJyBmaWxsPScjZDM1NDAwJy8+CjxwYXRoIGQ9J000MTAuNDkyMi00My4wNTQ2ODZIMzgyLjE0NDJDMzgyLjE0NDItMjcuMzk4NCAzOTQuODM2Mi0xNC43MTA5IDQxMC40OTIyLTE0LjcxMDlTNDM4Ljg0MDItMjcuMzk4NCA0MzguODQwMi00My4wNTQ2ODZDNDM4Ljg0MDItNTguNzEwOSA0MjYuMTQ4Mi03MS40MDIzIDQxMC40OTIyLTcxLjQwMjNDNDA1LjUxOTItNzEuNDAyMyA0MDAuNjI5Mi03MC4wOTM3IDM5Ni4zMjAyLTY3LjYwNTVaJyBzdHJva2U9JyNlNTk4NjYnIGZpbGw9J25vbmUnIHN0cm9rZS13aWR0aD0nMS4xOTU1Mycgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyBzdHJva2UtbGluZWNhcD0ncm91bmQnLz4KPHRleHQgY2xhc3M9J2YwJyB4PSctNDEuODYwMjk3JyB5PSctNTkuODI0NDQxJyB0cmFuc2Zvcm09J21hdHJpeCgxIDAgMCAxIDQ0Ni42Njk4IDY0LjU2NTcpJz48dHNwYW4gZmlsbD0nIzIxNjE4Yyc+NTwvdHNwYW4+PC90ZXh0Pgo8cmVjdCB4PSctNDEuODYwMjk3JyB5PSctNDkuNzQ4MzA0JyBoZWlnaHQ9Jy45OTE0NDUnIHdpZHRoPScxMS4zNjc3ODYnIHRyYW5zZm9ybT0nbWF0cml4KDEgMCAwIDEgNDQ2LjY2OTggNjQuNTY1NyknIGZpbGw9JyMyMTYxOGMnLz4KPHRleHQgY2xhc3M9J2YwJyB4PSctNDEuODYwMjk3JyB5PSctMjYuMDUzMTE5JyB0cmFuc2Zvcm09J21hdHJpeCgxIDAgMCAxIDQ0Ni42Njk4IDY0LjU2NTcpJz48dHNwYW4gZmlsbD0nIzIxNjE4Yyc+NjwvdHNwYW4+PC90ZXh0Pgo8cGF0aCBkPSdNNDEwLjQ5MjItNDMuMDU0Njg2SDQzOC44NDAyJyBmaWxsPScjZDM1NDAwJy8+CjxwYXRoIGQ9J000MTAuNDkyMi00My4wNTQ2ODZINDM4Ljg0MDInIHN0cm9rZT0nI2U1OTg2NicgZmlsbD0nbm9uZScgc3Ryb2tlLXdpZHRoPScxLjE5NTUzJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcvPgo8cGF0aCBkPSdNNDEwLjQ5MjItNDMuMDU0Njg2TDQyNC42NjgyLTY3LjYwNTUnIGZpbGw9JyNkMzU0MDAnLz4KPHBhdGggZD0nTTQxMC40OTIyLTQzLjA1NDY4Nkw0MjQuNjY4Mi02Ny42MDU1JyBzdHJva2U9JyNlNTk4NjYnIGZpbGw9J25vbmUnIHN0cm9rZS13aWR0aD0nMS4xOTU1Mycgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyBzdHJva2UtbGluZWNhcD0ncm91bmQnLz4KPHBhdGggZD0nTTQxMC40OTIyLTQzLjA1NDY4NkwzOTYuMzIwMi02Ny42MDU1JyBmaWxsPScjZDM1NDAwJy8+CjxwYXRoIGQ9J000MTAuNDkyMi00My4wNTQ2ODZMMzk2LjMyMDItNjcuNjA1NScgc3Ryb2tlPScjZTU5ODY2JyBmaWxsPSdub25lJyBzdHJva2Utd2lkdGg9JzEuMTk1NTMnIHN0cm9rZS1taXRlcmxpbWl0PScxMCcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJy8+CjxwYXRoIGQ9J000MTAuNDkyMi00My4wNTQ2ODZIMzgyLjE0ODInIGZpbGw9JyNkMzU0MDAnLz4KPHBhdGggZD0nTTQxMC40OTIyLTQzLjA1NDY4NkgzODIuMTQ4Micgc3Ryb2tlPScjZTU5ODY2JyBmaWxsPSdub25lJyBzdHJva2Utd2lkdGg9JzEuMTk1NTMnIHN0cm9rZS1taXRlcmxpbWl0PScxMCcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJy8+CjxwYXRoIGQ9J000MTAuNDkyMi00My4wNTQ2ODZMMzk2LjMyMDItMTguNTA3OCcgZmlsbD0nI2QzNTQwMCcvPgo8cGF0aCBkPSdNNDEwLjQ5MjItNDMuMDU0Njg2TDM5Ni4zMjAyLTE4LjUwNzgnIHN0cm9rZT0nI2U1OTg2NicgZmlsbD0nbm9uZScgc3Ryb2tlLXdpZHRoPScxLjE5NTUzJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcvPgo8cGF0aCBkPSdNNDEwLjQ5MjItNDMuMDU0Njg2TDQyNC42NjgyLTE4LjUwNzgnIGZpbGw9JyNkMzU0MDAnLz4KPHBhdGggZD0nTTQxMC40OTIyLTQzLjA1NDY4Nkw0MjQuNjY4Mi0xOC41MDc4JyBzdHJva2U9JyNlNTk4NjYnIGZpbGw9J25vbmUnIHN0cm9rZS13aWR0aD0nMS4xOTU1Mycgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyBzdHJva2UtbGluZWNhcD0ncm91bmQnLz4KPHBhdGggZD0nTTQxMC40OTIyLTQzLjA1NDY4Nkg0MzguODQwMicgZmlsbD0nI2QzNTQwMCcvPgo8cGF0aCBkPSdNNDEwLjQ5MjItNDMuMDU0Njg2SDQzOC44NDAyJyBzdHJva2U9JyNlNTk4NjYnIGZpbGw9J25vbmUnIHN0cm9rZS13aWR0aD0nMS4xOTU1Mycgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyBzdHJva2UtbGluZWNhcD0ncm91bmQnLz4KPC9nPgo8L3N2Zz4=" width="600px" style="display: block; margin: auto;" />
 <ul>
 <li>plusieurs conséquences <strong>ultra importantes</strong> à cette règle
 <ul>
-<li><strong>simplification</strong> $$\frac{a\times b}{a\times d}=\frac{a}{a}\times\frac{b}{d}$$</li>
+<li><strong>simplification</strong> $$\frac{a\times b}{a\times d}=\frac{a}{a}\times\frac{b}{d}=\frac{b}{d}$$</li>
 <li><strong>multiplication</strong> $$\frac{a\times b}{c\times d}=\frac{a}{c}\times\frac{b}{d}$$</li>
 <li><strong>addition</strong> $$\frac{a}{c}+\frac{b}{d} = \frac{ad}{cd}+\frac{bc}{cd}= \frac{ad+bc}{cd}$$</li>
 </ul>
 </li>
 </ul>
 <hr />
-<h2 id="inverse-r-el"><span class="section-number">2.3</span> Inverse réel</h2>
+<h2 id="inverse-r-el"><span class="section-number">2.4</span> Inverse réel</h2>
 <blockquote>
-<h3 id="d-finition-tout-nombre-r-el-non-nul-a-admet-un-inverse-not-a-1-pouvant-s-exprimer-a-1-frac1a"><span class="section-number">2.3.1</span> Définition : tout nombre réel non-nul \(a\) admet un inverse noté \(a^{-1}\) pouvant s’exprimer  $$a^{-1}= \frac1a$$</h3>
+<h3 id="d-finition_1"><span class="section-number">2.4.1</span> Définition :</h3>
+<p>tout nombre réel non-nul \(a\) admet un unique inverse noté \(a^{-1}\) vérifiant $$a\times a^{-1}=1$$ que l’on peut encore écrire  $$a^{-1}= \frac1a$$ <br></p>
 </blockquote>
 <ul>
 <li>ne plus confondre <strong>inverse</strong> et <strong>opposé</strong> !!!</li>
@@ -385,26 +438,11 @@ $$A = \frac{720}{240}+\frac{144}{12},\quad B= \frac{\frac{16}{18}}{\frac{24}{7}}
 <li>deuxième réflexe : recherche du <strong>plus petit dénominateur commun</strong>
 $$C=  \frac7{12}+\frac{15}{8},$$</li>
 <li>toutes ces approches <strong>indispensables</strong> dans des expressions incorporant <strong>une ou plusieurs inconnues</strong></li>
+<li>n’hésitez pas à chercher des façons de vous entraîner si vous en ressentez le besoin, par exemple pour reprendre les proportions :
+<a href="https://www.annales2maths.com/2nd-exercices-corriges-fractions/">https://www.annales2maths.com/2nd-exercices-corriges-fractions/</a></li>
 </ul>
 <hr />
-<h3 id="appart" class="unnumbered">Apparté</h3>
-<ul>
-<li>dans le secondaire, pour obtenir des notes acceptables,  il peut s’avérer suffisant de connaître
-<ul>
-<li>ses formules</li>
-<li>des exercices type</li>
-</ul>
-</li>
-<li><strong>désormais</strong> il n’est plus question d’apprentissage à court terme, on ne peut pas se permettre de réapprendre l’alphabet à chaque fois qu’on doit lire</li>
-<li><strong>les clés pour s’en sortir</strong> :
-<ul>
-<li>connaître ses <strong>définitions</strong>, <strong>théorèmes</strong> et autres</li>
-<li>être capable de remplacer une formule par une phrase, comme par exemple : “diviser par un nombre revient à multiplier par son inverse” pour résumer en termes d’opérations la formule vue plus haut $$\frac{a}{b}=a\times\frac{1}{b}$$</li>
-</ul>
-</li>
-</ul>
-<hr />
-<!--# class="middle center" style = "background-color:#f8ac00;"-->
+<!--# class="middle center" style = "background-color:#21618c;"-->
 <h1 id="savoir-se-r-p-rer"><span class="section-number">3.</span> Savoir se répérer</h1>
 <hr />
 <h2 id="principes"><span class="section-number">3.1</span> Principes</h2>
@@ -418,7 +456,7 @@ $$M:(x,y)\Leftrightarrow \overrightarrow{OM}=x \vec i+y\vec j$$</li>
 <li>différentes extensions possibles pour se repérer dans l’<strong>espace</strong> (en 3D)</li>
 </ul>
 <div align="center">
-<iframe src="BTM_coord_cart.html" width="1000" height="800" scrolling="yes" seamless="seamless" frameBorder="0"> </iframe>
+<iframe src="BTM_coord_cart.html" width="1100" height="800" scrolling="no" seamless="seamless" frameBorder="0"> </iframe>
 </div>
 <hr />
 <h2 id="repr-sentations-graphiques_1"><span class="section-number">3.2</span> Représentations graphiques</h2>
@@ -426,16 +464,19 @@ $$M:(x,y)\Leftrightarrow \overrightarrow{OM}=x \vec i+y\vec j$$</li>
 <li>courbe de fonctions</li>
 </ul>
 <blockquote>
-<h3 id="d-finition-la-courbe-mathcal-c-f-d-une-fonction-r-elle-f-correspond-l-ensemble-des-points-du-plan-dont-les-coordonn-es-x-y-sont-de-la-forme-x-f-x-autrement-dit-c-est-l-ensemble-des-points-du-plan-satisfaisant-l-quation-y-f-x"><span class="section-number">3.2.1</span> Définition : la courbe \(\mathcal C_f\) d’une fonction réelle \(f\) correspond à l’ensemble des points du plan dont les coordonnées \((x,y)\) sont de la forme \((x,f(x))\). Autrement dit c’est l’ensemble des points du plan satisfaisant l’équation \(y=f(x).\)</h3>
+<h3 id="d-finition_2"><span class="section-number">3.2.1</span> Définition :</h3>
+<p>la courbe \(\mathcal C_f\) d’une fonction réelle \(f\) correspond à l’ensemble des points du plan dont les coordonnées \((x,y)\) sont de la forme \((x,f(x))\). Autrement dit c’est l’ensemble des points du plan satisfaisant l’équation \(y=f(x).\)
+$$\mathcal C_f \,\colon y=f(x)$$ <br></p>
 </blockquote>
-<p>$$\mathcal C_f \,\colon y=f(x)$$</p>
 <ul>
 <li>ne pas hésiter à faire le lien avec les droites associées à des fonctions affines : $$\mathcal D\,\colon y = ax+b$$</li>
 </ul>
 <hr />
 <h3 id="repr-sentations-graphiques_2" class="unnumbered">Représentations graphiques</h3>
 <blockquote>
-<h3 id="propri-t-un-ensemble-de-points-est-la-courbe-d-une-fonction-si-et-seulement-si-chaque-abscisse-n-est-associ-e-qu-une-seule-image"><span class="section-number">3.2.2</span> Propriété : un ensemble de points est la courbe d’une fonction <strong>si et seulement si à chaque abscisse n’est associée qu’une seule image</strong></h3>
+<h3 id="propri-t_1"><span class="section-number">3.2.2</span> Propriété :</h3>
+<p>un ensemble de points est la courbe d’une fonction <strong>si et seulement si à chaque abscisse n’est associée qu’une seule image</strong>.</p>
+<p>&nbsp;</p>
 </blockquote>
 <ul>
 <li>exemple : un cercle n’est pas la courbe d’une fonction</li>
@@ -444,7 +485,7 @@ $$M:(x,y)\Leftrightarrow \overrightarrow{OM}=x \vec i+y\vec j$$</li>
 <iframe src="BTM_curve.html" width="1000" height="800" scrolling="yes" seamless="seamless" frameBorder="0"> </iframe>
 </div>
 <hr />
-<!--# class="middle center" style = "background-color:#f8ac00;"-->
+<!--# class="middle center" style = "background-color:#21618c;"-->
 <h1 id="la-fonction-affine"><span class="section-number">4.</span> La fonction affine</h1>
 <hr />
 <h2 id="gain-proportionnel"><span class="section-number">4.1</span> Gain proportionnel</h2>
@@ -458,7 +499,8 @@ $$V_{\textrm{moyenne}} = \frac{distance\, parcourue}{temps\,nécessaire}$$</li>
 <hr />
 <h2 id="fonction-affine-et-quation-de-droite"><span class="section-number">4.2</span> Fonction affine et équation de droite</h2>
 <blockquote>
-<h3 id="propri-t-une-fonction-f-de-mathbb-r-dans-mathbb-r-est-affine-si-et-seulement-il-existe-deux-r-els-constants-tels-que-pour-tout-r-el-x-f-x-ax-b"><span class="section-number">4.2.1</span> Propriété : une fonction \(f\) de \(\mathbb R\) dans \(\mathbb R\) est affine si et seulement il existe deux réels constants tels que pour tout réel \(x\) $$f(x)=ax+b$$</h3>
+<h3 id="propri-t_2"><span class="section-number">4.2.1</span> Propriété :</h3>
+<p>une fonction \(f\) de \(\mathbb R\) dans \(\mathbb R\) est affine si et seulement il existe deux réels constants tels que pour tout réel \(x\) $$f(x)=ax+b$$ <br></p>
 </blockquote>
 <ul>
 <li>pour rechercher l’équation de droite passant pas deux points \((x_1,y_1)\) et \((x_2,y_2)\) :
@@ -471,12 +513,12 @@ $$a= \frac{y_2-y_1}{x_2-x_1},\qquad b = y_1-ax_1=y_2-ax_2$$</li>
 </li>
 </ul>
 <hr />
-<h3 id="illustration"><span class="section-number">4.2.2</span> Illustration</h3>
+<h3 id="illustration_1"><span class="section-number">4.2.2</span> Illustration</h3>
 <ul>
 <li>la représentation d’une fonction affine est donc une droite oblique et inversement, une droite horizontale est le graphique d’une fonction constante et une droite verticale ne peut être la courbe d’une fonction !</li>
 </ul>
-<div align="center">
-<iframe src="BTM_system.html" width="1000" height="800" scrolling="yes" seamless="seamless" frameBorder="0"> </iframe>
+<div align="center" >
+    <iframe src="BTM_system.html" width="1000" height="800" scrolling="no" seamless="seamless" frameBorder="0"> </iframe>
 </div>
 <hr />
 <h2 id="syst-me-d-quations-et-droites"><span class="section-number">4.3</span> Système d’équations et droites</h2>
@@ -486,10 +528,10 @@ $$a= \frac{y_2-y_1}{x_2-x_1},\qquad b = y_1-ax_1=y_2-ax_2$$</li>
 $$\left\{\begin{array}{l} 2(x-25) = y-25\\ x+40 = 2y \end{array}\right. \Leftrightarrow \left\{\begin{array}{l} y=2x-25 \\ y=\tfrac x2+20 \end{array}\right.$$</li>
 </ul>
 <div align="center">
-<iframe src="BTM_slopes.html" width="1000" height="800" scrolling="yes" seamless="seamless" frameBorder="0"> </iframe>
+<iframe src="BTM_slopes.html" width="1100" height="800" scrolling="yes" seamless="seamless" frameBorder="0"> </iframe>
 </div>
 <hr />
-<!--# class="middle center" style = "background-color:#f8ac00;"-->
+<!--# class="middle center" style = "background-color:#21618c;"-->
 <h1 id="fonctions-r-elles"><span class="section-number">5.</span> Fonctions réelles</h1>
 <hr />
 <h2 id="g-n-ralit-s"><span class="section-number">5.1</span> Généralités</h2>
@@ -497,32 +539,27 @@ $$\left\{\begin{array}{l} 2(x-25) = y-25\\ x+40 = 2y \end{array}\right. \Leftrig
 <li>pour s’y retrouver bien distinguer les 3 éléments : \(x\) l’abscisse, \(f\) la fonction, et \(f(x)\) l’image</li>
 <li>parallèle possible : le produit brut, la machine, le produit fini</li>
 <li>confusion trop souvent entre \(f\) et \(f(x)\) qui peut freiner la compréhension</li>
-<li>en pratique :
-<ul>
-<li>les suites : souvent intérêt pour les limites</li>
-<li>les fonctions définies sur des réunions d’intervalles : dans ce cas, on s’intéresse à la <strong>régularité</strong></li>
 </ul>
-</li>
-</ul>
+<div align="center">
+<iframe src="usine.html" height="800" width="1100" scrolling="no" seamless="seamless" frameBorder="0"> </iframe>
+</div>
 <hr />
 <h2 id="continuit"><span class="section-number">5.2</span> Continuité</h2>
 <ul>
+<li>premier caractère intéressant d’une fonction, est-ce que la courbe correspondante possède des trous ?</li>
 <li>1e définition donnée au secondaire : pas besoin de lever le crayon pour tracer la courbe</li>
 </ul>
 <blockquote>
-<h3 id="d-finition"><span class="section-number">5.2.1</span> Définition :</h3>
+<h3 id="d-finition_3"><span class="section-number">5.2.1</span> Définition :</h3>
+<ul>
+<li>une fonction \(f\) est continue en \(a\) si $$\lim_{x\to a}f(x)=f(a),$$</li>
+<li>elle est continue sur un intervalle \(I\) si elle est continue en chaque \(a\in I\)</li>
+</ul>
+<p>&nbsp;</p>
 </blockquote>
 <ul>
-<li>
-<p>une fonction \(f\) est continue en \(a\) si $$\lim_{x\to a}f(x)=f(a),$$</p>
-</li>
-<li>
-<p>elle est continue sur un intervalle \(I\) si elle est continue en chaque \(a\in I\)</p>
-</li>
-<li>
-<p>un exemple avec le partie entière : la partie entière \(\lfloor x \rfloor\) d’un réel \(x\) est le plus grand entier inférieur ou égal à \(x\) en d’autre termes, l’arrondi de \(x\) à l’entier inférieur ou égal
-$$\lfloor 5\rfloor=5,\quad\lfloor \tfrac32\rfloor=1,\quad \lfloor \pi\rfloor=3,\quad\lfloor -2.2\rfloor=-3$$</p>
-</li>
+<li>un exemple avec le partie entière : la partie entière \(\lfloor x \rfloor\) d’un réel \(x\) est le plus grand entier inférieur ou égal à \(x\) en d’autre termes, l’arrondi de \(x\) à l’entier inférieur ou égal
+$$\lfloor 5\rfloor=5,\quad\lfloor \tfrac32\rfloor=1,\quad \lfloor \pi\rfloor=3,\quad\lfloor -2.2\rfloor=-3$$</li>
 </ul>
 <hr />
 <h3 id="partie-enti-re" class="unnumbered">Partie entière</h3>
@@ -531,7 +568,7 @@ $$\lfloor 5\rfloor=5,\quad\lfloor \tfrac32\rfloor=1,\quad \lfloor \pi\rfloor=3,\
 <li>très important de spécifier l’intervalle de travail</li>
 </ul>
 <div align="center">
-<iframe src="BTM_floor.html" width="1000" height="800" scrolling="yes" seamless="seamless" frameBorder="0"> </iframe>
+<iframe src="BTM_floor.html" width="1100" height="800" scrolling="no" seamless="seamless" frameBorder="0"> </iframe>
 </div>
 <hr />
 <h2 id="approximation-et-tangente"><span class="section-number">5.3</span> Approximation et tangente</h2>
@@ -540,7 +577,7 @@ $$\lfloor 5\rfloor=5,\quad\lfloor \tfrac32\rfloor=1,\quad \lfloor \pi\rfloor=3,\
 <li>plusieurs aspects intéressants :
 <ul>
 <li>existence : domaine de définition</li>
-<li>régularité : <strong>dérivabilité</strong> et plus si affinités</li>
+<li>régularité : continuité, <strong>dérivabilité</strong> et plus si affinités</li>
 <li>variations : croissances et décroissances</li>
 <li>maximum/minimum local/global</li>
 <li>comportements au bord des intervalles : limites</li>
@@ -554,55 +591,59 @@ $$\lfloor 5\rfloor=5,\quad\lfloor \tfrac32\rfloor=1,\quad \lfloor \pi\rfloor=3,\
 </li>
 </ul>
 <blockquote>
-<h3 id="d-finition-la-tangente-t-a-d-une-fonction-f-en-a-lorsqu-elle-existe-est-la-droite-qui-approche-le-mieux-la-courbe-de-la-fonction-autour-de-l-abscisse-a"><span class="section-number">5.3.1</span> Définition : la tangente \(T_a\) d’une fonction \(f\) en \(a\), lorsqu’elle existe, est la droite qui approche le mieux la courbe de la fonction autour de l’abscisse \(a\)</h3>
+<h3 id="d-finition_4"><span class="section-number">5.3.1</span> Définition :</h3>
+<p>la tangente \(T_a\) d’une fonction \(f\) en \(a\), lorsqu’elle existe, est la droite qui approche le mieux la courbe de la fonction autour de l’abscisse \(a\)</p>
+<p>&nbsp;</p>
 </blockquote>
+<div align="center">
+<iframe src="BTM_approx.html" width="1100" height="1500" scrolling="yes" seamless="seamless" frameBorder="0"> </iframe>
+</div>
 <hr />
 <h2 id="tangente-et-d-rivabilit"><span class="section-number">5.4</span> Tangente et dérivabilité</h2>
 <ul>
-<li>lorsque la tangente est oblique, elle est naturellement associée à une fonction affine, ainsi si \(g_a\) est la fonction</li>
+<li>lorsque la tangente est oblique, elle est naturellement associée à une fonction affine</li>
 <li>la tangente par définition passe par le point de coordonnées \((a,f(a))\), seulement on ne connaît pas de 2e point pour déterminer le coefficient directeur</li>
 <li>la parade : le <strong>taux d’accroissement</strong>; considérons un 2e point de la courbe  \(\mathcal C_f\) de la fonction \(f\), pas trop loin de \((a,f(a))\), le taux d’accroissement donné par le coefficient directeur de la droite qui passe par \((a,f(a))\) et notons-le \((a+h,f(a+h))\) ( \(h\) écart entre les deux abscisses) $$\frac{f(a+h)-f(a)}{h}$$</li>
 </ul>
 <blockquote>
-<h3 id="d-finition-le-nombre-d-riv-en-a-not-frac-df-dx-a-lorsqu-il-existe-est-la-limite-des-taux-d-accroissement-lorsque-h-tend-vers-0-frac-df-dx-a-lim-h-to-0-frac-f-a-h-f-a-h"><span class="section-number">5.4.1</span> Définition : le <strong>nombre dérivé</strong> en \(a\) noté \(\frac{df}{dx}(a)\), lorsqu’il existe est la limite des taux d’accroissement lorsque \(h\) tend vers 0 $$\frac{df}{dx}(a) = \lim_{h\to 0}\frac{f(a+h)-f(a)}{h}$$</h3>
+<h3 id="d-finition_5"><span class="section-number">5.4.1</span> Définition :</h3>
+<p>le <strong>nombre dérivé</strong> en \(a\) noté \(\frac{df}{dx}(a)\), lorsqu’il existe est la limite des taux d’accroissement lorsque \(h\) tend vers 0 $$\frac{df}{dx}(a) = \lim_{h\to 0}\frac{f(a+h)-f(a)}{h}$$
+La fonction \(f\) est alors dite <strong>dérivable en \(a\)</strong>.</p>
+<p>&nbsp;</p>
 </blockquote>
-<p>La fonction \(f\) est alors dite <strong>dérivable en \(a\)</strong>.</p>
 <hr />
 <h3 id="illustrations_1" class="unnumbered">Illustrations</h3>
+<ul>
+<li>pour déterminer le coefficient directeur de la tangente en \((a,f(a))\), on considère une seconde abscisse \(a+h\) où \(h\) représente l’écart</li>
+<li>plus l’écart \(h\) est petit, plus la droite passant par les deux points se rapproche de la tangente, donc en particulier ce rapprochement concerne également les coefficients directeurs des deux droites</li>
+</ul>
 <div align="center">
 <iframe src="BTM_derivation.html" width="1200" height="1500" scrolling="yes" seamless="seamless" frameBorder="0"> </iframe>
 </div>
 <hr />
-<h2 id="parall-le-avec-la-vitesse"><span class="section-number">5.5</span> Parallèle avec la vitesse</h2>
-<ul>
-<li>temps de trajet Rennes-Brest  2 h 40 min  pour 242 km
-$$V_{\textrm{moyenne}}= \frac{242}{2.67}=90.75 \,km.h^{-1}$$</li>
-<li>sur la voie rapide, par exemple entre les hauteurs de Bédée (après Rennes) et Lamballe (un peu avant St Brieuc), la vitesse moyenne plus proche de \(110 \,km.h^{-1}\)</li>
-<li>en pratique, lors d’un dépassement, la vitesse tourne autour de \(120 \,km.h^{-1}\) avec éventuellement une pointe à \(125 \,km.h^{-1}\).</li>
-<li>d’où l’intérêt de la vitesse instantanée, estimée par exemple sur le tableau de bord ou avec des systèmes GPS
-$$ V_{\textrm{instantanée}}(t) = \lim_{h\to0 } \frac{\textrm{distance parcourue dans l’intervalle }[t,t+h]}h$$</li>
-</ul>
-<hr />
-<h2 id="equation-de-tangente-et-approximation-affine"><span class="section-number">5.6</span> Equation de tangente et approximation affine</h2>
+<h2 id="equation-de-tangente-et-approximation-affine"><span class="section-number">5.5</span> Equation de tangente et approximation affine</h2>
 <ul>
 <li>le <strong>nombre dérivé</strong> \(\frac{df}{dx}(a)\) (ou \(f'(a)\)) est le coefficient directeur de la tangente lorsqu’elle  n’est pas verticale</li>
 <li>le point de coordonnées \((a,f(a))\) appartient à la tangente, donc pour l’ordonnée à l’origine
 $$f(a)= \frac{df}{dx}(a)\times a +b \Leftrightarrow b = f(a) - \frac{df}{dx}(a)a$$</li>
 </ul>
 <blockquote>
-<h3 id="propri-t-si-une-fonction-f-est-d-rivable-en-a-l-quation-de-la-tangente-en-a-est-donn-e-par"><span class="section-number">5.6.1</span> Propriété : si une fonction \(f\) est dérivable en \(a\), l’<strong>équation de la tangente</strong> en \(a\) est donnée par</h3>
-</blockquote>
-<p>$$T_a\,\colon\, y = \frac{df}{dx}(a)(x-a)+f(a)$$
+<h3 id="propri-t_3"><span class="section-number">5.5.1</span> Propriété :</h3>
+<p>si une fonction \(f\) est dérivable en \(a\), l’<strong>équation de la tangente</strong> en \(a\) est donnée par
+$$T_a\,\colon\, y = \frac{df}{dx}(a)(x-a)+f(a)$$
 De plus, la limite \(\displaystyle\lim_{x\to 0}f(x) - \left(f'(a)(x-a)+f(a)\right)=0.\) fournit l’approximation affine suivante pour \(x\) proche de \(a\)
-$$f(x) \approx \frac{df}{dx}(a)(x-a)+f(a),$$</p>
+$$f(x) \approx \frac{df}{dx}(a)(x-a)+f(a),$$<br></p>
+</blockquote>
 <ul>
 <li>on retrouve le <strong>principe d’approximation</strong> à l’origine de la tangente, ce type d’approximation <strong>extrêmement courante</strong>  en Physique et Chimie, par exemple : approximation des fonctions trigonométriques pour les petits angles utile notamment en optique, si \(\theta\) est un angle proche de 0
 $$\cos\theta\approx 1, \quad \sin\theta\approx \theta,\quad \tan\theta\approx \theta$$</li>
 </ul>
 <hr />
-<h2 id="nombre-d-riv-et-fonction-d-riv-e"><span class="section-number">5.7</span> Nombre dérivé et fonction dérivée</h2>
+<h2 id="nombre-d-riv-et-fonction-d-riv-e"><span class="section-number">5.6</span> Nombre dérivé et fonction dérivée</h2>
 <blockquote>
-<h3 id="d-finition-la-fonction-d-riv-e-frac-df-dx-ou-f-de-la-fonction-f-fournit-la-valeur-du-nombre-d-riv-pour-tout-point-a-o-f-est-d-rivable"><span class="section-number">5.7.1</span> Définition : la <strong>fonction dérivée</strong> \(\frac{df}{dx}\) (ou \(f'\)) de la fonction \(f\) fournit la valeur du nombre dérivé pour tout point \(a\) où \(f\) est <strong>dérivable</strong></h3>
+<h3 id="d-finition_6"><span class="section-number">5.6.1</span> Définition :</h3>
+<p>la <strong>fonction dérivée</strong> \(\frac{df}{dx}\) (ou \(f'\)) de la fonction \(f\) fournit la valeur du nombre dérivé pour tout point \(a\) où \(f\) est <strong>dérivable</strong></p>
+<p>&nbsp;</p>
 </blockquote>
 <ul>
 <li>exemples
@@ -615,28 +656,28 @@ qui tend vers \(2x\) quand \(h\) tend vers 0. Ainsi, le nombre dérivé en \(a\)
 </li>
 </ul>
 <hr />
-<h3 id="illustrations_2" class="unnumbered">Illustrations</h3>
+<h3 id="illustration_2" class="unnumbered">Illustration</h3>
 <div align="center">
-<iframe src="BTM_derivative.html" width="1200" height="1200" scrolling="yes" seamless="seamless" frameBorder="0"> </iframe>
+<iframe src="BTM_derivative.html" width="1400" height="1200" scrolling="no" seamless="seamless" frameBorder="0"> </iframe>
 </div>
 <hr />
-<h2 id="r-gles-de-calcul"><span class="section-number">5.8</span> Règles de calcul</h2>
+<h2 id="r-gles-de-calcul"><span class="section-number">5.7</span> Règles de calcul</h2>
 <ul>
-<li>somme de fonctions
-$$(f+g)'(x_{0})=f'(a)+g'(x_{0})$$
+<li><strong>somme de fonctions</strong>
+$$(f+g)'(x_{0})=f'(x_0)+g'(x_{0})$$
 exemple : \(h(x) = e^{x}+x^{2} \Rightarrow h'(x)= e^{x}+2x\)</li>
-<li>produit par une constante
-$$(\lambda f)'(x_{0})\Rightarrow h'(x)=\lambda f'(x_{0})$$
+<li><strong>produit par une constante</strong>
+$$(\lambda f)'(x_{0})\Rightarrow h'(x_{0})=\lambda f'(x_{0})$$
 exemple : \(h(x)=3x^{2} \Rightarrow h'(x)= 6x\)</li>
-<li>produit de fonctions
+<li><strong>produit de fonctions</strong>
 $$(fg)'(x_{0})=f'(x_{0})g(x_{0})+f(x_{0})g'(x_{0})$$
 exemple : \(h(x)=x^{2}e^{x} \Rightarrow h'(x)= e^{x}\times x^{2}+e^{x}\times (2x)\)</li>
-<li>composition de fonctions (Notation : \(f\circ g(x) = f(g(x))\))
+<li><strong>composition de fonctions</strong> (Notation : \(f\circ g(x) = f(g(x))\))
 $$(f\circ g)'(x_{0})=g'(x_{0})\times f'(g(x_{0}))$$
 exemple : \(h(x)=e^{x^{2}}\Rightarrow h'(x)= 2x e^{x^{2}}\)</li>
 </ul>
 <hr />
-<!--# class="middle center" style = "background-color:#f8ac00;"-->
+<!--# class="middle center" style = "background-color:#21618c;"-->
 <h1 id="fonctions-usuelles"><span class="section-number">6.</span> Fonctions usuelles</h1>
 <hr />
 <h2 id="remarques-g-n-rales"><span class="section-number">6.1</span> Remarques générales</h2>
@@ -656,7 +697,7 @@ exemple : \(h(x)=e^{x^{2}}\Rightarrow h'(x)= 2x e^{x^{2}}\)</li>
 <ul>
 <li>retour aux fondamentaux pour aboutir à  l’exponentielle</li>
 <li>La puissance résume un produit  où tous les facteurs sont identiques.
-$$\forall n^{*} \in\mathbb N,\forall a\in\mathbb R,\qquad a^{n}= \underbrace{a\times a\times\dots\times a\times a}_{n\textrm{ fois}}$$</li>
+$$\textrm{pour tout } n^{*} \in\mathbb N,\textrm{pour tout } a\in\mathbb R,\qquad a^{n}= \underbrace{a\times a\times\dots\times a\times a}_{n\textrm{ fois}}$$</li>
 <li><strong>propriétés remarquables</strong> : \(a^{n}a^{m}=a^{n+m},\quad \left(a^{n}\right)^{m}=a^{nm}\)</li>
 <li>définitions des fonctions correspondantes sur \(\mathbb R,\quad f_{n}\colon x\mapsto x^{n}\)</li>
 <li>comportements globaux suivant la parité de \(n\)
@@ -676,7 +717,7 @@ $$\forall n^{*} \in\mathbb N,\forall a\in\mathbb R,\qquad a^{n}= \underbrace{a\t
 <h2 id="level-2-puissances-enti-res-n-gatives-ou-nulle"><span class="section-number">6.3</span> Level 2 : Puissances entières négatives ou nulle</h2>
 <ul>
 <li>origine : convention de notation \(x^{-n} = \frac 1{x^{n}}\) et \(x^{0}=1\) compatible avec les règles de calcul :
-$$\forall n,m\in\mathbb Z,\forall a\neq 0,\quad a^{n}a^{m}=a^{n+m},\quad \left(a^{n}\right)^{m}=a^{nm}$$</li>
+$$\textrm{pour tout } n,m\in\mathbb Z,\quad \textrm{pour tout } a\neq 0,\quad a^{n}a^{m}=a^{n+m},\quad \left(a^{n}\right)^{m}=a^{nm}$$</li>
 <li>définitions des fonctions correspondantes sur \(\mathbb R^{*}\), \(f_{n}\colon x\mapsto x^{-n}=\frac1{x^{n}}\)</li>
 <li>comportements globaux suivant la parité de \(n\)
 <ul>
@@ -695,8 +736,8 @@ $$\forall n,m\in\mathbb Z,\forall a\neq 0,\quad a^{n}a^{m}=a^{n+m},\quad \left(a
 <h2 id="level-3-puissances-rationnelles"><span class="section-number">6.4</span> Level 3 : Puissances rationnelles</h2>
 <ul>
 <li>origine : applications réciproques \(\sqrt[n]{\quad}\) toujours définies de \(\mathbb R^{+*}\) dans \(\mathbb R^{+*}\) telles que
-$$\forall x &gt;0, \forall n\in\mathbb Z,\quad \left(\sqrt[n]{x}\right)^{n}=\sqrt[n]{\left(x\right)^{n}}=x$$</li>
-<li>généralisation de la puissance aux rationnels : $$\forall x &gt;0, \forall m\in\mathbb Z, \forall n\in\mathbb N^{*},\quad x^{\frac mn}=\left(\sqrt[n]{x}\right)^{m}=\sqrt[n]{x^{m}}$$</li>
+$$\textrm{pour tout } x &gt;0, \textrm{pour tout } n\in\mathbb Z,\quad \left(\sqrt[n]{x}\right)^{n}=\sqrt[n]{\left(x\right)^{n}}=x$$</li>
+<li>généralisation de la puissance aux rationnels : $$\textrm{pour tout } x &gt;0, \textrm{pour tout } m\in\mathbb Z, \textrm{pour tout } n\in\mathbb N^{*},\quad x^{\frac mn}=\left(\sqrt[n]{x}\right)^{m}=\sqrt[n]{x^{m}}$$</li>
 <li>fonctions correspondantes continues et dérivables sur \(\mathbb R^{+*}\) de dérivées $$x\mapsto \tfrac mn x^{\frac mn -1}$$</li>
 </ul>
 <hr />
@@ -717,13 +758,13 @@ $$\forall x &gt;0, \forall n\in\mathbb Z,\quad \left(\sqrt[n]{x}\right)^{n}=\sqr
 <h3 id="plusieurs-fa-ons-de-d-finir-l-exponentielle" class="unnumbered">Plusieurs façons de définir l’exponentielle</h3>
 <ul>
 <li>la fonction <strong>exponentielle</strong> comme la seule solution du prolongement continu de la règle de puissance
-$$\forall x,y\in\mathbb R,\quad  f(x)f(y)=f(x+y),\quad\textbf{et}\quad  f'(0)=1.$$</li>
+$$\textrm{pour tout } x,y\in\mathbb R,\quad  f(x)f(y)=f(x+y),\quad\textbf{et}\quad  f'(0)=1.$$</li>
 <li>au lycée : <strong>exponentielle</strong> seule solution de l’équation différentielle
-$$\forall x\in\mathbb R,\quad  f'(x)=f(x),\quad\textbf{et}\quad f'(0)=1.$$</li>
+$$\textrm{pour tout } x\in\mathbb R,\quad  f'(x)=f(x),\quad\textbf{et}\quad f'(0)=1.$$</li>
 <li>façon sans doute la “plus simple” :
-$$\forall x\in\mathbb R,\quad \exp(x) =\lim_{n\to+\infty} \left(1+\frac xn\right)^{n}$$</li>
+$$\textrm{pour tout } x\in\mathbb R,\quad \exp(x) =\lim_{n\to+\infty} \left(1+\frac xn\right)^{n}$$</li>
 <li>définition comme limite de polynômes<sup class="footnote-ref"><a href="#fn-1" id="fnref-1" data-footnote-ref>1</a></sup> :
-$$\forall x\in\mathbb R,\quad \exp(x) = \lim_{n\to+\infty}\sum_{k=0}^{n}\frac{x^{k}}{k!},$$</li>
+$$\textrm{pour tout } x\in\mathbb R,\quad \exp(x) = \lim_{n\to+\infty}\sum_{k=0}^{n}\frac{x^{k}}{k!},$$</li>
 </ul>
 <hr />
 <h2 id="illustration-de-convergences-des-suites"><span class="section-number">6.6</span> Illustration de convergences des suites</h2>
@@ -734,7 +775,6 @@ $$\forall x\in\mathbb R,\quad \exp(x) = \lim_{n\to+\infty}\sum_{k=0}^{n}\frac{x^
 <h2 id="propri-t-s-de-l-exponentielle"><span class="section-number">6.7</span> Propriétés de l’exponentielle</h2>
 <blockquote>
 <h3 id="propri-t-s_1"><span class="section-number">6.7.1</span> Propriétés :</h3>
-</blockquote>
 <ul>
 <li>\(\exp(0)=1\)</li>
 <li>la fonction exponentielle fonctionne comme une puissance
@@ -744,10 +784,11 @@ où \(e = \exp(1)\approx 2,72\)</li>
 <li>la fonction est dérivable sur \(\mathbb R\) et $$\exp'=exp$$ et strictement croissante sur \(\mathbb R\)</li>
 <li>limites : $$\lim_{x\to -\infty} \exp(x)=0,\quad \lim_{x\to +\infty} \exp(x)=+\infty$$</li>
 <li>lorsque \(x\) est proche de 0
-$$\exp(x)\approx 1+x$$</li>
+$$\exp(x)\approx 1+x$$<br></li>
 </ul>
+</blockquote>
 <hr />
-<h3 id="illustrations_3"><span class="section-number">6.7.2</span> Illustrations</h3>
+<h3 id="illustrations_2"><span class="section-number">6.7.2</span> Illustrations</h3>
 <div align="center">
 <iframe src="BTM_expos_DLs.html" width="1200" height="600" scrolling="yes" seamless="seamless" frameBorder="0"> </iframe>
 </div>
@@ -762,7 +803,9 @@ $$\exp(x)\approx 1+x$$</li>
 <hr />
 <h2 id="logarithme-n-perien-d-finition"><span class="section-number">6.9</span> Logarithme néperien : définition</h2>
 <blockquote>
-<h3 id="d-finition-le-logarithme-n-perien-ln-x-ou-log-x-d-un-nombre-r-el-strictement-positif-x-est-l-unique-nombre-r-el-dont-l-exponentielle-vaut-x-autrement-dit-le-nombre-ln-x-est-l-unique-ant-c-dent-positif-de-x-par-la-fonction-exponentielle"><span class="section-number">6.9.1</span> Définition : le <strong>logarithme néperien</strong> \(\ln (x)\) (ou \(\log(x)\)) d’un nombre réel strictement positif \(x\) est l’unique nombre réel dont l’exponentielle vaut \(x\), autrement dit, le nombre \(\ln (x)\) est l’unique antécédent positif de \(x\) par la fonction exponentielle</h3>
+<h3 id="d-finition_7"><span class="section-number">6.9.1</span> Définition :</h3>
+<p>le <strong>logarithme néperien</strong> \(\ln (x)\) (ou \(\log(x)\)) d’un nombre réel strictement positif \(x\) est l’unique nombre réel dont l’exponentielle vaut \(x\), autrement dit, le nombre \(\ln (x)\) est l’unique antécédent positif de \(x\) par la fonction exponentielle</p>
+<p>&nbsp;</p>
 </blockquote>
 <div align="center">
 <iframe src="BTM_logarithm.html" width="1600" height="1600" scrolling="yes" seamless="seamless" frameBorder="0"> </iframe>
@@ -771,7 +814,6 @@ $$\exp(x)\approx 1+x$$</li>
 <h2 id="propri-t-s-du-logarithme"><span class="section-number">6.10</span> Propriétés du logarithme</h2>
 <blockquote>
 <h3 id="propri-t-s_2"><span class="section-number">6.10.1</span> Propriétés :</h3>
-</blockquote>
 <ul>
 <li>\(\ln(1)=0\)</li>
 <li>le logarithme est strictement croissant sur \(\mathbb R^+\) et $$\frac{d\ln(x)}{dx}=\frac1x,\quad \textrm{pour tout } x&gt;0$$</li>
@@ -780,18 +822,33 @@ $$\exp(\ln(x))=x,\quad \textrm{pour tout } x&gt;0$$</li>
 <li>par définition, le logarithme vérifie la relation suivante
 $$\ln(\exp(x))=x,\quad \textrm{pour tout } x\in\mathbb R$$</li>
 <li>par définition, le logarithme vérifie la relation suivante
-$$\ln(xy)=\ln(x)+\ln(y),\quad \textrm{pour tout } x,y&gt;0$$</li>
+$$\ln(xy)=\ln(x)+\ln(y),\quad \textrm{pour tout } x,y&gt;0$$<br></li>
 </ul>
+</blockquote>
 <hr />
+<h2 id="croissances-compar-es"><span class="section-number">6.11</span> Croissances comparées</h2>
+<ul>
+<li>Théorème qui permet de lever des indétermination de limites</li>
+</ul>
+<blockquote>
+<h3 id="th-or-me"><span class="section-number">6.11.1</span> Théorème</h3>
+<ul>
+<li>tout polynôme se comporte comme son monôme de plus haut degré :
+$$ \lim_{x\to+\infty}\displaystyle\frac{\sum_{k=0}^{n}a_{k}x^{k}}{a_{n}x^{n}}=1.$$</li>
+<li>la fonction \(\tfrac1{\ln}\) va infiniment moins vite que la fonction identité \(Id\colon x\mapsto x\) vers 0 :
+$$ \lim_{x\to 0}x\ln x=0\left( =\lim_{x\to 0}\frac x{\tfrac1{\ln x}}\right) $$</li>
+<li>pour toutes constantes strictement positives \(\alpha\), \(\beta\), \(\gamma\), on a:
+`U4$$		\lim_{x\to +\infty}\frac{x^{\alpha}}{e^{\beta x}}=0\left( =\lim_{x\to +\infty}x^{\alpha}e^{-\beta x}\right) \qquad\textrm{et}\qquad
+\lim_{x\to +\infty}\frac{(\ln x)^{\gamma}}{x^{\alpha}}=0.$$<br></li>
+</ul>
+</blockquote>
 <section class="footnotes" data-footnotes>
 <ol>
 <li id="fn-1">
-<p>avec \(\forall n&gt;0, \quad n! = n\times (n-1)\times \dots2\times 1\) et \(0!=1\). <a href="#fnref-1" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="1" aria-label="Back to reference 1">↩</a></p>
+<p>avec \(\textrm{pour tout } n&gt;0, \quad n! = n\times (n-1)\times \dots2\times 1\) et \(0!=1\). <a href="#fnref-1" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="1" aria-label="Back to reference 1">↩</a></p>
 </li>
 </ol>
 </section>
-</div>
-<div class="include-after">
 </div>
 <script>
 (function(d) {
@@ -867,9 +924,9 @@ $$\ln(xy)=\ln(x)+\ln(y),\quad \textrm{pour tout } x,y&gt;0$$</li>
     if (fn) s.querySelectorAll('.footnote-ref > a[href^="#fn"]').forEach(a => {
       const li = fn.querySelector('li' + a.getAttribute('href'));
       if (!li) return;
-      let f = s.querySelector('div.footnotes');
+      let f = s.querySelector('section.footnotes');
       if (!f) {
-        f = newEl('div', 'footnotes'); s.append(f);
+        f = newEl('section', 'footnotes'); s.append(f);
       }
       f.append(li);
       li.firstElementChild?.insertAdjacentHTML('afterbegin', `[${a.innerHTML}] `);
