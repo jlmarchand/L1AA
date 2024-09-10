@@ -181,7 +181,7 @@ html:fullscreen {
 <div class="frontmatter">
 <div class="title"><h1>Reprise en douceur</h1></div>
 <div class="author"><h2>JL Marchand</h2></div>
-<div class="date"><h3>2024-09-03</h3></div>
+<div class="date"><h3>2024-09-10</h3></div>
 </div>
 <div class="body">
 <div id="TOC">
@@ -224,6 +224,7 @@ html:fullscreen {
 <li><a href="#equation-de-tangente-et-approximation-affine"><span class="section-number">5.5</span> Equation de tangente et approximation affine</a></li>
 <li><a href="#nombre-d-riv-et-fonction-d-riv-e"><span class="section-number">5.6</span> Nombre dérivé et fonction dérivée</a></li>
 <li><a href="#r-gles-de-calcul"><span class="section-number">5.7</span> Règles de calcul</a></li>
+<li><a href="#sur-l-importance-des-notations"><span class="section-number">5.8</span> Sur l’importance des notations</a></li>
 </ul>
 </li>
 <li><a href="#fonctions-usuelles"><span class="section-number">6.</span> Fonctions usuelles</a>
@@ -252,7 +253,7 @@ html:fullscreen {
 /* your CSS rules */
 body {
   /*background-image: url("blackboard.jpg");*/
-  background-color: #FFF;
+  background-color: #fff;
   background-repeat: no-repeat;
   background-position: middle center;
   background-size:  1800px;
@@ -266,7 +267,7 @@ blockquote {
   font-style: italic;
 }
 h1 {
-  color: #FFF;
+  color: #B74803;
 }
 h2 {
   color: #CC6D3D;
@@ -664,17 +665,31 @@ qui tend vers \(2x\) quand \(h\) tend vers 0. Ainsi, le nombre dérivé en \(a\)
 <h2 id="r-gles-de-calcul"><span class="section-number">5.7</span> Règles de calcul</h2>
 <ul>
 <li><strong>somme de fonctions</strong>
-$$(f+g)'(x_{0})=f'(x_0)+g'(x_{0})$$
-exemple : \(h(x) = e^{x}+x^{2} \Rightarrow h'(x)= e^{x}+2x\)</li>
+$$\frac{d(f+g)}{dx}(x_{0})=\frac{df}{dx}(x_{0})+\frac{dg}{dx}(x_{0})$$
+exemple : \(h(x) = e^{x}+x^{2} \Rightarrow \frac{dh}{dx}(x)= e^{x}+2x\)</li>
 <li><strong>produit par une constante</strong>
-$$(\lambda f)'(x_{0})\Rightarrow h'(x_{0})=\lambda f'(x_{0})$$
-exemple : \(h(x)=3x^{2} \Rightarrow h'(x)= 6x\)</li>
+$$\frac{d(\lambda f)}{dx}(x_{0})=\lambda \frac{df}{dx}(x_{0})$$
+exemple : \(h(x)=3x^{2} \Rightarrow \frac{dh}{dx}(x)= 6x\)</li>
 <li><strong>produit de fonctions</strong>
-$$(fg)'(x_{0})=f'(x_{0})g(x_{0})+f(x_{0})g'(x_{0})$$
-exemple : \(h(x)=x^{2}e^{x} \Rightarrow h'(x)= e^{x}\times x^{2}+e^{x}\times (2x)\)</li>
+$$\frac{d(fg)}{dx}(x_{0})=\frac{df}{dx}(x_{0})g(x_{0})+f(x_{0})\frac{dg}{dx}(x_{0})$$
+exemple : \(h(x)=x^{2}e^{x} \Rightarrow \frac{dh}{dx}(x)= e^{x}\times x^{2}+e^{x}\times (2x)\)</li>
 <li><strong>composition de fonctions</strong> (Notation : \(f\circ g(x) = f(g(x))\))
-$$(f\circ g)'(x_{0})=g'(x_{0})\times f'(g(x_{0}))$$
-exemple : \(h(x)=e^{x^{2}}\Rightarrow h'(x)= 2x e^{x^{2}}\)</li>
+$$\frac{d(f\circ g)}{dx}(x_{0})=\frac{dg}{dx}(x_{0})\times \frac{df}{dx}(g(x_{0}))$$
+exemple : \(h(x)=e^{x^{2}}\Rightarrow \frac{dh}{dx}(x)= 2x e^{x^{2}}\)</li>
+</ul>
+<hr />
+<h2 id="sur-l-importance-des-notations"><span class="section-number">5.8</span> Sur l’importance des notations</h2>
+<ul>
+<li>au lycée dans les programmes de mathématiques, la notation \(f'(a)\) est adoptée pour désigner le nombre dérivé</li>
+<li>ce choix est clairement discutable, pour plusieurs raisons :
+<ul>
+<li>notation française</li>
+<li>souvent peu adaptée aux domaines d’applications directs : mécanique, chimie, thermodynamique, etc.</li>
+</ul>
+</li>
+<li>la notation \(\frac{df}{dx}(a)\) plus universelle, surtout plus en lien avec l’information captée !</li>
+<li>par exemple, pour retenir la règle pour la composition</li>
+<li>autre intérêt majeur, faire le lien entre variables, par exemple en thermodynamique, les 3 variables d’intérêt sont la pression \(P\), la température \(T\) et le volume \(V\),</li>
 </ul>
 <hr />
 <!--# class="middle center" style = "background-color:#21618c;"-->
@@ -725,7 +740,7 @@ $$\textrm{pour tout } n,m\in\mathbb Z,\quad \textrm{pour tout } a\neq 0,\quad a^
 <li>si \(n=2k\), la fonction est <strong>paire</strong>, strictement croissante sur \(\mathbb R^{-*}\) et strictement décroissante sur  \(\mathbb R^{+*}\) avec $$\begin{array}{lll}&amp;\displaystyle\lim_{x\to0^{+}}x^{-2k}=\displaystyle\lim_{x\to0^{-}}x^{-2k}=+\infty,\quad \displaystyle\lim_{x\to+\infty}x^{-2k}=\lim_{x\to+\infty}x^{-2k}=0\end{array}$$</li>
 </ul>
 </li>
-<li>fonctions continues et dérivables sur \(\mathbb R^{*}\) de dérivées $$f_{n}'(x) = -nx^{-n-1}$$</li>
+<li>fonctions continues et dérivables sur \(\mathbb R^{*}\) de dérivées $$\frac{d f_n}{dx}(x) = -nx^{-n-1}$$</li>
 </ul>
 <hr />
 <h3 id="r-pr-sentations-graphiques_2" class="unnumbered">Réprésentations graphiques</h3>
@@ -781,7 +796,7 @@ $$\textrm{pour tout } x\in\mathbb R,\quad \exp(x) = \lim_{n\to+\infty}\sum_{k=0}
 $$ \exp(x+y)= e^{x+y}=e^x\times e^y=\exp(x)\exp(y),$$
 où \(e = \exp(1)\approx 2,72\)</li>
 <li>toutes les images sont strictement positives</li>
-<li>la fonction est dérivable sur \(\mathbb R\) et $$\exp'=exp$$ et strictement croissante sur \(\mathbb R\)</li>
+<li>la fonction est dérivable sur \(\mathbb R\) et $$\frac{d\exp}{dx}=exp$$ et strictement croissante sur \(\mathbb R\)</li>
 <li>limites : $$\lim_{x\to -\infty} \exp(x)=0,\quad \lim_{x\to +\infty} \exp(x)=+\infty$$</li>
 <li>lorsque \(x\) est proche de 0
 $$\exp(x)\approx 1+x$$<br></li>
@@ -816,7 +831,7 @@ $$\exp(x)\approx 1+x$$<br></li>
 <h3 id="propri-t-s_2"><span class="section-number">6.10.1</span> Propriétés :</h3>
 <ul>
 <li>\(\ln(1)=0\)</li>
-<li>le logarithme est strictement croissant sur \(\mathbb R^+\) et $$\frac{d\ln(x)}{dx}=\frac1x,\quad \textrm{pour tout } x&gt;0$$</li>
+<li>le logarithme est strictement croissant sur \(\mathbb R^+\) et $$\frac{d\ln}{dx}(x)=\frac1x,\quad \textrm{pour tout } x&gt;0$$</li>
 <li>par définition, le logarithme vérifie la relation suivante
 $$\exp(\ln(x))=x,\quad \textrm{pour tout } x&gt;0$$</li>
 <li>par définition, le logarithme vérifie la relation suivante
