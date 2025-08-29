@@ -1,0 +1,5 @@
+.reveal .slides section.scrollable,
+.reveal .slides section[style*="overflow"] {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
