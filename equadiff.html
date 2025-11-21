@@ -1,682 +1,848 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Equations différentielles</title>
-<style type="text/css">
-body {
-  font-family: sans-serif;
-  max-width: 800px;
-  margin: auto;
-  padding: 1em;
-  line-height: 1.5;
-  box-sizing: border-box;
-}
-body, .footnotes, code { font-size: .9em; }
-li li { font-size: .95em; }
-*, *:before, *:after {
-  box-sizing: inherit;
-}
-pre, img { max-width: 100%; }
-pre, pre:hover {
-  white-space: pre-wrap;
-  word-break: break-all;
-}
-pre code {
-  display: block;
-  overflow-x: auto;
-}
-code { font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace; }
-:not(pre) > code, code[class] { background-color: #F8F8F8; }
-code.language-undefined, pre > code:not([class]) {
-  background-color: inherit;
-  border: 1px solid #eee;
-}
-table {
-  margin: auto;
-  border-top: 1px solid #666;
-}
-table thead th { border-bottom: 1px solid #ddd; }
-th, td { padding: 5px; }
-thead, tfoot, tr:nth-child(even) { background: #eee; }
-blockquote {
-  color: #666;
-  margin: 0;
-  padding-left: 1em;
-  border-left: 0.5em solid #eee;
-}
-hr, .footnotes::before { border: 1px dashed #ddd; }
-.frontmatter { text-align: center; }
-#TOC .numbered li { list-style: none; }
-#TOC .numbered { padding-left: 0; }
-#TOC .numbered ul { padding-left: 1em; }
-table, .body h2 { border-bottom: 1px solid #666; }
-.body .appendix, .appendix ~ h2 { border-bottom-style: dashed; }
-.footnote-ref a::before { content: "["; }
-.footnote-ref a::after { content: "]"; }
-.footnotes::before {
-  content: "";
-  display: block;
-  max-width: 20em;
-}
+<html lang="en"><head>
+<script src="equadiff_files/libs/clipboard/clipboard.min.js"></script>
+<script src="equadiff_files/libs/quarto-html/tabby.min.js"></script>
+<script src="equadiff_files/libs/quarto-html/popper.min.js"></script>
+<script src="equadiff_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="equadiff_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="equadiff_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="equadiff_files/libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.33">
 
-@media print {
-  body {
-    font-size: 12pt;
-    max-width: 100%;
-  }
-  tr, img { page-break-inside: avoid; }
-}
-@media only screen and (min-width: 992px) {
-  pre { white-space: pre; }
-}
-</style>
-<style type="text/css">
-:root { --slide-width: 100%; }
-html { scroll-snap-type: y mandatory; }
-th, td { padding: .2em .5em; }
-.slide {
-  padding: 1em;
-  position: relative;
-}
-.slide > h2, .slide > h3 { margin-top: unset; }
-body {
-  max-width: fit-content;
-  padding: 0;
-}
-a { color: #eb4a47; }
-:not(pre) > code { background-color: #fdfded; }
-#TOC { columns: 2; }
-#TOC::before {
-  font-size: 1.3em;
-  font-weight: bold;
-  display: block;
-  border-bottom: 1px solid #666;
-}
-.frontmatter, .middle {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
-.page-number, .timer {
-  position: absolute;
-  bottom: 0;
-  opacity: .5;
-  font: .7em monospace;
-}
-.page-number { right: 0; }
-.timer { left: 0; }
-.inverse {
-  background-color: #eee;
-  filter: invert(1);
-}
-.fade {
-  background: repeating-linear-gradient(135deg, white, white 30px, #ddd 32px, #ddd 32px);
-  opacity: 0.6;
-}
-.center { text-align: center; }
-.slide-container h2 .section-number {
-  display: inline-block;
-  background-color: #666;
-  color: white;
-  padding: 0 .1em;
-  margin-right: .3em;
-}
-.overview {
-  font-size: .8em;
-  max-width: none;
-}
-.overview .slide {
-  min-height: unset;
-  scroll-snap-align: unset;
-}
-.overview .slide-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-}
-.overview .slide-container .slide {
-  width: var(--slide-width);
-  border: 1px dotted #ccc;
-  margin-bottom: 0.5em;
-}
-.mirrored { transform: scale(-1, 1); }
-.spacer { height: 50vh; }
-.overview .timer, .overview .spacer { display: none; }
-.overview .footnotes { position: unset; }
-html:fullscreen::-webkit-scrollbar { display: none; }
-html:fullscreen {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-@media (min-width: 992px) {
- :root { --slide-width: 49%; }
-  body { font-size: 2em; }
-  .slide {
-    min-height: 100vh;
-    scroll-snap-align: start;
-  }
-  li li { font-size: .9em; }
-  .footnotes {
-    position: absolute;
-    bottom: 1em;
-    font-size: .8em;
-  }
-}
-@media (min-width: 1400px) {
- :root { --slide-width: 33%; }
-}
-@media (min-width: 1800px) {
- :root { --slide-width: 24.67%; }
-}
-@media print, (max-width: 991.98px) {
-  .timer, .spacer { display: none; }
-}
-</style>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/@xiee/utils/css/key-buttons.min.css,npm/@xiee/utils/css/heading-anchor.min.css">
+  <meta name="author" content="Jean-Louis Marchand">
+  <title>Equations différentielles</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="equadiff_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="equadiff_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="equadiff_files/libs/revealjs/dist/theme/quarto-d160da4ebc569886ade2dbcd809f9464.css">
+  <link rel="stylesheet" href="_extensions/schochastics/blackboard/theme.css">
+  <link href="equadiff_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="equadiff_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="equadiff_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="equadiff_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="equadiff_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="equadiff_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="equadiff_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+  <script src="equadiff_files/libs/plotly-binding-4.10.4/plotly.js"></script>
+  <script src="equadiff_files/libs/typedarray-0.1/typedarray.min.js"></script>
+  <script src="equadiff_files/libs/jquery-3.5.1/jquery.min.js"></script>
+  <link href="equadiff_files/libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+  <script src="equadiff_files/libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+  <link href="equadiff_files/libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+  <script src="equadiff_files/libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 </head>
-<body>
-<div class="include-before">
-</div>
-<div class="frontmatter">
-<div class="title"><h1>Equations différentielles</h1></div>
-<div class="author"><h2>JL Marchand</h2></div>
-<div class="date"><h3>2023-12-19</h3></div>
-</div>
-<div class="body">
-<div id="TOC">
-<ul class="numbered">
-<li><a href="#rappels-sur-le-sens-d-une-quation"><span class="section-number">1.</span> Rappels sur le sens d’une équation</a>
-<ul>
-<li><a href="#concept-et-premier-exemple"><span class="section-number">1.1</span> Concept et premier exemple</a></li>
-<li><a href="#r-soudre-l-quation-x-y-2"><span class="section-number">1.2</span> Résoudre l’équation (x+y=2)</a></li>
-<li><a href="#souvenirs"><span class="section-number">1.3</span> Souvenirs</a></li>
-</ul>
-</li>
-<li><a href="#cadre-de-travail"><span class="section-number">2.</span> Cadre de travail</a>
-<ul>
-<li><a href="#les-principes"><span class="section-number">2.1</span> Les principes</a></li>
-<li><a href="#exemple-de-la-fonction-escalier"><span class="section-number">2.2</span> Exemple de la fonction escalier</a></li>
-<li><a href="#th-or-me-des-accroissements-finis"><span class="section-number">2.3</span> Théorème des accroissements finis</a></li>
-<li><a href="#cons-quences"><span class="section-number">2.4</span> Conséquences</a></li>
-<li><a href="#mais-enfin-jamy-a-m-a-l-air-bien-trop-compliqu-pour-moi-tout-a"><span class="section-number">2.5</span> Mais enfin Jamy, ça m’a l’air bien trop compliqué pour moi tout ça !?</a></li>
-<li><a href="#mais-jamy-c-est-toujours-trop-compliqu-pour-moi-jamais-je-n-y-arriverai"><span class="section-number">2.6</span> Mais Jamy, c’est toujours trop compliqué pour moi, jamais je n’y arriverai !</a></li>
-</ul>
-</li>
-<li><a href="#equations-diff-rentielles-lin-aires-d-ordre-1"><span class="section-number">3.</span> Equations différentielles linéaires d’ordre 1</a>
-<ul>
-<li><a href="#cadre-math-matique_1"><span class="section-number">3.1</span> Cadre mathématique</a></li>
-<li><a href="#equation-homog-ne_1"><span class="section-number">3.2</span> Equation homogène</a></li>
-<li><a href="#pourquoi-l-quation-homog-ne-et-la-solution-particuli-re"><span class="section-number">3.3</span> Pourquoi l’équation homogène et la solution particulière ?</a></li>
-<li><a href="#a-la-recherche-d-une-solution-particuli-re"><span class="section-number">3.4</span> A la recherche d’une solution particulière</a></li>
-<li><a href="#en-pratique"><span class="section-number">3.5</span> En pratique</a></li>
-<li><a href="#cas-particulier-o-a-et-b-sont-constantes"><span class="section-number">3.6</span> Cas particulier où a et b sont constantes</a></li>
-<li><a href="#et-si-le-cadre-n-est-pas-v-rifi-ou-qu-aucune-primitive-usuelle-n-appara-t-que-faire"><span class="section-number">3.7</span> Et si le cadre n’est pas vérifié, ou qu’aucune primitive usuelle n’apparaît, que faire ?</a></li>
-</ul>
-</li>
-<li><a href="#equations-diff-rentielles-lin-aires-d-ordre-2-coefficients-constants"><span class="section-number">4.</span> Equations différentielles linéaires d’ordre 2 à coefficients constants</a>
-<ul>
-<li><a href="#cadre-math-matique_2"><span class="section-number">4.1</span> Cadre mathématique</a></li>
-<li><a href="#equation-homog-ne_2"><span class="section-number">4.2</span> Equation homogène</a></li>
-<li><a href="#exemple-oscillation-libre-amortie"><span class="section-number">4.3</span> Exemple : oscillation libre amortie</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<!--
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{Making HTML Slides with the markdown Package}
-%\VignetteEncoding{UTF-8}
--->
-<style type="text/css">
-/* your CSS rules */
-body {
-  background-image: url("blackboard.jpg");
-  background-color: #FFFFFF;
-  background-repeat: no-repeat;
-  background-position: middle center;
-  background-size:  1800px;
-  color: #272822;
-}
-blockquote {
-  border-left: solid 5px #f8ac0080;
-  padding-left: 1em;
-  color: #272822;
-  font-style: italic;
-}
-h1 {
-  color: white;
-}
-h2, h3 {
-  color: #f8ac00;
-}
-.slide-container h2 .section-number {
-  display: inline-block;
-  background-color: #f8ac00;
-  color: white;
-  padding: 0 .1em;
-  margin-right: .3em;
-}
-strong {
-  background-color: #f8ac00;
-  color: white;
+<body class="quarto-dark">
+  <div class="reveal">
+    <div class="slides">
 
-}
-</style>
-<hr />
-<!--# class="middle center" style = "background-color:#f8ac00;"-->
-<h1 id="rappels-sur-le-sens-d-une-quation"><span class="section-number">1.</span> Rappels sur le sens d’une équation</h1>
-<hr />
-<h2 id="concept-et-premier-exemple"><span class="section-number">1.1</span> Concept et premier exemple</h2>
+<section id="title-slide" data-background-image="_extensions/schochastics/blackboard/blackboard.png" class="quarto-title-block center">
+  <h1 class="title">Equations différentielles</h1>
+  <p class="subtitle">ou étudier un lien entre une fonction et ses dérivées</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Jean-Louis Marchand 
+</div>
+</div>
+</div>
+
+</section><section id="TOC">
+<nav role="doc-toc"> 
+<h2 id="toc-title">Sommaire</h2>
 <ul>
-<li>une équation est une égalité qui relie plusieurs quantités</li>
+<li><a href="#/rappels-sur-le-sens-dune-équation" id="/toc-rappels-sur-le-sens-dune-équation"><span class="header-section-number">1</span> Rappels sur le sens d’une équation</a></li>
+<li><a href="#/cadre-de-travail" id="/toc-cadre-de-travail"><span class="header-section-number">2</span> Cadre de travail</a></li>
+<li><a href="#/equations-différentielles-linéaires-dordre-1" id="/toc-equations-différentielles-linéaires-dordre-1"><span class="header-section-number">3</span> Equations différentielles linéaires d’ordre 1</a></li>
+<li><a href="#/equations-différentielles-linéaires-dordre-2-à-coefficients-constants" id="/toc-equations-différentielles-linéaires-dordre-2-à-coefficients-constants"><span class="header-section-number">4</span> Equations différentielles linéaires d’ordre 2 à coefficients constants</a></li>
+</ul>
+</nav>
+</section>
+<section>
+<section id="rappels-sur-le-sens-dune-équation" class="title-slide slide level1 center" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="1">
+<h1><span class="header-section-number">1</span> Rappels sur le sens d’une équation</h1>
+
+</section>
+<section id="concept-et-premier-exemple" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="1.1">
+<h2><span class="header-section-number">1.1</span> Concept et premier exemple</h2>
+<ul>
+<li>une équation est une <strong>égalité</strong> qui relie plusieurs quantités ou objets mathématiques</li>
 <li>pour résoudre une équation, <strong>toujours</strong> préciser dans quel ensemble on travaille !</li>
-<li>exemples : prenons l’équation \(x+y=2\)
+<li>exemples : prenons l’équation <span class="math inline">\(x+y=2\)</span>
 <ul>
-<li>l’ensemble des solutions dans \(\mathbb R^2\) est une droite</li>
-<li>l’ensemble des solutions dans \(\mathbb R^3\) est un plan</li>
+<li>l’ensemble des solutions dans <span class="math inline">\(\mathbb R^2\)</span> est une droite</li>
+<li>l’ensemble des solutions dans <span class="math inline">\(\mathbb R^3\)</span> est un plan</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<hr />
-<h2 id="r-soudre-l-quation-x-y-2"><span class="section-number">1.2</span> Résoudre l’équation \(x+y=2\)</h2>
+</section>
+<section id="résoudre-léquation-xy2" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="1.2">
+<h2><span class="header-section-number">1.2</span> Résoudre l’équation <span class="math inline">\(x+y=2\)</span></h2>
 <ul>
 <li>à gauche, l’ensemble solutions dans le plan, à gauche dans l’espace</li>
 </ul>
 <div>
-  <iframe src="equadiff_2D.html" width="50%" height = "500" align = "left"> 
-  </iframe>
-  <iframe src="equadiff_3D.html" width="50%" height = "500" align = "right">
-  </iframe>
+<p><iframe src="equadiff_2D.html" width="50%" height="500" align="left"> </iframe> <iframe src="equadiff_3D.html" width="50%" height="500" align="right"> </iframe></p>
 </div>
-<hr />
-<h2 id="souvenirs"><span class="section-number">1.3</span> Souvenirs</h2>
+</section>
+<section id="souvenirs" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="1.3">
+<h2><span class="header-section-number">1.3</span> Souvenirs</h2>
 <ul>
-<li>
-<p>au collège, la résolution des systèmes linéaires de deux équations à deux inconnues est réalisée dans le plan \(\mathbb R^2\)</p>
-</li>
-<li>
-<p>au lycée, on demande de préciser que l’équation \(x^2=1\) ne possède pas de solution réelle, le but des <strong>nombres complexes</strong> consiste à créer un ensemble plus grand que \(\mathbb R\) où l’équation possède alors 2 solutions nommées \(i\) et \(-i\)</p>
-</li>
-<li>
-<p>la fonction exponentielle est définie comme l’unique solution <strong>dérivable sur \(\mathbb R\)</strong> du système suivant :
-$$\left\{ \begin{array}{l} f'=f\\f(0)=1\end{array}\right.$$</p>
-</li>
+<li><p>au collège, que la résolution des systèmes linéaires de deux équations à deux inconnues est réalisée dans le plan <span class="math inline">\(\mathbb R^2\)</span> comme pour les équations de droite</p></li>
+<li><p>au lycée, on demande de préciser que l’équation <span class="math inline">\(x^2=-1\)</span> ne possède pas de solution <strong>réelle</strong>, le but des <strong>nombres complexes</strong> consiste à créer un ensemble plus grand que <span class="math inline">\(\mathbb R\)</span> où l’équation possède alors 2 solutions nommées <span class="math inline">\(i\)</span> et <span class="math inline">\(-i\)</span></p></li>
+<li><p>la fonction exponentielle est définie comme l’unique solution <strong>dérivable sur <span class="math inline">\(\mathbb R\)</span></strong> du système suivant : <span class="math display">\[\left\{ \begin{array}{l} f'=f\\f'(0)=1\end{array}\right.\]</span> C’est bien ce qui nous intéresse ici : des fonctions dérivables sur des intervalles</p></li>
 </ul>
-<hr />
-<!--# class="middle center" style = "background-color:#f8ac00;"-->
-<h1 id="cadre-de-travail"><span class="section-number">2.</span> Cadre de travail</h1>
-<hr />
-<h2 id="les-principes"><span class="section-number">2.1</span> Les principes</h2>
+</section></section>
+<section>
+<section id="cadre-de-travail" class="title-slide slide level1 center" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="2">
+<h1><span class="header-section-number">2</span> Cadre de travail</h1>
+
+</section>
+<section id="les-principes" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="2.1">
+<h2><span class="header-section-number">2.1</span> Les principes</h2>
 <ul>
-<li>
-<p>une équation différentielle est une égalité portant sur une ou plusieurs dérivées d’une fonction</p>
+<li><p>une équation différentielle est une égalité portant sur une ou plusieurs dérivées d’une fonction d’une variable</p>
 <ul>
-<li>exemples
-$$ f’ = f,\qquad y’ = \ln,\qquad \frac{dy}{dt}=t\times y^2, \qquad x\times \dot x= \ln(x)$$</li>
+<li>exemples <span class="math display">\[ f' = f,\qquad y' = \ln,\qquad \frac{dy}{dt}=t\times y^2, \qquad x\times \dot x= \ln(x)\]</span></li>
+</ul></li>
+<li><p>pour comprendre comment définir l’ensemble sur lequel on peut résoudre ce genre d’équations, considérons l’équation de base <span class="math display">\[y' = \frac{dy}{dx} = 0\]</span></p></li>
+<li><p>les fonctions constantes apparaissent comme solutions, MAIS !</p></li>
 </ul>
-</li>
-<li>
-<p>pour définir du mieux possible l’ensemble sur lequel on peut résoudre ce genre d’équations, considérons l’équation de base
-$$y' = \frac{dy}{dx} = 0$$</p>
+</section>
+<section id="exemple-de-la-fonction-escalier" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="2.2">
+<h2><span class="header-section-number">2.2</span> Exemple de la fonction escalier</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="htmlwidget-6ca8e4e42467bbab8c57" style="width:800px;height:500px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6ca8e4e42467bbab8c57">{"x":{"visdat":{"713c61bd7a7a":["function () ","plotlyVisDat"]},"cur_data":"713c61bd7a7a","attrs":{"713c61bd7a7a":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"type":"scatter","mode":"lines","showlegend":true,"name":"partie entière","line":{"color":"orange","width":3},"inherit":true},"713c61bd7a7a.1":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":[-4,-3.9900000000000002,-3.9800000000000004,-3.9699999999999998,-3.96,-3.9500000000000002,-3.9400000000000004,-3.9299999999999997,-3.9199999999999999,-3.9100000000000001,-3.9000000000000004,-3.8899999999999997,-3.8799999999999999,-3.8700000000000001,-3.8600000000000003,-3.8499999999999996,-3.8399999999999999,-3.8300000000000001,-3.8200000000000003,-3.8099999999999996,-3.7999999999999998,-3.79,-3.7800000000000002,-3.7699999999999996,-3.7599999999999998,-3.75,-3.7400000000000002,-3.7300000000000004,-3.7199999999999998,-3.71,-3.7000000000000002,-3.6900000000000004,-3.6799999999999997,-3.6699999999999999,-3.6600000000000001,-3.6500000000000004,-3.6399999999999997,-3.6299999999999999,-3.6200000000000001,-3.6100000000000003,-3.5999999999999996,-3.5899999999999999,-3.5800000000000001,-3.5700000000000003,-3.5599999999999996,-3.5499999999999998,-3.54,-3.5300000000000002,-3.5199999999999996,-3.5099999999999998,-3.5,-3.4900000000000002,-3.4800000000000004,-3.4699999999999998,-3.46,-3.4500000000000002,-3.4399999999999995,-3.4299999999999997,-3.4199999999999999,-3.4100000000000001,-3.4000000000000004,-3.3899999999999997,-3.3799999999999999,-3.3700000000000001,-3.3600000000000003,-3.3499999999999996,-3.3399999999999999,-3.3300000000000001,-3.3200000000000003,-3.3099999999999996,-3.2999999999999998,-3.29,-3.2800000000000002,-3.2699999999999996,-3.2599999999999998,-3.25,-3.2400000000000002,-3.2300000000000004,-3.2199999999999998,-3.21,-3.2000000000000002,-3.1899999999999995,-3.1799999999999997,-3.1699999999999999,-3.1600000000000001,-3.1500000000000004,-3.1399999999999997,-3.1299999999999999,-3.1200000000000001,-3.1100000000000003,-3.0999999999999996,-3.0899999999999999,-3.0800000000000001,-3.0700000000000003,-3.0599999999999996,-3.0499999999999998,-3.04,-3.0300000000000002,-3.0199999999999996,-3.0099999999999998],"y":[-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4],"type":"scatter","mode":"lines","showlegend":false,"line":{"color":"orange","width":3},"inherit":true},"713c61bd7a7a.2":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":[-3,-2.9900000000000002,-2.9800000000000004,-2.9699999999999998,-2.96,-2.9500000000000002,-2.9400000000000004,-2.9299999999999997,-2.9199999999999999,-2.9100000000000001,-2.9000000000000004,-2.8899999999999997,-2.8799999999999999,-2.8700000000000001,-2.8600000000000003,-2.8499999999999996,-2.8399999999999999,-2.8300000000000001,-2.8200000000000003,-2.8099999999999996,-2.7999999999999998,-2.79,-2.7800000000000002,-2.7699999999999996,-2.7599999999999998,-2.75,-2.7400000000000002,-2.7300000000000004,-2.7199999999999998,-2.71,-2.7000000000000002,-2.6900000000000004,-2.6799999999999997,-2.6699999999999999,-2.6600000000000001,-2.6500000000000004,-2.6399999999999997,-2.6299999999999999,-2.6200000000000001,-2.6100000000000003,-2.5999999999999996,-2.5899999999999999,-2.5800000000000001,-2.5700000000000003,-2.5599999999999996,-2.5499999999999998,-2.54,-2.5300000000000002,-2.5199999999999996,-2.5099999999999998,-2.5,-2.4900000000000002,-2.4800000000000004,-2.4699999999999998,-2.46,-2.4500000000000002,-2.4399999999999995,-2.4299999999999997,-2.4199999999999999,-2.4100000000000001,-2.4000000000000004,-2.3899999999999997,-2.3799999999999999,-2.3700000000000001,-2.3600000000000003,-2.3499999999999996,-2.3399999999999999,-2.3300000000000001,-2.3200000000000003,-2.3099999999999996,-2.2999999999999998,-2.29,-2.2800000000000002,-2.2699999999999996,-2.2599999999999998,-2.25,-2.2400000000000002,-2.2300000000000004,-2.2199999999999998,-2.21,-2.2000000000000002,-2.1899999999999995,-2.1799999999999997,-2.1699999999999999,-2.1600000000000001,-2.1500000000000004,-2.1399999999999997,-2.1299999999999999,-2.1200000000000001,-2.1100000000000003,-2.0999999999999996,-2.0899999999999999,-2.0800000000000001,-2.0700000000000003,-2.0599999999999996,-2.0499999999999998,-2.04,-2.0300000000000002,-2.0199999999999996,-2.0099999999999998],"y":[-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3],"type":"scatter","mode":"lines","showlegend":false,"line":{"color":"orange","width":3},"inherit":true},"713c61bd7a7a.3":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":[-2,-1.9900000000000002,-1.9800000000000004,-1.9699999999999998,-1.96,-1.9500000000000002,-1.9400000000000004,-1.9299999999999997,-1.9199999999999999,-1.9100000000000001,-1.9000000000000004,-1.8899999999999997,-1.8799999999999999,-1.8700000000000001,-1.8600000000000003,-1.8499999999999996,-1.8399999999999999,-1.8300000000000001,-1.8200000000000003,-1.8099999999999996,-1.7999999999999998,-1.79,-1.7800000000000002,-1.7699999999999996,-1.7599999999999998,-1.75,-1.7400000000000002,-1.7300000000000004,-1.7199999999999998,-1.71,-1.7000000000000002,-1.6900000000000004,-1.6799999999999997,-1.6699999999999999,-1.6600000000000001,-1.6500000000000004,-1.6399999999999997,-1.6299999999999999,-1.6200000000000001,-1.6100000000000003,-1.5999999999999996,-1.5899999999999999,-1.5800000000000001,-1.5700000000000003,-1.5599999999999996,-1.5499999999999998,-1.54,-1.5300000000000002,-1.5199999999999996,-1.5099999999999998,-1.5,-1.4900000000000002,-1.4800000000000004,-1.4699999999999998,-1.46,-1.4500000000000002,-1.4399999999999995,-1.4299999999999997,-1.4199999999999999,-1.4100000000000001,-1.4000000000000004,-1.3899999999999997,-1.3799999999999999,-1.3700000000000001,-1.3600000000000003,-1.3499999999999996,-1.3399999999999999,-1.3300000000000001,-1.3200000000000003,-1.3099999999999996,-1.2999999999999998,-1.29,-1.2800000000000002,-1.2699999999999996,-1.2599999999999998,-1.25,-1.2400000000000002,-1.2300000000000004,-1.2199999999999998,-1.21,-1.2000000000000002,-1.1899999999999995,-1.1799999999999997,-1.1699999999999999,-1.1600000000000001,-1.1500000000000004,-1.1399999999999997,-1.1299999999999999,-1.1200000000000001,-1.1100000000000003,-1.0999999999999996,-1.0899999999999999,-1.0800000000000001,-1.0700000000000003,-1.0599999999999996,-1.0499999999999998,-1.04,-1.0300000000000002,-1.0199999999999996,-1.0099999999999998],"y":[-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2],"type":"scatter","mode":"lines","showlegend":false,"line":{"color":"orange","width":3},"inherit":true},"713c61bd7a7a.4":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":[-1,-0.99000000000000021,-0.98000000000000043,-0.96999999999999975,-0.95999999999999996,-0.95000000000000018,-0.94000000000000039,-0.92999999999999972,-0.91999999999999993,-0.91000000000000014,-0.90000000000000036,-0.88999999999999968,-0.87999999999999989,-0.87000000000000011,-0.86000000000000032,-0.84999999999999964,-0.83999999999999986,-0.83000000000000007,-0.82000000000000028,-0.80999999999999961,-0.79999999999999982,-0.79000000000000004,-0.78000000000000025,-0.76999999999999957,-0.75999999999999979,-0.75,-0.74000000000000021,-0.73000000000000043,-0.71999999999999975,-0.70999999999999996,-0.70000000000000018,-0.69000000000000039,-0.67999999999999972,-0.66999999999999993,-0.66000000000000014,-0.65000000000000036,-0.63999999999999968,-0.62999999999999989,-0.62000000000000011,-0.61000000000000032,-0.59999999999999964,-0.58999999999999986,-0.58000000000000007,-0.57000000000000028,-0.55999999999999961,-0.54999999999999982,-0.54000000000000004,-0.53000000000000025,-0.51999999999999957,-0.50999999999999979,-0.5,-0.49000000000000021,-0.48000000000000043,-0.46999999999999975,-0.45999999999999996,-0.45000000000000018,-0.4399999999999995,-0.42999999999999972,-0.41999999999999993,-0.41000000000000014,-0.40000000000000036,-0.38999999999999968,-0.37999999999999989,-0.37000000000000011,-0.36000000000000032,-0.34999999999999964,-0.33999999999999986,-0.33000000000000007,-0.32000000000000028,-0.30999999999999961,-0.29999999999999982,-0.29000000000000004,-0.28000000000000025,-0.26999999999999957,-0.25999999999999979,-0.25,-0.24000000000000021,-0.23000000000000043,-0.21999999999999975,-0.20999999999999996,-0.20000000000000018,-0.1899999999999995,-0.17999999999999972,-0.16999999999999993,-0.16000000000000014,-0.15000000000000036,-0.13999999999999968,-0.12999999999999989,-0.12000000000000011,-0.11000000000000032,-0.099999999999999645,-0.089999999999999858,-0.080000000000000071,-0.070000000000000284,-0.059999999999999609,-0.049999999999999822,-0.040000000000000036,-0.030000000000000249,-0.019999999999999574,-0.0099999999999997868],"y":[-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],"type":"scatter","mode":"lines","showlegend":false,"line":{"color":"orange","width":3},"inherit":true},"713c61bd7a7a.5":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":[0,0.0099999999999997868,0.019999999999999574,0.030000000000000249,0.040000000000000036,0.049999999999999822,0.059999999999999609,0.070000000000000284,0.080000000000000071,0.089999999999999858,0.099999999999999645,0.11000000000000032,0.12000000000000011,0.12999999999999989,0.13999999999999968,0.15000000000000036,0.16000000000000014,0.16999999999999993,0.17999999999999972,0.19000000000000039,0.20000000000000018,0.20999999999999996,0.21999999999999975,0.23000000000000043,0.24000000000000021,0.25,0.25999999999999979,0.26999999999999957,0.28000000000000025,0.29000000000000004,0.29999999999999982,0.30999999999999961,0.32000000000000028,0.33000000000000007,0.33999999999999986,0.34999999999999964,0.36000000000000032,0.37000000000000011,0.37999999999999989,0.38999999999999968,0.40000000000000036,0.41000000000000014,0.41999999999999993,0.42999999999999972,0.44000000000000039,0.45000000000000018,0.45999999999999996,0.46999999999999975,0.48000000000000043,0.49000000000000021,0.5,0.50999999999999979,0.51999999999999957,0.53000000000000025,0.54000000000000004,0.54999999999999982,0.5600000000000005,0.57000000000000028,0.58000000000000007,0.58999999999999986,0.59999999999999964,0.61000000000000032,0.62000000000000011,0.62999999999999989,0.63999999999999968,0.65000000000000036,0.66000000000000014,0.66999999999999993,0.67999999999999972,0.69000000000000039,0.70000000000000018,0.70999999999999996,0.71999999999999975,0.73000000000000043,0.74000000000000021,0.75,0.75999999999999979,0.76999999999999957,0.78000000000000025,0.79000000000000004,0.79999999999999982,0.8100000000000005,0.82000000000000028,0.83000000000000007,0.83999999999999986,0.84999999999999964,0.86000000000000032,0.87000000000000011,0.87999999999999989,0.88999999999999968,0.90000000000000036,0.91000000000000014,0.91999999999999993,0.92999999999999972,0.94000000000000039,0.95000000000000018,0.95999999999999996,0.96999999999999975,0.98000000000000043,0.99000000000000021],"y":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"type":"scatter","mode":"lines","showlegend":false,"line":{"color":"orange","width":3},"inherit":true},"713c61bd7a7a.6":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":[1,1.0099999999999998,1.0199999999999996,1.0300000000000002,1.04,1.0499999999999998,1.0599999999999996,1.0700000000000003,1.0800000000000001,1.0899999999999999,1.0999999999999996,1.1100000000000003,1.1200000000000001,1.1299999999999999,1.1399999999999997,1.1500000000000004,1.1600000000000001,1.1699999999999999,1.1799999999999997,1.1900000000000004,1.2000000000000002,1.21,1.2199999999999998,1.2300000000000004,1.2400000000000002,1.25,1.2599999999999998,1.2699999999999996,1.2800000000000002,1.29,1.2999999999999998,1.3099999999999996,1.3200000000000003,1.3300000000000001,1.3399999999999999,1.3499999999999996,1.3600000000000003,1.3700000000000001,1.3799999999999999,1.3899999999999997,1.4000000000000004,1.4100000000000001,1.4199999999999999,1.4299999999999997,1.4400000000000004,1.4500000000000002,1.46,1.4699999999999998,1.4800000000000004,1.4900000000000002,1.5,1.5099999999999998,1.5199999999999996,1.5300000000000002,1.54,1.5499999999999998,1.5600000000000005,1.5700000000000003,1.5800000000000001,1.5899999999999999,1.5999999999999996,1.6100000000000003,1.6200000000000001,1.6299999999999999,1.6399999999999997,1.6500000000000004,1.6600000000000001,1.6699999999999999,1.6799999999999997,1.6900000000000004,1.7000000000000002,1.71,1.7199999999999998,1.7300000000000004,1.7400000000000002,1.75,1.7599999999999998,1.7699999999999996,1.7800000000000002,1.79,1.7999999999999998,1.8100000000000005,1.8200000000000003,1.8300000000000001,1.8399999999999999,1.8499999999999996,1.8600000000000003,1.8700000000000001,1.8799999999999999,1.8899999999999997,1.9000000000000004,1.9100000000000001,1.9199999999999999,1.9299999999999997,1.9400000000000004,1.9500000000000002,1.96,1.9699999999999998,1.9800000000000004,1.9900000000000002],"y":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"type":"scatter","mode":"lines","showlegend":false,"line":{"color":"orange","width":3},"inherit":true},"713c61bd7a7a.7":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":[2,2.0099999999999998,2.0199999999999996,2.0300000000000002,2.04,2.0499999999999998,2.0599999999999996,2.0700000000000003,2.0800000000000001,2.0899999999999999,2.0999999999999996,2.1100000000000003,2.1200000000000001,2.1299999999999999,2.1399999999999997,2.1500000000000004,2.1600000000000001,2.1699999999999999,2.1799999999999997,2.1900000000000004,2.2000000000000002,2.21,2.2199999999999998,2.2300000000000004,2.2400000000000002,2.25,2.2599999999999998,2.2699999999999996,2.2800000000000002,2.29,2.2999999999999998,2.3099999999999996,2.3200000000000003,2.3300000000000001,2.3399999999999999,2.3499999999999996,2.3600000000000003,2.3700000000000001,2.3799999999999999,2.3899999999999997,2.4000000000000004,2.4100000000000001,2.4199999999999999,2.4299999999999997,2.4400000000000004,2.4500000000000002,2.46,2.4699999999999998,2.4800000000000004,2.4900000000000002,2.5,2.5099999999999998,2.5199999999999996,2.5300000000000002,2.54,2.5499999999999998,2.5600000000000005,2.5700000000000003,2.5800000000000001,2.5899999999999999,2.5999999999999996,2.6100000000000003,2.6200000000000001,2.6299999999999999,2.6399999999999997,2.6500000000000004,2.6600000000000001,2.6699999999999999,2.6799999999999997,2.6900000000000004,2.7000000000000002,2.71,2.7199999999999998,2.7300000000000004,2.7400000000000002,2.75,2.7599999999999998,2.7699999999999996,2.7800000000000002,2.79,2.7999999999999998,2.8100000000000005,2.8200000000000003,2.8300000000000001,2.8399999999999999,2.8499999999999996,2.8600000000000003,2.8700000000000001,2.8799999999999999,2.8899999999999997,2.9000000000000004,2.9100000000000001,2.9199999999999999,2.9299999999999997,2.9400000000000004,2.9500000000000002,2.96,2.9699999999999998,2.9800000000000004,2.9900000000000002],"y":[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],"type":"scatter","mode":"lines","showlegend":false,"line":{"color":"orange","width":3},"inherit":true},"713c61bd7a7a.8":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":[3,3.0099999999999998,3.0199999999999996,3.0300000000000002,3.04,3.0499999999999998,3.0599999999999996,3.0700000000000003,3.0800000000000001,3.0899999999999999,3.0999999999999996,3.1100000000000003,3.1200000000000001,3.1299999999999999,3.1399999999999997,3.1500000000000004,3.1600000000000001,3.1699999999999999,3.1799999999999997,3.1900000000000004,3.2000000000000002,3.21,3.2199999999999998,3.2300000000000004,3.2400000000000002,3.25,3.2599999999999998,3.2699999999999996,3.2800000000000002,3.29,3.2999999999999998,3.3099999999999996,3.3200000000000003,3.3300000000000001,3.3399999999999999,3.3499999999999996,3.3600000000000003,3.3700000000000001,3.3799999999999999,3.3899999999999997,3.4000000000000004,3.4100000000000001,3.4199999999999999,3.4299999999999997,3.4400000000000004,3.4500000000000002,3.46,3.4699999999999998,3.4800000000000004,3.4900000000000002,3.5,3.5099999999999998,3.5199999999999996,3.5300000000000002,3.54,3.5499999999999998,3.5600000000000005,3.5700000000000003,3.5800000000000001,3.5899999999999999,3.5999999999999996,3.6100000000000003,3.6200000000000001,3.6299999999999999,3.6399999999999997,3.6500000000000004,3.6600000000000001,3.6699999999999999,3.6799999999999997,3.6900000000000004,3.7000000000000002,3.71,3.7199999999999998,3.7300000000000004,3.7400000000000002,3.75,3.7599999999999998,3.7699999999999996,3.7800000000000002,3.79,3.7999999999999998,3.8100000000000005,3.8200000000000003,3.8300000000000001,3.8399999999999999,3.8499999999999996,3.8600000000000003,3.8700000000000001,3.8799999999999999,3.8899999999999997,3.9000000000000004,3.9100000000000001,3.9199999999999999,3.9299999999999997,3.9400000000000004,3.9500000000000002,3.96,3.9699999999999998,3.9800000000000004,3.9900000000000002],"y":[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],"type":"scatter","mode":"lines","showlegend":false,"line":{"color":"orange","width":3},"inherit":true},"713c61bd7a7a.9":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":[4,4.0099999999999998,4.0199999999999996,4.0300000000000002,4.04,4.0499999999999998,4.0599999999999996,4.0700000000000003,4.0800000000000001,4.0899999999999999,4.0999999999999996,4.1100000000000003,4.1200000000000001,4.1299999999999999,4.1399999999999997,4.1500000000000004,4.1600000000000001,4.1699999999999999,4.1799999999999997,4.1900000000000004,4.2000000000000002,4.21,4.2199999999999998,4.2300000000000004,4.2400000000000002,4.25,4.2599999999999998,4.2699999999999996,4.2800000000000002,4.29,4.2999999999999998,4.3099999999999996,4.3200000000000003,4.3300000000000001,4.3399999999999999,4.3499999999999996,4.3600000000000003,4.3700000000000001,4.3799999999999999,4.3899999999999997,4.4000000000000004,4.4100000000000001,4.4199999999999999,4.4299999999999997,4.4400000000000004,4.4500000000000002,4.46,4.4699999999999998,4.4800000000000004,4.4900000000000002,4.5,4.5099999999999998,4.5199999999999996,4.5300000000000002,4.54,4.5499999999999998,4.5600000000000005,4.5700000000000003,4.5800000000000001,4.5899999999999999,4.5999999999999996,4.6100000000000003,4.6200000000000001,4.6299999999999999,4.6399999999999997,4.6500000000000004,4.6600000000000001,4.6699999999999999,4.6799999999999997,4.6900000000000004,4.7000000000000002,4.71,4.7199999999999998,4.7300000000000004,4.7400000000000002,4.75,4.7599999999999998,4.7699999999999996,4.7800000000000002,4.79,4.7999999999999998,4.8100000000000005,4.8200000000000003,4.8300000000000001,4.8399999999999999,4.8499999999999996,4.8600000000000003,4.8700000000000001,4.8799999999999999,4.8899999999999997,4.9000000000000004,4.9100000000000001,4.9199999999999999,4.9299999999999997,4.9400000000000004,4.9500000000000002,4.96,4.9699999999999998,4.9800000000000004,4.9900000000000002],"y":[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],"type":"scatter","mode":"lines","showlegend":false,"line":{"color":"orange","width":3},"inherit":true},"713c61bd7a7a.10":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":[5,5.0099999999999998,5.0199999999999996,5.0300000000000002,5.04,5.0499999999999998,5.0599999999999996,5.0700000000000003,5.0800000000000001,5.0899999999999999,5.0999999999999996,5.1100000000000003,5.1200000000000001,5.1299999999999999,5.1399999999999997,5.1500000000000004,5.1600000000000001,5.1699999999999999,5.1799999999999997,5.1900000000000004,5.2000000000000002,5.21,5.2199999999999998,5.2300000000000004,5.2400000000000002,5.25,5.2599999999999998,5.2699999999999996,5.2800000000000002,5.29,5.2999999999999998,5.3099999999999996,5.3200000000000003,5.3300000000000001,5.3399999999999999,5.3499999999999996,5.3600000000000003,5.3700000000000001,5.3799999999999999,5.3899999999999997,5.4000000000000004,5.4100000000000001,5.4199999999999999,5.4299999999999997,5.4400000000000004,5.4500000000000002,5.46,5.4699999999999998,5.4800000000000004,5.4900000000000002,5.5,5.5099999999999998,5.5199999999999996,5.5300000000000002,5.54,5.5499999999999998,5.5600000000000005,5.5700000000000003,5.5800000000000001,5.5899999999999999,5.5999999999999996,5.6100000000000003,5.6200000000000001,5.6299999999999999,5.6399999999999997,5.6500000000000004,5.6600000000000001,5.6699999999999999,5.6799999999999997,5.6900000000000004,5.7000000000000002,5.71,5.7199999999999998,5.7300000000000004,5.7400000000000002,5.75,5.7599999999999998,5.7699999999999996,5.7800000000000002,5.79,5.7999999999999998,5.8100000000000005,5.8200000000000003,5.8300000000000001,5.8399999999999999,5.8499999999999996,5.8600000000000003,5.8700000000000001,5.8799999999999999,5.8899999999999997,5.9000000000000004,5.9100000000000001,5.9199999999999999,5.9299999999999997,5.9400000000000004,5.9500000000000002,5.96,5.9699999999999998,5.9800000000000004,5.9900000000000002],"y":[5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5],"type":"scatter","mode":"lines","showlegend":false,"line":{"color":"orange","width":3},"inherit":true},"713c61bd7a7a.11":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":[-5,-4,-3,-2,-1,0,1,2,3,4,5],"y":[-5,-4,-3,-2,-1,0,1,2,3,4,5],"type":"scatter","mode":"markers","showlegend":false,"marker":{"color":"orange","width":3},"inherit":true}},"layout":{"width":800,"height":600,"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"range":[-5,5],"constrain":"domain","zerolinecolor":"ffff","zerolinewidth":4,"gridcolor":"ffff","dtick":1,"tickfont":{"size":22,"color":"white"},"title":"x"},"yaxis":{"domain":[0,1],"automargin":true,"range":[-5,5],"zerolinecolor":"ffff","zerolinewidth":4,"gridcolor":"ffff","dtick":1,"scaleanchor":"x","scaleratio":1,"tickfont":{"size":22,"color":"white"},"title":"y"},"plot_bgcolor":"transparent","paper_bgcolor":"transparent","legend":{"font":{"size":22,"color":"white"}},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[-5,-4.9900000000000002,-4.9800000000000004,-4.9699999999999998,-4.96,-4.9500000000000002,-4.9400000000000004,-4.9299999999999997,-4.9199999999999999,-4.9100000000000001,-4.9000000000000004,-4.8899999999999997,-4.8799999999999999,-4.8700000000000001,-4.8600000000000003,-4.8499999999999996,-4.8399999999999999,-4.8300000000000001,-4.8200000000000003,-4.8099999999999996,-4.7999999999999998,-4.79,-4.7800000000000002,-4.7699999999999996,-4.7599999999999998,-4.75,-4.7400000000000002,-4.7300000000000004,-4.7199999999999998,-4.71,-4.7000000000000002,-4.6900000000000004,-4.6799999999999997,-4.6699999999999999,-4.6600000000000001,-4.6500000000000004,-4.6399999999999997,-4.6299999999999999,-4.6200000000000001,-4.6100000000000003,-4.5999999999999996,-4.5899999999999999,-4.5800000000000001,-4.5700000000000003,-4.5599999999999996,-4.5499999999999998,-4.54,-4.5300000000000002,-4.5199999999999996,-4.5099999999999998,-4.5,-4.4900000000000002,-4.4800000000000004,-4.4699999999999998,-4.46,-4.4500000000000002,-4.4399999999999995,-4.4299999999999997,-4.4199999999999999,-4.4100000000000001,-4.4000000000000004,-4.3899999999999997,-4.3799999999999999,-4.3700000000000001,-4.3600000000000003,-4.3499999999999996,-4.3399999999999999,-4.3300000000000001,-4.3200000000000003,-4.3099999999999996,-4.2999999999999998,-4.29,-4.2800000000000002,-4.2699999999999996,-4.2599999999999998,-4.25,-4.2400000000000002,-4.2300000000000004,-4.2199999999999998,-4.21,-4.2000000000000002,-4.1899999999999995,-4.1799999999999997,-4.1699999999999999,-4.1600000000000001,-4.1500000000000004,-4.1399999999999997,-4.1299999999999999,-4.1200000000000001,-4.1100000000000003,-4.0999999999999996,-4.0899999999999999,-4.0800000000000001,-4.0700000000000003,-4.0599999999999996,-4.0499999999999998,-4.04,-4.0300000000000002,-4.0199999999999996,-4.0099999999999998],"y":[-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5],"type":"scatter","mode":"lines","showlegend":true,"name":"partie entière","line":{"color":"orange","width":3},"marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[-4,-3.9900000000000002,-3.9800000000000004,-3.9699999999999998,-3.96,-3.9500000000000002,-3.9400000000000004,-3.9299999999999997,-3.9199999999999999,-3.9100000000000001,-3.9000000000000004,-3.8899999999999997,-3.8799999999999999,-3.8700000000000001,-3.8600000000000003,-3.8499999999999996,-3.8399999999999999,-3.8300000000000001,-3.8200000000000003,-3.8099999999999996,-3.7999999999999998,-3.79,-3.7800000000000002,-3.7699999999999996,-3.7599999999999998,-3.75,-3.7400000000000002,-3.7300000000000004,-3.7199999999999998,-3.71,-3.7000000000000002,-3.6900000000000004,-3.6799999999999997,-3.6699999999999999,-3.6600000000000001,-3.6500000000000004,-3.6399999999999997,-3.6299999999999999,-3.6200000000000001,-3.6100000000000003,-3.5999999999999996,-3.5899999999999999,-3.5800000000000001,-3.5700000000000003,-3.5599999999999996,-3.5499999999999998,-3.54,-3.5300000000000002,-3.5199999999999996,-3.5099999999999998,-3.5,-3.4900000000000002,-3.4800000000000004,-3.4699999999999998,-3.46,-3.4500000000000002,-3.4399999999999995,-3.4299999999999997,-3.4199999999999999,-3.4100000000000001,-3.4000000000000004,-3.3899999999999997,-3.3799999999999999,-3.3700000000000001,-3.3600000000000003,-3.3499999999999996,-3.3399999999999999,-3.3300000000000001,-3.3200000000000003,-3.3099999999999996,-3.2999999999999998,-3.29,-3.2800000000000002,-3.2699999999999996,-3.2599999999999998,-3.25,-3.2400000000000002,-3.2300000000000004,-3.2199999999999998,-3.21,-3.2000000000000002,-3.1899999999999995,-3.1799999999999997,-3.1699999999999999,-3.1600000000000001,-3.1500000000000004,-3.1399999999999997,-3.1299999999999999,-3.1200000000000001,-3.1100000000000003,-3.0999999999999996,-3.0899999999999999,-3.0800000000000001,-3.0700000000000003,-3.0599999999999996,-3.0499999999999998,-3.04,-3.0300000000000002,-3.0199999999999996,-3.0099999999999998],"y":[-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4],"type":"scatter","mode":"lines","showlegend":false,"line":{"color":"orange","width":3},"marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[-3,-2.9900000000000002,-2.9800000000000004,-2.9699999999999998,-2.96,-2.9500000000000002,-2.9400000000000004,-2.9299999999999997,-2.9199999999999999,-2.9100000000000001,-2.9000000000000004,-2.8899999999999997,-2.8799999999999999,-2.8700000000000001,-2.8600000000000003,-2.8499999999999996,-2.8399999999999999,-2.8300000000000001,-2.8200000000000003,-2.8099999999999996,-2.7999999999999998,-2.79,-2.7800000000000002,-2.7699999999999996,-2.7599999999999998,-2.75,-2.7400000000000002,-2.7300000000000004,-2.7199999999999998,-2.71,-2.7000000000000002,-2.6900000000000004,-2.6799999999999997,-2.6699999999999999,-2.6600000000000001,-2.6500000000000004,-2.6399999999999997,-2.6299999999999999,-2.6200000000000001,-2.6100000000000003,-2.5999999999999996,-2.5899999999999999,-2.5800000000000001,-2.5700000000000003,-2.5599999999999996,-2.5499999999999998,-2.54,-2.5300000000000002,-2.5199999999999996,-2.5099999999999998,-2.5,-2.4900000000000002,-2.4800000000000004,-2.4699999999999998,-2.46,-2.4500000000000002,-2.4399999999999995,-2.4299999999999997,-2.4199999999999999,-2.4100000000000001,-2.4000000000000004,-2.3899999999999997,-2.3799999999999999,-2.3700000000000001,-2.3600000000000003,-2.3499999999999996,-2.3399999999999999,-2.3300000000000001,-2.3200000000000003,-2.3099999999999996,-2.2999999999999998,-2.29,-2.2800000000000002,-2.2699999999999996,-2.2599999999999998,-2.25,-2.2400000000000002,-2.2300000000000004,-2.2199999999999998,-2.21,-2.2000000000000002,-2.1899999999999995,-2.1799999999999997,-2.1699999999999999,-2.1600000000000001,-2.1500000000000004,-2.1399999999999997,-2.1299999999999999,-2.1200000000000001,-2.1100000000000003,-2.0999999999999996,-2.0899999999999999,-2.0800000000000001,-2.0700000000000003,-2.0599999999999996,-2.0499999999999998,-2.04,-2.0300000000000002,-2.0199999999999996,-2.0099999999999998],"y":[-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3],"type":"scatter","mode":"lines","showlegend":false,"line":{"color":"orange","width":3},"marker":{"color":"rgba(44,160,44,1)","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[-2,-1.9900000000000002,-1.9800000000000004,-1.9699999999999998,-1.96,-1.9500000000000002,-1.9400000000000004,-1.9299999999999997,-1.9199999999999999,-1.9100000000000001,-1.9000000000000004,-1.8899999999999997,-1.8799999999999999,-1.8700000000000001,-1.8600000000000003,-1.8499999999999996,-1.8399999999999999,-1.8300000000000001,-1.8200000000000003,-1.8099999999999996,-1.7999999999999998,-1.79,-1.7800000000000002,-1.7699999999999996,-1.7599999999999998,-1.75,-1.7400000000000002,-1.7300000000000004,-1.7199999999999998,-1.71,-1.7000000000000002,-1.6900000000000004,-1.6799999999999997,-1.6699999999999999,-1.6600000000000001,-1.6500000000000004,-1.6399999999999997,-1.6299999999999999,-1.6200000000000001,-1.6100000000000003,-1.5999999999999996,-1.5899999999999999,-1.5800000000000001,-1.5700000000000003,-1.5599999999999996,-1.5499999999999998,-1.54,-1.5300000000000002,-1.5199999999999996,-1.5099999999999998,-1.5,-1.4900000000000002,-1.4800000000000004,-1.4699999999999998,-1.46,-1.4500000000000002,-1.4399999999999995,-1.4299999999999997,-1.4199999999999999,-1.4100000000000001,-1.4000000000000004,-1.3899999999999997,-1.3799999999999999,-1.3700000000000001,-1.3600000000000003,-1.3499999999999996,-1.3399999999999999,-1.3300000000000001,-1.3200000000000003,-1.3099999999999996,-1.2999999999999998,-1.29,-1.2800000000000002,-1.2699999999999996,-1.2599999999999998,-1.25,-1.2400000000000002,-1.2300000000000004,-1.2199999999999998,-1.21,-1.2000000000000002,-1.1899999999999995,-1.1799999999999997,-1.1699999999999999,-1.1600000000000001,-1.1500000000000004,-1.1399999999999997,-1.1299999999999999,-1.1200000000000001,-1.1100000000000003,-1.0999999999999996,-1.0899999999999999,-1.0800000000000001,-1.0700000000000003,-1.0599999999999996,-1.0499999999999998,-1.04,-1.0300000000000002,-1.0199999999999996,-1.0099999999999998],"y":[-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2],"type":"scatter","mode":"lines","showlegend":false,"line":{"color":"orange","width":3},"marker":{"color":"rgba(214,39,40,1)","line":{"color":"rgba(214,39,40,1)"}},"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[-1,-0.99000000000000021,-0.98000000000000043,-0.96999999999999975,-0.95999999999999996,-0.95000000000000018,-0.94000000000000039,-0.92999999999999972,-0.91999999999999993,-0.91000000000000014,-0.90000000000000036,-0.88999999999999968,-0.87999999999999989,-0.87000000000000011,-0.86000000000000032,-0.84999999999999964,-0.83999999999999986,-0.83000000000000007,-0.82000000000000028,-0.80999999999999961,-0.79999999999999982,-0.79000000000000004,-0.78000000000000025,-0.76999999999999957,-0.75999999999999979,-0.75,-0.74000000000000021,-0.73000000000000043,-0.71999999999999975,-0.70999999999999996,-0.70000000000000018,-0.69000000000000039,-0.67999999999999972,-0.66999999999999993,-0.66000000000000014,-0.65000000000000036,-0.63999999999999968,-0.62999999999999989,-0.62000000000000011,-0.61000000000000032,-0.59999999999999964,-0.58999999999999986,-0.58000000000000007,-0.57000000000000028,-0.55999999999999961,-0.54999999999999982,-0.54000000000000004,-0.53000000000000025,-0.51999999999999957,-0.50999999999999979,-0.5,-0.49000000000000021,-0.48000000000000043,-0.46999999999999975,-0.45999999999999996,-0.45000000000000018,-0.4399999999999995,-0.42999999999999972,-0.41999999999999993,-0.41000000000000014,-0.40000000000000036,-0.38999999999999968,-0.37999999999999989,-0.37000000000000011,-0.36000000000000032,-0.34999999999999964,-0.33999999999999986,-0.33000000000000007,-0.32000000000000028,-0.30999999999999961,-0.29999999999999982,-0.29000000000000004,-0.28000000000000025,-0.26999999999999957,-0.25999999999999979,-0.25,-0.24000000000000021,-0.23000000000000043,-0.21999999999999975,-0.20999999999999996,-0.20000000000000018,-0.1899999999999995,-0.17999999999999972,-0.16999999999999993,-0.16000000000000014,-0.15000000000000036,-0.13999999999999968,-0.12999999999999989,-0.12000000000000011,-0.11000000000000032,-0.099999999999999645,-0.089999999999999858,-0.080000000000000071,-0.070000000000000284,-0.059999999999999609,-0.049999999999999822,-0.040000000000000036,-0.030000000000000249,-0.019999999999999574,-0.0099999999999997868],"y":[-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],"type":"scatter","mode":"lines","showlegend":false,"line":{"color":"orange","width":3},"marker":{"color":"rgba(148,103,189,1)","line":{"color":"rgba(148,103,189,1)"}},"error_y":{"color":"rgba(148,103,189,1)"},"error_x":{"color":"rgba(148,103,189,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[0,0.0099999999999997868,0.019999999999999574,0.030000000000000249,0.040000000000000036,0.049999999999999822,0.059999999999999609,0.070000000000000284,0.080000000000000071,0.089999999999999858,0.099999999999999645,0.11000000000000032,0.12000000000000011,0.12999999999999989,0.13999999999999968,0.15000000000000036,0.16000000000000014,0.16999999999999993,0.17999999999999972,0.19000000000000039,0.20000000000000018,0.20999999999999996,0.21999999999999975,0.23000000000000043,0.24000000000000021,0.25,0.25999999999999979,0.26999999999999957,0.28000000000000025,0.29000000000000004,0.29999999999999982,0.30999999999999961,0.32000000000000028,0.33000000000000007,0.33999999999999986,0.34999999999999964,0.36000000000000032,0.37000000000000011,0.37999999999999989,0.38999999999999968,0.40000000000000036,0.41000000000000014,0.41999999999999993,0.42999999999999972,0.44000000000000039,0.45000000000000018,0.45999999999999996,0.46999999999999975,0.48000000000000043,0.49000000000000021,0.5,0.50999999999999979,0.51999999999999957,0.53000000000000025,0.54000000000000004,0.54999999999999982,0.5600000000000005,0.57000000000000028,0.58000000000000007,0.58999999999999986,0.59999999999999964,0.61000000000000032,0.62000000000000011,0.62999999999999989,0.63999999999999968,0.65000000000000036,0.66000000000000014,0.66999999999999993,0.67999999999999972,0.69000000000000039,0.70000000000000018,0.70999999999999996,0.71999999999999975,0.73000000000000043,0.74000000000000021,0.75,0.75999999999999979,0.76999999999999957,0.78000000000000025,0.79000000000000004,0.79999999999999982,0.8100000000000005,0.82000000000000028,0.83000000000000007,0.83999999999999986,0.84999999999999964,0.86000000000000032,0.87000000000000011,0.87999999999999989,0.88999999999999968,0.90000000000000036,0.91000000000000014,0.91999999999999993,0.92999999999999972,0.94000000000000039,0.95000000000000018,0.95999999999999996,0.96999999999999975,0.98000000000000043,0.99000000000000021],"y":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"type":"scatter","mode":"lines","showlegend":false,"line":{"color":"orange","width":3},"marker":{"color":"rgba(140,86,75,1)","line":{"color":"rgba(140,86,75,1)"}},"error_y":{"color":"rgba(140,86,75,1)"},"error_x":{"color":"rgba(140,86,75,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[1,1.0099999999999998,1.0199999999999996,1.0300000000000002,1.04,1.0499999999999998,1.0599999999999996,1.0700000000000003,1.0800000000000001,1.0899999999999999,1.0999999999999996,1.1100000000000003,1.1200000000000001,1.1299999999999999,1.1399999999999997,1.1500000000000004,1.1600000000000001,1.1699999999999999,1.1799999999999997,1.1900000000000004,1.2000000000000002,1.21,1.2199999999999998,1.2300000000000004,1.2400000000000002,1.25,1.2599999999999998,1.2699999999999996,1.2800000000000002,1.29,1.2999999999999998,1.3099999999999996,1.3200000000000003,1.3300000000000001,1.3399999999999999,1.3499999999999996,1.3600000000000003,1.3700000000000001,1.3799999999999999,1.3899999999999997,1.4000000000000004,1.4100000000000001,1.4199999999999999,1.4299999999999997,1.4400000000000004,1.4500000000000002,1.46,1.4699999999999998,1.4800000000000004,1.4900000000000002,1.5,1.5099999999999998,1.5199999999999996,1.5300000000000002,1.54,1.5499999999999998,1.5600000000000005,1.5700000000000003,1.5800000000000001,1.5899999999999999,1.5999999999999996,1.6100000000000003,1.6200000000000001,1.6299999999999999,1.6399999999999997,1.6500000000000004,1.6600000000000001,1.6699999999999999,1.6799999999999997,1.6900000000000004,1.7000000000000002,1.71,1.7199999999999998,1.7300000000000004,1.7400000000000002,1.75,1.7599999999999998,1.7699999999999996,1.7800000000000002,1.79,1.7999999999999998,1.8100000000000005,1.8200000000000003,1.8300000000000001,1.8399999999999999,1.8499999999999996,1.8600000000000003,1.8700000000000001,1.8799999999999999,1.8899999999999997,1.9000000000000004,1.9100000000000001,1.9199999999999999,1.9299999999999997,1.9400000000000004,1.9500000000000002,1.96,1.9699999999999998,1.9800000000000004,1.9900000000000002],"y":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"type":"scatter","mode":"lines","showlegend":false,"line":{"color":"orange","width":3},"marker":{"color":"rgba(227,119,194,1)","line":{"color":"rgba(227,119,194,1)"}},"error_y":{"color":"rgba(227,119,194,1)"},"error_x":{"color":"rgba(227,119,194,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2,2.0099999999999998,2.0199999999999996,2.0300000000000002,2.04,2.0499999999999998,2.0599999999999996,2.0700000000000003,2.0800000000000001,2.0899999999999999,2.0999999999999996,2.1100000000000003,2.1200000000000001,2.1299999999999999,2.1399999999999997,2.1500000000000004,2.1600000000000001,2.1699999999999999,2.1799999999999997,2.1900000000000004,2.2000000000000002,2.21,2.2199999999999998,2.2300000000000004,2.2400000000000002,2.25,2.2599999999999998,2.2699999999999996,2.2800000000000002,2.29,2.2999999999999998,2.3099999999999996,2.3200000000000003,2.3300000000000001,2.3399999999999999,2.3499999999999996,2.3600000000000003,2.3700000000000001,2.3799999999999999,2.3899999999999997,2.4000000000000004,2.4100000000000001,2.4199999999999999,2.4299999999999997,2.4400000000000004,2.4500000000000002,2.46,2.4699999999999998,2.4800000000000004,2.4900000000000002,2.5,2.5099999999999998,2.5199999999999996,2.5300000000000002,2.54,2.5499999999999998,2.5600000000000005,2.5700000000000003,2.5800000000000001,2.5899999999999999,2.5999999999999996,2.6100000000000003,2.6200000000000001,2.6299999999999999,2.6399999999999997,2.6500000000000004,2.6600000000000001,2.6699999999999999,2.6799999999999997,2.6900000000000004,2.7000000000000002,2.71,2.7199999999999998,2.7300000000000004,2.7400000000000002,2.75,2.7599999999999998,2.7699999999999996,2.7800000000000002,2.79,2.7999999999999998,2.8100000000000005,2.8200000000000003,2.8300000000000001,2.8399999999999999,2.8499999999999996,2.8600000000000003,2.8700000000000001,2.8799999999999999,2.8899999999999997,2.9000000000000004,2.9100000000000001,2.9199999999999999,2.9299999999999997,2.9400000000000004,2.9500000000000002,2.96,2.9699999999999998,2.9800000000000004,2.9900000000000002],"y":[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],"type":"scatter","mode":"lines","showlegend":false,"line":{"color":"orange","width":3},"marker":{"color":"rgba(127,127,127,1)","line":{"color":"rgba(127,127,127,1)"}},"error_y":{"color":"rgba(127,127,127,1)"},"error_x":{"color":"rgba(127,127,127,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[3,3.0099999999999998,3.0199999999999996,3.0300000000000002,3.04,3.0499999999999998,3.0599999999999996,3.0700000000000003,3.0800000000000001,3.0899999999999999,3.0999999999999996,3.1100000000000003,3.1200000000000001,3.1299999999999999,3.1399999999999997,3.1500000000000004,3.1600000000000001,3.1699999999999999,3.1799999999999997,3.1900000000000004,3.2000000000000002,3.21,3.2199999999999998,3.2300000000000004,3.2400000000000002,3.25,3.2599999999999998,3.2699999999999996,3.2800000000000002,3.29,3.2999999999999998,3.3099999999999996,3.3200000000000003,3.3300000000000001,3.3399999999999999,3.3499999999999996,3.3600000000000003,3.3700000000000001,3.3799999999999999,3.3899999999999997,3.4000000000000004,3.4100000000000001,3.4199999999999999,3.4299999999999997,3.4400000000000004,3.4500000000000002,3.46,3.4699999999999998,3.4800000000000004,3.4900000000000002,3.5,3.5099999999999998,3.5199999999999996,3.5300000000000002,3.54,3.5499999999999998,3.5600000000000005,3.5700000000000003,3.5800000000000001,3.5899999999999999,3.5999999999999996,3.6100000000000003,3.6200000000000001,3.6299999999999999,3.6399999999999997,3.6500000000000004,3.6600000000000001,3.6699999999999999,3.6799999999999997,3.6900000000000004,3.7000000000000002,3.71,3.7199999999999998,3.7300000000000004,3.7400000000000002,3.75,3.7599999999999998,3.7699999999999996,3.7800000000000002,3.79,3.7999999999999998,3.8100000000000005,3.8200000000000003,3.8300000000000001,3.8399999999999999,3.8499999999999996,3.8600000000000003,3.8700000000000001,3.8799999999999999,3.8899999999999997,3.9000000000000004,3.9100000000000001,3.9199999999999999,3.9299999999999997,3.9400000000000004,3.9500000000000002,3.96,3.9699999999999998,3.9800000000000004,3.9900000000000002],"y":[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],"type":"scatter","mode":"lines","showlegend":false,"line":{"color":"orange","width":3},"marker":{"color":"rgba(188,189,34,1)","line":{"color":"rgba(188,189,34,1)"}},"error_y":{"color":"rgba(188,189,34,1)"},"error_x":{"color":"rgba(188,189,34,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[4,4.0099999999999998,4.0199999999999996,4.0300000000000002,4.04,4.0499999999999998,4.0599999999999996,4.0700000000000003,4.0800000000000001,4.0899999999999999,4.0999999999999996,4.1100000000000003,4.1200000000000001,4.1299999999999999,4.1399999999999997,4.1500000000000004,4.1600000000000001,4.1699999999999999,4.1799999999999997,4.1900000000000004,4.2000000000000002,4.21,4.2199999999999998,4.2300000000000004,4.2400000000000002,4.25,4.2599999999999998,4.2699999999999996,4.2800000000000002,4.29,4.2999999999999998,4.3099999999999996,4.3200000000000003,4.3300000000000001,4.3399999999999999,4.3499999999999996,4.3600000000000003,4.3700000000000001,4.3799999999999999,4.3899999999999997,4.4000000000000004,4.4100000000000001,4.4199999999999999,4.4299999999999997,4.4400000000000004,4.4500000000000002,4.46,4.4699999999999998,4.4800000000000004,4.4900000000000002,4.5,4.5099999999999998,4.5199999999999996,4.5300000000000002,4.54,4.5499999999999998,4.5600000000000005,4.5700000000000003,4.5800000000000001,4.5899999999999999,4.5999999999999996,4.6100000000000003,4.6200000000000001,4.6299999999999999,4.6399999999999997,4.6500000000000004,4.6600000000000001,4.6699999999999999,4.6799999999999997,4.6900000000000004,4.7000000000000002,4.71,4.7199999999999998,4.7300000000000004,4.7400000000000002,4.75,4.7599999999999998,4.7699999999999996,4.7800000000000002,4.79,4.7999999999999998,4.8100000000000005,4.8200000000000003,4.8300000000000001,4.8399999999999999,4.8499999999999996,4.8600000000000003,4.8700000000000001,4.8799999999999999,4.8899999999999997,4.9000000000000004,4.9100000000000001,4.9199999999999999,4.9299999999999997,4.9400000000000004,4.9500000000000002,4.96,4.9699999999999998,4.9800000000000004,4.9900000000000002],"y":[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],"type":"scatter","mode":"lines","showlegend":false,"line":{"color":"orange","width":3},"marker":{"color":"rgba(23,190,207,1)","line":{"color":"rgba(23,190,207,1)"}},"error_y":{"color":"rgba(23,190,207,1)"},"error_x":{"color":"rgba(23,190,207,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[5,5.0099999999999998,5.0199999999999996,5.0300000000000002,5.04,5.0499999999999998,5.0599999999999996,5.0700000000000003,5.0800000000000001,5.0899999999999999,5.0999999999999996,5.1100000000000003,5.1200000000000001,5.1299999999999999,5.1399999999999997,5.1500000000000004,5.1600000000000001,5.1699999999999999,5.1799999999999997,5.1900000000000004,5.2000000000000002,5.21,5.2199999999999998,5.2300000000000004,5.2400000000000002,5.25,5.2599999999999998,5.2699999999999996,5.2800000000000002,5.29,5.2999999999999998,5.3099999999999996,5.3200000000000003,5.3300000000000001,5.3399999999999999,5.3499999999999996,5.3600000000000003,5.3700000000000001,5.3799999999999999,5.3899999999999997,5.4000000000000004,5.4100000000000001,5.4199999999999999,5.4299999999999997,5.4400000000000004,5.4500000000000002,5.46,5.4699999999999998,5.4800000000000004,5.4900000000000002,5.5,5.5099999999999998,5.5199999999999996,5.5300000000000002,5.54,5.5499999999999998,5.5600000000000005,5.5700000000000003,5.5800000000000001,5.5899999999999999,5.5999999999999996,5.6100000000000003,5.6200000000000001,5.6299999999999999,5.6399999999999997,5.6500000000000004,5.6600000000000001,5.6699999999999999,5.6799999999999997,5.6900000000000004,5.7000000000000002,5.71,5.7199999999999998,5.7300000000000004,5.7400000000000002,5.75,5.7599999999999998,5.7699999999999996,5.7800000000000002,5.79,5.7999999999999998,5.8100000000000005,5.8200000000000003,5.8300000000000001,5.8399999999999999,5.8499999999999996,5.8600000000000003,5.8700000000000001,5.8799999999999999,5.8899999999999997,5.9000000000000004,5.9100000000000001,5.9199999999999999,5.9299999999999997,5.9400000000000004,5.9500000000000002,5.96,5.9699999999999998,5.9800000000000004,5.9900000000000002],"y":[5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5],"type":"scatter","mode":"lines","showlegend":false,"line":{"color":"orange","width":3},"marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[-5,-4,-3,-2,-1,0,1,2,3,4,5],"y":[-5,-4,-3,-2,-1,0,1,2,3,4,5],"type":"scatter","mode":"markers","showlegend":false,"marker":{"color":"orange","width":3,"line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"line":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="théorème-des-accroissements-finis" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="2.3">
+<h2><span class="header-section-number">2.3</span> Théorème des accroissements finis</h2>
 <ul>
-<li>les fonctions constantes apparaissent comme solutions, MAIS !</li>
+<li>considérons une fonction <span class="math inline">\(f\)</span> continue sur un segment <span class="math inline">\([a,b]\)</span>, au moins dérivable sur <span class="math inline">\(]a,b[\)</span>, alors il existe <span class="math inline">\(a&lt;x&lt;b\)</span> tel que <span class="math display">\[f'(x)=\frac{f(b)-f(a)}{b-a}\]</span></li>
 </ul>
-</li>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="htmlwidget-ea5c939d928682f000ac" style="width:800px;height:500px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ea5c939d928682f000ac">{"x":{"visdat":{"814ab6686f4":["function () ","plotlyVisDat"],"814a5e6670f1":["function () ","data"]},"cur_data":"814a5e6670f1","attrs":{"814ab6686f4":{"x":{},"y":{},"mode":"lines","showlegend":false,"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"},"814a5e6670f1":{"x":{},"y":{},"mode":"markers","showlegend":false,"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","inherit":true}},"layout":{"width":800,"height":400,"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"range":[-0.10000000000000001,2.1000000000000001],"constrain":"domain","zerolinecolor":"ffff","zerolinewidth":4,"gridcolor":"ffff","dtick":1,"tickfont":{"size":22,"color":"white"},"title":"x"},"yaxis":{"domain":[0,1],"automargin":true,"range":[-0.10000000000000001,2.1000000000000001],"zerolinecolor":"ffff","zerolinewidth":4,"gridcolor":"ffff","dtick":1,"scaleanchor":"x","scaleratio":1,"tickfont":{"size":22,"color":"white"},"title":"y"},"plot_bgcolor":"transparent","paper_bgcolor":"transparent","legend":{"font":{"size":22,"color":"white"}},"shapes":[{"type":"line","x0":0,"x1":2,"xref":"x","yref":"y","y0":0,"y1":2,"line":{"width":2,"color":"orange"}},{"type":"line","x0":0,"x1":2,"xref":"x","yref":"y","y0":1,"y1":3,"line":{"width":2,"color":"orange"}}],"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[0,0.01,0.02,0.029999999999999999,0.040000000000000001,0.050000000000000003,0.059999999999999998,0.070000000000000007,0.080000000000000002,0.089999999999999997,0.10000000000000001,0.11,0.12,0.13,0.14000000000000001,0.14999999999999999,0.16,0.17000000000000001,0.17999999999999999,0.19,0.20000000000000001,0.20999999999999999,0.22,0.23000000000000001,0.23999999999999999,0.25,0.26000000000000001,0.27000000000000002,0.28000000000000003,0.28999999999999998,0.29999999999999999,0.31,0.32000000000000001,0.33000000000000002,0.34000000000000002,0.35000000000000003,0.35999999999999999,0.37,0.38,0.39000000000000001,0.40000000000000002,0.41000000000000003,0.41999999999999998,0.42999999999999999,0.44,0.45000000000000001,0.46000000000000002,0.47000000000000003,0.47999999999999998,0.48999999999999999,0.5,0.51000000000000001,0.52000000000000002,0.53000000000000003,0.54000000000000004,0.55000000000000004,0.56000000000000005,0.57000000000000006,0.57999999999999996,0.58999999999999997,0.59999999999999998,0.60999999999999999,0.62,0.63,0.64000000000000001,0.65000000000000002,0.66000000000000003,0.67000000000000004,0.68000000000000005,0.69000000000000006,0.70000000000000007,0.70999999999999996,0.71999999999999997,0.72999999999999998,0.73999999999999999,0.75,0.76000000000000001,0.77000000000000002,0.78000000000000003,0.79000000000000004,0.80000000000000004,0.81000000000000005,0.82000000000000006,0.83000000000000007,0.83999999999999997,0.84999999999999998,0.85999999999999999,0.87,0.88,0.89000000000000001,0.90000000000000002,0.91000000000000003,0.92000000000000004,0.93000000000000005,0.94000000000000006,0.95000000000000007,0.95999999999999996,0.96999999999999997,0.97999999999999998,0.98999999999999999,1,1.01,1.02,1.03,1.04,1.05,1.0600000000000001,1.0700000000000001,1.0800000000000001,1.0900000000000001,1.1000000000000001,1.1100000000000001,1.1200000000000001,1.1300000000000001,1.1400000000000001,1.1500000000000001,1.1599999999999999,1.1699999999999999,1.1799999999999999,1.1899999999999999,1.2,1.21,1.22,1.23,1.24,1.25,1.26,1.27,1.28,1.29,1.3,1.3100000000000001,1.3200000000000001,1.3300000000000001,1.3400000000000001,1.3500000000000001,1.3600000000000001,1.3700000000000001,1.3800000000000001,1.3900000000000001,1.4000000000000001,1.4099999999999999,1.4199999999999999,1.4299999999999999,1.4399999999999999,1.45,1.46,1.47,1.48,1.49,1.5,1.51,1.52,1.53,1.54,1.55,1.5600000000000001,1.5700000000000001,1.5800000000000001,1.5900000000000001,1.6000000000000001,1.6100000000000001,1.6200000000000001,1.6300000000000001,1.6400000000000001,1.6500000000000001,1.6600000000000001,1.6699999999999999,1.6799999999999999,1.6899999999999999,1.7,1.71,1.72,1.73,1.74,1.75,1.76,1.77,1.78,1.79,1.8,1.8100000000000001,1.8200000000000001,1.8300000000000001,1.8400000000000001,1.8500000000000001,1.8600000000000001,1.8700000000000001,1.8800000000000001,1.8900000000000001,1.9000000000000001,1.9100000000000001,1.9199999999999999,1.9299999999999999,1.9399999999999999,1.95,1.96,1.97,1.98,1.99,2],"y":[0,0.041410759078128294,0.082790519529313378,0.12410831331851431,0.16533323356430427,0.20643446504023089,0.2473813145857246,0.28814324139654257,0.32868988716485481,0.36899110603922924,0.40901699437494743,0.44873792024529136,0.48812455268467791,0.52714789063478062,0.56577929156507278,0.60399049973954677,0.64175367410171535,0.67904141575037136,0.71582679497899671,0.75208337785213053,0.78778525229247309,0.82290705365297634,0.85742398974868961,0.89131186532365181,0.92454710592868861,0.95710678118654746,0.98896862742141156,1.0201110696304596,1.0505132427757893,1.0801550123756902,1.1090169943749475,1.1370805742745618,1.1643279255020151,1.1907420270039437,1.2163066800438638,1.2410065241883679,1.2648270524660195,1.2877546256839811,1.3097764858882512,1.3308807689542255,1.3510565162951536,1.370293685676943,1.388583161128631,1.4059167619387474,1.4222872507286886,1.4376883405951377,1.452114701314478,1.46556196460308,1.4780267284282715,1.4895065603657316,1.5,1.5095065603657316,1.5180267284282716,1.52556196460308,1.5321147013144778,1.5376883405951376,1.5422872507286887,1.5459167619387475,1.5485831611286311,1.5502936856769431,1.5510565162951537,1.5508807689542254,1.5497764858882515,1.5477546256839814,1.5448270524660195,1.5410065241883679,1.5363066800438636,1.5307420270039436,1.524327925502015,1.5170805742745617,1.5090169943749476,1.5001550123756906,1.4905132427757892,1.4801110696304596,1.4689686274214115,1.4571067811865475,1.444547105928689,1.4313118653236518,1.41742398974869,1.4029070536529764,1.3877852522924732,1.3720833778521304,1.3558267949789968,1.3390414157503712,1.3217536741017155,1.3039904997395468,1.2857792915650728,1.2671478906347806,1.2481245526846783,1.2287379202452913,1.2090169943749476,1.1889911060392291,1.1686898871648548,1.1481432413965424,1.1273813145857245,1.1064344650402311,1.0853332335643044,1.0641083133185143,1.0427905195293135,1.0214107590781283,1.0000000000000002,0.97858924092187205,0.95720948047068666,0.93589168668148592,0.91466676643569578,0.89356553495976931,0.87261868541427523,0.85185675860345755,0.831310112835145,0.8110088939607708,0.79098300562505242,0.77126207975470862,0.75187544731532174,0.73285210936521938,0.71422070843492746,0.69600950026045305,0.67824632589828493,0.66095858424962906,0.6441732050210035,0.6279166221478697,0.61221474770752693,0.5970929463470237,0.58257601025131034,0.56868813467634827,0.55545289407131127,0.54289321881345254,0.53103137257858868,0.51988893036954054,0.50948675722421066,0.49984498762430962,0.4909830056250527,0.48291942572543844,0.47567207449798476,0.46925797299605632,0.4636933199561365,0.4589934758116323,0.4551729475339803,0.45224537431601886,0.45022351411174866,0.44911923104577467,0.4489434837048466,0.44970631432305697,0.45141683887136896,0.45408323806125273,0.45771274927131123,0.4623116594048623,0.4678852986855222,0.47443803539691998,0.48197327157172842,0.49049343963426839,0.5,0.51049343963426841,0.52197327157172846,0.53443803539692003,0.54788529868552216,0.56231165940486227,0.57771274927131133,0.59408323806125274,0.611416838871369,0.62970631432305701,0.64894348370484645,0.66911923104577475,0.69022351411174887,0.71224537431601909,0.73517294753398055,0.75899347581163212,0.78369331995613678,0.80925797299605595,0.83567207449798442,0.86291942572543812,0.89098300562505239,0.91984498762430933,0.94948675722421039,0.9798889303695405,1.0110313725785884,1.0428932188134523,1.0754528940713111,1.1086881346763477,1.1425760102513105,1.1770929463470234,1.2122147477075267,1.2479166221478692,1.2841732050210037,1.3209585842496288,1.3582463258982846,1.3960095002604531,1.4342207084349279,1.4728521093652198,1.5118754473153222,1.5512620797547088,1.5909830056250525,1.6310088939607714,1.6713101128351446,1.7118567586034565,1.7526186854142753,1.7935655349597688,1.8346667664356953,1.875891686681485,1.9172094804706867,1.9585892409218717,1.9999999999999998],"mode":"lines","showlegend":false,"type":"scatter","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[0,0.5,2],"y":[0,1.5,1.9999999999999998],"mode":"markers","showlegend":false,"type":"scatter","marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"line":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="conséquences" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="2.4">
+<h2><span class="header-section-number">2.4</span> Conséquences</h2>
+<ul>
+<li>considérons une fonction <span class="math inline">\(f\)</span> continue sur un segment <span class="math inline">\([a,b]\)</span>, au moins dérivable sur <span class="math inline">\(]a,b[\)</span>, telle que <span class="math inline">\(f'(x) = 0\)</span> alors la fonction <span class="math inline">\(f\)</span> est <strong>constante sur <span class="math inline">\([a,b]\)</span></strong></li>
+<li><strong>conclusion :</strong> pour bien maîtriser les choses on résout une équation différentielle sur l’ensemble des <strong>fonctions suffisamment dérivables sur un intervalle donné</strong> !</li>
+<li>en d’autres termes, <strong>un couple <span class="math inline">\((y,I)\)</span> est solution d’une équation différentielle si pour tout <span class="math inline">\(x\)</span> de l’intervalle <span class="math inline">\(I\)</span>, l’équation est vérifiée</strong></li>
+<li>ceci nous garantit alors que les seules solutions <span class="math inline">\((y,I)\)</span> de l’équation <span class="math display">\[y'=0\]</span> sont les fonctions constantes sur l’intervalle <span class="math inline">\(I\)</span></li>
 </ul>
-<hr />
-<h2 id="exemple-de-la-fonction-escalier"><span class="section-number">2.2</span> Exemple de la fonction escalier</h2>
-<img src="data:image/png;base64,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" width="400px" style="display: block; margin: auto;" />
-<hr />
-<h2 id="th-or-me-des-accroissements-finis"><span class="section-number">2.3</span> Théorème des accroissements finis</h2>
+</section>
+<section id="mais-enfin-ça-ma-lair-bien-trop-compliqué-pour-moi-tout-ça" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="2.5">
+<h2><span class="header-section-number">2.5</span> Mais enfin, ça m’a l’air bien trop compliqué pour moi tout ça !?</h2>
 <ul>
-<li>considérons une fonction \(f\) continue sur un segment \([a,b]\), au moins dérivable sur \(]a,b[\), alors il existe \(a&lt;x&lt;b\) tel que
-$$f'(x)=\frac{f(b)-f(a)}{b-a}$$</li>
-</ul>
-<img src="data:image/png;base64,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" width="380px" style="display: block; margin: auto;" />
-<hr />
-<h2 id="cons-quences"><span class="section-number">2.4</span> Conséquences</h2>
+<li>Attention ! nous venons juste de cerner un <strong>point théorique clé</strong> qui justifie la façon de considérer les solutions comme des couples <strong>(fonction,intervalle)</strong></li>
+<li>prenons un exemple pour bien comprendre ce que ça implique pour nous :
 <ul>
-<li>considérons une fonction \(f\) continue sur un segment \([a,b]\), au moins dérivable sur \(]a,b[\), telle que \(f'(x) = 0\) alors la fonction \(f\) est <strong>constante sur \([a,b]\)</strong></li>
-<li><strong>conclusion :</strong> pour bien maîtriser les choses on résout une équation différentielle sur l’ensemble des fonctions suffisamment dérivables sur un intervalle donné !</li>
-<li>en d’autres termes, un couple \((y,I)\) est solution d’une équation différentielle si pour tout \(x\) de l’intervalle \(I\), l’équation est vérifiée</li>
-<li>les seules solutions \((y,\mathbb R)\) de l’équation $$y'=0$$ sont les fonctions constantes sur \(\mathbb R\)</li>
-</ul>
-<hr />
-<h2 id="mais-enfin-jamy-a-m-a-l-air-bien-trop-compliqu-pour-moi-tout-a"><span class="section-number">2.5</span> Mais enfin Jamy, ça m’a l’air bien trop compliqué pour moi tout ça !?</h2>
-<ul>
-<li>mais non Fred ! nous venons juste de cerner un <strong>point théorique clé</strong> qui justifie la façon de considérer les solutions</li>
-<li>prenons un exemple pour bien comprendre
-<ul>
-<li>exemple : \(y' =  \frac {2y}x\)</li>
-<li>problème en 0 ! donc pour travailler correctement, on peut au mieux considérer \(\mathbb R^{-*}=]- \infty, 0[\)  ou \(\mathbb R^{+*}=]0 , +\infty[\)</li>
-<li>cherchons d’abord des solutions sur \(\mathbb R^+\) en supposant que \(y\) ne s’annule pas,</li>
+<li>exemple : <span class="math inline">\(y' =  \frac {2y}x\)</span></li>
+<li>problème en 0 ! donc pour travailler correctement, on peut au mieux considérer <span class="math inline">\(\mathbb R^{-*}=]- \infty, 0[\)</span> ou <span class="math inline">\(\mathbb R^{+*}=]0 , +\infty[\)</span></li>
+<li>cherchons d’abord des solutions sur <span class="math inline">\(\mathbb R^+\)</span> en supposant que <span class="math inline">\(y\)</span> ne s’annule pas,</li>
 <li>existe-t-il d’autres solutions ?</li>
-</ul>
-</li>
+</ul></li>
 <li><strong>2e conclusion</strong> décrire <strong>toutes</strong> les solutions n’est pas si simple
 <ul>
-<li>exemple 2 : \(x y' =  2y\)</li>
+<li>exemple 2 : <span class="math inline">\(x y' =  2y\)</span></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<hr />
-<h2 id="mais-jamy-c-est-toujours-trop-compliqu-pour-moi-jamais-je-n-y-arriverai"><span class="section-number">2.6</span> Mais Jamy, c’est toujours trop compliqué pour moi, jamais je n’y arriverai !</h2>
+</section>
+<section id="implications" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="2.6">
+<h2><span class="header-section-number">2.6</span> Implications</h2>
 <ul>
 <li>rassurons-nous, nous allons travailler dans un cadre plus simple, où l’intervalle sera <strong>naturel</strong>, car c’est souvent le cas en physique ou en chimie</li>
-<li>pour les mêmes raisons, nous nous limiterons à des gammes d’équations possèdant une méthode de résolution</li>
+<li>pour les mêmes raisons, nous nous limiterons à des gammes d’équations possédant une méthode de résolution</li>
 <li><strong>les aspects théoriques importants</strong> à retenir :
 <ul>
-<li>une résolution nécessite la précision d’un intervalle de travail !</li>
+<li>une résolution nécessite la précision d’un <strong>intervalle de travail</strong> !</li>
 <li>une fonction est solution sur l’intervalle si elle vérifie la relation définie <strong>pour tout point</strong> de cet intervalle</li>
 <li>la résolution exhaustive peut poser problème assez rapidement, on veillera donc à vérifier <strong>systématiquement</strong> que l’équation respecte le cadre de travail simple qui sera le nôtre par la suite</li>
+</ul></li>
 </ul>
+</section></section>
+<section>
+<section id="equations-différentielles-linéaires-dordre-1" class="title-slide slide level1 center" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="3">
+<h1><span class="header-section-number">3</span> Equations différentielles linéaires d’ordre 1</h1>
+
+</section>
+<section id="cadre-mathématique" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="3.1">
+<h2><span class="header-section-number">3.1</span> Cadre mathématique</h2>
+<ul>
+<li>résolution sur un intervalle <span class="math inline">\(I\)</span> d’équation de la forme suivante : <span class="math display">\[\left\{\begin{array}{ll} y' = a(x) y + b(x)\\y(x_0)=y_0\end{array}\right.\]</span> où <span class="math inline">\(a\)</span> et <span class="math inline">\(b\)</span> sont des <strong>fonctions continues sur l’intervalle <span class="math inline">\(I\)</span></strong></li>
+<li>en pratique, on choisit <span class="math inline">\(I\)</span> le plus grand possible contenant <span class="math inline">\(x_0\)</span></li>
+<li>les hypothèses sur <span class="math inline">\(a\)</span> et <span class="math inline">\(b\)</span> garantissent <strong>l’existence et l’unicité de la solution</strong></li>
+</ul>
+</section>
+<section id="le-résultat-central" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="3.2">
+<h2><span class="header-section-number">3.2</span> Le résultat central</h2>
+<blockquote>
+<h3 id="théorème" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover">Théorème</h3>
+<p>si <span class="math inline">\(a\)</span> et <span class="math inline">\(b\)</span> sont deux fonctions continues sur un intervalle <span class="math inline">\(I\)</span>, alors l’équation <span class="math display">\[\left\{\begin{array}{ll} y' = a(x) y + b(x)\\y(x_0)=y_0\end{array}\right.\]</span> admet une unique solution <span class="math inline">\((y,I)\)</span> donnée pour tout <span class="math inline">\(x\in I\)</span> par <span class="math display">\[y(x) = \left(y_0+\int_{x_0}^x b(t) e^{-\int_{x_0}^ta(u)du}dt\right)e^{\int_{x_0}^xa(t)dt}\]</span></p>
+</blockquote>
+</section>
+<section id="démonstration-de-yi-solution" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="3.3">
+<h2><span class="header-section-number">3.3</span> Démonstration de <span class="math inline">\((y,I)\)</span> solution</h2>
+<ul>
+<li>appelons <span class="math inline">\(A\)</span> une primitive de <span class="math inline">\(a\)</span> sur <span class="math inline">\(I\)</span>, et <span class="math inline">\(\mu\)</span> une primitive de <span class="math inline">\(be^{-A}\)</span>: <span class="math display">\[A'(x)=a(x), \quad \mu'(x) = b(x)e^{-A(x)}\]</span></li>
+<li>on peut alors réécrire la solution <span class="math inline">\((y,I)\)</span></li>
+</ul>
+<p><span class="math display">\[ y(x) = \left(y_0+\int_{x_0}^x b(t) e^{-\int_{x_0}^ta(u)du}dt\right) e^{\int_{x_0}^xa(t)dt}
+= \left(y_0+\mu(x)-\mu(x_0)\right)e^{A(x)-A(x_0)}\]</span></p>
+<ul>
+<li>vérifions que cela définit bien une solution, rapidement <span class="math inline">\(y(x_0)=y_0\)</span>, de plus: <span class="math display">\[y'(x)=\mu'(x)e^{A(x)-A(x_0)}+\left(y_0+\mu(x)-\mu(x_0)\right)A'(x)e^{A(x)-A(x_0)}\]</span> on utilise alors les définitions de <span class="math inline">\(A\)</span> et <span class="math inline">\(\mu\)</span> <span class="math display">\[y'(x)=be^{A(x)}e^{A(x)-A(x_0)}+\left(y_0+\mu(x)-\mu(x_0)\right)a(x)e^{A(x)-A(x_0)}=b(x)+a(x)y(x)\]</span></li>
+</ul>
+</section>
+<section id="unicité" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="3.4">
+<h2><span class="header-section-number">3.4</span> Unicité</h2>
+<ul>
+<li>considérons deux solutions <span class="math inline">\((y,I)\)</span> et <span class="math inline">\((z,I)\)</span>, alors <span class="math inline">\(y(x_0)=z(x_0)=y_0\)</span> et<br>
+<span class="math display">\[\textrm{pour tout }x\in I,\quad y'(x)= a(x)y(x)+b(x),\quad \textrm{ et }\quad z'(x)= a(x)z(x)+b(x),\]</span></li>
+<li>ainsi en combinant les deux équations, on obtient que la fonction <span class="math inline">\(h\)</span> définie par <span class="math inline">\(h(x) = y(x)-z(x)\)</span> est solution sur <span class="math inline">\(I\)</span> de l’équation différentielle <span class="math inline">\((H)\colon y'=ay\)</span> car <span class="math display">\[h'(x) = y'(x)-z'(x) =a(x)y(x)+b(x) -a(x)z(x)-b(x) = a(x)h(x).\]</span></li>
+<li>la fonction k donnée sur <span class="math inline">\(I\)</span> par <span class="math inline">\(k(x) = e^{A(x)}\)</span> est clairement solution de <span class="math inline">\((H)\)</span>, ainsi: <span class="math display">\[\left(\frac hk\right)'(x)= \frac{h'(x)k(x)-h(x)k(x)}{k(x)^2}=0\]</span></li>
+<li>ainsi <span class="math inline">\(\tfrac hk\)</span> est constante, donc <span class="math inline">\(h(x)=\lambda e^A(x)=y(x)-z(x)\)</span>, en évaluant en <span class="math inline">\(x_0\)</span>, on déduit <span class="math inline">\(\lambda=0\)</span> autrement dit <span class="math inline">\(y(x)=z(x).\)</span></li>
+</ul>
+</section>
+<section id="en-pratique" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="3.5">
+<h2><span class="header-section-number">3.5</span> En pratique</h2>
+<ol class="example" type="1">
+<li>écriture de l’équation sous la forme <span class="math inline">\(y' = a(x)y+b(x)\)</span> pour identifier <span class="math inline">\(a\)</span> et <span class="math inline">\(b\)</span></li>
+<li>détermination du plus grand intervalle de travail <span class="math inline">\(I\)</span> contenant <span class="math inline">\(x_0\)</span>, tel que <span class="math inline">\(a\)</span> et <span class="math inline">\(b\)</span> sont <strong>simultanément continues</strong> sur <span class="math inline">\(I\)</span></li>
+<li>recherche d’une primitive <span class="math inline">\(A\)</span> de <span class="math inline">\(a\)</span> sur <span class="math inline">\(I\)</span> et d’une primitive <span class="math inline">\(\mu\)</span> de <span class="math inline">\(be^{-A}\)</span> toujours sur <span class="math inline">\(I\)</span>
+<ul>
+<li>une fois <span class="math inline">\(A\)</span> déterminé, penser à simplifier les expressions <span class="math inline">\(e^A\)</span> et <span class="math inline">\(e^{-A}\)</span></li>
+<li>simplifier alors <span class="math inline">\(be^{-A}\)</span> et déterminer une primitive</li>
+</ul></li>
+<li>déterminer la solution du problème<br>
 </li>
-</ul>
-<hr />
-<!--# class="middle center" style = "background-color:#f8ac00;"-->
-<h1 id="equations-diff-rentielles-lin-aires-d-ordre-1"><span class="section-number">3.</span> Equations différentielles linéaires d’ordre 1</h1>
-<hr />
-<h2 id="cadre-math-matique_1"><span class="section-number">3.1</span> Cadre mathématique</h2>
+<li>pour les plus gourmands, on peut chercher à étendre la solution à un intervalle plus grand si l’équation de départ n’est pas de la forme <span class="math inline">\(y'=ay+b\)</span></li>
+</ol>
+<!-- ## Un exemple : refroidissement d’un solide -->
+<!-- - Un solide de température $T(t)$ se refroidit dans un milieu ambiant de température $T_\infty$. -->
+<!-- La loi de conservation d'énergie donne : -->
+<!-- $$C(T)\tfrac{dT}{dt}=-h(t)(T-T_\infty), où$$ -->
+<!--   + $C(T) = C_0(1+\alpha T)$ : capacité calorifique du corps (supposée ici non-constante) -->
+<!--   + $h(t) = h_0(1+ sin(t))$ : coefficient de convection (vitesse de l'air fluctuante) -->
+<!--   + $A$ : surface d'échange (constante) -->
+<!--   + $T(t)$ : température du solide -->
+</section>
+<section id="chauffage-dun-fluide-en-écoulement" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="3.6">
+<h2><span class="header-section-number">3.6</span> Chauffage d’un fluide en écoulement</h2>
 <ul>
-<li>résolution sur un intervalle \(I\) d’équation de la forme suivante :
-$$\left\{\begin{array}{ll} y' = a(x) y + b(x)\\y(x_0)=y_0\end{array}\right.$$
-où \(a\) et \(b\) sont des <strong>fonctions continues sur l’intervalle \(I\)</strong></li>
-<li>en pratique, on choisit \(I\) le plus grand possible contenant \(x_0\)</li>
-<li>les hypothèses sur \(a\) et \(b\) garantissent <strong>l’existence et l’unicité de la solution</strong></li>
-<li>la résolution se décomposera en trois étapes :
-<ul>
-<li>résolution de l’<strong>équation homogène</strong> (sans \(b\), ni la 2e condition)</li>
-<li>recherche d’<strong>une solution particulière</strong> (avec \(b\), sans la 2e condition)</li>
-<li>forme générale des solutions de l’équation et détermination de <strong>la</strong> solution satisfaisant \(y(x_0)=y_0\)</li>
+<li>Dans un tube chauffé, la température d’un fluide <span class="math inline">\(T(x)\)</span> évolue le long de la direction d’écoulement <span class="math inline">\(x\)</span>. On applique l’équation différentielle stationnaire (bilan d’énergie local) : <span class="math display">\[\frac{dT}{dx} = \frac{h(x)\,P}{\dot{m}\, c_p}\left( T_w - T(x) \right),\quad
+\tiny{\text{ où } \colon \left\|\begin{array}{ll}
+T(x)\colon  &amp;\text{température du fluide},\\
+T_w\colon  &amp;\text{température de la paroi},\\
+P \colon &amp;\text{périmètre mouillé},\\
+\dot{m}\colon &amp;\text{débit massique},\\
+h(x)\colon &amp;\text{coefficient de transfert thermique},\\
+c_p \colon &amp;\text{capacité calorifique}.\end{array}\right.}\]</span></li>
 </ul>
-</li>
-</ul>
-<hr />
-<h2 id="equation-homog-ne_1"><span class="section-number">3.2</span> Equation homogène</h2>
+<p>On réécrit alors : <span class="math inline">\(\frac{dT}{dx}
++ \frac{h(x) P}{\dot{m}\,c_p}\, T
+= \frac{h(x) P}{\dot{m}\,c_p}\,T_w\)</span></p>
 <ul>
-<li>dans un premier temps on oublie \(b\) et la condition \(y(x_0)=y_0\) : l’équation homogène se résume à
-$$\forall x\in I,\quad y'(x)=a(x)y(x)$$</li>
-<li>la <strong>continuité</strong> de la fonction \(a\) sur \(I\) garantit (admis) l’existence d’une fonction \(A\) dérivable sur \(I\) telle que \(A' = a\), \(A\) est dite <strong>primitive de \(a\) sur \(I\)</strong></li>
-<li>on vérifie aisément que toute fonction de la forme \(x\mapsto \lambda e^{A(x)}\) est solution sur \(I\) de l’équation homogène</li>
-<li>ce sont les <strong>seules solutions</strong> !</li>
+<li>Supposons de plus que le régime de l’écoulement augmente de la façon suivante : <span class="math display">\[h(x)= h_0(1 + \beta x)\]</span></li>
 </ul>
-<hr />
-<h2 id="pourquoi-l-quation-homog-ne-et-la-solution-particuli-re"><span class="section-number">3.3</span> Pourquoi l’équation homogène et la solution particulière ?</h2>
+</section>
+<section id="chauffage-dun-fluide-en-écoulement-suite" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="3.7">
+<h2><span class="header-section-number">3.7</span> Chauffage d’un fluide en écoulement, suite</h2>
 <ul>
-<li>remarque : si \(f\) et \(g\) sont deux solutions de $$\forall x\in I,\quad  y'(x) = a(x) y(x) + b(x)$$ alors \(h=f-g\) est solution de l’équation homogène
-$$\forall x\in I, h'(x)=f'(x)-g'(x)=a(x)f(x)-a(x)g(x)=a(x)h(x)$$</li>
-<li>conséquence : si \(\varphi\) est une solution de $$\forall x\in I,  y'(x) = a(x) y(x)+b(x)$$ alors toute solution \(y\) peut s’écrire \(y=\varphi + h\) où \(h\) est une solution de l’équation homogène</li>
-<li><strong>conclusion</strong> en décrivant toutes les solutions de l’équation homogène, on retrouve toutes les solutions de l’équation de départ en ajoutant une solution particulière \(\varphi\) à chacune d’elles !</li>
+<li><p>Le problème à résoudre se résume alors à <span class="math display">\[\left\{\begin{array}{l}\displaystyle\frac{dT}{dx}=- \frac{h_0 P}{\dot{m}\, c_p} (1+\beta x)\, T + \frac{h_0 P}{\dot{m}\, c_p} (1+\beta x)\, T_w,\\T(0) = T_{\text{entrée}}\end{array}\right..\]</span></p></li>
+<li><p>ici <span class="math display">\[a(x) = - \frac{h_0 P (1+\beta x)}{\dot{m}\, c_p},\qquad b(x)=\frac{h_0 P (1+\beta x)}{\dot{m}\, c_p}\, T_w,\]</span> on a bien une équation linéaire, ce qui ne serait plus le cas si la capacité était fonction de la température comme pour l’eau par exemple où on aurait : <span class="math inline">\(c_p=c_0(1+ \alpha T)\)</span>. <strong>Linéariser une équation</strong> en supposant par exemple ici que la capacité est <em>quasi-constante</em> est usuel en physique et c’est la connaissance du phénomène qui nous permet de savoir en quoi ces approximations sont raisonnables ou non !</p></li>
 </ul>
-<hr />
-<h2 id="a-la-recherche-d-une-solution-particuli-re"><span class="section-number">3.4</span> A la recherche d’une solution particulière</h2>
+</section>
+<section id="chauffage-dun-fluide-en-écoulement-suite-et-fin" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="3.8">
+<h2><span class="header-section-number">3.8</span> Chauffage d’un fluide en écoulement, suite et fin</h2>
 <ul>
-<li>pas de méthode miracle qui fonctionnerait tout le temps, cependant <strong>la méthode de variation de la constante</strong> permet de traiter un grand nombre de cas à un point technique près</li>
-<li>si on en voit une <strong>évidente</strong> simplifions-nous la vie, ça fera toujours moins de calculs</li>
-<li><strong>la méthode de variation de la constante</strong> repose sur la proposition d’un candidat proche de la solution de l’équation homogène dans sa structure. On suppose ainsi qu’une solution particulière pourrait satisfaire :
-$$\forall x\in I, \varphi(x) = \mu(x) e^{A(x)} $$
-en d’autres termes on remplace la constante \(\lambda\) par les images d’une fonction (on fait varier la constante …)</li>
-<li>Il se trouve qu’une telle solution existe sous la seule condition
-$$\mu'(x)=b(x)e^{-A(x)}$$</li>
-<li><strong>conclusion</strong> si on sait déterminer une <strong>primitive</strong> de \(be^{-A}\) alors on dispose d’une solution particulière \(\varphi\)</li>
+<li><p>consdérons les primitives de <span class="math inline">\(a\)</span> et <span class="math inline">\(be^A\)</span> suivantes : <span class="math display">\[A(x) = - \frac{h_0 P}{\dot{m}\, c_p} (x+\tfrac\beta2 x^2), \quad \mu(x) = T_we^{\frac{h_0 P}{\dot{m}\, c_p} (x+\tfrac\beta2 x^2)}\]</span></p></li>
+<li><p>la solution recherchée est <span class="math inline">\((T,\mathbb R)\)</span> donnée par :</p></li>
 </ul>
-<hr />
-<h2 id="en-pratique"><span class="section-number">3.5</span> En pratique</h2>
+<p><span class="math display">\[T(x)=\left(T_{\text{entrée}}+T_we^{\frac{h_0 P}{\dot{m}\, c_p} (x+\tfrac\beta2 x^2)}-T_we^{\frac{h_0 P}{\dot{m}\, c_p} (0+\tfrac\beta2 0^2)}\right)e^{- \frac{h_0 P}{\dot{m}\, c_p} (x+\tfrac\beta2 x^2)+ \frac{h_0 P}{\dot{m}\, c_p} (0+\tfrac\beta2 0^2)},\]</span></p>
+<p>après simplification : <span class="math display">\[T(x)=T_w+(T_{\text{entrée}}-T_w)e^{- \frac{h_0 P}{\dot{m}\, c_p} (x+\tfrac\beta2 x^2)}.\]</span></p>
+</section>
+<section id="cas-particulier-équation-à-coefficients-constants" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="3.9">
+<h2><span class="header-section-number">3.9</span> Cas particulier : équation à coefficients constants</h2>
 <ul>
-<li>écriture de l’équation sous la forme \(y' = a(x)y+b(x)\)</li>
-<li>détermination du plus grand intervalle de travail \(I\) contenant \(x_0\), tel que \(a\) et \(b\) sont simultanément continues sur \(I\)</li>
-<li>résolution de l’équation homogène sur \(I\) : \(y'=a(x)y\)
-<ul>
-<li>\(h\) solution sur \(I\) <strong>ssi</strong> \(\forall x\in I,\quad h(x)=\lambda e^{A(x)}\)</li>
-<li>point technique : trouver une primitive \(A\) pour \(a\) sur \(I\)</li>
+<li><p>dans le cas où <span class="math inline">\(a\)</span> et <span class="math inline">\(b\)</span> sont constants (situation de la plupart des cas en physique-chimie cette année), on peut aller plus vite, en considérant <span class="math inline">\(A(x)=ax\)</span> et <span class="math inline">\(\mu(x)=-\tfrac ba e^{-ax}\)</span> : <span class="math display">\[y(x) = (y_0-\tfrac ba e^{-ax}+\tfrac ba e^{-ax_0} )e^{a(x-x_0)}=y_0e^{a(x-x_0)}-\tfrac ba.\]</span></p></li>
+<li><p>si nous étudions un cas plus général dans le cours de mathématiques, c’est pour insister sur la situation exceptionnelle que représente une équation à coefficients constants, souvent obtenue par des hypothèses plus ou moins fortes sur le comportement des paramètres du système considéré. Le pas supplémentaire effectué nous montre aussi que nous avons les moyens de traiter des situations plus générale sans que le coût ne soit “trop” élevé.</p></li>
 </ul>
-</li>
-<li>recherche d’une solution particulière \(\varphi\) sur \(I\) de \(y' = a(x)y+b(x)\) telle que \(\varphi(x)=\mu(x)e^{A(x)}\)
+</section></section>
+<section>
+<section id="equations-différentielles-linéaires-dordre-2-à-coefficients-constants" class="title-slide slide level1 center" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="4">
+<h1><span class="header-section-number">4</span> Equations différentielles linéaires d’ordre 2 à coefficients constants</h1>
+
+</section>
+<section id="cadre-mathématique-1" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="4.1">
+<h2><span class="header-section-number">4.1</span> Cadre mathématique</h2>
 <ul>
-<li>point technique : trouver une primitive \(\mu\) pour \(be^{-A}\) sur \(I\)</li>
-</ul>
-</li>
-<li>forme générale des solutions sur \(I\)
-$$y(x)= \varphi(x) + \lambda e^{A(x)}$$</li>
-<li>recherche de la solution du système en déterminant la valeur de \(\lambda\)
-$$y(x_0)= \varphi(x_0) + \lambda e^{A(x_0)}=y_0\qquad \Rightarrow\qquad  \lambda =\left(y_0-\varphi(x_0)\right) e^{-A(x_0)}$$</li>
-<li>par curiosité, on peut chercher à étendre la solution à un intervalle plus grand si l’équation de départ n’est pas de la forme \(y'=ay+b\)</li>
-</ul>
-<hr />
-<h2 id="cas-particulier-o-a-et-b-sont-constantes"><span class="section-number">3.6</span> Cas particulier où a et b sont constantes</h2>
-<p>Dans les premiers cas vus en électricité, vu que \(a\) et \(b\) sont constantes,
-$$y' = a y +b$$
-la résolution se simplifie :</p>
-<ul>
-<li>on peut toujours travailler avec \(I=\mathbb R\)</li>
-<li>vu que \(a\) est constante, une primitive évidente sur \(\mathbb R\) est \(A(x)=ax\)</li>
-<li>on peut éviter la méthode de la variation de la constante, car ce type d’équation admet une solution constante \(\varphi = c\) :
-$$\varphi'(x)=0= a\varphi(x) +b=ac+b \quad \Rightarrow\quad c = -\frac ba$$</li>
-<li>d’où la forme générale des solutions
-$$y(x) = \lambda e^{ax} -\frac ba$$</li>
-</ul>
-<hr />
-<h2 id="et-si-le-cadre-n-est-pas-v-rifi-ou-qu-aucune-primitive-usuelle-n-appara-t-que-faire"><span class="section-number">3.7</span> Et si le cadre n’est pas vérifié, ou qu’aucune primitive usuelle n’apparaît, que faire ?</h2>
-<ul>
-<li>une approximation évidemment !</li>
-<li>il existe plein de schémas d’approximation, le plus naïf consiste à utiliser les tangentes
-<ul>
-<li>on fixe un décalage \(\Delta x\) jugé suffisamment petite</li>
-<li>construction récurrente, l’image à l’abscisse \(x_k = x_0+k\times \Delta x\) est donnée par
-$$y_k = y_{k-1}+ a(x_{k-1})\times \Delta x$$</li>
-<li>un exemple</li>
-</ul>
-</li>
-</ul>
-<div align="center">
-<iframe src="euler.html" width="1000" height="800" scrolling="yes" seamless="seamless" frameBorder="0"> </iframe>
-</div>
-<hr />
-<!--# class="middle center" style = "background-color:#f8ac00;"-->
-<h1 id="equations-diff-rentielles-lin-aires-d-ordre-2-coefficients-constants"><span class="section-number">4.</span> Equations différentielles linéaires d’ordre 2 à coefficients constants</h1>
-<hr />
-<h2 id="cadre-math-matique_2"><span class="section-number">4.1</span> Cadre mathématique</h2>
-<ul>
-<li>résolution sur un intervalle \(I\) d’équation de la forme suivante :
-$$\left\{\begin{array}{ll} ay''+ b y' + cy = f \\y(x_0)=y_0\\y'(x_0)=z_0\end{array}\right.$$
-où \(a\), \(b\) et \(c\) sont des <strong>constantes réelles</strong> et \(f\) une <strong>fonction continues sur un intervalle \(I\) contenant \(x_0\)</strong></li>
-<li>en pratique, on choisit \(I\) le plus grand possible contenant \(x_0\)</li>
+<li>résolution sur un intervalle <span class="math inline">\(I\)</span> d’équation de la forme suivante : <span class="math display">\[\left\{\begin{array}{ll} ay''+ b y' + cy = f \\y(x_0)=y_0\\y'(x_0)=z_0\end{array}\right.\]</span> où <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span> et <span class="math inline">\(c\)</span> sont des <strong>constantes réelles</strong> et <span class="math inline">\(f\)</span> une <strong>fonction continues sur un intervalle <span class="math inline">\(I\)</span> contenant <span class="math inline">\(x_0\)</span></strong></li>
+<li>en pratique, on choisit <span class="math inline">\(I\)</span> le plus grand possible contenant <span class="math inline">\(x_0\)</span></li>
 <li>les hypothèses garantissent <strong>l’existence et l’unicité de la solution</strong></li>
 <li>la résolution se décomposera en trois étapes :
 <ul>
-<li>résolution de l’<strong>équation homogène</strong> (sans \(f\), ni les 2e et 3e conditions)</li>
-<li>recherche d’<strong>une solution particulière</strong> (avec \(f\), sans les 2e et 3e conditions)</li>
-<li>forme générale des solutions de l’équation et détermination de <strong>la</strong> solution satisfaisant \(y(x_0)=y_0\) et  \(y'(x_0)=z_0\)</li>
+<li>résolution de l’<strong>équation homogène</strong> (sans <span class="math inline">\(f\)</span>, ni les 2e et 3e conditions)</li>
+<li>recherche d’<strong>une solution particulière</strong> (avec <span class="math inline">\(f\)</span>, sans les 2e et 3e conditions)</li>
+<li>forme générale des solutions de l’équation et détermination de <strong>la</strong> solution satisfaisant <span class="math inline">\(y(x_0)=y_0\)</span> et <span class="math inline">\(y'(x_0)=z_0\)</span></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<hr />
-<h2 id="equation-homog-ne_2"><span class="section-number">4.2</span> Equation homogène</h2>
-<p>Encore une fois, on identifie un premier problème, plus simple à résoudre
-$$ay''+ b y' + cy = 0.$$</p>
+</section>
+<section id="equation-homogène" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="4.2">
+<h2><span class="header-section-number">4.2</span> Equation homogène</h2>
+<p>On identifie un premier problème, plus simple à résoudre <span class="math display">\[(H)\colon ay''+ b y' + cy = 0.\]</span> <strong>en pratique</strong> on recherche les solutions de l’équation en calculant le discriminant <span class="math inline">\(\Delta = b^2-4ac\)</span> puis</p>
 <ul>
-<li><strong>en pratique</strong> on recherche les solutions de l’équation en calculant le discriminant \(\Delta = b^2-4ac\) puis
-<ul>
-<li>si \(\Delta&gt;0\), deux racines réelles \(r_1\neq r_2\), toutes les solutions sont de la forme
-$$\forall x\in \mathbb R,\quad h(x)=\lambda e^{r_1x}+\mu e^{r_2x}$$</li>
-<li>si \(\Delta=0\), une seule racine réelle \(r\), toutes les solutions sont de la forme
-$$\forall x\in \mathbb R,\quad h(x)=\left(\lambda +\mu x\right) e^{rx}$$</li>
-<li>si \(\Delta&lt;0\), aucune racine réelle, toutes les solutions sont de la forme
-$$\forall x\in\mathbb R,\quad h(x)=e^{-\frac b{2a}x}\left(\lambda\cos\left(\frac{\sqrt{-\Delta }}{2a}\,x\right)+\mu\sin\left(\frac{\sqrt{-\Delta}}{2a}\,x\right)\right)$$</li>
+<li>si <span class="math inline">\(\Delta&gt;0\)</span>, deux racines réelles <span class="math inline">\(r_1\neq r_2\)</span>, toutes les solutions sont de la forme <span class="math display">\[\forall x\in \mathbb R,\quad h(x)=\lambda e^{r_1x}+\mu e^{r_2x}\]</span></li>
+<li>si <span class="math inline">\(\Delta=0\)</span>, une seule racine réelle <span class="math inline">\(r\)</span>, toutes les solutions sont de la forme <span class="math display">\[\forall x\in \mathbb R,\quad h(x)=\left(\lambda +\mu x\right) e^{rx}\]</span></li>
+<li>si <span class="math inline">\(\Delta&lt;0\)</span>, aucune racine réelle, toutes les solutions sont de la forme <span class="math display">\[\forall x\in\mathbb R,\quad h(x)=e^{-\frac b{2a}x}\left(\lambda\cos\left(\frac{\sqrt{-\Delta }}{2a}\,x\right)+\mu\sin\left(\frac{\sqrt{-\Delta}}{2a}\,x\right)\right)\]</span></li>
 </ul>
-</li>
-</ul>
-<hr />
-<h3 id="r-criture-du-dernier-cas"><span class="section-number">4.2.1</span> Réécriture du dernier cas</h3>
+</section>
+<section id="réécriture-du-dernier-cas" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="4.3">
+<h2><span class="header-section-number">4.3</span> Réécriture du dernier cas</h2>
 <ul>
-<li>en fixant \(r_0=-\frac b{2a}\), \(\omega = \frac{\sqrt{-\Delta}}{2a}\), \(\gamma = \sqrt{\lambda^2+\mu^2}\) et \(\varphi = \arctan\left(\frac{\mu}{\lambda}\right)\), on peut réécrire la forme générale des solutions
-$$\forall x\in\mathbb R,\quad h(x)= x_0 e^{r_0x}\cos(\omega x+\varphi)$$</li>
-<li>ainsi les sinusoides apparaissent dans des cadres qui ne semblent pas traiter de trigonométrie</li>
+<li>en fixant <span class="math inline">\(r_0=-\frac b{2a}\)</span>, <span class="math inline">\(\omega = \frac{\sqrt{-\Delta}}{2a}\)</span>, <span class="math inline">\(\gamma = \sqrt{\lambda^2+\mu^2}\)</span> et <span class="math inline">\(\varphi = \arctan\left(\frac{\mu}{\lambda}\right)\)</span>, on peut réécrire la forme générale des solutions <span class="math display">\[\forall x\in\mathbb R,\quad h(x)= x_0 e^{r_0x}\cos(\omega x+\varphi)\]</span></li>
+<li>ainsi les sinusoïdes apparaissent dans des cadres qui ne semblent pas traiter de trigonométrie</li>
 <li>la théorie permet de comprendre que l’apparition des fonctions trigonométriques est due à leur périodicité et leur régularité (elles sont dérivables à l’infini)</li>
 </ul>
-<hr />
-<h2 id="exemple-oscillation-libre-amortie"><span class="section-number">4.3</span> Exemple : oscillation libre amortie</h2>
+</section>
+<section id="exemple-oscillation-libre-amortie" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="4.4">
+<h2><span class="header-section-number">4.4</span> Exemple : oscillation libre amortie</h2>
 <ul>
-<li>
-<p>Imaginons un bloc de masse \(m\) pendu à un ressort, la force de rappel est proportionnel à la position
-$$m\frac{d^2y}{dt^2}=-ky$$</p>
-</li>
-<li>
-<p>Imaginons un bloc de masse \(m\) pendu à un ressort, soumis à une force d’amortissement (dans un liquide par exemple). Cette force est proportionnelle à la vitesse mais dans le sens contraire \(-c\frac{dy}{dt}\) pour une certaine constante positive \(c\)
-$$m\frac{d^2y}{dt^2}=-ky-c\frac{dy}{dt}$$</p>
-</li>
+<li><p>Imaginons un bloc de masse <span class="math inline">\(m\)</span> pendu à un ressort, la force de rappel est proportionnel à la position <span class="math display">\[m\frac{d^2y}{dt^2}=-ky\]</span></p></li>
+<li><p>Imaginons un bloc de masse <span class="math inline">\(m\)</span> pendu à un ressort, soumis à une force d’amortissement (dans un liquide par exemple). Cette force est proportionnelle à la vitesse mais dans le sens contraire <span class="math inline">\(-c\frac{dy}{dt}\)</span> pour une certaine constante positive <span class="math inline">\(c\)</span> <span class="math display">\[m\frac{d^2y}{dt^2}=-ky-c\frac{dy}{dt}\]</span></p></li>
 </ul>
-</div>
-<div class="include-after">
-</div>
-<script>
-(function(d) {
-  let p = d.body;  // container of slides; assume <body> for now
-  const s1 = ':scope > hr:not([class])', s2 = ':scope > h2';
-  // find a container that has at least n "slides"
-  function findContainer(s, n = 1) {
-    if (p.querySelectorAll(s).length >= n) return true;
-    // if body doesn't contain headings or <hr>s, look into children
-    for (let i = 0; i < p.children.length; i++) {
-      if (p.children[i].querySelectorAll(s).length >= n) {
-        p = p.children[i]; break;
-      }
-    }
-    return false;
-  }
-  function newEl(tag, cls) {
-    const el = d.createElement(tag);
-    if (cls) el.className = cls;
-    return el;
-  }
-  if (!findContainer(s1, 3)) {
-    // if not enough <hr>s found in children; look for <h2> instead
-    if (p.tagName === 'BODY') {
-      // not enough h2 found, this page is not appropriate for slides
-      if (!findContainer(s2) && p.tagName === 'BODY') return;
-      p.querySelectorAll(s2).forEach(h2 => h2.before(newEl('hr')));
-    }
-  }
-  p.classList.add('slide-container');
-  // add 'slide' class to the frontmatter div and toc
-  ['.frontmatter', '#TOC'].forEach(s => {
-    d.body.querySelector(s)?.classList.add('slide');
-  });
 
-  function newSlide(s) {
-    return (s?.innerText === '') ? s : newEl('div', 'slide');
-  }
-  function isSep(el) {
-    return el.tagName === 'HR' && el.attributes.length === 0;
-  }
-  let el = p.firstElementChild; if (isSep(el)) el.remove();
-  el = p.firstElementChild; if (!el) return;
-  let s = newSlide(); el.before(s);
-  while (true) {
-    let el = s.nextSibling;
-    if (!el) break;
-    // remove slide separators (<hr>) and create new slide
-    if (isSep(el)) {
-      s = newSlide(s);
-      el.before(s); el.remove();
-    } else if (el.classList?.contains('slide')) {
-      s = newSlide(s);
-      el.after(s);
-    } else {
-      s.append(el);
-    }
-  }
-  function setAttr(el, attr) {
-    const m = newEl('div');
-    m.innerHTML = `<div ${attr}></div>`;
-    const attrs = m.firstElementChild.attributes;
-    for (let i = 0; i < attrs.length; i++) {
-      let a = attrs[i];
-      el.setAttribute(a.name, a.value);
-    }
-    m.remove();
-  }
-  const slides = d.querySelectorAll('div.slide'), N = slides.length,
-        tm = d.querySelector('span.timer'), fn = d.querySelector('.footnotes');
-  slides.forEach((s, i) => {
-    // append footnotes
-    if (fn) s.querySelectorAll('.footnote-ref > a[href^="#fn"]').forEach(a => {
-      const li = fn.querySelector('li' + a.getAttribute('href'));
-      if (!li) return;
-      let f = s.querySelector('div.footnotes');
-      if (!f) {
-        f = newEl('div', 'footnotes'); s.append(f);
-      }
-      f.append(li);
-      li.firstElementChild?.insertAdjacentHTML('afterbegin', `[${a.innerHTML}] `);
-      li.outerHTML = li.innerHTML;
-    });
-    // add a timer
-    s.append(tm ? tm.cloneNode() : newEl('span', 'timer'));
-    // add page numbers
-    const n = newEl('span', 'page-number');
-    n.innerText = i + 1 + '/' + N;
-    n.onclick = e => location.hash = i + 1;
-    s.append(n);
-    // apply slide attributes in <!--# -->
-    for (let k in s.childNodes) {
-      const node = s.childNodes[k];
-      if (node.nodeType !== Node.COMMENT_NODE) continue;
-      let t = node.textContent;
-      if (!/^#/.test(t)) continue;
-      t = t.replace(/^#/, '');
-      const r = /[\s\n]class="([^"]+)"/, m = t.match(r);
-      if (m) {
-        t = t.replace(r, '').trim();
-        s.className += ' ' + m[1];
-      }
-      if (t) setAttr(s, t);
-      break;
-    }
-    s.classList.contains('extend') && s.append(newEl('div', 'spacer fade'));
-    location.hash === ('#' + (i + 1)) && s.scrollIntoView();
-    s.addEventListener('click', e => {
-      if (!e.altKey) return;
-      d.body.classList.toggle('overview');
-      setTimeout(() => e.target.scrollIntoView(), 100);
-    });
-  });
-  [...d.querySelectorAll('a.footnote-backref'), fn, tm].forEach(el => el?.remove());
-  const tms = d.querySelectorAll('span.timer'), t1 = 1000 * tms[0].dataset.total;
-  let t0;
-  function startTimers() {
-    t0 = new Date();
-    setInterval(setTimers, 1000);
-  }
-  function setTimers() {
-    let t = (new Date() - t0);
-    if (t1) t = t1 - t;
-    const t2 = new Date(Math.abs(t)).toISOString().substr(11, 8).replace(/^00:/, '');
-    tms.forEach(el => {
-      el.innerText = t2;
-      if (t < 0) el.style.display = el.style.display === 'none' ? '' : 'none';
-    });
-  }
-  // press f for fullscreen mode
-  d.addEventListener('keyup', (e) => {
-    if (e.target !== d.body) return;
-    e.key === 'f' && d.documentElement.requestFullscreen();
-    e.key === 'o' && d.body.classList.toggle('overview');
-    e.key === 'm' && d.body.classList.toggle('mirrored');
-    sessionStorage.setItem('body-class', d.body.className);
-  });
-  // start timer on fullscreen
-  d.onfullscreenchange = (e) => d.fullscreenElement && !t0 && startTimers();
-  tms.forEach(el => el.addEventListener('click', e => startTimers()));
-  // restore previsouly saved body class
-  const bc = sessionStorage.getItem('body-class');
-  if (bc) d.body.className += ' ' + bc;
-})(document);
-</script>
-<script src="https://cdn.jsdelivr.net/combine/npm/katex/dist/katex.min.js,npm/katex/dist/contrib/auto-render.min.js,npm/@xiee/utils/js/render-katex.js" defer></script>
-<script src="https://cdn.jsdelivr.net/combine/npm/@xiee/utils/js/key-buttons.min.js,npm/@xiee/utils/js/external-link.min.js,npm/@xiee/utils/js/heading-anchor.min.js" defer></script>
-</body>
-</html>
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p><a href="https://mr.schochastics.net">theme by schochastics</a></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="equadiff_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="equadiff_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="equadiff_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="equadiff_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="equadiff_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="equadiff_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="equadiff_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="equadiff_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="equadiff_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="equadiff_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="equadiff_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': true,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'slide',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
+              }
+            }
+            return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
