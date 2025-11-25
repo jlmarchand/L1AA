@@ -293,13 +293,13 @@ Jean-Louis Marchand
 <section id="démonstration-de-yi-solution" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="3.3">
 <h2><span class="header-section-number">3.3</span> Démonstration de <span class="math inline">\((y,I)\)</span> solution</h2>
 <ul>
-<li>appelons <span class="math inline">\(A\)</span> une primitive de <span class="math inline">\(a\)</span> sur <span class="math inline">\(I\)</span>, et <span class="math inline">\(\mu\)</span> une primitive de <span class="math inline">\(be^{-A}\)</span>: <span class="math display">\[A'(x)=a(x), \quad \mu'(x) = b(x)e^{-A(x)}\]</span></li>
+<li>appelons <span class="math inline">\(A\)</span> une primitive de <span class="math inline">\(a\)</span> sur <span class="math inline">\(I\)</span>, et <span class="math inline">\(\mu\)</span> une primitive de <span class="math inline">\(be^{-A}\)</span>: <span class="math display">\[A'(x)=a(x), \quad \mu'(x) = b(x)e^{A(x_0)-A(x)}\]</span></li>
 <li>on peut alors réécrire la solution <span class="math inline">\((y,I)\)</span></li>
 </ul>
 <p><span class="math display">\[ y(x) = \left(y_0+\int_{x_0}^x b(t) e^{-\int_{x_0}^ta(u)du}dt\right) e^{\int_{x_0}^xa(t)dt}
 = \left(y_0+\mu(x)-\mu(x_0)\right)e^{A(x)-A(x_0)}\]</span></p>
 <ul>
-<li>vérifions que cela définit bien une solution, rapidement <span class="math inline">\(y(x_0)=y_0\)</span>, de plus: <span class="math display">\[y'(x)=\mu'(x)e^{A(x)-A(x_0)}+\left(y_0+\mu(x)-\mu(x_0)\right)A'(x)e^{A(x)-A(x_0)}\]</span> on utilise alors les définitions de <span class="math inline">\(A\)</span> et <span class="math inline">\(\mu\)</span> <span class="math display">\[y'(x)=be^{A(x)}e^{A(x)-A(x_0)}+\left(y_0+\mu(x)-\mu(x_0)\right)a(x)e^{A(x)-A(x_0)}=b(x)+a(x)y(x)\]</span></li>
+<li>vérifions que cela définit bien une solution, rapidement <span class="math inline">\(y(x_0)=y_0\)</span>, de plus: <span class="math display">\[y'(x)=\mu'(x)e^{A(x)-A(x_0)}+\left(y_0+\mu(x)-\mu(x_0)\right)A'(x)e^{A(x)-A(x_0)}\]</span> on utilise alors les définitions de <span class="math inline">\(A\)</span> et <span class="math inline">\(\mu\)</span> <span class="math display">\[y'(x)=be^{A(x_0)-A(x)}e^{A(x)-A(x_0)}+\left(y_0+\mu(x)-\mu(x_0)\right)a(x)e^{A(x)-A(x_0)}=b(x)+a(x)y(x)\]</span></li>
 </ul>
 </section>
 <section id="unicité" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="3.4">
@@ -317,7 +317,7 @@ Jean-Louis Marchand
 <ol class="example" type="1">
 <li>écriture de l’équation sous la forme <span class="math inline">\(y' = a(x)y+b(x)\)</span> pour identifier <span class="math inline">\(a\)</span> et <span class="math inline">\(b\)</span></li>
 <li>détermination du plus grand intervalle de travail <span class="math inline">\(I\)</span> contenant <span class="math inline">\(x_0\)</span>, tel que <span class="math inline">\(a\)</span> et <span class="math inline">\(b\)</span> sont <strong>simultanément continues</strong> sur <span class="math inline">\(I\)</span></li>
-<li>recherche d’une primitive <span class="math inline">\(A\)</span> de <span class="math inline">\(a\)</span> sur <span class="math inline">\(I\)</span> et d’une primitive <span class="math inline">\(\mu\)</span> de <span class="math inline">\(be^{-A}\)</span> toujours sur <span class="math inline">\(I\)</span>
+<li>recherche d’une primitive <span class="math inline">\(A\)</span> de <span class="math inline">\(a\)</span> sur <span class="math inline">\(I\)</span> et d’une primitive <span class="math inline">\(\mu\)</span> de <span class="math inline">\(be^{A(x_0)-A}\)</span> toujours sur <span class="math inline">\(I\)</span>
 <ul>
 <li>une fois <span class="math inline">\(A\)</span> déterminé, penser à simplifier les expressions <span class="math inline">\(e^A\)</span> et <span class="math inline">\(e^{-A}\)</span></li>
 <li>simplifier alors <span class="math inline">\(be^{-A}\)</span> et déterminer une primitive</li>
@@ -364,7 +364,7 @@ c_p \colon &amp;\text{capacité calorifique}.\end{array}\right.}\]</span></li>
 <section id="chauffage-dun-fluide-en-écoulement-suite-et-fin" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="3.8">
 <h2><span class="header-section-number">3.8</span> Chauffage d’un fluide en écoulement, suite et fin</h2>
 <ul>
-<li><p>consdérons les primitives de <span class="math inline">\(a\)</span> et <span class="math inline">\(be^A\)</span> suivantes : <span class="math display">\[A(x) = - \frac{h_0 P}{\dot{m}\, c_p} (x+\tfrac\beta2 x^2), \quad \mu(x) = T_we^{\frac{h_0 P}{\dot{m}\, c_p} (x+\tfrac\beta2 x^2)}\]</span></p></li>
+<li><p>considérons les primitives de <span class="math inline">\(a\)</span> et <span class="math inline">\(be^{A(0)-A}=be^{-A}\)</span> suivantes : <span class="math display">\[A(x) = - \frac{h_0 P}{\dot{m}\, c_p} (x+\tfrac\beta2 x^2), \quad \mu(x) = T_we^{\frac{h_0 P}{\dot{m}\, c_p} (x+\tfrac\beta2 x^2)}\]</span></p></li>
 <li><p>la solution recherchée est <span class="math inline">\((T,\mathbb R)\)</span> donnée par :</p></li>
 </ul>
 <p><span class="math display">\[T(x)=\left(T_{\text{entrée}}+T_we^{\frac{h_0 P}{\dot{m}\, c_p} (x+\tfrac\beta2 x^2)}-T_we^{\frac{h_0 P}{\dot{m}\, c_p} (0+\tfrac\beta2 0^2)}\right)e^{- \frac{h_0 P}{\dot{m}\, c_p} (x+\tfrac\beta2 x^2)+ \frac{h_0 P}{\dot{m}\, c_p} (0+\tfrac\beta2 0^2)},\]</span></p>
@@ -373,7 +373,7 @@ c_p \colon &amp;\text{capacité calorifique}.\end{array}\right.}\]</span></li>
 <section id="cas-particulier-équation-à-coefficients-constants" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="3.9">
 <h2><span class="header-section-number">3.9</span> Cas particulier : équation à coefficients constants</h2>
 <ul>
-<li><p>dans le cas où <span class="math inline">\(a\)</span> et <span class="math inline">\(b\)</span> sont constants (situation de la plupart des cas en physique-chimie cette année), on peut aller plus vite, en considérant <span class="math inline">\(A(x)=ax\)</span> et <span class="math inline">\(\mu(x)=-\tfrac ba e^{-ax}\)</span> : <span class="math display">\[y(x) = (y_0-\tfrac ba e^{-ax}+\tfrac ba e^{-ax_0} )e^{a(x-x_0)}=y_0e^{a(x-x_0)}-\tfrac ba.\]</span></p></li>
+<li><p>dans le cas où <span class="math inline">\(a\)</span> et <span class="math inline">\(b\)</span> sont constants (situation de la plupart des cas en physique-chimie cette année), on peut aller plus vite, en considérant <span class="math inline">\(A(x)=ax\)</span> et <span class="math inline">\(\mu(x)=-\tfrac ba e^{-a(x-x_0)}\)</span> : <span class="math display">\[y(x) = (y_0-\tfrac ba e^{-a(x-x_0)}+\tfrac ba  )e^{a(x-x_0)}=\left(y_0+\tfrac ba\right)e^{a(x-x_0)}-\tfrac ba.\]</span></p></li>
 <li><p>si nous étudions un cas plus général dans le cours de mathématiques, c’est pour insister sur la situation exceptionnelle que représente une équation à coefficients constants, souvent obtenue par des hypothèses plus ou moins fortes sur le comportement des paramètres du système considéré. Le pas supplémentaire effectué nous montre aussi que nous avons les moyens de traiter des situations plus générale sans que le coût ne soit “trop” élevé.</p></li>
 </ul>
 </section></section>
