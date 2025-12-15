@@ -157,6 +157,7 @@ Jean-Louis Marchand
 <li><a href="#/cadre-de-travail" id="/toc-cadre-de-travail"><span class="header-section-number">2</span> Cadre de travail</a></li>
 <li><a href="#/equations-différentielles-linéaires-dordre-1" id="/toc-equations-différentielles-linéaires-dordre-1"><span class="header-section-number">3</span> Equations différentielles linéaires d’ordre 1</a></li>
 <li><a href="#/equations-différentielles-linéaires-dordre-2-à-coefficients-constants" id="/toc-equations-différentielles-linéaires-dordre-2-à-coefficients-constants"><span class="header-section-number">4</span> Equations différentielles linéaires d’ordre 2 à coefficients constants</a></li>
+<li><a href="#/equations-à-variables-séparées" id="/toc-equations-à-variables-séparées"><span class="header-section-number">5</span> Equations à variables séparées</a></li>
 </ul>
 </nav>
 </section>
@@ -418,6 +419,62 @@ c_p \colon &amp;\text{capacité calorifique}.\end{array}\right.}\]</span></li>
 <ul>
 <li><p>Imaginons un bloc de masse <span class="math inline">\(m\)</span> pendu à un ressort, la force de rappel est proportionnel à la position <span class="math display">\[m\frac{d^2y}{dt^2}=-ky\]</span></p></li>
 <li><p>Imaginons un bloc de masse <span class="math inline">\(m\)</span> pendu à un ressort, soumis à une force d’amortissement (dans un liquide par exemple). Cette force est proportionnelle à la vitesse mais dans le sens contraire <span class="math inline">\(-c\frac{dy}{dt}\)</span> pour une certaine constante positive <span class="math inline">\(c\)</span> <span class="math display">\[m\frac{d^2y}{dt^2}=-ky-c\frac{dy}{dt}\]</span></p></li>
+</ul>
+</section></section>
+<section>
+<section id="equations-à-variables-séparées" class="title-slide slide level1 center" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="5">
+<h1><span class="header-section-number">5</span> Equations à variables séparées</h1>
+
+</section>
+<section id="situations-très-particulières" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="5.1">
+<h2><span class="header-section-number">5.1</span> Situations très particulières</h2>
+<ul>
+<li>cas d’équations non-linéaires</li>
+<li>un exemple : <span class="math display">\[(E)\colon y' = xy^2\]</span></li>
+<li>pour des solutions qui ne s’annulent pas, nous pouvons <strong>séparer</strong> les variables et ainsi primitiver de chaque côté : <span class="math display">\[\frac{y'}{y^2}=x\qquad\Longrightarrow\qquad-\frac1y = \frac{x^2}2+c,\]</span> où <span class="math inline">\(c\)</span> est une constante, ainsi <span class="math display">\[y(x)=-\frac2{x^2+2c}\]</span></li>
+</ul>
+</section>
+<section id="le-cadre" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="5.2">
+<h2><span class="header-section-number">5.2</span> Le cadre</h2>
+<blockquote>
+<h3 id="définition" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover">Définition :</h3>
+<p>on appelle équation différentielle à variable séparées toute équation du type : <span class="math display">\[(E)\colon y'=f(x)g(y),\]</span> où <span class="math inline">\(f\)</span> et <span class="math inline">\(g\)</span> sont des fonctions réelles.</p>
+</blockquote>
+<ul>
+<li><p>exemple : <span class="math inline">\((E)\colon y' = xy.\)</span></p></li>
+<li><p>pour chaque <span class="math inline">\(c\in J\)</span> tel que <span class="math inline">\(g(c)=0,\)</span> les couples <span class="math inline">\((y,I)=(c,I)\)</span> sont solutions de l’équation <span class="math inline">\((E)\)</span>, elles sont solutions du système que si <span class="math inline">\(x_0=c\)</span>, il existe un problème autour de ces valeurs où <span class="math inline">\(g\)</span> s’annule !</p></li>
+</ul>
+</section>
+<section id="le-résultat" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="5.3">
+<h2><span class="header-section-number">5.3</span> Le résultat</h2>
+<blockquote>
+<h3 id="théorème-1" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover">Théorème :</h3>
+<p>si <span class="math inline">\(f\)</span> est continue sur <span class="math inline">\(I\)</span> contenant <span class="math inline">\(x_0\)</span> et <span class="math inline">\(g\)</span> continue sur <span class="math inline">\(J\)</span> contenant <span class="math inline">\(y_0\)</span>. Supposons de plus que <span class="math inline">\(g\)</span> <strong>ne s’annule pas</strong> sur <span class="math inline">\(J\)</span>. Alors le système <span class="math display">\[\left\{\begin{array}{l} (E)\colon y'=f(x)g(y),\\y(x_0)=y_0\end{array}\right.\]</span> admet une unique solution au sens où :</p>
+<ul>
+<li>il existe une solution <span class="math inline">\((y,I')\)</span>,</li>
+<li>si <span class="math inline">\((z,I')\)</span> est une autre solution alors <span class="math display">\[\forall x\in I',\quad y(x)=z(x).\]</span></li>
+<li>si <span class="math inline">\(I'\subsetneq I''\)</span>, alors il n’existe pas de solution <span class="math inline">\((w,I'')\)</span></li>
+</ul>
+</blockquote>
+</section>
+<section id="remarques-pour-les-aspects-pratiques" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="5.4">
+<h2><span class="header-section-number">5.4</span> Remarques pour les aspects pratiques</h2>
+<ul>
+<li><p>l’énoncé du résultat dans le cas où <span class="math inline">\(g\)</span> <strong>ne s’annule jamais</strong> sur <span class="math inline">\(J\)</span> est certes un peu lourd, mais en pratique il nous dit juste que tout se passe bien tant que notre solution passe suffisamment loin des points d’annulation de <span class="math inline">\(g\)</span>, les solutions <span class="math inline">\((y,I')\)</span> vérifieront donc que pour tout <span class="math inline">\(x\in I',\)</span> <span class="math inline">\(g(y(x))\)</span> est <strong>non-nul et de signe constant</strong>, la valeur de <span class="math inline">\(y_0\)</span> permettra donc de savoir comment travailler</p></li>
+<li><p>⚠ il reste donc un angle mort, par exemple pour le système : <span class="math display">\[\left\{\begin{array}{l} y'=2 \sqrt y,\\y(0)=0\end{array}\right.\]</span> les fonctions définies par <span class="math display">\[y_a(x)=\left\{\begin{array}{ll} y(x)=(x-a)^2, &amp;\textrm{si } x\geq a\\y(x)=0 &amp;\textrm{si }x&lt;a \end{array}\right.\]</span> sont solutions, on perd donc l’<strong>unicité</strong></p></li>
+</ul>
+</section>
+<section id="méthode" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="5.5">
+<h2><span class="header-section-number">5.5</span> Méthode</h2>
+<ul>
+<li>la résolution passera par les étapes suivantes :
+<ol type="1">
+<li>chercher le(s) nombre(s) <span class="math inline">\(c\)</span> tels que <span class="math inline">\(g(c)=0\)</span>, si <span class="math inline">\(y_0=c\)</span>, la solution est <span class="math inline">\((y,I)\)</span></li>
+<li>partager <span class="math inline">\(J\)</span> en intervalles ouverts de la forme <span class="math inline">\(]a,b[\)</span> où <span class="math inline">\(g\)</span> est de signe constant</li>
+<li>résoudre l’équation sur ces intervalles suivant ce qu’on cherche</li>
+<li>pour les plus gourmands : étude des raccords potentiels entre les solutions trouvées</li>
+</ol></li>
+<li>exemple : <span class="math inline">\((E)\colon y' = x^2y.\)</span></li>
 </ul>
 
 </section></section>
