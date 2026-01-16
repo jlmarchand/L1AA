@@ -328,8 +328,8 @@ Jean-Louis Marchand
 <section id="les-développements-limités" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="2.5">
 <h2><span class="header-section-number">2.5</span> Les développements limités</h2>
 <ul>
-<li>c’est une généralisation de la tangente au lieu de chercher une approximation par une fonction affine, on cherche parmi des <strong>polynômes</strong></li>
-<li>par exemple la tangente en 0 du cosinus est horizontale, mais on arrive à écrire <span class="math inline">\(\cos(x)\approx 1+\tfrac{x^2}{2}\)</span> !</li>
+<li>c’est une généralisation de la tangente au lieu de chercher une approximation par une fonction affine, on cherche par</li>
+<li>par exemple la tangente en 0 du cosinus est horizontale, mais on arrive à écrire <span class="math inline">\(\cos(x)\approx 1-\tfrac{x^2}{2}\)</span> !</li>
 </ul>
 <blockquote>
 <h3 id="théorème-développement-limité-à-lordre-2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover">Théorème : Développement limité à l’ordre 2</h3>
@@ -342,7 +342,6 @@ Jean-Louis Marchand
 <li><p>écrit autrement, si <span class="math inline">\(x\)</span> est assez proche de <span class="math inline">\(x_0\)</span> au sens où <span class="math inline">\(x-x_0\in J\)</span>, on retrouve une extension du développement limité à l’ordre 1 : <span class="math display">\[f(x) = f(x_0)+f'(x_0)(x-x_0)+\frac{f''(x_0)}{2}(x-x_0)^2+(x-x_0)^2\varepsilon(x-x_0)\\\approx f(x_0)+f'(x_0)(x-x_0)+\frac{f''(x_0)}{2}(x-x_0)^2\qquad\qquad\qquad\]</span></p></li>
 <li><p>considérons l’exponentielle en 0 <span class="math display">\[\exp(x) \approx   1+ x+ \tfrac{x^2}{2}\]</span></p></li>
 <li><p>on peut généraliser, l’écriture est un peu lourde mais par exemple, si <span class="math inline">\(f\)</span> est dérivable 3 fois avec <span class="math inline">\(f'''\)</span> continue, le résultat devient <span class="math display">\[f(x_0+h) = f(x_0)+f'(x_0)h+\frac{f''(x_0)}{2}h^2+\frac{f'''(x_0)}{2\times 3}h^3+h^3\varepsilon(h)\]</span></p></li>
-<li><p>pour l’exponentielle ça donne en 0 <span class="math display">\[\exp(x) \approx   1+ x+ \tfrac{x^2}{2}+ \tfrac{x^3}{6}\]</span></p></li>
 </ul>
 </section>
 <section id="approximation-dune-intégrale" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="2.7">
@@ -367,10 +366,10 @@ Jean-Louis Marchand
 <h2><span class="header-section-number">2.9</span> Equations différentielles</h2>
 <ul>
 <li>le même problème peut être rencontré, prenons l’exemple d’une équation linéaire d’ordre 1, où expliciter des primitives peut se révéler impossible</li>
-<li>le <strong>schéma d’Euler</strong> est la première méthode pour approcher la solution sur un segment <span class="math inline">\([a,b]\)</span> avec <span class="math inline">\(y(a)=y_0\)</span> en supposant <span class="math inline">\(a\)</span> et <span class="math inline">\(b\)</span> <strong>dérivables, de dérivées continues sur <span class="math inline">\([a;b]\)</span></strong>
+<li>le <strong>schéma d’Euler</strong> est la première méthode pour approcher la solution sur un segment <span class="math inline">\([u,v]\)</span> avec <span class="math inline">\(y(u)=y_0\)</span> en supposant <span class="math inline">\(a\)</span> et <span class="math inline">\(b\)</span> <strong>dérivables, de dérivées continues sur <span class="math inline">\([u;v]\)</span></strong>
 <ul>
-<li>choix fini d’abscisses <span class="math inline">\(x_n = a+ n\times h\)</span></li>
-<li>approximations <span class="math inline">\(y_n\)</span> de la <strong>véritable image inconnue</strong> <span class="math inline">\(y(x_n)\)</span> calculée par (avec <span class="math inline">\(y(a)=y_0\)</span>) : <span class="math display">\[y_{n+1} = y_{n} + h\times \left[a(x_n)y_{n}+b(x_n)\right]\]</span></li>
+<li>choix fini d’abscisses <span class="math inline">\(x_n = u+ n\times h\)</span></li>
+<li>approximations <span class="math inline">\(y_n\)</span> de la <strong>véritable image inconnue</strong> <span class="math inline">\(y(x_n)\)</span> calculée par (avec <span class="math inline">\(y(u)=y_0\)</span>) : <span class="math display">\[y_{n+1} = y_{n} + h\times \left[a(x_n)y_{n}+b(x_n)\right],\]</span>(t)|$</li>
 </ul></li>
 </ul>
 
