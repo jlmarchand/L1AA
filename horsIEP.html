@@ -354,7 +354,7 @@ Jean-Louis Marchand
 <section id="quelle-erreur" class="slide level2" data-background-image="_extensions/schochastics/blackboard/blackboard.png" data-background-size="cover" data-number="2.8">
 <h2><span class="header-section-number">2.8</span> Quelle erreur ?</h2>
 <ul>
-<li><p>en conséquence du Théorème des Accroissement Finis, si <span class="math inline">\(f\)</span> est continue <strong>et dérivable, de dérivée continue</strong> sur le segment <span class="math inline">\([a;b]\)</span> alors <span class="math display">\[\left|\int_a^bf(x)dx - \lim_{n\to+\infty}\frac{b-a}n\sum_{k = 1}^nf\left(a+k\tfrac{b-a}n\right)\right|\leq M\frac{(b-a)^2}n,\]</span> où <span class="math inline">\(M = \max_{x\in[a;b]}|f'(x)|\)</span></p></li>
+<li><p>en conséquence du Théorème des Accroissement Finis, si <span class="math inline">\(f\)</span> est continue <strong>et dérivable, de dérivée continue</strong> sur le segment <span class="math inline">\([a;b]\)</span> alors <span class="math display">\[\left|\int_a^bf(x)dx - \frac{b-a}n\sum_{k = 1}^nf\left(a+k\tfrac{b-a}n\right)\right|\leq M\frac{(b-a)^2}n,\]</span> où <span class="math inline">\(M = \max_{x\in[a;b]}|f'(x)|\)</span></p></li>
 <li><p>les logiciels utilisent des schémas plus performants permettant d’obtenir un majorant plus petit</p>
 <ul>
 <li>on comprend que plus la fonction a de fortes variations moins la méthode précédente est bonne</li>
