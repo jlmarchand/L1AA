@@ -1,0 +1,55 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+
+\begin{document}
+
+\tikzset{every node/.style={text=white},
+  every left delimiter/.style={color=white},
+  every right delimiter/.style={color=white},
+    node style sp/.style={draw,circle, text = white},
+    node style ge/.style={circle, text = white},
+    arrow style mul/.style={draw,sloped,midway, fill = cyan},
+    arrow style plus/.style={midway,sloped}}
+
+\begin{tikzpicture}[baseline=(A.center)]
+	\tikzset{BarreStyle/.style =   {opacity=.4,line width=7 mm,line cap=round,color=#1}}
+    \tikzset{SignePlus/.style =   {above left,,opacity=1,circle,fill=#1!50}}
+    \tikzset{SigneMoins/.style =   {below left,,opacity=1,circle,fill=#1!50}}
+    
+% les matrices
+
+\matrix (A) [matrix of math nodes, nodes = {node style ge},%
+             left delimiter  = (,%
+             right delimiter = ),column sep=0 mm] 
+{ 2 & 1 & -1 &3  \\
+-1 & 0 &2 & 5 \\
+};
+
+\matrix (B) [matrix of math nodes, nodes = {node style ge},%
+             left delimiter  = (,%
+             right delimiter = ),column sep=0 mm] at (5,4)
+{ 1 & 2 & 3  \\
+-1 & -2 &5 \\
+2 & -3 &1 \\
+-1 & 0 &0 \\
+};
+
+\matrix (C) [matrix of math nodes, nodes = {node style ge},%
+             left delimiter  = (,%
+             right delimiter = ),column sep=0 mm] at (5,0)
+{ -4 &|[fill = cyan, text = white]|5 &? \\
+? &? &? \\
+};
+\draw [BarreStyle=orange] (A-1-1.west) to (A-1-4.east) ;
+\draw [BarreStyle=orange] (B-1-2.north) to (B-4-2.south) ;
+\draw[<->,orange](A-1-1) to[in=180,out=90] node[arrow style mul] (x) {$2\times 2$} (B-1-2);
+\draw[<->,orange](A-1-2) to[in=180,out=90] node[arrow style mul] (y) {$1\times (-2)$}(B-2-2);
+\draw[<->,orange](A-1-3) to[in=180,out=90] node[arrow style mul] (z) {$(-1)\times (-3)$}(B-3-2);
+\draw[<->,orange](A-1-4) to[in=180,out=90] node[arrow style mul] (t) {$3\times 0$}(B-4-2);
+\draw[orange,dashed] (x) to node[arrow style plus] {$+$} (y)%
+				  to node[arrow style plus] {$+$} (z)%
+				  to node[arrow style plus] {$+$} (t)%
+                  to node[arrow style mul] {$=$} (C-1-2.north west);
+\end{tikzpicture}
+```\end{document}
